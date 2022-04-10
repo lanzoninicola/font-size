@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Links,
   LiveReload,
@@ -7,21 +7,23 @@ import {
   Scripts,
   ScrollRestoration,
   useCatch,
-} from 'remix';
-import type { MetaFunction } from 'remix';
-import { VStack, Heading, ChakraProvider, Text } from '@chakra-ui/react';
-import { withEmotionCache } from '@emotion/react';
+} from "remix";
+import type { MetaFunction } from "remix";
+import { VStack, Heading, ChakraProvider, Text } from "@chakra-ui/react";
+import { withEmotionCache } from "@emotion/react";
 
-import { ServerStyleContext, ClientStyleContext } from './context';
+import { ServerStyleContext, ClientStyleContext } from "./context";
+
+import { theme } from "./chackra-ui/theme/theme";
 
 export const meta: MetaFunction = () => {
-  return { title: 'Chakra UI Boilerplate' };
+  return { title: "Font-size" };
 };
 
 export default function App() {
   return (
     <Document>
-      <ChakraProvider>
+      <ChakraProvider resetCSS theme={theme}>
         <Outlet />
       </ChakraProvider>
     </Document>
@@ -120,7 +122,7 @@ const Document = withEmotionCache(
           {serverSyleData?.map(({ key, ids, css }) => (
             <style
               key={key}
-              data-emotion={`${key} ${ids.join(' ')}`}
+              data-emotion={`${key} ${ids.join(" ")}`}
               dangerouslySetInnerHTML={{ __html: css }}
             />
           ))}
@@ -129,7 +131,7 @@ const Document = withEmotionCache(
           {children}
           <ScrollRestoration />
           <Scripts />
-          {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
+          {process.env.NODE_ENV === "development" ? <LiveReload /> : null}
         </body>
       </html>
     );

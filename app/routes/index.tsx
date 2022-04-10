@@ -1,31 +1,31 @@
-import { Box, Heading, HStack, Link as ChakraLink } from '@chakra-ui/react';
-import { Link } from 'remix';
+import { Box, Container, Heading, Text } from "@chakra-ui/react";
+import Footer from "~/components/footer/footer";
+import Header from "~/components/header/header";
+import ContentWrapper from "~/components/shared/contet-wrapper";
+import InputNumber from "~/components/shared/input-number";
+import InputSelect from "~/components/shared/input-select";
+import MainGridWrapper from "~/components/shared/main-grid-wrapper";
+import Sidebar from "~/components/sidebar/sidebar";
 
 export default function Index() {
   return (
-    <Box fontFamily="system-ui, sans-serif" lineHeight={1.4}>
-      <Heading as="h1" color="blue.400">
-        Welcome to Remix with Chakra UI!
-      </Heading>
-      <HStack spacing={4}>
-        <ChakraLink
-          href="https://remix.run/docs"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Remix Docs
-        </ChakraLink>
-        <ChakraLink
-          target="_blank"
-          href="https://chakra-ui.com/docs/getting-started"
-          rel="noreferrer"
-        >
-          Chakra UI Docs
-        </ChakraLink>
-        <ChakraLink as={Link} color="red.400" to="/nothing-here">
-          Nothing here
-        </ChakraLink>
-      </HStack>
+    <Box as="main" bg="background.500" paddingLeft={["1rem", "5rem", "10rem"]}>
+      <MainGridWrapper minH="100vh">
+        <Header />
+        <Sidebar />
+        <ContentWrapper>
+          <Box h="100px" w="100%">
+            <InputNumber />
+            <InputSelect>
+              <option value="option1">Option 1</option>
+              <option value="option2">Option 2</option>
+              <option value="option3">Option 3</option>
+            </InputSelect>
+          </Box>
+          <Box bg="blue" h="100px" w="100%"></Box>
+        </ContentWrapper>
+        <Footer />
+      </MainGridWrapper>
     </Box>
   );
 }
