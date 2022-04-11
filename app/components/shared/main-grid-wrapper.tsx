@@ -10,11 +10,11 @@ export default function MainGridWrapper({
 }) {
   return (
     <Grid
-      gridTemplateColumns={"auto 1fr 1fr"}
+      gridTemplateColumns={"auto 1fr"}
       gridAutoRows={"minmax(100px, auto)"}
-      gridTemplateAreas='"sd hd   hd"
-      "sd main main"
-      "sd ft   ft"'
+      gridTemplateAreas='"sd hd"
+      "sd main"
+      "sd ft"'
       {...props}
     >
       {children}

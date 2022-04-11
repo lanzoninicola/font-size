@@ -11,7 +11,7 @@ export default function Credits() {
       aria-label="Content credits"
       p={[".5rem 1rem", ".5rem 1.5rem", ".5rem 2.5rem"]}
     >
-      <HStack gap="1rem" wrap={"wrap"}>
+      <HStack gap="1rem">
         <VStackBox>
           <HStack wrap={"wrap"} gap=".15rem" spacing={0}>
             <Text fontSize={["sm"]} fontWeight={700}>

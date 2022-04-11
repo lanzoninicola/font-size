@@ -5,13 +5,12 @@ const InputNumber = forwardRef<{ [key: string]: any }, "input">(
     const { ...rest } = props;
     return (
       <Input
-        type="text"
+        type="number"
         inputMode="decimal"
         pattern="[0-9]*"
         variant={"filled"}
         h="50px"
         maxW="120px"
-        textAlign="right"
         borderRadius="15px"
         border="none"
         bg="primary.500"

@@ -9,10 +9,13 @@ export default function Header() {
       borderBottom={"1px solid"}
       borderColor="primaryAlpha.20"
       gridArea={"hd"}
-      paddingInline={["1rem", "2rem", "4rem"]}
+      paddingInline={["1rem", "2rem"]}
       wrap="wrap"
+      maxH="120px"
     >
-      <Heading color="primary.500">font-size: clamp()</Heading>
+      <Heading as="h1" color="primary.500">
+        Font scaling with clamp()
+      </Heading>
       <Credits />
     </HStack>
   );

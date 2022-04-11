@@ -1,4 +1,5 @@
 import { VStack } from "@chakra-ui/react";
+import { Link } from "remix";
 import { FontIcon, SettingsIcon, StyleIcon } from "../shared/icons";
 
 export default function Sidebar() {
@@ -10,9 +11,13 @@ export default function Sidebar() {
       gridArea={"sd"}
       minW="100px"
     >
-      <StyleIcon color="white" />
+      <Link to="/styling">
+        <StyleIcon color="white" />
+      </Link>
       <FontIcon color="white" />
-      <SettingsIcon color="white" />
+      <Link to="/settings">
+        <SettingsIcon color="white" />
+      </Link>
     </VStack>
   );
 }

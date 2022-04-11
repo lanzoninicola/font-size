@@ -23,5 +23,5 @@ export default function useClampFormula({ tag }: { tag: Tags }) {
 
   return `clamp(${_minFontSize}rem, ${yAxisIntersection.toFixed(4)}rem + ${(
     slope * 100
-  ).toFixed(4)}vw, ${_maxFontSize}rem);`;
+  ).toFixed(4)}vw, ${_maxFontSize}rem)`;
 }

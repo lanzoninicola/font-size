@@ -9,12 +9,17 @@ import {
   useCatch,
 } from "remix";
 import type { MetaFunction } from "remix";
-import { VStack, Heading, ChakraProvider, Text } from "@chakra-ui/react";
+import { VStack, Heading, ChakraProvider, Text, Box } from "@chakra-ui/react";
 import { withEmotionCache } from "@emotion/react";
 
 import { ServerStyleContext, ClientStyleContext } from "./context";
 
 import { theme } from "./chackra-ui/theme/theme";
+import { FontSizeProvider } from "./context/font-size/font-size-context";
+import MainGridWrapper from "./components/shared/main-grid-wrapper";
+import Header from "./components/header/header";
+import Sidebar from "./components/sidebar/sidebar";
+import Footer from "./components/footer/footer";
 
 export const meta: MetaFunction = () => {
   return { title: "Font-size" };
@@ -24,7 +29,16 @@ export default function App() {
   return (
     <Document>
       <ChakraProvider resetCSS theme={theme}>
-        <Outlet />
+        <FontSizeProvider>
+          <Box as="main" bg="background.500">
+            <MainGridWrapper minH="100vh">
+              <Header />
+              <Sidebar />
+              <Outlet />
+              <Footer />
+            </MainGridWrapper>
+          </Box>
+        </FontSizeProvider>
       </ChakraProvider>
     </Document>
   );

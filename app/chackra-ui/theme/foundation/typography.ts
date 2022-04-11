@@ -14,6 +14,8 @@ const typography = {
   },
   fontSizes: {
     ...chakraTheme.fontSizes,
+    md: "22px",
+    sm: "16px",
   },
 };
 
