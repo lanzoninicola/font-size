@@ -26,7 +26,8 @@ export default function SettingsPage() {
         <FormControlInputNumber
           id="rems"
           label="1 rem"
-          value={String(pixelsPerRem)}
+          value={pixelsPerRem}
+          unit="PX"
           onChange={(e) => onChangePixelsPerRem(e.target.value)}
         />
         <ConverterPixelsRems />

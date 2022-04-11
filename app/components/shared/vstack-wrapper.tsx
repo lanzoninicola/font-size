@@ -8,7 +8,7 @@ export default function VStackBox({
   [key: string]: any;
 }) {
   return (
-    <VStack align={["flex-start"]} {...props} spacing={0} w="100%">
+    <VStack align={["flex-start"]} spacing={0} w="100%" {...props}>
       {children}
     </VStack>
   );

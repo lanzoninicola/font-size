@@ -13,3 +13,5 @@ export type MinViewportWidthState = Record<Tags, number>;
 export type MaxViewportWidthState = Record<Tags, number>;
 export type MinFontSizeState = Record<Tags, number>;
 export type MaxFontSizeState = Record<Tags, number>;
+export type SlopeState = Record<Tags, number>;
+export type YAxisIntersectionState = Record<Tags, number>;
