@@ -1,5 +1,5 @@
 import { Box, Code } from "@chakra-ui/react";
-import useClampFormula from "~/context/font-size/hooks/useClampFormula";
+import useClampFormulaByTag from "~/domain/clamp/hooks/useClampFormulaByTag";
 import useMaxViewportWidth from "~/context/font-size/hooks/useMaxViewportWidth";
 import useMinViewportWidth from "~/context/font-size/hooks/useMinViewportWidth";
 import usePixelsPerRem from "~/context/font-size/hooks/usePixelsPerRem";
@@ -10,7 +10,7 @@ import CodeArea from "./code-area";
 export default function CodeRenderStandardCSS() {
   const { tag } = useTag();
   const { pixelsPerRem } = usePixelsPerRem();
-  const formula = useClampFormula({ tag });
+  const { formula } = useClampFormulaByTag({ tag });
   const { minViewportWidth } = useMinViewportWidth();
   const { maxViewportWidth } = useMaxViewportWidth();
 

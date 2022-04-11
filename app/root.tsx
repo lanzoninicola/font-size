@@ -1,3 +1,5 @@
+import { ChakraProvider, Heading, Text, VStack } from "@chakra-ui/react";
+import { withEmotionCache } from "@emotion/react";
 import React from "react";
 import {
   Links,
@@ -8,19 +10,12 @@ import {
   ScrollRestoration,
   useCatch,
 } from "remix";
-import type { MetaFunction } from "remix";
-import { VStack, Heading, ChakraProvider, Text, Box } from "@chakra-ui/react";
-import { withEmotionCache } from "@emotion/react";
-
-import { ServerStyleContext, ClientStyleContext } from "./context";
 
 import { theme } from "./chackra-ui/theme/theme";
+import { ClientStyleContext, ServerStyleContext } from "./context";
 import { FontSizeProvider } from "./context/font-size/font-size-context";
-import MainGridWrapper from "./components/shared/main-grid-wrapper";
-import Header from "./components/header/header";
-import Sidebar from "./components/sidebar/sidebar";
-import Footer from "./components/footer/footer";
 
+import type { MetaFunction } from "remix";
 export const meta: MetaFunction = () => {
   return { title: "Font-size" };
 };
@@ -30,14 +25,7 @@ export default function App() {
     <Document>
       <ChakraProvider resetCSS theme={theme}>
         <FontSizeProvider>
-          <Box as="main" bg="background.500">
-            <MainGridWrapper minH="100vh">
-              <Header />
-              <Sidebar />
-              <Outlet />
-              <Footer />
-            </MainGridWrapper>
-          </Box>
+          <Outlet />
         </FontSizeProvider>
       </ChakraProvider>
     </Document>
@@ -125,12 +113,6 @@ const Document = withEmotionCache(
         <head>
           <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width,initial-scale=1" />
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstaticom" />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
-            rel="stylesheet"
-          />
           <Meta />
           <Links />
           {serverSyleData?.map(({ key, ids, css }) => (
