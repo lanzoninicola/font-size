@@ -13,7 +13,9 @@ export default function StylingSection() {
           <CodeSection />
         </FlexRowWrapColumn>
         <FlexRowWrapColumn wrapAt="600px" maxW={`calc(100vw - 850px)`}>
-          <Box bg="blue" h="100px" w="100%" flex={"1 0 600px"}></Box>
+          <Box bg="blue" h="100px" w="100%" flex={"1 0 600px"}>
+            <iframe src="/preview-content"></iframe>
+          </Box>
         </FlexRowWrapColumn>
       </FlexRowWrap>
     </>
