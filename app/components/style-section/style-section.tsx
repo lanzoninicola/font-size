@@ -1,34 +1,37 @@
-import { useEffect, useState } from "react";
-import useBreakpointService from "~/domain/breakpoints/useBreakpointService";
-import useMediaQueriesSelector from "~/context/font-size/hooks/useMediaQueriesSelector";
-import useTag from "~/context/font-size/hooks/useTag";
-import { Tags } from "~/context/interfaces";
+import { Button, HStack } from "@chakra-ui/react";
+import { useState } from "react";
+import useMediaQueryService from "~/domain/media-query/useMediaQueryService";
 
+import FormControlInputNumber from "../shared/form-control-input-number";
+import FormControlSelectBreakpoint from "../shared/form-control-select-breakpoint";
+import FormControlSelectTag from "../shared/form-control-select-tag";
 import SectionHeader from "../shared/section-header";
 import VStackBox from "../shared/vstack-wrapper";
-import Breakpoints from "../breakpoints/breakpoints";
-import FormControlInputNumber from "./components/form-control-input-number";
-import FormControlSelectTag from "./components/form-control-select-tag";
-import FormControlSelectBreakpoint from "../shared/form-control-select-breakpoint";
-import { HStack, Button, Center, Text } from "@chakra-ui/react";
-import useMediaQueryService from "~/domain/media-query/useMediaQueryService";
 
 export default function StyleSection() {
   const [inputMinFontSize, setInputMinFontSize] = useState<number>(0);
   const [inputMaxFontSize, setInputMaxFontSize] = useState<number>(0);
 
-  const { tag, setTag } = useTag();
-  const { breakpoints, breakpointKeySelected, onSelectedBreakpoint } =
-    useBreakpointService();
-  const { onCreateMediaQuery, onUpdateMediaQuery } = useMediaQueryService(
-    breakpointKeySelected,
-    tag,
-    inputMinFontSize,
-    inputMaxFontSize
-  );
+  const {
+    breakpoints,
+    breakpointIdSelected,
+    onSaveMediaQuery,
+    onSelectedBreakpointId,
+    onSelectedTagId,
+  } = useMediaQueryService(inputMinFontSize, inputMaxFontSize);
+
+  function onChangeBreakpoint(e: React.ChangeEvent<HTMLInputElement>) {
+    const { minFontSize, maxFontSize } = onSelectedBreakpointId(e);
+
+    setInputMinFontSize(minFontSize);
+    setInputMaxFontSize(maxFontSize);
+  }
 
   function onChangeTag(e: React.ChangeEvent<HTMLInputElement>) {
-    setTag(e.target.value as Tags);
+    const { minFontSize, maxFontSize } = onSelectedTagId(e);
+
+    setInputMinFontSize(minFontSize);
+    setInputMaxFontSize(maxFontSize);
   }
 
   function onChangeMinFontSize(e: React.ChangeEvent<HTMLInputElement>) {
@@ -47,7 +50,7 @@ export default function StyleSection() {
         <VStackBox gap="2rem">
           <FormControlSelectBreakpoint
             breakpoints={breakpoints}
-            onChange={onSelectedBreakpoint}
+            onChange={onChangeBreakpoint}
           />
           <FormControlSelectTag onChange={(e) => onChangeTag(e)} />
 
@@ -68,10 +71,12 @@ export default function StyleSection() {
             />
           </VStackBox>
           <HStack justify={"flex-end"} w="100%">
-            {breakpoints && (
-              <Button onClick={() => onUpdateMediaQuery()}>Update</Button>
-            )}
-            <Button onClick={() => onCreateMediaQuery()}>Save</Button>
+            <Button
+              onClick={() => onSaveMediaQuery()}
+              disabled={breakpointIdSelected === "no-selected"}
+            >
+              Save
+            </Button>
           </HStack>
         </VStackBox>
       )}

@@ -1,16 +1,20 @@
 import { useEffect } from "react";
 import useMediaQueriesSelector from "~/context/font-size/hooks/useMediaQueriesSelector";
-import { Tags, BreakpointKey, TagMediaQueries } from "~/context/interfaces";
+import useTag from "~/context/font-size/hooks/useTag";
+import { BreakpointKey, TagMediaQueries, Tags } from "~/context/interfaces";
+
+import useBreakpointService from "../breakpoints/useBreakpointService";
 
 export default function useMediaQueryService(
-  breakpointId: BreakpointKey,
-  tag: Tags,
   inputMinFontSize?: number,
   inputMaxFontSize?: number
 ) {
   const { mediaQueries, setMediaQueries } = useMediaQueriesSelector();
+  const { breakpoints, breakpointIdSelected, onSelectedBreakpoint } =
+    useBreakpointService();
+  const { tag, setTag } = useTag();
 
-  function onCreateMediaQuery() {
+  function onSaveMediaQuery() {
     let newMediaQueries = { ...mediaQueries };
 
     let mediaQueriesTag = newMediaQueries[tag];
@@ -20,7 +24,7 @@ export default function useMediaQueryService(
       newMediaQueries[tag] = mediaQueriesTag;
     }
 
-    mediaQueriesTag[breakpointId] = {
+    mediaQueriesTag[breakpointIdSelected] = {
       minFontSize: inputMinFontSize,
       maxFontSize: inputMaxFontSize,
     };
@@ -28,11 +32,80 @@ export default function useMediaQueryService(
     setMediaQueries(newMediaQueries as TagMediaQueries);
   }
 
-  function onUpdateMediaQuery() {}
+  function onSelectedTagId(event: React.ChangeEvent<HTMLInputElement>) {
+    setTag(event.target.value as Tags);
+
+    return getCurrentFontSizeValues();
+  }
+
+  function onSelectedBreakpointId(event: React.ChangeEvent<HTMLInputElement>) {
+    onSelectedBreakpoint(event);
+
+    return getCurrentFontSizeValues();
+  }
+
+  function getCurrentFontSizeValues() {
+    let breakpoint = null;
+    let minFontSize = 0;
+    let maxFontSize = 0;
+
+    if (breakpoints) {
+      if (mediaQueries) {
+        let mediaQueriesTag = mediaQueries[tag];
+
+        if (mediaQueriesTag) {
+          breakpoint = mediaQueriesTag[breakpointIdSelected];
+        }
+      }
+    }
+
+    if (breakpoint) {
+      minFontSize = breakpoint.minFontSize || 0;
+      maxFontSize = breakpoint.maxFontSize || 0;
+    }
+
+    return {
+      minFontSize,
+      maxFontSize,
+    };
+  }
+
+  function getFontSizeByTagAndBreakpointId(
+    tag: Tags,
+    breakpointId: BreakpointKey
+  ) {
+    let breakpoint = null;
+    let minFontSize = 0;
+    let maxFontSize = 0;
+
+    if (breakpoints) {
+      if (mediaQueries) {
+        let mediaQueriesTag = mediaQueries[tag];
+
+        if (mediaQueriesTag) {
+          breakpoint = mediaQueriesTag[breakpointId];
+        }
+      }
+    }
+
+    if (breakpoint) {
+      minFontSize = breakpoint.minFontSize || 0;
+      maxFontSize = breakpoint.maxFontSize || 0;
+    }
+
+    return {
+      minFontSize,
+      maxFontSize,
+    };
+  }
 
   return {
+    breakpoints,
     mediaQueries,
-    onCreateMediaQuery,
-    onUpdateMediaQuery,
+    breakpointIdSelected,
+    getFontSizeByTagAndBreakpointId,
+    onSelectedTagId,
+    onSelectedBreakpointId,
+    onSaveMediaQuery,
   };
 }

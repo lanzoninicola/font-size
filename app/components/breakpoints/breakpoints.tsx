@@ -4,7 +4,7 @@ import useBreakpointService from "~/domain/breakpoints/useBreakpointService";
 
 import SectionHeader from "../shared/section-header";
 import VStackBox from "../shared/vstack-wrapper";
-import FormControlInputNumber from "../style-section/components/form-control-input-number";
+import FormControlInputNumber from "../shared/form-control-input-number";
 import FormControlSelectBreakpoint from "../shared/form-control-select-breakpoint";
 
 export default function Breakpoints() {
@@ -15,7 +15,6 @@ export default function Breakpoints() {
     breakpoints,
     breakpointLabel,
     onCreateBreakpoint,
-    onUpdateBreakpoint,
     onSelectedBreakpoint,
   } = useBreakpointService(inputMinWidth, inputMaxWidth);
 
@@ -67,9 +66,6 @@ export default function Breakpoints() {
         </Text>
       </HStack>
       <HStack justify={"flex-end"} w="100%">
-        {breakpoints && (
-          <Button onClick={() => onUpdateBreakpoint()}>Update</Button>
-        )}
         <Button onClick={() => onCreateBreakpoint()}>Create</Button>
       </HStack>
     </VStackBox>

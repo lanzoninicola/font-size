@@ -1,24 +1,31 @@
 import { useEffect, useState } from "react";
 import useBreakpointsSelector from "~/context/font-size/hooks/useBreakpointsSelector";
+import usePixelsPerRemSelector from "~/context/font-size/hooks/usePixelsPerRemSelector";
 import { BreakpointKey, Tags } from "~/context/interfaces";
 
 export default function useBreakpointService(
   inputMinWidth?: number,
   inputMaxWidth?: number
 ) {
-  const { breakpoints, setBreakpoints } = useBreakpointsSelector();
-
-  const [breakpointKey, setBreakpointKey] = useState("");
+  const { breakpoints } = useBreakpointsSelector();
+  const { pixelsPerRem } = usePixelsPerRemSelector();
+  const [breakpointId, setBreakpointId] = useState("");
   const [breakpointLabel, setBreakpointLabel] = useState<string>("...");
-  const [breakpointKeySelected, setBreakpointKeySelected] =
-    useState<BreakpointKey>("");
+  const [breakpointIdSelected, setBreakpointIdSelected] =
+    useState<BreakpointKey>("no-selected");
 
+  /**
+   * 
+   * Not used
+   * If the user wants to update, press the SAVE button 
+   * and override the breakpoint
+   * 
   function onUpdateBreakpoint() {
     let newBreakpoints = { ...breakpoints };
 
-    delete newBreakpoints[breakpointKeySelected];
+    delete newBreakpoints[breakpointIdSelected];
 
-    newBreakpoints[breakpointKey] = {
+    newBreakpoints[breakpointId] = {
       label: breakpointLabel,
       minWidth: inputMinWidth,
       maxWidth: inputMaxWidth,
@@ -26,41 +33,57 @@ export default function useBreakpointService(
 
     setBreakpoints(newBreakpoints);
   }
+   */
 
   function onCreateBreakpoint(): void {
     let newBreakpoints = { ...breakpoints };
 
-    newBreakpoints[breakpointKey] = {
+    newBreakpoints[breakpointId] = {
       label: breakpointLabel,
       minWidth: inputMinWidth,
       maxWidth: inputMaxWidth,
     };
 
-    setBreakpoints(newBreakpoints);
+    console.log(newBreakpoints);
+
+    // setBreakpoints(newBreakpoints);
   }
 
-  function onSelectedBreakpoint(event: React.ChangeEvent<HTMLInputElement>) {
+  function setCurrentBreakpointIdSelected(breakpointId: BreakpointKey) {
+    setBreakpointIdSelected(breakpointId);
+  }
+
+  function getBreakpointValuesById(breakpointId: BreakpointKey) {
     let breakpoint = null;
     let minWidth = 0;
     let maxWidth = 0;
-
-    const breakpointKey = event.target.value;
+    let minWidthREM = 0;
+    let maxWidthREM = 0;
 
     if (breakpoints) {
-      breakpoint = breakpoints[breakpointKey];
+      breakpoint = breakpoints[breakpointId];
     }
 
     if (breakpoint) {
-      setBreakpointKeySelected(breakpointKey);
-
       minWidth = breakpoint.minWidth || 0;
       maxWidth = breakpoint.maxWidth || 0;
+      minWidthREM = minWidth / pixelsPerRem;
+      maxWidthREM = maxWidth / pixelsPerRem;
     }
 
     return {
       minWidth,
       maxWidth,
+      minWidthREM,
+      maxWidthREM,
     };
+  }
+
+  function onSelectedBreakpoint(event: React.ChangeEvent<HTMLInputElement>) {
+    const breakpointId = event.target.value;
+    setCurrentBreakpointIdSelected(breakpointId);
+
+    return getBreakpointValuesById(breakpointId);
   }
 
   useEffect(() => {
@@ -70,21 +93,22 @@ export default function useBreakpointService(
       inputMaxWidth &&
       inputMaxWidth > 0
     ) {
-      setBreakpointKey(`min${inputMinWidth}max${inputMaxWidth}`);
+      setBreakpointId(`min${inputMinWidth}max${inputMaxWidth}`);
 
       setBreakpointLabel(
         `min-width: ${inputMinWidth}px and max-width: ${inputMaxWidth}px`
       );
     }
-  }, [inputMinWidth, inputMaxWidth, breakpoints]);
+  }, [inputMinWidth, inputMaxWidth, breakpoints, breakpointIdSelected]);
 
   return {
     breakpoints,
-    breakpointKey,
+    breakpointId,
     breakpointLabel,
-    breakpointKeySelected,
+    breakpointIdSelected,
+    setCurrentBreakpointIdSelected,
+    getBreakpointValuesById,
     onCreateBreakpoint,
-    onUpdateBreakpoint,
     onSelectedBreakpoint,
   };
 }

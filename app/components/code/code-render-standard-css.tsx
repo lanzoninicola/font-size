@@ -1,26 +1,9 @@
-import { Box, Code } from "@chakra-ui/react";
-import usePixelsPerRem from "~/context/font-size/hooks/usePixelsPerRem";
-import useTag from "~/context/font-size/hooks/useTag";
-import CopyButton from "../shared/copy-button";
+import useCSSCodeBlock from "~/domain/code-block/useCSSCodeBlock";
+
 import CodeArea from "./code-area";
 
 export default function CodeRenderStandardCSS() {
-  const { tag } = useTag();
-  const { pixelsPerRem } = usePixelsPerRem();
-
-  //   const codeBlock = `
-  // html {font-size: ${(100 / 16) * pixelsPerRem}%;} /*${pixelsPerRem}px*/
-
-  // @media only screen and (min-width: ${
-  //     minViewportWidth[tag]
-  //   }px) and (max-width: ${maxViewportWidth[tag]}px) {
-  //     ${tag} {
-  //         font-size: ${formula};
-  //     }
-  // }
-  // `;
-
-  const codeBlock = "";
+  const { codeBlock } = useCSSCodeBlock();
 
   return (
     <>

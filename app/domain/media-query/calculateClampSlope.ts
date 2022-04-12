@@ -1,8 +1,8 @@
 export default function calculateClampSlope(
-  minFontSize: number,
-  maxFontSize: number,
-  minWidth: number,
-  maxWidth: number
+  minFontSizeREM: number,
+  maxFontSizeREM: number,
+  minWidthREM: number,
+  maxWidthREM: number
 ) {
-  return (maxFontSize - minFontSize) / (maxWidth - minWidth);
+  return (maxFontSizeREM - minFontSizeREM) / (maxWidthREM - minWidthREM);
 }

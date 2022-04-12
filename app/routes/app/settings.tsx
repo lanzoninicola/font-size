@@ -1,15 +1,8 @@
-import { Divider, HStack } from "@chakra-ui/react";
 import ConverterPixelsRems from "~/components/settings/converter-pixels-rems";
-
+import FormControlInputNumber from "~/components/shared/form-control-input-number";
 import SectionHeader from "~/components/shared/section-header";
 import VStackBox from "~/components/shared/vstack-wrapper";
-import FormControlInputNumber from "~/components/style-section/components/form-control-input-number";
-import useMaxFontSize from "~/context/font-size/hooks/useMaxFontSize";
-import useMaxViewportWidth from "~/context/font-size/hooks/useMaxViewportWidth";
-import useMinFontSize from "~/context/font-size/hooks/useMinFontSize";
-import useMinViewportWidth from "~/context/font-size/hooks/useMinViewportWidth";
-import usePixelsPerRem from "~/context/font-size/hooks/usePixelsPerRem";
-import useTag from "~/context/font-size/hooks/useTag";
+import usePixelsPerRem from "~/context/font-size/hooks/usePixelsPerRemSelector";
 
 export default function SettingsPage() {
   const { pixelsPerRem, setPixelsPerRem } = usePixelsPerRem();

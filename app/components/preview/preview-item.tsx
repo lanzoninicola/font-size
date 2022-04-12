@@ -5,7 +5,7 @@ import useClampFormulaByTag from "~/domain/clamp/hooks/useClampFormulaByTag";
 import { Tags } from "~/context/interfaces";
 import { LoaderData } from "~/routes/app/styling";
 
-import FormControlInputNumber from "../style-section/components/form-control-input-number";
+import FormControlInputNumber from "../shared/form-control-input-number";
 import useClampFormula from "~/domain/clamp/hooks/useClampFormula";
 
 export default function PreviewItem() {
