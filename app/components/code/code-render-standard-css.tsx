@@ -1,7 +1,4 @@
 import { Box, Code } from "@chakra-ui/react";
-import useClampFormulaByTag from "~/domain/clamp/hooks/useClampFormulaByTag";
-import useMaxViewportWidth from "~/context/font-size/hooks/useMaxViewportWidth";
-import useMinViewportWidth from "~/context/font-size/hooks/useMinViewportWidth";
 import usePixelsPerRem from "~/context/font-size/hooks/usePixelsPerRem";
 import useTag from "~/context/font-size/hooks/useTag";
 import CopyButton from "../shared/copy-button";
@@ -10,21 +7,20 @@ import CodeArea from "./code-area";
 export default function CodeRenderStandardCSS() {
   const { tag } = useTag();
   const { pixelsPerRem } = usePixelsPerRem();
-  const { formula } = useClampFormulaByTag({ tag });
-  const { minViewportWidth } = useMinViewportWidth();
-  const { maxViewportWidth } = useMaxViewportWidth();
 
-  const codeBlock = `
-html {font-size: ${(100 / 16) * pixelsPerRem}%;} /*${pixelsPerRem}px*/
+  //   const codeBlock = `
+  // html {font-size: ${(100 / 16) * pixelsPerRem}%;} /*${pixelsPerRem}px*/
 
-@media only screen and (min-width: ${
-    minViewportWidth[tag]
-  }px) and (max-width: ${maxViewportWidth[tag]}px) {
-    ${tag} {
-        font-size: ${formula};
-    }
-}
-`;
+  // @media only screen and (min-width: ${
+  //     minViewportWidth[tag]
+  //   }px) and (max-width: ${maxViewportWidth[tag]}px) {
+  //     ${tag} {
+  //         font-size: ${formula};
+  //     }
+  // }
+  // `;
+
+  const codeBlock = "";
 
   return (
     <>

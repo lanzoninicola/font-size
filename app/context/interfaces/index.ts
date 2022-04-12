@@ -9,9 +9,26 @@ export enum Tags {
   caption = "caption",
 }
 
-export type MinViewportWidthState = Record<Tags, number>;
-export type MaxViewportWidthState = Record<Tags, number>;
-export type MinFontSizeState = Record<Tags, number>;
-export type MaxFontSizeState = Record<Tags, number>;
-export type SlopeState = Record<Tags, number>;
-export type YAxisIntersectionState = Record<Tags, number>;
+export enum MediaQuerySettingsKey {
+  label = "label",
+  minWidth = "minWidth",
+  maxWidth = "maxWidth",
+  minFontSize = "minFontSize",
+  maxFontSize = "maxFontSize",
+}
+
+export type BreakpointKey = string;
+
+export interface BreakpointSettings {
+  [MediaQuerySettingsKey.label]: string;
+  [MediaQuerySettingsKey.minWidth]: number;
+  [MediaQuerySettingsKey.maxWidth]: number;
+  [MediaQuerySettingsKey.minFontSize]: number;
+  [MediaQuerySettingsKey.maxFontSize]: number;
+}
+
+export type Breakpoints = Record<BreakpointKey, BreakpointSettings>;
+
+export type MediaQueries = {
+  [key in keyof typeof Tags]: Breakpoints;
+};
