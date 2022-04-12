@@ -32,6 +32,8 @@ export interface Breakpoints {
   };
 }
 
-export type TagMediaQueries = {
-  [key in keyof typeof Tags]: Breakpoints;
-};
+// export type TagMediaQueries = {
+//   [key in keyof typeof Tags]: Breakpoints | null | undefined;
+// };
+
+export type TagMediaQueries = Record<Tags, Breakpoints | null>;

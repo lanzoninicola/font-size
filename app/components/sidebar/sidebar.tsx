@@ -11,14 +11,14 @@ export default function Sidebar() {
       gridArea={"sd"}
       minW="100px"
     >
-      <Link to="/breakpoints">
+      <Link to="/app/breakpoints">
         <StyleIcon color="white" />
       </Link>
-      <Link to="/styling">
+      <Link to="/app/styling">
         <StyleIcon color="white" />
       </Link>
       <FontIcon color="white" />
-      <Link to="/settings">
+      <Link to="/app/settings">
         <SettingsIcon color="white" />
       </Link>
     </VStack>

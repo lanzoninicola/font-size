@@ -11,7 +11,7 @@ export default function FormControlSelectTag({
       <Text color="primary.500" fontSize={"md"}>
         Choose a tag
       </Text>
-      <InputSelect minW="270px" onChange={onChange}>
+      <InputSelect minW="370px" fontSize="16px" onChange={onChange}>
         <option value="h1">Heading (H1)</option>
         <option value="h2">Heading (H2)</option>
         <option value="h3">Heading (H3)</option>

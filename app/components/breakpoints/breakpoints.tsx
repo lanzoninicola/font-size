@@ -1,11 +1,11 @@
 import { Button, HStack, Text } from "@chakra-ui/react";
 import React, { useEffect } from "react";
-import useBreakpointBuilder from "~/domain/breakpoints/hooks/useBreakpointBuilder";
+import useBreakpointService from "~/domain/breakpoints/useBreakpointService";
 
 import SectionHeader from "../shared/section-header";
 import VStackBox from "../shared/vstack-wrapper";
 import FormControlInputNumber from "../style-section/components/form-control-input-number";
-import FormControlSelectBreakpoint from "../style-section/components/form-control-select-breakpoint";
+import FormControlSelectBreakpoint from "../shared/form-control-select-breakpoint";
 
 export default function Breakpoints() {
   const [inputMinWidth, setInputMinWidth] = React.useState<number>(0);
@@ -17,10 +17,7 @@ export default function Breakpoints() {
     onCreateBreakpoint,
     onUpdateBreakpoint,
     onSelectedBreakpoint,
-  } = useBreakpointBuilder({
-    inputMinWidth,
-    inputMaxWidth,
-  });
+  } = useBreakpointService(inputMinWidth, inputMaxWidth);
 
   function onChangeMinViewportWidth(e: React.ChangeEvent<HTMLInputElement>) {
     setInputMinWidth(parseInt(e.target.value, 10));
@@ -46,8 +43,6 @@ export default function Breakpoints() {
           <FormControlSelectBreakpoint
             breakpoints={breakpoints}
             onChange={onSelectBreakpoint}
-            minW="370px"
-            fontSize="16px"
           />
         )}
         <FormControlInputNumber

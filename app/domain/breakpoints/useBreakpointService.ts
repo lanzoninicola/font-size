@@ -1,15 +1,12 @@
 import { useEffect, useState } from "react";
-import useBreakpoints from "~/context/font-size/hooks/useBreakpoints";
-import { BreakpointKey } from "~/context/interfaces";
+import useBreakpointsSelector from "~/context/font-size/hooks/useBreakpointsSelector";
+import { BreakpointKey, Tags } from "~/context/interfaces";
 
-export default function useBreakpointBuilder({
-  inputMinWidth,
-  inputMaxWidth,
-}: {
-  inputMinWidth: number;
-  inputMaxWidth: number;
-}) {
-  const { breakpoints, setBreakpoints } = useBreakpoints();
+export default function useBreakpointService(
+  inputMinWidth?: number,
+  inputMaxWidth?: number
+) {
+  const { breakpoints, setBreakpoints } = useBreakpointsSelector();
 
   const [breakpointKey, setBreakpointKey] = useState("");
   const [breakpointLabel, setBreakpointLabel] = useState<string>("...");
@@ -67,15 +64,18 @@ export default function useBreakpointBuilder({
   }
 
   useEffect(() => {
-    if (inputMinWidth > 0 && inputMaxWidth > 0) {
+    if (
+      inputMinWidth &&
+      inputMinWidth > 0 &&
+      inputMaxWidth &&
+      inputMaxWidth > 0
+    ) {
       setBreakpointKey(`min${inputMinWidth}max${inputMaxWidth}`);
 
       setBreakpointLabel(
         `min-width: ${inputMinWidth}px and max-width: ${inputMaxWidth}px`
       );
     }
-
-    console.log("useBreakpointBuilder", breakpoints);
   }, [inputMinWidth, inputMaxWidth, breakpoints]);
 
   return {
