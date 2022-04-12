@@ -1,12 +1,12 @@
 import { useEffect } from "react";
-import useBreakpointBuilder from "~/context/font-size/hooks/useBreakpointBuilder";
+import useBreakpointBuilder from "~/domain/breakpoints/hooks/useBreakpointBuilder";
 import useMediaQueriesBuilder from "~/context/font-size/hooks/useMediaQueriesBuilder";
 import useTag from "~/context/font-size/hooks/useTag";
 import { Tags } from "~/context/interfaces";
 
 import SectionHeader from "../shared/section-header";
 import VStackBox from "../shared/vstack-wrapper";
-import Breakpoints from "./breakpoints";
+import Breakpoints from "../breakpoints/breakpoints";
 import FormControlInputNumber from "./components/form-control-input-number";
 import FormControlSelectTag from "./components/form-control-select-tag";
 

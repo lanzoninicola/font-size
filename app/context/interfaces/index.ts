@@ -9,26 +9,29 @@ export enum Tags {
   caption = "caption",
 }
 
-export enum MediaQuerySettingsKey {
+export enum BreakpointsSettingsKey {
   label = "label",
   minWidth = "minWidth",
   maxWidth = "maxWidth",
-  minFontSize = "minFontSize",
-  maxFontSize = "maxFontSize",
 }
 
 export type BreakpointKey = string;
 
-export interface BreakpointSettings {
-  [MediaQuerySettingsKey.label]: string;
-  [MediaQuerySettingsKey.minWidth]: number;
-  [MediaQuerySettingsKey.maxWidth]: number;
-  [MediaQuerySettingsKey.minFontSize]: number;
-  [MediaQuerySettingsKey.maxFontSize]: number;
+export enum FontSizeSettingsKey {
+  minFontSize = "minFontSize",
+  maxFontSize = "maxFontSize",
 }
 
-export type Breakpoints = Record<BreakpointKey, BreakpointSettings>;
+export interface Breakpoints {
+  [key: BreakpointKey]: {
+    [BreakpointsSettingsKey.label]?: string;
+    [BreakpointsSettingsKey.minWidth]?: number;
+    [BreakpointsSettingsKey.maxWidth]?: number;
+    [FontSizeSettingsKey.minFontSize]?: number;
+    [FontSizeSettingsKey.maxFontSize]?: number;
+  };
+}
 
-export type MediaQueries = {
+export type TagMediaQueries = {
   [key in keyof typeof Tags]: Breakpoints;
 };

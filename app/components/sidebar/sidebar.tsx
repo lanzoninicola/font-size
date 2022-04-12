@@ -11,6 +11,9 @@ export default function Sidebar() {
       gridArea={"sd"}
       minW="100px"
     >
+      <Link to="/breakpoints">
+        <StyleIcon color="white" />
+      </Link>
       <Link to="/styling">
         <StyleIcon color="white" />
       </Link>
