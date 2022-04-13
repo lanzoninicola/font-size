@@ -3,7 +3,8 @@
     window.addEventListener(
       "message",
       (event) => {
-        console.log(event.data);
+        console.log("im listening");
+        console.log("***** EVENT ORIGIN **********", event.origin);
         if (
           event.origin !== "https://font-size-eight.vercel.app" ||
           event.origin !== "http://172.24.64.1:3000"
