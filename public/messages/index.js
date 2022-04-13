@@ -5,7 +5,7 @@
       (event) => {
         if (event.origin !== "https://casamento-convite.vercel.app") return;
 
-        console.log(event.data);
+        document.body.style.backgroundColor = "red";
       },
       false
     );
