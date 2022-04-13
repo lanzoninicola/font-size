@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import useCSSCodeBlock from "~/domain/code-block/useCSSCodeBlock";
 
 import CodeArea from "./code-area";

@@ -3,7 +3,7 @@ import { Box, Heading, Text } from "@chakra-ui/react";
 export default function PreviewContent() {
   return (
     <>
-      <Box bg="white">
+      <Box bg="white" paddingInline={"1rem"} paddingBlock={"1.5rem"}>
         <Heading as="h1">This is a heading</Heading>
         <Heading as="h2">This is a sub-heading</Heading>
         <Text>

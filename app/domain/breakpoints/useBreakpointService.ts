@@ -7,7 +7,7 @@ export default function useBreakpointService(
   inputMinWidth?: number,
   inputMaxWidth?: number
 ) {
-  const { breakpoints } = useBreakpointsSelector();
+  const { breakpoints, setBreakpoints } = useBreakpointsSelector();
   const { pixelsPerRem } = usePixelsPerRemSelector();
   const [breakpointId, setBreakpointId] = useState("");
   const [breakpointLabel, setBreakpointLabel] = useState<string>("...");
@@ -35,7 +35,7 @@ export default function useBreakpointService(
   }
    */
 
-  function onCreateBreakpoint(): void {
+  function onSaveBreakpoint(): void {
     let newBreakpoints = { ...breakpoints };
 
     newBreakpoints[breakpointId] = {
@@ -44,9 +44,7 @@ export default function useBreakpointService(
       maxWidth: inputMaxWidth,
     };
 
-    console.log(newBreakpoints);
-
-    // setBreakpoints(newBreakpoints);
+    setBreakpoints(newBreakpoints);
   }
 
   function setCurrentBreakpointIdSelected(breakpointId: BreakpointKey) {
@@ -108,7 +106,7 @@ export default function useBreakpointService(
     breakpointIdSelected,
     setCurrentBreakpointIdSelected,
     getBreakpointValuesById,
-    onCreateBreakpoint,
+    onSaveBreakpoint,
     onSelectedBreakpoint,
   };
 }

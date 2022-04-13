@@ -47,3 +47,23 @@ export function StyleIcon({
     <Image src={`${BASE_URL}/style-icon-${size}-${color}.svg`} alt="Pix" />
   );
 }
+
+export function WIcon({
+  size = 36,
+  color = "gray",
+}: {
+  size?: number;
+  color?: string;
+}) {
+  return <Image src={`${BASE_URL}/w-icon-${size}-${color}.svg`} alt="Pix" />;
+}
+
+export function HIcon({
+  size = 36,
+  color = "gray",
+}: {
+  size?: number;
+  color?: string;
+}) {
+  return <Image src={`${BASE_URL}/h-icon-${size}-${color}.svg`} alt="Pix" />;
+}

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import usePixelsPerRemSelector from "~/context/font-size/hooks/usePixelsPerRemSelector";
 import { Tags } from "~/context/interfaces";
 import useBreakpointService from "../breakpoints/useBreakpointService";
@@ -11,6 +12,8 @@ export default function useCSSCodeBlock() {
   const { mediaQueries, getFontSizeByTagAndBreakpointId } =
     useMediaQueryService();
   const { getBreakpointValuesById } = useBreakpointService();
+
+  const [codeBlock, setCodeBlock] = useState<string>("");
 
   function buildCodeBlock() {
     const htmlPercentage = (100 / 16) * pixelsPerRem;
@@ -62,7 +65,7 @@ export default function useCSSCodeBlock() {
         codeBlock += `\n`;
         codeBlock += `  ${tag} {`;
         codeBlock += `\n`;
-        codeBlock += `   font-size: ${clampFormula}px;`;
+        codeBlock += `   font-size: ${clampFormula} !important;`;
         codeBlock += `\n`;
         codeBlock += `  }`;
         codeBlock += `\n`;
@@ -74,7 +77,13 @@ export default function useCSSCodeBlock() {
     return codeBlock;
   }
 
+  useEffect(() => {
+    setCodeBlock(buildCodeBlock());
+
+    console.log("useCSSCodeBlock fired");
+  }, [mediaQueries]);
+
   return {
-    codeBlock: buildCodeBlock(),
+    codeBlock,
   };
 }

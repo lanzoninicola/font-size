@@ -14,7 +14,7 @@ export default function Breakpoints() {
   const {
     breakpoints,
     breakpointLabel,
-    onCreateBreakpoint,
+    onSaveBreakpoint,
     onSelectedBreakpoint,
   } = useBreakpointService(inputMinWidth, inputMaxWidth);
 
@@ -66,7 +66,7 @@ export default function Breakpoints() {
         </Text>
       </HStack>
       <HStack justify={"flex-end"} w="100%">
-        <Button onClick={() => onCreateBreakpoint()}>Create</Button>
+        <Button onClick={() => onSaveBreakpoint()}>Create</Button>
       </HStack>
     </VStackBox>
   );
