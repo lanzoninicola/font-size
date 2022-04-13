@@ -8,6 +8,11 @@
           event.origin !== "http://172.24.64.1:3000"
         )
           return;
+
+        console.log("im listening");
+
+        console.log(event.origin);
+        console.log(event.data);
       },
       false
     );
