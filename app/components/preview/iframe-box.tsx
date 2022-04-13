@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import usePreviewUrl from "~/context/preview/hooks/usePreviewUrl";
 import useCSSCodeBlock from "~/domain/code-block/useCSSCodeBlock";
 import useMediaQueryService from "~/domain/media-query/useMediaQueryService";
+import SETTINGS from "~/domain/settings";
 
 export default function IframeBox({
   width,
@@ -14,7 +15,9 @@ export default function IframeBox({
   const { codeBlock } = useCSSCodeBlock();
   const { mediaQueries } = useMediaQueryService();
   const [iframeReloadKey, setIframeReloadKey] = useState(0);
-  const { previewUrl, setPreviewUrl } = usePreviewUrl();
+  const { previewUrl } = usePreviewUrl();
+
+  const DEFAULT_URL = SETTINGS.preview.iframeDefaultURL;
 
   function applyStyle() {
     if (document) {
@@ -75,12 +78,12 @@ export default function IframeBox({
         // src={
         //   previewUrl || previewUrl === "https://"
         //     ? previewUrl
-        //     : `/preview/content`
+        //     : ${DEFAULT_URL}
         // }
-        src={"http://127.0.0.1:5500/index.html"}
+        src={previewUrl && previewUrl !== "" ? previewUrl : DEFAULT_URL}
         width="100%"
         height="100%"
-        // onLoad={(e) => applyStyle(e)}
+        onLoad={() => applyStyle()}
       ></iframe>
     </Box>
   );
