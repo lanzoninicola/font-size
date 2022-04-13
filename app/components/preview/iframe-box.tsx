@@ -21,6 +21,11 @@ export default function IframeBox({
       console.log("im here");
       const iframes = document.querySelectorAll("iframe[name=iframe-preview]");
 
+      const iframeHTMLElement = iframes[0] as HTMLIFrameElement;
+
+      console.log(iframeHTMLElement.contentWindow);
+      console.log(iframeHTMLElement.contentDocument);
+
       if (iframes.length > 0) {
         iframes.forEach((iframe) => {
           const iframeHTMLElement = iframe as HTMLIFrameElement;
@@ -54,10 +59,6 @@ export default function IframeBox({
 
   useEffect(() => {
     setIframeReloadKey(iframeReloadKey + 1);
-
-    setTimeout(() => {
-      applyStyle();
-    }, 10000);
   }, [mediaQueries, width, height, previewUrl]);
 
   return (
@@ -76,10 +77,10 @@ export default function IframeBox({
         //     ? previewUrl
         //     : `/preview/content`
         // }
-        src={"https://casamento-convite.vercel.app"}
+        src={"http://127.0.0.1:5500/index.html"}
         width="100%"
         height="100%"
-        onLoad={() => applyStyle()}
+        // onLoad={(e) => applyStyle(e)}
       ></iframe>
     </Box>
   );
