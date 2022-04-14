@@ -1,10 +1,15 @@
 import { useEffect } from "react";
+import { MediaQueries } from "~/context/font-size/interfaces";
 import useCSSCodeBlock from "~/domain/code-block/useCSSCodeBlock";
 
 import CodeArea from "./code-area";
 
-export default function CodeRenderStandardCSS() {
-  const { codeBlock } = useCSSCodeBlock();
+export default function CodeRenderStandardCSS({
+  mediaQueries,
+}: {
+  mediaQueries: MediaQueries | null;
+}) {
+  const { codeBlock } = useCSSCodeBlock({ mediaQueries });
 
   return (
     <>

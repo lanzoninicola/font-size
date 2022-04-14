@@ -1,8 +1,8 @@
-import { Box, Button } from "@chakra-ui/react";
-import { useState, useEffect, useRef } from "react";
+import { Box } from "@chakra-ui/react";
+import { useEffect, useRef, useState } from "react";
+import useMediaQueriesSelector from "~/context/font-size/hooks/useMediaQueriesSelector";
 import usePreviewUrl from "~/context/preview/hooks/usePreviewUrl";
 import useCSSCodeBlock from "~/domain/code-block/useCSSCodeBlock";
-import useMediaQueryService from "~/domain/media-query/useMediaQueryService";
 import SETTINGS from "~/domain/settings";
 
 export default function IframeBox({
@@ -13,8 +13,9 @@ export default function IframeBox({
   height: number;
 }) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const { codeBlock } = useCSSCodeBlock();
-  const { mediaQueries } = useMediaQueryService();
+
+  const { mediaQueries } = useMediaQueriesSelector();
+  const { codeBlock } = useCSSCodeBlock({ mediaQueries });
   const [iframeReloadKey, setIframeReloadKey] = useState(0);
   const { previewUrl } = usePreviewUrl();
 

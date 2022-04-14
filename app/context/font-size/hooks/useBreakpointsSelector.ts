@@ -1,37 +1,36 @@
-import { useEffect } from "react";
-import { useContextSelector } from "use-context-selector";
-import useLocalStorage from "~/components/shared/hooks/useLocalStorage";
-import { FS_CONTEXT_BREAKPOINTS } from "~/context/constants";
-import { Breakpoints } from "~/context/interfaces";
-import { FontSizeContextData } from "../font-size-context";
+import { Breakpoints } from "~/context/font-size/interfaces";
+
+import useBreakpointsContext from "./useBreakpointsContext";
+import useBreakpointsLocalStorage from "./useBreakpointsLocalStorage";
 
 export default function useBreakpointsSelector() {
-  const breakpoints = useContextSelector(
-    FontSizeContextData,
-    (ctx) => ctx?.breakpoints
-  );
+  const {
+    breakpoints: breakpointsContext,
+    setBreakpoints: setBreakpointsContext,
+  } = useBreakpointsContext();
 
-  const setBreakpointsState = useContextSelector(
-    FontSizeContextData,
-    (ctx) => ctx?.setBreakpoints
-  );
-
-  const [breakpointsOnLocalStorage, setBreakpointsOnLocalStorage] =
-    useLocalStorage<Breakpoints | null>(FS_CONTEXT_BREAKPOINTS, null);
+  const {
+    breakpoints: breakpointsLocalStorage,
+    setBreakpoints: setBreakpointsLocalStorage,
+  } = useBreakpointsLocalStorage();
 
   function setBreakpoints(nextState: Breakpoints | null) {
-    setBreakpointsState(nextState);
-    setBreakpointsOnLocalStorage(nextState);
+    setBreakpointsContext(nextState);
+    setBreakpointsLocalStorage(nextState);
   }
 
-  useEffect(() => {
-    if (breakpointsOnLocalStorage) {
-      setBreakpointsState(breakpointsOnLocalStorage);
-    }
-  }, [breakpoints]);
+  // Commented this because it cause a re-rendering of the whole app
+  // every time a component is render.
+  // With this configuration, if local storage is not enabled or accessible then the app will crash
+  //
+  // useEffect(() => {
+  //   if (breakpointsOnLocalStorage) {
+  //     setBreakpointsState(breakpointsOnLocalStorage);
+  //   }
+  // }, []);
 
   return {
-    breakpoints,
+    breakpoints: breakpointsLocalStorage,
     setBreakpoints,
   };
 }

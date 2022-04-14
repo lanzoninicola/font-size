@@ -1,4 +1,4 @@
-export default function getClampFormula(
+export default function generateClampFormula(
   minFontSize: number,
   maxFontSize: number,
   slope: number,

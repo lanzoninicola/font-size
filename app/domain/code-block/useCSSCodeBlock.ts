@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
 import usePixelsPerRemSelector from "~/context/font-size/hooks/usePixelsPerRemSelector";
-import { Tags } from "~/context/interfaces";
+import { MediaQueries, HTMLTags } from "~/context/font-size/interfaces";
+
 import useBreakpointService from "../breakpoints/useBreakpointService";
 import calculateClampSlope from "../media-query/calculateClampSlope";
 import calculateClampYAxisIntersection from "../media-query/calculateClampYAxisIntersection";
-import getClampFormula from "../media-query/getClampFormula";
+import generateClampFormula from "../media-query/generateClampFormula";
 import useMediaQueryService from "../media-query/useMediaQueryService";
 
-export default function useCSSCodeBlock() {
+export default function useCSSCodeBlock({
+  mediaQueries,
+}: {
+  mediaQueries: MediaQueries | null;
+}) {
   const { pixelsPerRem } = usePixelsPerRemSelector();
-  const { mediaQueries, getFontSizeByTagAndBreakpointId } =
-    useMediaQueryService();
+  const { getFontSizesByTagAndBreakpointId } = useMediaQueryService();
   const { getBreakpointValuesById } = useBreakpointService();
 
   const [codeBlock, setCodeBlock] = useState<string>("");
@@ -26,7 +30,7 @@ export default function useCSSCodeBlock() {
     }
 
     for (const tag in mediaQueries) {
-      const mediaQueryTag = mediaQueries[tag as Tags];
+      const mediaQueryTag = mediaQueries[tag as HTMLTags];
 
       if (!mediaQueryTag) {
         continue;
@@ -36,8 +40,8 @@ export default function useCSSCodeBlock() {
         const { minWidth, minWidthREM, maxWidth, maxWidthREM } =
           getBreakpointValuesById(breakpointId);
 
-        const { minFontSize, maxFontSize } = getFontSizeByTagAndBreakpointId(
-          tag as Tags,
+        const { minFontSize, maxFontSize } = getFontSizesByTagAndBreakpointId(
+          tag as HTMLTags,
           breakpointId
         );
 
@@ -54,7 +58,7 @@ export default function useCSSCodeBlock() {
           minWidthREM
         );
 
-        const clampFormula = getClampFormula(
+        const clampFormula = generateClampFormula(
           minFontSize,
           maxFontSize,
           slope,
@@ -79,7 +83,7 @@ export default function useCSSCodeBlock() {
 
   useEffect(() => {
     setCodeBlock(buildCodeBlock());
-  }, [mediaQueries]);
+  }, []);
 
   return {
     codeBlock,

@@ -1,96 +1,46 @@
-import { useEffect } from "react";
+import useBreakpointsSelector from "~/context/font-size/hooks/useBreakpointsSelector";
 import useMediaQueriesSelector from "~/context/font-size/hooks/useMediaQueriesSelector";
-import useTag from "~/context/font-size/hooks/useTag";
-import { BreakpointKey, TagMediaQueries, Tags } from "~/context/interfaces";
+import {
+  BreakpointId,
+  MediaQueries,
+  Selector,
+} from "~/context/font-size/interfaces";
 
-import useBreakpointService from "../breakpoints/useBreakpointService";
-
-export default function useMediaQueryService(
-  inputMinFontSize?: number,
-  inputMaxFontSize?: number
-) {
+export default function useMediaQueryService() {
   const { mediaQueries, setMediaQueries } = useMediaQueriesSelector();
-  const { breakpoints, breakpointIdSelected, onSelectedBreakpoint } =
-    useBreakpointService();
-  const { tag, setTag } = useTag();
+  const { breakpoints } = useBreakpointsSelector();
 
-  function onSaveMediaQuery() {
+  function saveMediaQuery(
+    breakpointId: BreakpointId,
+    selector: Selector,
+    minFontSize: number,
+    maxFontSize: number
+  ) {
     let newMediaQueries = { ...mediaQueries };
 
-    let mediaQueriesTag = newMediaQueries[tag];
+    newMediaQueries[breakpointId] = {
+      ...newMediaQueries[breakpointId],
+      [selector]: {
+        ...newMediaQueries[breakpointId][selector],
+        minFontSize,
+        maxFontSize,
+      },
+    } as MediaQueries;
 
-    if (!mediaQueriesTag) {
-      mediaQueriesTag = {};
-      newMediaQueries[tag] = mediaQueriesTag;
-    }
-
-    mediaQueriesTag[breakpointIdSelected] = {
-      minFontSize: inputMinFontSize,
-      maxFontSize: inputMaxFontSize,
-    };
-
-    setMediaQueries(newMediaQueries as TagMediaQueries);
+    setMediaQueries(newMediaQueries as MediaQueries);
   }
 
-  function onSelectedTagId(event: React.ChangeEvent<HTMLInputElement>) {
-    setTag(event.target.value as Tags);
-
-    return getCurrentFontSizeValues();
-  }
-
-  function onSelectedBreakpointId(event: React.ChangeEvent<HTMLInputElement>) {
-    onSelectedBreakpoint(event);
-
-    return getCurrentFontSizeValues();
-  }
-
-  function getCurrentFontSizeValues() {
+  function getFontSizeRange(breakpointId: BreakpointId, selector: Selector) {
     let breakpoint = null;
     let minFontSize = 0;
     let maxFontSize = 0;
 
-    if (breakpoints) {
-      if (mediaQueries) {
-        let mediaQueriesTag = mediaQueries[tag];
-
-        if (mediaQueriesTag) {
-          breakpoint = mediaQueriesTag[breakpointIdSelected];
-        }
+    if (mediaQueries) {
+      breakpoint = mediaQueries[breakpointId];
+      if (breakpoint) {
+        minFontSize = breakpoint[selector]?.minFontSize ?? 0;
+        maxFontSize = breakpoint[selector]?.maxFontSize ?? 0;
       }
-    }
-
-    if (breakpoint) {
-      minFontSize = breakpoint.minFontSize || 0;
-      maxFontSize = breakpoint.maxFontSize || 0;
-    }
-
-    return {
-      minFontSize,
-      maxFontSize,
-    };
-  }
-
-  function getFontSizeByTagAndBreakpointId(
-    tag: Tags,
-    breakpointId: BreakpointKey
-  ) {
-    let breakpoint = null;
-    let minFontSize = 0;
-    let maxFontSize = 0;
-
-    if (breakpoints) {
-      if (mediaQueries) {
-        let mediaQueriesTag = mediaQueries[tag];
-
-        if (mediaQueriesTag) {
-          breakpoint = mediaQueriesTag[breakpointId];
-        }
-      }
-    }
-
-    if (breakpoint) {
-      minFontSize = breakpoint.minFontSize || 0;
-      maxFontSize = breakpoint.maxFontSize || 0;
     }
 
     return {
@@ -102,10 +52,7 @@ export default function useMediaQueryService(
   return {
     breakpoints,
     mediaQueries,
-    breakpointIdSelected,
-    getFontSizeByTagAndBreakpointId,
-    onSelectedTagId,
-    onSelectedBreakpointId,
-    onSaveMediaQuery,
+    getFontSizeRange,
+    saveMediaQuery,
   };
 }

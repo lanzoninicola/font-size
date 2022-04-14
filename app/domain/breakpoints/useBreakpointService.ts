@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import useBreakpointsSelector from "~/context/font-size/hooks/useBreakpointsSelector";
 import usePixelsPerRemSelector from "~/context/font-size/hooks/usePixelsPerRemSelector";
-import { BreakpointKey, Tags } from "~/context/interfaces";
+import { BreakpointId, HTMLTags } from "~/context/font-size/interfaces";
 
 export default function useBreakpointService(
   inputMinWidth?: number,
@@ -11,8 +11,8 @@ export default function useBreakpointService(
   const { pixelsPerRem } = usePixelsPerRemSelector();
   const [breakpointId, setBreakpointId] = useState("");
   const [breakpointLabel, setBreakpointLabel] = useState<string>("...");
-  const [breakpointIdSelected, setBreakpointIdSelected] =
-    useState<BreakpointKey>("no-selected");
+  // const [breakpointIdSelected, setBreakpointIdSelected] =
+  //   useState<BreakpointId>("no-selected");
 
   /**
    * 
@@ -47,11 +47,11 @@ export default function useBreakpointService(
     setBreakpoints(newBreakpoints);
   }
 
-  function setCurrentBreakpointIdSelected(breakpointId: BreakpointKey) {
-    setBreakpointIdSelected(breakpointId);
-  }
+  // function setCurrentBreakpointIdSelected(breakpointId: BreakpointId) {
+  //   setBreakpointIdSelected(breakpointId);
+  // }
 
-  function getBreakpointValuesById(breakpointId: BreakpointKey) {
+  function getBreakpointValuesById(breakpointId: BreakpointId) {
     let breakpoint = null;
     let minWidth = 0;
     let maxWidth = 0;
@@ -77,12 +77,12 @@ export default function useBreakpointService(
     };
   }
 
-  function onSelectedBreakpoint(event: React.ChangeEvent<HTMLInputElement>) {
-    const breakpointId = event.target.value;
-    setCurrentBreakpointIdSelected(breakpointId);
+  // function onSelectedBreakpoint(event: React.ChangeEvent<HTMLInputElement>) {
+  //   const breakpointId = event.target.value;
+  //   setCurrentBreakpointIdSelected(breakpointId);
 
-    return getBreakpointValuesById(breakpointId);
-  }
+  //   return getBreakpointValuesById(breakpointId);
+  // }
 
   useEffect(() => {
     if (
@@ -97,16 +97,16 @@ export default function useBreakpointService(
         `min-width: ${inputMinWidth}px and max-width: ${inputMaxWidth}px`
       );
     }
-  }, [inputMinWidth, inputMaxWidth, breakpoints, breakpointIdSelected]);
+  }, [inputMinWidth, inputMaxWidth, breakpoints]);
 
   return {
     breakpoints,
     breakpointId,
     breakpointLabel,
-    breakpointIdSelected,
-    setCurrentBreakpointIdSelected,
+    // breakpointIdSelected,
+    // setCurrentBreakpointIdSelected,
     getBreakpointValuesById,
     onSaveBreakpoint,
-    onSelectedBreakpoint,
+    // onSelectedBreakpoint,
   };
 }

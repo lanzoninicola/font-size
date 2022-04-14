@@ -1,39 +1,38 @@
 import { useEffect } from "react";
-import { useContextSelector } from "use-context-selector";
-import useLocalStorage from "~/components/shared/hooks/useLocalStorage";
-import { FS_CONTEXT_MEDIA_QUERIES } from "~/context/constants";
-import { TagMediaQueries } from "~/context/interfaces";
-import { FontSizeContextData } from "../font-size-context";
+import { MediaQueries } from "~/context/font-size/interfaces";
+
+import useMediaQueriesContext from "./useMediaQueriesContext";
+import useMediaQueriesLocalStorage from "./useMediaQueriesLocalStorage";
 
 export default function useMediaQueriesSelector() {
-  const mediaQueries = useContextSelector(
-    FontSizeContextData,
-    (ctx) => ctx?.mediaQueries
-  );
+  const {
+    mediaQueries: mediaQueriesContext,
+    setMediaQueries: setMediaQueriesContext,
+  } = useMediaQueriesContext();
+  const {
+    mediaQueries: mediaQueriesLocalStorage,
+    setMediaQueries: setMediaQueriesLocalStorage,
+  } = useMediaQueriesLocalStorage();
 
-  const setMediaQueriesState = useContextSelector(
-    FontSizeContextData,
-    (ctx) => ctx?.setMediaQueries
-  );
-
-  const [mediaQueriesOnLocalStorage, setMediaQueriesOnLocalStorage] =
-    useLocalStorage<TagMediaQueries | null>(FS_CONTEXT_MEDIA_QUERIES, null);
-
-  function setMediaQueries(nextState: TagMediaQueries | null) {
+  function setMediaQueries(nextState: MediaQueries | null) {
     if (nextState) {
-      setMediaQueriesState(nextState);
-      setMediaQueriesOnLocalStorage(nextState);
+      setMediaQueriesContext(nextState);
+      setMediaQueriesLocalStorage(nextState);
     }
   }
 
-  useEffect(() => {
-    if (mediaQueriesOnLocalStorage) {
-      setMediaQueriesState(mediaQueriesOnLocalStorage);
-    }
-  }, [mediaQueries]);
+  // Commented this because it cause a re-rendering of the whole app
+  // every time a component is render.
+  // With this configuration, if local storage is not enabled or accessible then the app will crash
+  //
+  // useEffect(() => {
+  //   if (mediaQueriesOnLocalStorage) {
+  //     setMediaQueriesState(mediaQueriesOnLocalStorage);
+  //   }
+  // }, []);
 
   return {
-    mediaQueries,
+    mediaQueries: mediaQueriesLocalStorage,
     setMediaQueries,
   };
 }

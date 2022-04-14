@@ -14,6 +14,7 @@ const InputNumber = forwardRef<{ [key: string]: any }, "input">(
         borderRadius="15px"
         border="none"
         bg="primary.500"
+        isDisabled={props.isDisabled}
         _focus={{
           outline: "none",
           background: "primary.500",

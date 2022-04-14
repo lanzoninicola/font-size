@@ -1,11 +1,11 @@
 import { HStack, Text } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import InputSelect from "~/components/shared/input-select";
-import { Breakpoints } from "~/context/interfaces";
+import { Breakpoints } from "~/context/font-size/interfaces";
 import useBreakpointService from "~/domain/breakpoints/useBreakpointService";
 
 export interface SelectOption {
-  value: string;
+  value: string | undefined;
   label: string | undefined;
 }
 
@@ -24,7 +24,7 @@ export default function FormControlSelectBreakpoint({
     if (breakpoints) {
       let options: SelectOption[] = [
         {
-          value: "no-selected",
+          value: undefined,
           label: " --- Select a breakpoint --- ",
         },
       ];

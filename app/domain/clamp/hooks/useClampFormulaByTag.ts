@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Tags } from "~/context/interfaces";
+import { HTMLTags } from "~/context/font-size/interfaces";
 
-export default function useClampFormulaByTag({ tag }: { tag: Tags }) {
+export default function useClampFormulaByTag({ tag }: { tag: HTMLTags }) {
   // const { pixelsPerRem } = usePixelsPerRem();
   // const { minViewportWidth } = useMinViewportWidth();
   // const { maxViewportWidth } = useMaxViewportWidth();
