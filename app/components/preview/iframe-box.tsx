@@ -1,5 +1,5 @@
-import { Box } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
+import { Box, Button } from "@chakra-ui/react";
+import { useState, useEffect, useRef } from "react";
 import usePreviewUrl from "~/context/preview/hooks/usePreviewUrl";
 import useCSSCodeBlock from "~/domain/code-block/useCSSCodeBlock";
 import useMediaQueryService from "~/domain/media-query/useMediaQueryService";
@@ -12,6 +12,7 @@ export default function IframeBox({
   width: number;
   height: number;
 }) {
+  const iframeRef = useRef<HTMLIFrameElement>(null);
   const { codeBlock } = useCSSCodeBlock();
   const { mediaQueries } = useMediaQueryService();
   const [iframeReloadKey, setIframeReloadKey] = useState(0);
@@ -19,24 +20,26 @@ export default function IframeBox({
 
   const DEFAULT_URL = SETTINGS.preview.iframeDefaultURL;
 
+  function sendMessage() {
+    if (iframeRef.current) {
+      console.log("sendMessage");
+      window.postMessage("message from app", "*");
+
+      if (iframeRef.current.contentDocument) {
+        iframeRef.current.contentDocument.body.style.backgroundColor = "red";
+      }
+    }
+  }
+
   function applyStyle() {
     if (document) {
-      console.log("im here");
       const iframes = document.querySelectorAll("iframe[name=iframe-preview]");
 
       const iframeHTMLElement = iframes[0] as HTMLIFrameElement;
 
-      console.log(iframeHTMLElement.contentWindow);
-      console.log(iframeHTMLElement.contentDocument);
-
       if (iframes.length > 0) {
         iframes.forEach((iframe) => {
           const iframeHTMLElement = iframe as HTMLIFrameElement;
-
-          console.log(
-            "iframeHTMLElement.contentDocument",
-            iframeHTMLElement.contentDocument
-          );
 
           if (!iframeHTMLElement.contentDocument) {
             return;
@@ -50,8 +53,7 @@ export default function IframeBox({
 
           if (iframeHTMLElement.contentDocument.readyState === "complete") {
             const style = document.createElement("style");
-            // style.textContent = `${codeBlock}`;
-            style.textContent = `h1 {color: red;} h2 {color: blue;}`;
+            style.textContent = `${codeBlock}`;
 
             iframeBody.appendChild(style);
           }
@@ -65,26 +67,31 @@ export default function IframeBox({
   }, [mediaQueries, width, height, previewUrl]);
 
   return (
-    <Box
-      className="preview"
-      width={width}
-      height={height}
-      borderRadius={"5px"}
-      transition="all 500ms ease"
-    >
-      <iframe
-        key={iframeReloadKey}
-        name="iframe-preview"
-        // src={
-        //   previewUrl || previewUrl === "https://"
-        //     ? previewUrl
-        //     : ${DEFAULT_URL}
-        // }
-        src={previewUrl && previewUrl !== "" ? previewUrl : DEFAULT_URL}
-        width="100%"
-        height="100%"
-        onLoad={() => applyStyle()}
-      ></iframe>
-    </Box>
+    <>
+      <Button onClick={sendMessage}>Send Message</Button>
+      <Box
+        className="preview"
+        width={width}
+        height={height}
+        borderRadius={"5px"}
+        transition="all 500ms ease"
+      >
+        <iframe
+          key={iframeReloadKey}
+          name="iframe-preview"
+          ref={iframeRef}
+          // src={
+          //   previewUrl || previewUrl === "https://"
+          //     ? previewUrl
+          //     : ${DEFAULT_URL}
+          // }
+          //src={previewUrl && previewUrl !== "" ? previewUrl : DEFAULT_URL}
+          src={"https://remix-vert-pi.vercel.app"}
+          width="100%"
+          height="100%"
+          onLoad={() => applyStyle()}
+        ></iframe>
+      </Box>
+    </>
   );
 }
