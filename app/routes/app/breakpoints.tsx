@@ -8,11 +8,11 @@ export default function BreakpointsPage() {
     <FlexRowWrap>
       <FlexRowWrapColumn wrapAt="600px" maxW="650px">
         <Breakpoints />
-        {/* <CodeSection /> */}
+        {/* <CodeIndex /> */}
       </FlexRowWrapColumn>
       <FlexRowWrapColumn wrapAt="600px" maxW={`calc(100vw - 850px)`} h="auto">
         {/* <Box bg="blue" h="100px" w="100%" flex={"1 0 600px"}></Box> */}
-        {/* <PreviewSection /> */}
+        {/* <PreviewIndex /> */}
       </FlexRowWrapColumn>
     </FlexRowWrap>
   );

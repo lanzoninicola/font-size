@@ -1,9 +1,9 @@
 import { Box } from "@chakra-ui/react";
 import { json } from "remix";
-import CodeSection from "~/components/code/code-section";
+import CodeIndex from "~/components/code/code-index";
 import FlexRowWrap from "~/components/layout/flex-row-wrap";
 import FlexRowWrapColumn from "~/components/layout/flex-row-wrap-column";
-import PreviewSection from "~/components/preview/preview-section";
+import PreviewIndex from "~/components/preview/preview-index";
 import StyleSection from "~/components/style-section/style-section";
 
 import { v4 as uuidv4 } from "uuid";
@@ -48,7 +48,7 @@ export default function StylingSection() {
           <>
             <FlexRowWrapColumn wrapAt="600px" maxW="650px" gap="3rem">
               <StyleSection />
-              <CodeSection />
+              <CodeIndex />
             </FlexRowWrapColumn>
             <FlexRowWrapColumn
               wrapAt="600px"
@@ -57,7 +57,7 @@ export default function StylingSection() {
             >
               {/* <Box bg="blue" h="100px" w="100%" flex={"1 0 600px"}></Box> */}
               <PreviewProvider>
-                <PreviewSection />
+                <PreviewIndex />
               </PreviewProvider>
             </FlexRowWrapColumn>
           </>

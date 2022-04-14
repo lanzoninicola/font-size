@@ -4,7 +4,7 @@ import VStackBox from "../shared/vstack-wrapper";
 import PreviewItem from "./preview-item";
 import PreviewToolbar from "./preview-toolbar";
 
-export default function PreviewSection() {
+export default function PreviewIndex() {
   return (
     <VStackBox gap="1rem">
       <PreviewToolbar />

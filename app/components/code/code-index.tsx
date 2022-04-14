@@ -4,7 +4,7 @@ import VStackBox from "../shared/vstack-wrapper";
 import CodeRenderOptions from "./code-render-options";
 import CodeRenderStandardCSS from "./code-render-standard-css";
 
-export default function CodeSection() {
+export default function CodeIndex() {
   const [showCode, setShowCode] = useState<boolean>(false);
 
   function onCodeShow() {
