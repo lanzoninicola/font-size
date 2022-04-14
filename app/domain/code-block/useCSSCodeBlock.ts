@@ -79,8 +79,6 @@ export default function useCSSCodeBlock() {
 
   useEffect(() => {
     setCodeBlock(buildCodeBlock());
-
-    console.log("useCSSCodeBlock fired");
   }, [mediaQueries]);
 
   return {
