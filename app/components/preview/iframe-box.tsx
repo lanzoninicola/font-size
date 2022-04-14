@@ -43,13 +43,11 @@ export default function IframeBox({
           key={iframeReloadKey}
           name="iframe-preview"
           ref={iframeRef}
-          // src={
-          //   previewUrl || previewUrl === "https://"
-          //     ? previewUrl
-          //     : ${DEFAULT_URL}
-          // }
+          src={
+            previewUrl || previewUrl === "https://" ? previewUrl : DEFAULT_URL
+          }
           //src={previewUrl && previewUrl !== "" ? previewUrl : DEFAULT_URL}
-          src={"https://remix-vert-pi.vercel.app/"}
+          // src={"https://remix-vert-pi.vercel.app/"}
           // src={"/receiver.html"}
           width="100%"
           height="100%"

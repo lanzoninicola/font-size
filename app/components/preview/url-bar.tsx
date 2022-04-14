@@ -43,7 +43,7 @@ export default function UrlBar() {
     setPreviewUrl(inputURL);
   }
 
-  function onChangeURL(e: React.ChangeEvent<HTMLInputElement>) {
+  function onUpdateURL(e: React.ChangeEvent<HTMLInputElement>) {
     setInputURL(e.target.value);
 
     if (isInvalid && e.target.value === "") {
@@ -72,7 +72,7 @@ export default function UrlBar() {
             background: "primary.500",
           }}
           value={inputURL}
-          onChange={onChangeURL}
+          onChange={onUpdateURL}
         />
         <Button onClick={onSendURL}>GO</Button>
       </HStack>
