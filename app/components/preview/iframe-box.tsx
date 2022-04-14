@@ -22,43 +22,7 @@ export default function IframeBox({
 
   function sendMessage() {
     if (iframeRef.current) {
-      console.log("sendMessage");
-      window.postMessage("message from app", "*");
-
-      if (iframeRef.current.contentDocument) {
-        iframeRef.current.contentDocument.body.style.backgroundColor = "red";
-      }
-    }
-  }
-
-  function applyStyle() {
-    if (document) {
-      const iframes = document.querySelectorAll("iframe[name=iframe-preview]");
-
-      const iframeHTMLElement = iframes[0] as HTMLIFrameElement;
-
-      if (iframes.length > 0) {
-        iframes.forEach((iframe) => {
-          const iframeHTMLElement = iframe as HTMLIFrameElement;
-
-          if (!iframeHTMLElement.contentDocument) {
-            return;
-          }
-
-          const iframeBody = iframeHTMLElement.contentDocument.body;
-
-          if (!iframeBody) {
-            return;
-          }
-
-          if (iframeHTMLElement.contentDocument.readyState === "complete") {
-            const style = document.createElement("style");
-            style.textContent = `${codeBlock}`;
-
-            iframeBody.appendChild(style);
-          }
-        });
-      }
+      iframeRef.current.contentWindow?.postMessage(codeBlock, "*");
     }
   }
 
@@ -68,7 +32,6 @@ export default function IframeBox({
 
   return (
     <>
-      <Button onClick={sendMessage}>Send Message</Button>
       <Box
         className="preview"
         width={width}
@@ -86,10 +49,11 @@ export default function IframeBox({
           //     : ${DEFAULT_URL}
           // }
           //src={previewUrl && previewUrl !== "" ? previewUrl : DEFAULT_URL}
-          src={"https://remix-vert-pi.vercel.app"}
+          src={"https://remix-vert-pi.vercel.app/"}
+          // src={"/receiver.html"}
           width="100%"
           height="100%"
-          onLoad={() => applyStyle()}
+          onLoad={sendMessage}
         ></iframe>
       </Box>
     </>
