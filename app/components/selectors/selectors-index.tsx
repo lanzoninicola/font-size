@@ -1,5 +1,5 @@
 import { HStack, Button } from "@chakra-ui/react";
-import breakpoints from "../breakpoints/breakpoints";
+import breakpoints from "../breakpoints/breakpoint-edit";
 import FormControlInputNumber from "../shared/form-control-input-number";
 import FormControlSelectBreakpoint from "../shared/form-control-select-breakpoint";
 import SectionHeader from "../shared/section-header";

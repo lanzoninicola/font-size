@@ -2,7 +2,7 @@ import { Code } from "@chakra-ui/react";
 import { useState } from "react";
 import CopyButton from "../shared/copy-button";
 
-export default function CodeArea({
+export default function CodeBox({
   children,
   textToCopy,
   disableCopy,

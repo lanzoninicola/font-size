@@ -30,6 +30,14 @@ export default function useMediaQueryService() {
     setMediaQueries(newMediaQueries as MediaQueries);
   }
 
+  /**
+   *
+   * @param {BreakpointId} breakpointId - The breakpoint id
+   * @param {Selector} selector - The selector (tag, class, id) to get the media query info
+   * @param {MediaQueries} mq - Optional if the component cannot access to the mediaqueries context
+   *
+   * @returns The min and max font size for the given selector and breakpoint in REM
+   */
   function getFontSizeRange(breakpointId: BreakpointId, selector: Selector) {
     let breakpoint = null;
     let minFontSize = 0;
@@ -37,6 +45,7 @@ export default function useMediaQueryService() {
 
     if (mediaQueries) {
       breakpoint = mediaQueries[breakpointId];
+
       if (breakpoint) {
         minFontSize = breakpoint[selector]?.minFontSize ?? 0;
         maxFontSize = breakpoint[selector]?.maxFontSize ?? 0;

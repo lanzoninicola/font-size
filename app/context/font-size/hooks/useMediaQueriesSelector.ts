@@ -25,14 +25,14 @@ export default function useMediaQueriesSelector() {
   // every time a component is render.
   // With this configuration, if local storage is not enabled or accessible then the app will crash
   //
-  // useEffect(() => {
-  //   if (mediaQueriesOnLocalStorage) {
-  //     setMediaQueriesState(mediaQueriesOnLocalStorage);
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (mediaQueriesLocalStorage) {
+      setMediaQueriesContext(mediaQueriesLocalStorage);
+    }
+  }, [mediaQueriesLocalStorage]);
 
   return {
-    mediaQueries: mediaQueriesLocalStorage,
+    mediaQueries: mediaQueriesContext,
     setMediaQueries,
   };
 }

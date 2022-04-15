@@ -5,8 +5,8 @@ import { Breakpoints } from "~/context/font-size/interfaces";
 import useBreakpointService from "~/domain/breakpoints/useBreakpointService";
 
 export interface SelectOption {
-  value: string | undefined;
-  label: string | undefined;
+  value: string;
+  label: string;
 }
 
 export default function FormControlSelectBreakpoint({
@@ -24,7 +24,7 @@ export default function FormControlSelectBreakpoint({
     if (breakpoints) {
       let options: SelectOption[] = [
         {
-          value: undefined,
+          value: "",
           label: " --- Select a breakpoint --- ",
         },
       ];

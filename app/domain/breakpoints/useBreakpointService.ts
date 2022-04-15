@@ -1,70 +1,107 @@
-import { useEffect, useState } from "react";
 import useBreakpointsSelector from "~/context/font-size/hooks/useBreakpointsSelector";
 import usePixelsPerRemSelector from "~/context/font-size/hooks/usePixelsPerRemSelector";
-import { BreakpointId, HTMLTags } from "~/context/font-size/interfaces";
+import {
+  BreakpointId,
+  Breakpoints,
+  BreakpointViewportSize,
+} from "~/context/font-size/interfaces";
 
-export default function useBreakpointService(
-  inputMinWidth?: number,
-  inputMaxWidth?: number
-) {
+export default function useBreakpointService() {
   const { breakpoints, setBreakpoints } = useBreakpointsSelector();
   const { pixelsPerRem } = usePixelsPerRemSelector();
-  const [breakpointId, setBreakpointId] = useState("");
-  const [breakpointLabel, setBreakpointLabel] = useState<string>("...");
-  // const [breakpointIdSelected, setBreakpointIdSelected] =
-  //   useState<BreakpointId>("no-selected");
+
+  function buildId({
+    minWidth = 0,
+    maxWidth = 0,
+  }: {
+    minWidth: number;
+    maxWidth: number;
+  }) {
+    return `min${minWidth}max${maxWidth}`;
+  }
+
+  function buildLabel({
+    minWidth,
+    maxWidth,
+  }: {
+    minWidth: string;
+    maxWidth: string;
+  }) {
+    return `(min-width: ${minWidth}px) and (max-width: ${maxWidth}px)`;
+  }
+
+  function createBreakpoint(
+    minWidth: number,
+    maxWidth: number,
+    label?: string
+  ) {
+    const id = buildId({ minWidth, maxWidth });
+    const viewportSize: BreakpointViewportSize = {
+      minWidth,
+      maxWidth,
+    };
+
+    const breakpoint: Breakpoints = {
+      [id]: {
+        label:
+          label ||
+          buildLabel({
+            minWidth: String(minWidth),
+            maxWidth: String(maxWidth),
+          }),
+        ...viewportSize,
+      },
+    };
+
+    setBreakpoints({
+      ...breakpoints,
+      ...breakpoint,
+    });
+  }
+
+  function saveBreakpoint(
+    breakpointId: string,
+    label: string,
+    minWidth: number,
+    maxWidth: number
+  ): void {
+    let newBreakpoints = { ...breakpoints };
+
+    newBreakpoints[breakpointId] = {
+      label: label,
+      minWidth: minWidth,
+      maxWidth: maxWidth,
+    };
+
+    setBreakpoints(newBreakpoints);
+  }
 
   /**
-   * 
-   * Not used
-   * If the user wants to update, press the SAVE button 
-   * and override the breakpoint
-   * 
-  function onUpdateBreakpoint() {
-    let newBreakpoints = { ...breakpoints };
-
-    delete newBreakpoints[breakpointIdSelected];
-
-    newBreakpoints[breakpointId] = {
-      label: breakpointLabel,
-      minWidth: inputMinWidth,
-      maxWidth: inputMaxWidth,
-    };
-
-    setBreakpoints(newBreakpoints);
-  }
+   *
+   * @param {BreakpointId} breakpointId - The breakpoint id
+   * @param {MediaQueries} b - Optional if the component cannot access to the breakpoints value context
+   *
+   * @returns The min and max viewport size for the given breakpointId in PX and REM
    */
-
-  function onSaveBreakpoint(): void {
-    let newBreakpoints = { ...breakpoints };
-
-    newBreakpoints[breakpointId] = {
-      label: breakpointLabel,
-      minWidth: inputMinWidth,
-      maxWidth: inputMaxWidth,
-    };
-
-    setBreakpoints(newBreakpoints);
-  }
-
-  // function setCurrentBreakpointIdSelected(breakpointId: BreakpointId) {
-  //   setBreakpointIdSelected(breakpointId);
-  // }
-
-  function getBreakpointValuesById(breakpointId: BreakpointId) {
-    let breakpoint = null;
+  function getViewportSizeByBreakpointId(
+    id: BreakpointId,
+    b: Breakpoints = breakpoints || {}
+  ) {
+    let viewportSize: BreakpointViewportSize = { minWidth: 0, maxWidth: 0 };
     let minWidth = 0;
     let maxWidth = 0;
     let minWidthREM = 0;
     let maxWidthREM = 0;
 
-    if (breakpoints) {
-      breakpoint = breakpoints[breakpointId];
+    if (b) {
+      viewportSize = b[id];
     }
 
-    if (breakpoint) {
-      minWidth = breakpoint.minWidth || 0;
-      maxWidth = breakpoint.maxWidth || 0;
+    console.log(b);
+
+    if (viewportSize) {
+      minWidth = viewportSize.minWidth || 0;
+      maxWidth = viewportSize.maxWidth || 0;
       minWidthREM = minWidth / pixelsPerRem;
       maxWidthREM = maxWidth / pixelsPerRem;
     }
@@ -77,36 +114,11 @@ export default function useBreakpointService(
     };
   }
 
-  // function onSelectedBreakpoint(event: React.ChangeEvent<HTMLInputElement>) {
-  //   const breakpointId = event.target.value;
-  //   setCurrentBreakpointIdSelected(breakpointId);
-
-  //   return getBreakpointValuesById(breakpointId);
-  // }
-
-  useEffect(() => {
-    if (
-      inputMinWidth &&
-      inputMinWidth > 0 &&
-      inputMaxWidth &&
-      inputMaxWidth > 0
-    ) {
-      setBreakpointId(`min${inputMinWidth}max${inputMaxWidth}`);
-
-      setBreakpointLabel(
-        `min-width: ${inputMinWidth}px and max-width: ${inputMaxWidth}px`
-      );
-    }
-  }, [inputMinWidth, inputMaxWidth, breakpoints]);
-
   return {
     breakpoints,
-    breakpointId,
-    breakpointLabel,
-    // breakpointIdSelected,
-    // setCurrentBreakpointIdSelected,
-    getBreakpointValuesById,
-    onSaveBreakpoint,
-    // onSelectedBreakpoint,
+    buildLabel,
+    createBreakpoint,
+    saveBreakpoint,
+    getViewportSizeByBreakpointId,
   };
 }

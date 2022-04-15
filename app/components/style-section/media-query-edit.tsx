@@ -2,6 +2,7 @@ import { Button, HStack } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { BreakpointId, Selector } from "~/context/font-size/interfaces";
 import useMediaQueryService from "~/domain/media-query/useMediaQueryService";
+import parseInputString from "~/domain/utilities/parseInputString";
 
 import FormControlInputNumber from "../shared/form-control-input-number";
 import FormControlSelectBreakpoint from "../shared/form-control-select-breakpoint";
@@ -9,10 +10,9 @@ import FormControlSelectSelector from "../shared/form-control-select-selector";
 import SectionHeader from "../shared/section-header";
 import VStackBox from "../shared/vstack-wrapper";
 
-export default function StyleSection() {
-  const [isFontSizesDisabled, setIsFontSizesDisabled] = useState(false);
-  const [minFontSize, setMinFontSize] = useState<number>(0);
-  const [maxFontSize, setMaxFontSize] = useState<number>(0);
+export default function MediaQueryEdit() {
+  const [minFontSize, setMinFontSize] = useState<string>("");
+  const [maxFontSize, setMaxFontSize] = useState<string>("");
   const [currentBreakpointId, setCurrentBreakpointId] = useState<
     BreakpointId | undefined
   >(undefined);
@@ -30,11 +30,13 @@ export default function StyleSection() {
   }
 
   function onChangeMinFontSize(e: React.ChangeEvent<HTMLInputElement>) {
-    setMinFontSize(parseInt(e.target.value, 10));
+    const value = e.target.value;
+    setMinFontSize(parseInputString(value));
   }
 
   function onChangeMaxFontSize(e: React.ChangeEvent<HTMLInputElement>) {
-    setMaxFontSize(parseInt(e.target.value, 10));
+    const value = e.target.value;
+    setMaxFontSize(parseInputString(value));
   }
 
   function onSaveMediaQuery() {
@@ -42,8 +44,8 @@ export default function StyleSection() {
       saveMediaQuery(
         currentBreakpointId,
         currentSelector,
-        minFontSize,
-        maxFontSize
+        parseFloat(minFontSize),
+        parseFloat(maxFontSize)
       );
     }
   }
@@ -55,19 +57,13 @@ export default function StyleSection() {
         currentSelector
       );
 
-      setMinFontSize(minFontSize);
-      setMaxFontSize(maxFontSize);
+      setMinFontSize(minFontSize.toString());
+      setMaxFontSize(maxFontSize.toString());
     }
   }
 
   useEffect(() => {
     onSelectedBreakpointAndSelector();
-
-    if (!currentBreakpointId && !currentSelector) {
-      setIsFontSizesDisabled(true);
-    } else {
-      setIsFontSizesDisabled(false);
-    }
   }, [currentBreakpointId, currentSelector]);
 
   return (
@@ -89,7 +85,6 @@ export default function StyleSection() {
               value={minFontSize}
               unit="rem"
               onChange={(e) => onChangeMinFontSize(e)}
-              isDisabled={isFontSizesDisabled}
             />
             <FormControlInputNumber
               id="maxFontSize"
@@ -97,7 +92,6 @@ export default function StyleSection() {
               value={maxFontSize}
               unit="rem"
               onChange={(e) => onChangeMaxFontSize(e)}
-              isDisabled={isFontSizesDisabled}
             />
           </VStackBox>
           <HStack justify={"flex-end"} w="100%">

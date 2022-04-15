@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Breakpoints from "~/components/breakpoints/breakpoints";
+import Breakpoints from "~/components/breakpoints/breakpoint-edit";
 import FlexRowWrap from "~/components/layout/flex-row-wrap";
 import FlexRowWrapColumn from "~/components/layout/flex-row-wrap-column";
 

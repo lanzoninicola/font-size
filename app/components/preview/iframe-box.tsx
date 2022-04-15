@@ -15,7 +15,7 @@ export default function IframeBox({
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const { mediaQueries } = useMediaQueriesSelector();
-  const { codeBlock } = useCSSCodeBlock({ mediaQueries });
+  // const { codeBlock } = useCSSCodeBlock({ mediaQueries });
   const [iframeReloadKey, setIframeReloadKey] = useState(0);
   const { previewUrl } = usePreviewUrl();
 
@@ -23,7 +23,7 @@ export default function IframeBox({
 
   function sendMessage() {
     if (iframeRef.current) {
-      iframeRef.current.contentWindow?.postMessage(codeBlock, "*");
+      // iframeRef.current.contentWindow?.postMessage(codeBlock, "*");
     }
   }
 

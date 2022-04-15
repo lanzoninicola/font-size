@@ -4,7 +4,7 @@ import CodeIndex from "~/components/code/code-index";
 import FlexRowWrap from "~/components/layout/flex-row-wrap";
 import FlexRowWrapColumn from "~/components/layout/flex-row-wrap-column";
 import PreviewIndex from "~/components/preview/preview-index";
-import StyleSection from "~/components/style-section/style-section";
+import MediaQueryEdit from "~/components/style-section/media-query-edit";
 
 import { v4 as uuidv4 } from "uuid";
 import useBreakpointsSelector from "~/context/font-size/hooks/useBreakpointsSelector";
@@ -47,7 +47,7 @@ export default function StylingSection() {
         {breakpoints && (
           <>
             <FlexRowWrapColumn wrapAt="600px" maxW="650px" gap="3rem">
-              <StyleSection />
+              <MediaQueryEdit />
               <CodeIndex />
             </FlexRowWrapColumn>
             <FlexRowWrapColumn

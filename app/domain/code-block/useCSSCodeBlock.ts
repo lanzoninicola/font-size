@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
 import usePixelsPerRemSelector from "~/context/font-size/hooks/usePixelsPerRemSelector";
-import { MediaQueries, HTMLTags } from "~/context/font-size/interfaces";
+import {
+  MediaQueries,
+  HTMLTags,
+  Selector,
+  BreakpointId,
+  Breakpoints,
+} from "~/context/font-size/interfaces";
+import getViewportSizeByBreakpointId from "../breakpoints/getViewportSizeByBreakpointId";
 
 import useBreakpointService from "../breakpoints/useBreakpointService";
 import calculateClampSlope from "../media-query/calculateClampSlope";
@@ -8,14 +15,10 @@ import calculateClampYAxisIntersection from "../media-query/calculateClampYAxisI
 import generateClampFormula from "../media-query/generateClampFormula";
 import useMediaQueryService from "../media-query/useMediaQueryService";
 
-export default function useCSSCodeBlock({
-  mediaQueries,
-}: {
-  mediaQueries: MediaQueries | null;
-}) {
+export default function useCSSCodeBlock() {
   const { pixelsPerRem } = usePixelsPerRemSelector();
-  const { getFontSizesByTagAndBreakpointId } = useMediaQueryService();
-  const { getBreakpointValuesById } = useBreakpointService();
+  const { mediaQueries, getFontSizeRange } = useMediaQueryService();
+  const { breakpoints, getViewportSizeByBreakpointId } = useBreakpointService();
 
   const [codeBlock, setCodeBlock] = useState<string>("");
 
@@ -29,20 +32,32 @@ export default function useCSSCodeBlock({
       return codeBlock;
     }
 
-    for (const tag in mediaQueries) {
-      const mediaQueryTag = mediaQueries[tag as HTMLTags];
+    if (!breakpoints) {
+      return codeBlock;
+    }
 
-      if (!mediaQueryTag) {
+    for (const breakpointId in mediaQueries) {
+      const breakpointMediaQuery = mediaQueries[breakpointId as BreakpointId];
+
+      if (!breakpointMediaQuery) {
         continue;
       }
 
-      for (const breakpointId in mediaQueryTag) {
-        const { minWidth, minWidthREM, maxWidth, maxWidthREM } =
-          getBreakpointValuesById(breakpointId);
+      const { minWidth, maxWidth, minWidthREM, maxWidthREM } =
+        getViewportSizeByBreakpointId(breakpointId, breakpoints);
 
-        const { minFontSize, maxFontSize } = getFontSizesByTagAndBreakpointId(
-          tag as HTMLTags,
-          breakpointId
+      // const minWidth = breakpoints[breakpointId as BreakpointId].minWidth || 0;
+      // const maxWidth = breakpoints[breakpointId as BreakpointId].maxWidth || 0;
+      // const minWidthREM = minWidth / pixelsPerRem;
+      // const maxWidthREM = maxWidth / pixelsPerRem;
+
+      codeBlock += `@media only screen and (min-width: ${minWidth}px) and (max-width: ${maxWidth}px) {`;
+      codeBlock += `\n`;
+
+      for (const selector in breakpointMediaQuery) {
+        const { minFontSize, maxFontSize } = getFontSizeRange(
+          breakpointId,
+          selector as Selector
         );
 
         const slope = calculateClampSlope(
@@ -65,17 +80,16 @@ export default function useCSSCodeBlock({
           yAxisIntersection
         );
 
-        codeBlock += `@media only screen and (min-width: ${minWidth}px) and (max-width: ${maxWidth}px) {`;
-        codeBlock += `\n`;
-        codeBlock += `  ${tag} {`;
+        codeBlock += `  ${selector} {`;
         codeBlock += `\n`;
         codeBlock += `   font-size: ${clampFormula} !important;`;
         codeBlock += `\n`;
         codeBlock += `  }`;
         codeBlock += `\n`;
-        codeBlock += `}`;
-        codeBlock += `\n`;
       }
+
+      codeBlock += `}`;
+      codeBlock += `\n`;
     }
 
     return codeBlock;
@@ -83,7 +97,9 @@ export default function useCSSCodeBlock({
 
   useEffect(() => {
     setCodeBlock(buildCodeBlock());
-  }, []);
+
+    console.log(mediaQueries);
+  }, [mediaQueries, breakpoints]);
 
   return {
     codeBlock,

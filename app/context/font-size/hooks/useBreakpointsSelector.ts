@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Breakpoints } from "~/context/font-size/interfaces";
 
 import useBreakpointsContext from "./useBreakpointsContext";
@@ -19,18 +20,14 @@ export default function useBreakpointsSelector() {
     setBreakpointsLocalStorage(nextState);
   }
 
-  // Commented this because it cause a re-rendering of the whole app
-  // every time a component is render.
-  // With this configuration, if local storage is not enabled or accessible then the app will crash
-  //
-  // useEffect(() => {
-  //   if (breakpointsOnLocalStorage) {
-  //     setBreakpointsState(breakpointsOnLocalStorage);
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (breakpointsLocalStorage) {
+      setBreakpointsContext(breakpointsLocalStorage);
+    }
+  }, [breakpointsLocalStorage]);
 
   return {
-    breakpoints: breakpointsLocalStorage,
+    breakpoints: breakpointsContext,
     setBreakpoints,
   };
 }

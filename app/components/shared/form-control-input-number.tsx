@@ -14,7 +14,7 @@ export default function FormControlInputNumber({
 }: {
   id: string;
   label?: string;
-  value?: number;
+  value?: string;
   unit: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.FocusEventHandler<HTMLInputElement>) => void;
