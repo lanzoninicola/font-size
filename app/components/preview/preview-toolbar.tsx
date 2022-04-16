@@ -1,50 +1,23 @@
 import { HStack } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import usePreviewWindowsSelector from "~/context/preview/hooks/usePreviewWindowsSelector";
-import usePreviewZoomSelector from "~/context/preview/hooks/usePreviewZoomSelector";
-import { PreviewItem } from "~/context/preview/interfaces";
-import SETTINGS from "~/domain/settings";
-import FormControlInputNumber from "../shared/form-control-input-number";
+import { useState } from "react";
+import usePreviewService from "~/domain/preview/usePreviewService";
 
-import { AddIcon, BrowserIcon, ZoomInIcon, ZoomOutIcon } from "../shared/icons";
+import { AddIcon, BrowserIcon } from "../shared/icons";
 import VStackBox from "../shared/vstack-wrapper";
 import ToolbarButton from "./toolbar-button";
 import UrlBar from "./url-bar";
+import ZoomBar from "./zoom-bar";
 
 export default function PreviewToolbar() {
-  const { previewWindows, setPreviewWindows } = usePreviewWindowsSelector();
-  const { zoom, setZoom } = usePreviewZoomSelector();
+  const { addWindow } = usePreviewService();
   const [showURLBar, setShowURLBar] = useState(false);
 
   function onAddPreview() {
-    const nextState = [...previewWindows];
-
-    const newItem: PreviewItem = {
-      width: SETTINGS.preview.iframeDefaultWidth,
-      height: SETTINGS.preview.iframeDefaultHeight,
-    };
-
-    nextState.unshift(newItem);
-
-    console.log(nextState);
-
-    setPreviewWindows(nextState);
+    addWindow();
   }
 
   function onShowURLBar() {
     setShowURLBar(!showURLBar);
-  }
-
-  function onZoomInPreview() {
-    setZoom(zoom + 10);
-  }
-
-  function onZoomOutPreview() {
-    const nextZoom = zoom - 10;
-    if (nextZoom < 0) {
-      return;
-    }
-    setZoom(zoom - 10);
   }
 
   return (
@@ -67,26 +40,7 @@ export default function PreviewToolbar() {
               <BrowserIcon />
             </ToolbarButton>
           </HStack>
-          <HStack spacing={0} justify="center">
-            <ToolbarButton label="Zoom In" onClick={onZoomInPreview}>
-              <ZoomInIcon />
-            </ToolbarButton>
-            <FormControlInputNumber
-              id="preview-zoom-percentage"
-              ariaLabel="Zoom percentage"
-              h="30px"
-              w="70px"
-              borderRadius="5px"
-              labelFontSize="12px"
-              justify="center"
-              value={`${zoom}%`}
-              fontSize="12px"
-              isReadOnly
-            />
-            <ToolbarButton label="Zoom Out" onClick={onZoomOutPreview}>
-              <ZoomOutIcon />
-            </ToolbarButton>
-          </HStack>
+          <ZoomBar />
         </HStack>
         {showURLBar && <UrlBar />}
       </VStackBox>

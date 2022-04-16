@@ -1,48 +1,20 @@
-import { Grid, HStack, Text } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { Grid } from "@chakra-ui/react";
+import { useState } from "react";
 import usePreviewWindowsSelector from "~/context/preview/hooks/usePreviewWindowsSelector";
-import parseDecimalNumber from "~/domain/utilities/parseDecimalNumber";
-import parseInputString from "~/domain/utilities/parseInputString";
+import usePreviewService from "~/domain/preview/usePreviewService";
 
-import FormControlInputNumber from "../shared/form-control-input-number";
 import { TrashIcon } from "../shared/icons";
 import IframeBox from "./iframe-box";
+import PreviewItemToolbar from "./preview-item-toolbar";
 import ToolbarButton from "./toolbar-button";
 
 // TODO: ADD SENDER_ID TO IFRAME
 
-export default function PreviewItem({
-  idx,
-  width,
-  height,
-}: {
-  idx: number;
-  width: number;
-  height: number;
-}) {
-  const { previewWindows, setPreviewWindows } = usePreviewWindowsSelector();
-  const [sizeWidth, setSizeWidth] = useState(width);
-  const [sizeHeight, setSizeHeight] = useState(height);
+export default function PreviewItem({ idx }: { idx: number }) {
+  const { removeWindow } = usePreviewService();
+  const { previewWindows } = usePreviewWindowsSelector();
 
   const [showRemoveIcon, setShowRemoveIcon] = useState(false);
-
-  function onChangeWidth(e: React.ChangeEvent<HTMLInputElement>) {
-    const value = e.target.value;
-    setSizeWidth(parseDecimalNumber(value));
-
-    const nextState = [...previewWindows];
-    nextState[idx].width = parseDecimalNumber(value);
-    setPreviewWindows(nextState);
-  }
-
-  function onChangeHeight(e: React.ChangeEvent<HTMLInputElement>) {
-    const value = e.target.value;
-    setSizeHeight(parseDecimalNumber(value));
-
-    const nextState = [...previewWindows];
-    nextState[idx].height = parseDecimalNumber(value);
-    setPreviewWindows(nextState);
-  }
 
   function onMouseEnter(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     e.preventDefault();
@@ -59,21 +31,8 @@ export default function PreviewItem({
   }
 
   function onRemovePreviewWindow(idx: number) {
-    let nextState = [...previewWindows];
-
-    console.log(nextState[idx]);
-
-    nextState = nextState.filter(
-      (item) => item.height !== sizeHeight || item.width !== sizeWidth
-    );
-
-    setPreviewWindows(nextState);
+    removeWindow(idx);
   }
-
-  useEffect(() => {
-    setSizeHeight(height);
-    setSizeWidth(width);
-  }, [width, height]);
 
   return (
     <Grid
@@ -91,39 +50,11 @@ export default function PreviewItem({
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      <HStack spacing={0} justify="center">
-        <FormControlInputNumber
-          id={`viewport-width-${idx}`}
-          value={parseInputString(String(sizeWidth))}
-          label="W"
-          labelFontSize="16px"
-          ariaLabel="Set the width of the preview"
-          fontSize="16px"
-          unit="PX"
-          unitFontSize="12px"
-          h="30px"
-          w="80px"
-          onChange={(e) => onChangeWidth(e)}
-        />
-        <FormControlInputNumber
-          id={`viewport-height-${idx}`}
-          value={parseInputString(String(sizeHeight))}
-          label="H"
-          labelFontSize="16px"
-          ariaLabel="Set the height of the preview"
-          fontSize="16px"
-          unit="PX"
-          unitFontSize="12px"
-          h="30px"
-          w="80px"
-          onChange={(e) => onChangeHeight(e)}
-        />
-        <Text>{`Window ID ${idx}`}</Text>
-      </HStack>
+      <PreviewItemToolbar itemIdx={idx} />
 
       <IframeBox
-        width={parseDecimalNumber(String(sizeWidth))}
-        height={parseDecimalNumber(String(sizeHeight))}
+        width={previewWindows[idx].width}
+        height={previewWindows[idx].height}
       />
 
       {showRemoveIcon && (
