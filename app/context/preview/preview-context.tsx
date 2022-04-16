@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { createContext } from "use-context-selector";
+import SETTINGS from "~/domain/settings";
+import { PreviewItem } from "./interfaces";
 
 export interface PreviewContext {
-  previewWindows: number;
+  previewWindows: PreviewItem[];
   previewUrl: string;
-  setPreviewWindows: (previewWindows: number) => void;
+  zoom: number;
+  setPreviewWindows: (previewWindows: PreviewItem[]) => void;
   setPreviewUrl: (url: string) => void;
+  setZoom: (zoom: number) => void;
 }
 
 export const PreviewContextData = createContext<PreviewContext>(
@@ -13,16 +17,24 @@ export const PreviewContextData = createContext<PreviewContext>(
 );
 
 export function PreviewProvider({ children }: { children: React.ReactNode }) {
-  const [previewWindows, setPreviewWindows] = useState(1);
+  const [previewWindows, setPreviewWindows] = useState<PreviewItem[]>([
+    {
+      width: SETTINGS.preview.iframeDefaultWidth,
+      height: SETTINGS.preview.iframeDefaultHeight,
+    },
+  ]);
   const [previewUrl, setPreviewUrl] = useState("");
+  const [zoom, setZoom] = useState(100);
 
   return (
     <PreviewContextData.Provider
       value={{
         previewWindows,
         previewUrl,
+        zoom,
         setPreviewWindows,
         setPreviewUrl,
+        setZoom,
       }}
     >
       {children}

@@ -97,8 +97,6 @@ export default function useBreakpointService() {
       viewportSize = b[id];
     }
 
-    console.log(b);
-
     if (viewportSize) {
       minWidth = viewportSize.minWidth || 0;
       maxWidth = viewportSize.maxWidth || 0;

@@ -1,6 +1,8 @@
 const SETTINGS = {
   preview: {
     iframeDefaultURL: "/preview/content",
+    iframeDefaultWidth: 412,
+    iframeDefaultHeight: 718,
   },
 };
 

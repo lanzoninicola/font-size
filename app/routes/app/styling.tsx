@@ -36,11 +36,7 @@ export default function StylingSection() {
     <>
       <FlexRowWrap spacing={"3rem"}>
         {!breakpoints && (
-          <FlexRowWrapColumn
-            wrapAt="600px"
-            maxW={`calc(100vw - 850px)`}
-            h="auto"
-          >
+          <FlexRowWrapColumn wrapAt="600px" maxW={`auto`} h="auto">
             <BreakpointsNotCreatedMessage />
           </FlexRowWrapColumn>
         )}
@@ -52,10 +48,11 @@ export default function StylingSection() {
             </FlexRowWrapColumn>
             <FlexRowWrapColumn
               wrapAt="600px"
-              maxW={`calc(100vw - 900px)`}
               h="auto"
+              maxW={`calc(100vw - 900px)`}
             >
               {/* <Box bg="blue" h="100px" w="100%" flex={"1 0 600px"}></Box> */}
+
               <PreviewProvider>
                 <PreviewIndex />
               </PreviewProvider>

@@ -1,21 +1,15 @@
 import { useEffect, useState } from "react";
 import usePixelsPerRemSelector from "~/context/font-size/hooks/usePixelsPerRemSelector";
-import {
-  MediaQueries,
-  HTMLTags,
-  Selector,
-  BreakpointId,
-  Breakpoints,
-} from "~/context/font-size/interfaces";
-import getViewportSizeByBreakpointId from "../breakpoints/getViewportSizeByBreakpointId";
+import { BreakpointId, Selector } from "~/context/font-size/interfaces";
 
+import getViewportSizeByBreakpointId from "../breakpoints/getViewportSizeByBreakpointId";
 import useBreakpointService from "../breakpoints/useBreakpointService";
 import calculateClampSlope from "../media-query/calculateClampSlope";
 import calculateClampYAxisIntersection from "../media-query/calculateClampYAxisIntersection";
 import generateClampFormula from "../media-query/generateClampFormula";
 import useMediaQueryService from "../media-query/useMediaQueryService";
 
-export default function useCSSCodeBlock() {
+export default function useCSSCodeBlock(forceImportant = false) {
   const { pixelsPerRem } = usePixelsPerRemSelector();
   const { mediaQueries, getFontSizeRange } = useMediaQueryService();
   const { breakpoints, getViewportSizeByBreakpointId } = useBreakpointService();
@@ -82,7 +76,9 @@ export default function useCSSCodeBlock() {
 
         codeBlock += `  ${selector} {`;
         codeBlock += `\n`;
-        codeBlock += `   font-size: ${clampFormula} !important;`;
+        codeBlock += `   font-size: ${clampFormula}${
+          forceImportant ? " !important" : ""
+        };`;
         codeBlock += `\n`;
         codeBlock += `  }`;
         codeBlock += `\n`;
@@ -97,8 +93,6 @@ export default function useCSSCodeBlock() {
 
   useEffect(() => {
     setCodeBlock(buildCodeBlock());
-
-    console.log(mediaQueries);
   }, [mediaQueries, breakpoints]);
 
   return {

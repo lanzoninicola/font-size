@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import useMediaQueriesSelector from "~/context/font-size/hooks/useMediaQueriesSelector";
 import usePreviewUrl from "~/context/preview/hooks/usePreviewUrl";
 import useCSSCodeBlock from "~/domain/code-block/useCSSCodeBlock";
+import usePostMessageService from "~/domain/preview/usePostMessageService";
 import SETTINGS from "~/domain/settings";
 
 export default function IframeBox({
@@ -15,16 +16,16 @@ export default function IframeBox({
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const { mediaQueries } = useMediaQueriesSelector();
-  // const { codeBlock } = useCSSCodeBlock({ mediaQueries });
-  const [iframeReloadKey, setIframeReloadKey] = useState(0);
+  const { codeBlock } = useCSSCodeBlock(true);
   const { previewUrl } = usePreviewUrl();
+  const { postMessage } = usePostMessageService();
+
+  const [iframeReloadKey, setIframeReloadKey] = useState(0);
 
   const DEFAULT_URL = SETTINGS.preview.iframeDefaultURL;
 
   function sendMessage() {
-    if (iframeRef.current) {
-      // iframeRef.current.contentWindow?.postMessage(codeBlock, "*");
-    }
+    postMessage({ iframeRef, message: codeBlock });
   }
 
   useEffect(() => {
@@ -37,7 +38,6 @@ export default function IframeBox({
         className="preview"
         width={width}
         height={height}
-        borderRadius={"5px"}
         transition="all 500ms ease"
       >
         <iframe
@@ -47,12 +47,12 @@ export default function IframeBox({
           src={
             previewUrl || previewUrl === "https://" ? previewUrl : DEFAULT_URL
           }
-          //src={previewUrl && previewUrl !== "" ? previewUrl : DEFAULT_URL}
-          // src={"https://remix-vert-pi.vercel.app/"}
-          // src={"/receiver.html"}
           width="100%"
           height="100%"
           onLoad={sendMessage}
+          style={{
+            borderRadius: "5px",
+          }}
         ></iframe>
       </Box>
     </>

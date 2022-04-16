@@ -68,7 +68,7 @@ export default function MediaQueryEdit() {
 
   return (
     <VStackBox gap="1rem" w="100%">
-      <SectionHeader>Style</SectionHeader>
+      <SectionHeader>Media Query Builder</SectionHeader>
 
       {breakpoints && (
         <VStackBox gap="2rem">

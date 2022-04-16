@@ -1,6 +1,14 @@
 import { Box, Heading, Text } from "@chakra-ui/react";
+import { useEffect } from "react";
+import usePostMessageService from "~/domain/preview/usePostMessageService";
 
 export default function PreviewContent() {
+  const { handleMessages } = usePostMessageService();
+
+  useEffect(() => {
+    handleMessages();
+  }, []);
+
   return (
     <>
       <Box bg="white" paddingInline={"1rem"} paddingBlock={"1.5rem"}>

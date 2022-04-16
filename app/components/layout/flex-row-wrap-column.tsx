@@ -13,6 +13,7 @@ export default function FlexRowWrapColumn({
 }) {
   return (
     <VStackBox
+      className="flex-row-wrap-column"
       gap="2rem"
       marginBlock="2rem"
       flex={`"1 0 ${wrapAt}"`}

@@ -1,21 +1,31 @@
 import { HStack, Text } from "@chakra-ui/react";
-import React, { SyntheticEvent } from "react";
+import React from "react";
 import FormControlLabel from "~/components/shared/form-control-label";
 import InputNumber from "~/components/shared/input-number";
 
 export default function FormControlInputNumber({
   id,
   label,
+  labelFontSize,
+  labelSpacing,
+  ariaLabel,
+  unitFontSize,
   value,
   unit,
   onChange,
   onBlur,
+
   ...props
 }: {
   id: string;
   label?: string;
+  labelFontSize?: string;
+  labelSpacing?: string;
+  ariaLabel?: string;
+  unitFontSize?: string;
   value?: string;
-  unit: string;
+  unit?: string;
+
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.FocusEventHandler<HTMLInputElement>) => void;
   [key: string]: any;
@@ -23,10 +33,16 @@ export default function FormControlInputNumber({
   return (
     <HStack
       w="100%"
-      aria-label={label && `Set the ${label.toLowerCase()}`}
-      justify="space-between"
+      aria-label={ariaLabel || (label && `Set the ${label.toLowerCase()}`)}
+      justify={unit ? "space-between" : "center"}
+      alignItems="center"
+      gap={labelSpacing || ".25rem"}
     >
-      {label && <FormControlLabel htmlFor={id}>{label}</FormControlLabel>}
+      {label && (
+        <FormControlLabel fontSize={labelFontSize} htmlFor={id} m={0}>
+          {label}
+        </FormControlLabel>
+      )}
       <HStack>
         <InputNumber
           value={value}
@@ -34,9 +50,16 @@ export default function FormControlInputNumber({
           onBlur={onBlur}
           {...props}
         />
-        <Text color="primary.500" fontWeight={700} fontSize={"sm"} minW="40px">
-          {unit.toUpperCase()}
-        </Text>
+        {unit && (
+          <Text
+            color="primary.500"
+            fontWeight={700}
+            fontSize={unitFontSize || "sm"}
+            minW="40px"
+          >
+            {unit.toUpperCase()}
+          </Text>
+        )}
       </HStack>
     </HStack>
   );
