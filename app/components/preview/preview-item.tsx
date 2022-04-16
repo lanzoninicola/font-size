@@ -6,7 +6,6 @@ import parseInputString from "~/domain/utilities/parseInputString";
 
 import FormControlInputNumber from "../shared/form-control-input-number";
 import { TrashIcon } from "../shared/icons";
-import VStackBox from "../shared/vstack-wrapper";
 import IframeBox from "./iframe-box";
 import ToolbarButton from "./toolbar-button";
 
@@ -45,15 +44,24 @@ export default function PreviewItem({
     setPreviewWindows(nextState);
   }
 
-  function onHover(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+  function onMouseEnter(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     e.preventDefault();
     e.stopPropagation();
 
     setShowRemoveIcon(true);
   }
 
+  function onMouseLeave(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    setShowRemoveIcon(false);
+  }
+
   function onRemovePreviewWindow(idx: number) {
     let nextState = [...previewWindows];
+
+    console.log(nextState[idx]);
 
     nextState = nextState.filter(
       (item) => item.height !== sizeHeight || item.width !== sizeWidth
@@ -61,6 +69,11 @@ export default function PreviewItem({
 
     setPreviewWindows(nextState);
   }
+
+  useEffect(() => {
+    setSizeHeight(height);
+    setSizeWidth(width);
+  }, [width, height]);
 
   return (
     <Grid
@@ -75,12 +88,12 @@ export default function PreviewItem({
         transition: "all .2s ease-in-out",
       }}
       position="relative"
-      onMouseEnter={onHover}
-      onMouseLeave={() => setShowRemoveIcon(false)}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       <HStack spacing={0} justify="center">
         <FormControlInputNumber
-          id="viewport-width"
+          id={`viewport-width-${idx}`}
           value={parseInputString(String(sizeWidth))}
           label="W"
           labelFontSize="16px"
@@ -93,7 +106,7 @@ export default function PreviewItem({
           onChange={(e) => onChangeWidth(e)}
         />
         <FormControlInputNumber
-          id="viewport-height"
+          id={`viewport-height-${idx}`}
           value={parseInputString(String(sizeHeight))}
           label="H"
           labelFontSize="16px"

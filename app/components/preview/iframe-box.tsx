@@ -13,8 +13,6 @@ export default function IframeBox({
   width: number;
   height: number;
 }) {
-  const iframeRef = useRef<HTMLIFrameElement>(null);
-
   const { mediaQueries } = useMediaQueriesSelector();
   const { codeBlock } = useCSSCodeBlock(true);
   const { previewUrl } = usePreviewUrl();
@@ -22,15 +20,18 @@ export default function IframeBox({
 
   const [iframeReloadKey, setIframeReloadKey] = useState(0);
 
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+
   const DEFAULT_URL = SETTINGS.preview.iframeDefaultURL;
 
   function sendMessage() {
     postMessage({ iframeRef, message: codeBlock });
   }
 
+  // reload the frame when the media queries change and a new url is set
   useEffect(() => {
     setIframeReloadKey(iframeReloadKey + 1);
-  }, [mediaQueries, width, height, previewUrl]);
+  }, [mediaQueries, previewUrl]);
 
   return (
     <>

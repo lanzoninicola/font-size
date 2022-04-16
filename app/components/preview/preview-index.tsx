@@ -11,7 +11,7 @@ export default function PreviewIndex() {
   const { previewWindows, setPreviewWindows } = usePreviewWindowsSelector();
   const { zoom } = usePreviewZoomSelector();
 
-  console.log(zoom);
+  console.log("previewWindows", previewWindows);
 
   return (
     <VStackBox gap="1rem" id="preview-index">
@@ -26,18 +26,18 @@ export default function PreviewIndex() {
             align={"flex-start"}
           >
             <>
-              {/* {previewWindows.map((item, idx) => (
-            <PreviewItem
-              key={idx}
-              idx={idx}
-              width={item.width}
-              height={item.height}
-            />
-          ))} */}
-              <PreviewItem key={0} idx={0} width={412} height={568} />
+              {previewWindows.map((item, idx) => (
+                <PreviewItem
+                  key={idx}
+                  idx={idx}
+                  width={item.width}
+                  height={item.height}
+                />
+              ))}
+              {/* <PreviewItem key={0} idx={0} width={412} height={568} />
               <PreviewItem key={1} idx={1} width={412} height={568} />
               <PreviewItem key={2} idx={2} width={412} height={568} />
-              <PreviewItem key={3} idx={4} width={412} height={568} />
+              <PreviewItem key={3} idx={4} width={412} height={568} /> */}
             </>
           </HStack>
         </Box>

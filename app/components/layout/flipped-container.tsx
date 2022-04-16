@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 
 /**
  * @description: This puts the scrollbar at the top of the container
- * Children must have the prop transform to rotateX(180deg) too
+ * Children must have the prop "transform" set to "rotateX(180deg)" too
  */
 
 export default function FlippedContainer({

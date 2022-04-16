@@ -26,6 +26,8 @@ export default function PreviewToolbar() {
 
     nextState.unshift(newItem);
 
+    console.log(nextState);
+
     setPreviewWindows(nextState);
   }
 
