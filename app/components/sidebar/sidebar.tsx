@@ -1,26 +1,68 @@
-import { VStack } from "@chakra-ui/react";
-import { Link } from "remix";
-import { FontIcon, SettingsIcon, StyleIcon } from "../shared/icons";
+import { Box, VStack } from "@chakra-ui/react";
+
+import {
+  BreakpointsIcon,
+  MediaQueryIcon,
+  SelectorsIcon,
+  SettingsIcon,
+} from "../shared/icons";
+import SidebarItem from "./sidebar-item";
+
+interface SidebarItem {
+  to: string;
+  label: string;
+  ariaLabel: string;
+  icon: React.ReactNode;
+}
 
 export default function Sidebar() {
+  const items: SidebarItem[] = [
+    {
+      to: "/app/breakpoints",
+      label: "Breakpoints",
+      ariaLabel: "Define your custom breakpoints",
+      icon: <BreakpointsIcon size={24} color="gray" />,
+    },
+    {
+      to: "/app/styling",
+      label: "Media Queries",
+      ariaLabel: "Define media queries and styles",
+      icon: <MediaQueryIcon size={24} color="gray" />,
+    },
+    {
+      to: "/app/selectors",
+      label: "Selectors",
+      ariaLabel: "Define the selector to customize",
+      icon: <SelectorsIcon size={24} color="gray" />,
+    },
+    {
+      to: "/app/settings",
+      label: "Settings",
+      ariaLabel: "Setting up your project",
+      icon: <SettingsIcon size={24} color="gray" />,
+    },
+  ];
+
   return (
-    <VStack
-      borderLeft={"1px solid"}
+    <Box
+      gridArea={"sd"}
       borderRight={"1px solid"}
       borderColor={"primaryAlpha.20"}
-      gridArea={"sd"}
-      minW="100px"
+      paddingInline=".5rem"
+      minW="50px"
     >
-      <Link to="/app/breakpoints">
-        <StyleIcon color="white" />
-      </Link>
-      <Link to="/app/styling">
-        <StyleIcon color="white" />
-      </Link>
-      <FontIcon color="white" />
-      <Link to="/app/settings">
-        <SettingsIcon color="white" />
-      </Link>
-    </VStack>
+      <VStack
+        position={"sticky"}
+        top="50%"
+        transform="translateY(-50%)"
+        spacing={4}
+      >
+        {items.map((item, idx) => (
+          <SidebarItem key={idx} {...item}>
+            {item.icon}
+          </SidebarItem>
+        ))}
+      </VStack>
+    </Box>
   );
 }
