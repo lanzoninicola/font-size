@@ -16,11 +16,11 @@ export default function FlippedContainer({
     <Box
       w="100%"
       transform={"rotateX(180deg)"}
-      overflow="scroll"
+      overflow="auto"
       css={{
         "&::-webkit-scrollbar": {
-          width: "0.8em",
-          height: "0.8em",
+          width: "10px",
+          height: "10px",
         },
 
         "&::-webkit-scrollbar-track": {

@@ -1,9 +1,9 @@
 import { Box, HStack } from "@chakra-ui/react";
 import usePreviewWindowsSelector from "~/context/preview/hooks/usePreviewWindowsSelector";
 import usePreviewZoomSelector from "~/context/preview/hooks/usePreviewZoomSelector";
-import FlippedContainer from "../layout/flipped-container";
-import VStackBox from "../shared/vstack-wrapper";
 
+import FlippedContainer from "../layout/flipped-container";
+import InnerContentColumn from "../layout/inner-content-column";
 import PreviewItem from "./preview-item";
 import PreviewToolbar from "./preview-toolbar";
 
@@ -12,16 +12,15 @@ export default function PreviewIndex() {
   const { zoom } = usePreviewZoomSelector();
 
   return (
-    <VStackBox gap="1rem" id="preview-index">
-      <PreviewToolbar />
+    <InnerContentColumn>
       <FlippedContainer>
         <Box w="100%" transform={`rotateX(180deg) scale(${zoom / 100})`}>
           <HStack
             flex={"1 0 850px"}
-            p="1rem"
             w="100%"
             gap="2rem"
             align={"flex-start"}
+            paddingLeft="2rem"
           >
             <>
               {previewWindows.map((_, idx) => (
@@ -31,6 +30,6 @@ export default function PreviewIndex() {
           </HStack>
         </Box>
       </FlippedContainer>
-    </VStackBox>
+    </InnerContentColumn>
   );
 }

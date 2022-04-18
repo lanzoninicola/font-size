@@ -24,7 +24,7 @@ export default function Sidebar() {
       icon: <BreakpointsIcon size={24} color="gray" />,
     },
     {
-      to: "/app/styling",
+      to: "/app/media-queries",
       label: "Media Queries",
       ariaLabel: "Define media queries and styles",
       icon: <MediaQueryIcon size={24} color="gray" />,
@@ -45,6 +45,7 @@ export default function Sidebar() {
 
   return (
     <Box
+      as="aside"
       gridArea={"sd"}
       borderRight={"1px solid"}
       borderColor={"primaryAlpha.20"}

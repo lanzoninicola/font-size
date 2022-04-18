@@ -3,10 +3,12 @@ import { Center, Tooltip } from "@chakra-ui/react";
 export default function ToolbarButton({
   children,
   label,
+  noHoverbg = false,
   ...props
 }: {
   children: React.ReactNode;
   label: string;
+  noHoverbg?: boolean;
   [key: string]: any;
 }) {
   return (
@@ -16,7 +18,7 @@ export default function ToolbarButton({
       {...props}
       _hover={{
         cursor: "pointer",
-        bg: "secondary.700",
+        bg: noHoverbg ? "transparent" : "secondary.700",
         transition: "all .2s ease-in-out",
       }}
       borderRadius={"5px"}

@@ -1,7 +1,7 @@
-import { Divider, Heading } from "@chakra-ui/react";
+import { Heading } from "@chakra-ui/react";
 import VStackBox from "./vstack-wrapper";
 
-export default function SectionHeader({
+export default function SectionSubHeader({
   children,
   ...props
 }: {
@@ -9,18 +9,17 @@ export default function SectionHeader({
   [key: string]: any;
 }) {
   return (
-    <VStackBox h="65px" justify="center">
+    <VStackBox>
       <Heading
         color="primary.500"
         as="h2"
-        fontSize="22px"
+        fontSize="16px"
         lineHeight="50px"
         fontWeight={700}
         {...props}
       >
         {children}
       </Heading>
-      {/* <Divider borderColor={"primaryAlpha.20"} /> */}
     </VStackBox>
   );
 }

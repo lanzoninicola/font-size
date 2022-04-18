@@ -17,7 +17,7 @@ export default function CodeIndex() {
 
   return (
     <VStackBox gap="1rem" w="100%">
-      <Button onClick={() => onCodeShow()}>Show me the code</Button>
+      {/* <Button onClick={() => onCodeShow()}>Show me the code</Button> */}
       {showCode && (
         <VStackBox align="flex-end" gap="1rem" w="100%">
           <CodeRenderOptions />

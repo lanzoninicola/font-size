@@ -11,7 +11,7 @@ export default function MainGridWrapper({
   return (
     <Grid
       gridTemplateColumns={"auto 1fr"}
-      gridAutoRows={"minmax(100px, auto)"}
+      gridTemplateRows={"auto 1fr auto"}
       gridTemplateAreas='"sd hd"
       "sd main"
       "sd ft"'

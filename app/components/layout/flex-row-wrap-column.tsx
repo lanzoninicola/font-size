@@ -8,14 +8,13 @@ export default function FlexRowWrapColumn({
 }: {
   children: React.ReactNode;
   wrapAt: string;
-  maxW: string;
+  maxW?: string;
   [key: string]: any;
 }) {
   return (
     <VStackBox
       className="flex-row-wrap-column"
       gap="2rem"
-      marginBlock="2rem"
       flex={`"1 0 ${wrapAt}"`}
       maxW={maxW}
       {...props}

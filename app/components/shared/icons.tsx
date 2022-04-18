@@ -183,3 +183,101 @@ export function SelectorsIcon({
     />
   );
 }
+
+export function NewMediaQueryIcon({
+  size = 20,
+  color = "gray",
+  ariaLabel = "New media query",
+}: IconProps) {
+  return (
+    <Image
+      src={`${BASE_URL}/new-media-query-icon-${size}-${color}.svg`}
+      alt={ariaLabel}
+      altaria-label={ariaLabel}
+    />
+  );
+}
+
+export function CodeIcon({
+  size = 20,
+  color = "gray",
+  ariaLabel = "Show me the code",
+}: IconProps) {
+  return (
+    <Image
+      src={`${BASE_URL}/code-icon-${size}-${color}.svg`}
+      alt={ariaLabel}
+      altaria-label={ariaLabel}
+    />
+  );
+}
+
+export function ExportConfig({
+  size = 20,
+  color = "gray",
+  ariaLabel = "Export media queries",
+}: IconProps) {
+  return (
+    <Image
+      src={`${BASE_URL}/export-config-icon-${size}-${color}.svg`}
+      alt={ariaLabel}
+      altaria-label={ariaLabel}
+    />
+  );
+}
+
+export function MaxFontSizeIcon({
+  size = 20,
+  color = "gray",
+  ariaLabel = "Max font size",
+}: IconProps) {
+  return (
+    <Image
+      src={`${BASE_URL}/max-font-size-icon-${size}-${color}.svg`}
+      alt={ariaLabel}
+      altaria-label={ariaLabel}
+    />
+  );
+}
+
+export function MinFontSizeIcon({
+  size = 20,
+  color = "gray",
+  ariaLabel = "Max font size",
+}: IconProps) {
+  return (
+    <Image
+      src={`${BASE_URL}/min-font-size-icon-${size}-${color}.svg`}
+      alt={ariaLabel}
+      altaria-label={ariaLabel}
+    />
+  );
+}
+
+export function LineHeightIcon({
+  size = 20,
+  color = "gray",
+  ariaLabel = "Max font size",
+}: IconProps) {
+  return (
+    <Image
+      src={`${BASE_URL}/line-height-icon-${size}-${color}.svg`}
+      alt={ariaLabel}
+      altaria-label={ariaLabel}
+    />
+  );
+}
+
+export function EditIcon({
+  size = 20,
+  color = "gray",
+  ariaLabel = "Edit",
+}: IconProps) {
+  return (
+    <Image
+      src={`${BASE_URL}/edit-icon-${size}-${color}.svg`}
+      alt={ariaLabel}
+      altaria-label={ariaLabel}
+    />
+  );
+}

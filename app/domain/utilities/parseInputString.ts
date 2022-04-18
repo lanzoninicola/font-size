@@ -8,6 +8,10 @@
  * @returns {string} - The parsed value
  */
 export default function parseInputString(value: string): string {
+  if (value === "") {
+    return "";
+  }
+
   return value
     .split("")
     .filter((char) => {

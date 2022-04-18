@@ -1,4 +1,4 @@
-import { FormLabel, Text } from "@chakra-ui/react";
+import { FormLabel } from "@chakra-ui/react";
 
 export default function FormControlLabel({
   children,
@@ -14,7 +14,7 @@ export default function FormControlLabel({
       htmlFor={htmlFor}
       color="primary.500"
       fontWeight={400}
-      fontSize={props.fontSize || "md"}
+      fontSize={props.fontSize || "sm"}
       {...props}
     >
       {children}

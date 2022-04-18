@@ -3,7 +3,7 @@ import usePreviewZoomSelector from "~/context/preview/hooks/usePreviewZoomSelect
 import usePreviewZoomService from "~/domain/preview/usePreviewZoomService";
 import FormControlInputNumber from "../shared/form-control-input-number";
 import { ZoomInIcon, ZoomOutIcon } from "../shared/icons";
-import ToolbarButton from "./toolbar-button";
+import ToolbarButton from "../layout/toolbar-button";
 
 export default function ZoomBar() {
   const { zoomIn, zoomOut } = usePreviewZoomService();
@@ -19,7 +19,7 @@ export default function ZoomBar() {
   return (
     <HStack spacing={0} justify="center">
       <ToolbarButton label="Zoom In" onClick={onZoomInPreview}>
-        <ZoomInIcon />
+        <ZoomInIcon size={20} />
       </ToolbarButton>
       <FormControlInputNumber
         id="preview-zoom-percentage"
@@ -34,7 +34,7 @@ export default function ZoomBar() {
         isReadOnly
       />
       <ToolbarButton label="Zoom Out" onClick={onZoomOutPreview}>
-        <ZoomOutIcon />
+        <ZoomOutIcon size={20} />
       </ToolbarButton>
     </HStack>
   );

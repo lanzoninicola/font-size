@@ -11,12 +11,12 @@ export default function Header() {
       gridArea={"hd"}
       paddingInline={["1rem", "2rem"]}
       wrap="wrap"
-      maxH="120px"
+      h="50px"
     >
-      <Heading as="h1" color="primary.500">
-        Font scaling with clamp()
+      <Heading as="h1" color="primary.500" fontSize="18px">
+        FS
       </Heading>
-      <Credits />
+      {/* <Credits /> */}
     </HStack>
   );
 }

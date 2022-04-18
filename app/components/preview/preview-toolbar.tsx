@@ -1,10 +1,11 @@
 import { HStack } from "@chakra-ui/react";
 import { useState } from "react";
 import usePreviewService from "~/domain/preview/usePreviewService";
+import ToolbarWrapper from "../layout/toolbar-wrapper";
 
 import { AddIcon, BrowserIcon } from "../shared/icons";
 import VStackBox from "../shared/vstack-wrapper";
-import ToolbarButton from "./toolbar-button";
+import ToolbarButton from "../layout/toolbar-button";
 import UrlBar from "./url-bar";
 import ZoomBar from "./zoom-bar";
 
@@ -21,29 +22,21 @@ export default function PreviewToolbar() {
   }
 
   return (
-    <HStack
-      w="100%"
-      paddingInline={"1rem"}
-      gap="1rem"
-      p=".5rem"
-      spacing={0}
-      backgroundColor={"background.300"}
-      borderRadius={"5px"}
-    >
+    <ToolbarWrapper>
       <VStackBox w="100%" spacing={"1rem"}>
         <HStack w="100%" justify={"space-between"}>
           <HStack>
             <ToolbarButton label="Add Preview" onClick={onAddPreview}>
-              <AddIcon />
+              <AddIcon size={20} />
             </ToolbarButton>
             <ToolbarButton label="Show navigation Bar" onClick={onShowURLBar}>
-              <BrowserIcon />
+              <BrowserIcon size={20} />
             </ToolbarButton>
           </HStack>
           <ZoomBar />
         </HStack>
         {showURLBar && <UrlBar />}
       </VStackBox>
-    </HStack>
+    </ToolbarWrapper>
   );
 }

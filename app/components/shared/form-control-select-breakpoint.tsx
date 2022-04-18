@@ -25,7 +25,7 @@ export default function FormControlSelectBreakpoint({
       let options: SelectOption[] = [
         {
           value: "",
-          label: " --- Select a breakpoint --- ",
+          label: " --- Choose a breakpoint --- ",
         },
       ];
 

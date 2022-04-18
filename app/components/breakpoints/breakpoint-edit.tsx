@@ -9,6 +9,7 @@ import FormControlSelectBreakpoint from "../shared/form-control-select-breakpoin
 import parseInputString from "~/domain/utilities/parseInputString";
 import parseDecimalNumber from "~/domain/utilities/parseDecimalNumber";
 import { BreakpointId } from "~/context/font-size/interfaces";
+import InnerContentColumn from "../layout/inner-content-column";
 
 enum EntityState {
   new = "new",
@@ -87,7 +88,7 @@ export default function BreakpointsEdit() {
   }, [minWidth, maxWidth]);
 
   return (
-    <VStackBox gap="3rem">
+    <InnerContentColumn>
       <SectionHeader>Breakpoints</SectionHeader>
       <VStackBox gap="1.5rem">
         {breakpoints && (
@@ -128,6 +129,6 @@ export default function BreakpointsEdit() {
           {entityState === EntityState.new ? "Create" : "Save"}
         </Button>
       </HStack>
-    </VStackBox>
+    </InnerContentColumn>
   );
 }

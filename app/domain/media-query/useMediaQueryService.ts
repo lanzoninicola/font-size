@@ -5,12 +5,129 @@ import {
   MediaQueries,
   Selector,
 } from "~/context/font-size/interfaces";
+import { MediaQueryBreakpointFlat } from "~/context/font-size/interfaces/media-query";
+import useMediaQueryBuilderContext from "~/context/media-query-builder/hooks/useMediaQueryBuilderContext";
+import { EntityState } from "~/context/media-query-builder/interfaces";
+import parseInputString from "../utilities/parseInputString";
 
 export default function useMediaQueryService() {
+  const {
+    entityState,
+    currentBreakpointId,
+    currentSelector,
+    minFontSize,
+    maxFontSize,
+    setEntityState,
+    setCurrentBreakpointId,
+    setCurrentSelector,
+    setMinFontSize,
+    setMaxFontSize,
+  } = useMediaQueryBuilderContext();
   const { mediaQueries, setMediaQueries } = useMediaQueriesSelector();
   const { breakpoints } = useBreakpointsSelector();
 
-  function saveMediaQuery(
+  function changeBreakpoint(bp: BreakpointId) {
+    updateEntityStateOnBreakpointChange(bp);
+    setCurrentBreakpointId(bp);
+  }
+
+  function changeSelector(s: Selector) {
+    updateEntityStateOnSelectorChange(s);
+    setCurrentSelector(s);
+  }
+
+  function updateEntityStateOnBreakpointChange(bp: BreakpointId) {
+    if (isMediaQueryForBreakpoint(bp)) {
+      setEntityState(EntityState.edit);
+    } else {
+      setEntityState(EntityState.new);
+    }
+  }
+
+  function updateEntityStateOnSelectorChange(s: Selector) {
+    if (isMediaQueryForBreakpointAndSelector(currentBreakpointId, s)) {
+      setEntityState(EntityState.edit);
+    } else {
+      setEntityState(EntityState.new);
+    }
+  }
+
+  function updateMinMaxFontSizeOnBreakpointAndSelectorChange() {
+    if (
+      !isMediaQueryForBreakpointAndSelector(
+        currentBreakpointId,
+        currentSelector
+      )
+    ) {
+      changeMinFontSize("");
+      changeMaxFontSize("");
+
+      return;
+    }
+
+    const { minFontSize, maxFontSize } = getFontSizeRange(
+      currentBreakpointId,
+      currentSelector
+    );
+    changeMinFontSize(minFontSize.toString());
+    changeMaxFontSize(maxFontSize.toString());
+  }
+
+  function changeMinFontSize(minfs: string) {
+    parseInputString(minfs);
+    setMinFontSize(minfs);
+  }
+
+  function changeMaxFontSize(maxfs: string) {
+    parseInputString(maxfs);
+    setMaxFontSize(maxfs);
+  }
+
+  function addNewMediaQuery() {
+    setEntityState(EntityState.new);
+  }
+
+  function saveMediaQuery() {
+    if (entityState === EntityState.new) {
+      createMediaQuery(
+        currentBreakpointId,
+        currentSelector,
+        parseFloat(minFontSize),
+        parseFloat(maxFontSize)
+      );
+    }
+
+    if (entityState === EntityState.edit) {
+      updateMediaQuery(
+        currentBreakpointId,
+        currentSelector,
+        parseFloat(minFontSize),
+        parseFloat(maxFontSize)
+      );
+    }
+  }
+
+  function createMediaQuery(
+    breakpointId: BreakpointId,
+    selector: Selector,
+    minFontSize: number,
+    maxFontSize: number
+  ) {
+    const mediaQueryData = {
+      minFontSize,
+      maxFontSize,
+    };
+
+    const nextMediaQueries: MediaQueries = { ...mediaQueries };
+
+    nextMediaQueries[breakpointId] = { ...nextMediaQueries[breakpointId] };
+
+    nextMediaQueries[breakpointId][selector] = mediaQueryData;
+
+    setMediaQueries(nextMediaQueries);
+  }
+
+  function updateMediaQuery(
     breakpointId: BreakpointId,
     selector: Selector,
     minFontSize: number,
@@ -58,10 +175,66 @@ export default function useMediaQueryService() {
     };
   }
 
+  /**
+   * @param {stirng} bp - The breakpoint id
+   * @returns {array} - An array of media query breakpoints for the given breakpoint
+   */
+  function listMediaQueriesByBreakpointId(
+    bp: BreakpointId
+  ): MediaQueryBreakpointFlat[] {
+    if (!isMediaQueryForBreakpoint(bp)) {
+      return [];
+    }
+
+    let list = [] as MediaQueryBreakpointFlat[];
+    const breakpoint = mediaQueries?.[bp];
+
+    if (!breakpoint) {
+      return [];
+    }
+
+    for (let selector in breakpoint) {
+      const { minFontSize, maxFontSize } = breakpoint[selector];
+
+      list.push({
+        selector,
+        minFontSize: minFontSize ? minFontSize : 0,
+        maxFontSize: maxFontSize ? maxFontSize : 0,
+      });
+    }
+
+    return list;
+  }
+
+  function isMediaQueryForBreakpoint(bp: BreakpointId) {
+    if (!mediaQueries) return false;
+    if (!mediaQueries[bp]) return false;
+    return true;
+  }
+
+  function isMediaQueryForBreakpointAndSelector(bp: BreakpointId, s: Selector) {
+    if (!mediaQueries) return false;
+    if (!mediaQueries[bp]) return false;
+    if (!mediaQueries[bp][s]) return false;
+    return true;
+  }
+
   return {
     breakpoints,
     mediaQueries,
+    entityState,
+    currentBreakpointId,
+    currentSelector,
+    minFontSize,
+    maxFontSize,
+    addNewMediaQuery,
+    changeBreakpoint,
+    changeSelector,
+    changeMinFontSize,
+    changeMaxFontSize,
+    updateMinMaxFontSizeOnBreakpointAndSelectorChange,
     getFontSizeRange,
     saveMediaQuery,
+    listMediaQueriesByBreakpointId,
   };
 }

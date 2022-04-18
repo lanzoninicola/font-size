@@ -13,7 +13,6 @@ export default function FlexRowWrap({
     <Flex
       direction={"row"}
       // wrap="wrap"
-      marginInline={["1rem", "1rem", "2rem"]}
       gap={spacing}
       {...props}
     >
