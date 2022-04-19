@@ -119,9 +119,7 @@ export default function useMediaQueryService() {
     };
 
     const nextMediaQueries: MediaQueries = { ...mediaQueries };
-
     nextMediaQueries[breakpointId] = { ...nextMediaQueries[breakpointId] };
-
     nextMediaQueries[breakpointId][selector] = mediaQueryData;
 
     setMediaQueries(nextMediaQueries);
@@ -168,15 +166,20 @@ export default function useMediaQueryService() {
    * @param s - the selector
    */
   function deleteMediaQuery(bp: BreakpointId, s: Selector) {
-    const nextMediaQueries = { ...mediaQueries };
+    let nextMediaQueries: MediaQueries | null = { ...mediaQueries };
 
     delete nextMediaQueries[bp][s];
 
     if (Object.keys(nextMediaQueries[bp]).length === 0) {
       delete nextMediaQueries[bp];
+      setCurrentSelector("");
     }
 
-    setMediaQueries(nextMediaQueries as MediaQueries);
+    if (Object.keys(nextMediaQueries).length === 0) {
+      setMediaQueries(null);
+    }
+
+    setMediaQueries(nextMediaQueries as MediaQueries | null);
   }
 
   /**

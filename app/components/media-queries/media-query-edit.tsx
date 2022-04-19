@@ -1,29 +1,17 @@
-import { Box, Button, Center, HStack, Text } from "@chakra-ui/react";
+import { Button, HStack } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { useContextSelector } from "use-context-selector";
 import { BreakpointId, Selector } from "~/context/font-size/interfaces";
-import useMediaQueryBuilderContext from "~/context/media-query-builder/hooks/useMediaQueryBuilderContext";
 import { EntityState } from "~/context/media-query-builder/interfaces";
 import useMediaQueryService from "~/domain/media-query/useMediaQueryService";
-import parseInputString from "~/domain/utilities/parseInputString";
 
 import InnerContentColumn from "../layout/inner-content-column";
 import FormControlInputNumber from "../shared/form-control-input-number";
 import FormControlSelectBreakpoint from "../shared/form-control-select-breakpoint";
 import FormControlSelectSelector from "../shared/form-control-select-selector";
-import { AddIcon, NewMediaQueryIcon } from "../shared/icons";
 import VStackBox from "../shared/vstack-wrapper";
 import MediaQueryEditIdle from "./media-query-edit-idle";
-import MediaQueryList from "./media-query-list";
 
 export default function MediaQueryEdit() {
-  // const [minFontSize, setMinFontSize] = useState<string>("");
-  // const [maxFontSize, setMaxFontSize] = useState<string>("");
-  // const [currentBreakpointId, setCurrentBreakpointId] = useState<
-  //   BreakpointId | undefined
-  // >(undefined);
-  // const [currentSelector, setCurrentSelector] = useState<Selector | null>(null);
-
   const {
     mediaQueries,
     breakpoints,
@@ -77,7 +65,7 @@ export default function MediaQueryEdit() {
       {!mediaQueries && entityState === EntityState.idle && (
         <MediaQueryEditIdle />
       )}
-      {mediaQueries && (
+      {(entityState !== EntityState.idle || mediaQueries) && (
         <VStackBox gap="4rem" paddingInlineStart="2rem" paddingRight="1rem">
           <VStackBox w="100%" gap="1rem">
             <FormControlSelectBreakpoint
@@ -114,7 +102,9 @@ export default function MediaQueryEdit() {
                 currentBreakpointId === "" ||
                 currentSelector === "" ||
                 currentBreakpointId === "no-selected" ||
-                currentSelector === "no-selected"
+                currentSelector === "no-selected" ||
+                minFontSize === "" ||
+                maxFontSize === ""
               }
             >
               Save

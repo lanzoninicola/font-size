@@ -32,11 +32,15 @@ export default function MediaQueryList() {
   return (
     <VStackBox w="100%" gap=".5rem" paddingLeft="2rem" paddingRight="1rem">
       {mediaQueries &&
-        currentBreakpointId &&
+        mediaQueries[currentBreakpointId] &&
         Object.keys(mediaQueries[currentBreakpointId]).map(
           (selectorId, index) => {
             if (!currentBreakpointId) {
-              return null;
+              return;
+            }
+
+            if (!selectorId) {
+              return;
             }
 
             const mediaQueryData =
