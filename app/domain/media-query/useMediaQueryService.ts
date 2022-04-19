@@ -83,7 +83,7 @@ export default function useMediaQueryService() {
     setMaxFontSize(maxfs);
   }
 
-  function addNewMediaQuery() {
+  function initMediaQuery() {
     setEntityState(EntityState.new);
   }
 
@@ -133,18 +133,50 @@ export default function useMediaQueryService() {
     minFontSize: number,
     maxFontSize: number
   ) {
-    let newMediaQueries = { ...mediaQueries };
+    let nextMediaQueries = { ...mediaQueries };
 
-    newMediaQueries[breakpointId] = {
-      ...newMediaQueries[breakpointId],
+    nextMediaQueries[breakpointId] = {
+      ...nextMediaQueries[breakpointId],
       [selector]: {
-        ...newMediaQueries[breakpointId][selector],
+        ...nextMediaQueries[breakpointId][selector],
         minFontSize,
         maxFontSize,
       },
     } as MediaQueries;
 
-    setMediaQueries(newMediaQueries as MediaQueries);
+    setMediaQueries(nextMediaQueries as MediaQueries);
+  }
+
+  /**
+   * @description Edit media query for current breakpoint and selector
+   *
+   * @param bp - the breakpoint id
+   * @param s - the selector
+   */
+  function editMediaQuery(bp: BreakpointId, s: Selector) {
+    setCurrentBreakpointId(bp);
+    setCurrentSelector(s);
+    setEntityState(EntityState.edit);
+
+    updateMinMaxFontSizeOnBreakpointAndSelectorChange();
+  }
+
+  /**
+   * @description Delete media query for current breakpoint and selector
+   *
+   * @param bp - the breakpoint id
+   * @param s - the selector
+   */
+  function deleteMediaQuery(bp: BreakpointId, s: Selector) {
+    const nextMediaQueries = { ...mediaQueries };
+
+    delete nextMediaQueries[bp][s];
+
+    if (Object.keys(nextMediaQueries[bp]).length === 0) {
+      delete nextMediaQueries[bp];
+    }
+
+    setMediaQueries(nextMediaQueries as MediaQueries);
   }
 
   /**
@@ -227,7 +259,7 @@ export default function useMediaQueryService() {
     currentSelector,
     minFontSize,
     maxFontSize,
-    addNewMediaQuery,
+    initMediaQuery,
     changeBreakpoint,
     changeSelector,
     changeMinFontSize,
@@ -235,6 +267,8 @@ export default function useMediaQueryService() {
     updateMinMaxFontSizeOnBreakpointAndSelectorChange,
     getFontSizeRange,
     saveMediaQuery,
+    editMediaQuery,
+    deleteMediaQuery,
     listMediaQueriesByBreakpointId,
   };
 }

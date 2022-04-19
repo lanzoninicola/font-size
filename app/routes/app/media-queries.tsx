@@ -1,29 +1,21 @@
-import { Box, HStack } from "@chakra-ui/react";
-import { json } from "remix";
+import { Box } from "@chakra-ui/react";
+import { json, Outlet } from "remix";
+import { v4 as uuidv4 } from "uuid";
 import CodeIndex from "~/components/code/code-index";
 import FlexRowWrap from "~/components/layout/flex-row-wrap";
 import FlexRowWrapColumn from "~/components/layout/flex-row-wrap-column";
-import PreviewIndex from "~/components/preview/preview-index";
+import MediaQueriesToolbar from "~/components/media-queries/media-queries-toolbar";
 import MediaQueryEdit from "~/components/media-queries/media-query-edit";
-
-import { v4 as uuidv4 } from "uuid";
-import useBreakpointsSelector from "~/context/font-size/hooks/useBreakpointsSelector";
+import MediaQueryList from "~/components/media-queries/media-query-list";
+import PreviewIndex from "~/components/preview/preview-index";
+import PreviewToolbar from "~/components/preview/preview-toolbar";
 import BreakpointsNotCreatedMessage from "~/components/shared/breakpoints-not-created-message";
-import { PreviewProvider } from "~/context/preview/preview-context";
 import SectionHeader from "~/components/shared/section-header";
-import ToolbarButton from "~/components/layout/toolbar-button";
-import ToolbarWrapper from "~/components/layout/toolbar-wrapper";
-import {
-  NewMediaQueryIcon,
-  CodeIcon,
-  ExportConfig,
-} from "~/components/shared/icons";
 import SectionSubHeader from "~/components/shared/section-subheader";
 import VStackBox from "~/components/shared/vstack-wrapper";
-import PreviewToolbar from "~/components/preview/preview-toolbar";
-import MediaQueriesToolbar from "~/components/media-queries/media-queries-toolbar";
-import MediaQueryList from "~/components/media-queries/media-query-list";
+import useBreakpointsSelector from "~/context/font-size/hooks/useBreakpointsSelector";
 import { MediaQueryBuilderProvider } from "~/context/media-query-builder/media-query-builder-context";
+import { PreviewProvider } from "~/context/preview/preview-context";
 
 export interface LoaderData {
   ENV: {
@@ -63,51 +55,7 @@ export default function MediaQueriesSection() {
               <BreakpointsNotCreatedMessage />
             </FlexRowWrapColumn>
           )}
-          {breakpoints && (
-            <>
-              <FlexRowWrapColumn
-                wrapAt="600px"
-                maxW="650px"
-                borderRight="1px solid"
-                borderRightColor={"primaryAlpha.20"}
-              >
-                <MediaQueryBuilderProvider>
-                  <VStackBox
-                    h="100px"
-                    borderBottom="1px solid"
-                    borderBottomColor="primaryAlpha.20"
-                    paddingInlineStart="2rem"
-                    paddingRight="1rem"
-                  >
-                    <SectionSubHeader>Builder</SectionSubHeader>
-                    <MediaQueriesToolbar />
-                  </VStackBox>
-
-                  <MediaQueryEdit />
-                  <MediaQueryList />
-                </MediaQueryBuilderProvider>
-
-                <CodeIndex />
-              </FlexRowWrapColumn>
-              <FlexRowWrapColumn wrapAt="600px" h="auto" paddingRight="1rem">
-                {/* <Box bg="blue" h="100px" w="100%" flex={"1 0 600px"}></Box> */}
-
-                <PreviewProvider>
-                  <VStackBox
-                    h="100px"
-                    borderBottom="1px solid"
-                    borderBottomColor="primaryAlpha.20"
-                    paddingInlineStart="2rem"
-                    paddingRight="1rem"
-                  >
-                    <SectionSubHeader>Preview</SectionSubHeader>
-                    <PreviewToolbar />
-                  </VStackBox>
-                  <PreviewIndex />
-                </PreviewProvider>
-              </FlexRowWrapColumn>
-            </>
-          )}
+          {breakpoints && <Outlet />}
         </FlexRowWrap>
       </Box>
     </>

@@ -5,10 +5,10 @@ import ToolbarWrapper from "../layout/toolbar-wrapper";
 import { NewMediaQueryIcon, CodeIcon, ExportConfig } from "../shared/icons";
 
 export default function MediaQueriesToolbar() {
-  const { addNewMediaQuery } = useMediaQueryService();
+  const { initMediaQuery } = useMediaQueryService();
 
   function onNewMediaQuery() {
-    addNewMediaQuery();
+    initMediaQuery();
   }
 
   return (
