@@ -1,13 +1,10 @@
+import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
 import useBreakpointsSelector from "~/context/font-size/hooks/useBreakpointsSelector";
 import useMediaQueriesSelector from "~/context/font-size/hooks/useMediaQueriesSelector";
-import {
-  BreakpointId,
-  MediaQueries,
-  Selector,
-} from "~/context/font-size/interfaces";
+import { MediaQueries, Selector } from "~/context/font-size/interfaces";
 import { MediaQueryBreakpointFlat } from "~/context/font-size/interfaces/media-query";
 import useMediaQueryBuilderContext from "~/context/media-query-builder/hooks/useMediaQueryBuilderContext";
-import { EntityState } from "~/context/media-query-builder/interfaces";
+import { EntityState } from "~/context/shared/interfaces/entity-state";
 import parseInputString from "../utilities/parseInputString";
 
 export default function useMediaQueryService() {

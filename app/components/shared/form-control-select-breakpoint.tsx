@@ -1,8 +1,10 @@
 import { HStack, Text } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import InputSelect from "~/components/shared/input-select";
-import { Breakpoints } from "~/context/font-size/interfaces";
-import useBreakpointService from "~/domain/breakpoints/useBreakpointService";
+import {
+  BreakpointId,
+  Breakpoints,
+} from "~/context/breakpoint-builder/interfaces";
 
 export interface SelectOption {
   value: string;
@@ -11,10 +13,12 @@ export interface SelectOption {
 
 export default function FormControlSelectBreakpoint({
   breakpoints,
+  value,
   onChange,
   ...props
 }: {
   breakpoints: Breakpoints | null;
+  value?: BreakpointId;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   [key: string]: any;
 }) {
@@ -48,7 +52,7 @@ export default function FormControlSelectBreakpoint({
         minW="370px"
         fontSize="16px"
         onChange={onChange}
-        defaultValue="no-selected"
+        value={value || "no-selected"}
         {...props}
       >
         {breakpoints &&

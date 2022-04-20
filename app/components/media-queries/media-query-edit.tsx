@@ -1,15 +1,16 @@
 import { Button, HStack } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { BreakpointId, Selector } from "~/context/font-size/interfaces";
-import { EntityState } from "~/context/media-query-builder/interfaces";
+import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
+import { Selector } from "~/context/font-size/interfaces";
+import { EntityState } from "~/context/shared/interfaces/entity-state";
 import useMediaQueryService from "~/domain/media-query/useMediaQueryService";
 
 import InnerContentColumn from "../layout/inner-content-column";
+import EntityStateIdleMessage from "../shared/entity-state-idle-message";
 import FormControlInputNumber from "../shared/form-control-input-number";
 import FormControlSelectBreakpoint from "../shared/form-control-select-breakpoint";
 import FormControlSelectSelector from "../shared/form-control-select-selector";
 import VStackBox from "../shared/vstack-wrapper";
-import MediaQueryEditIdle from "./media-query-edit-idle";
 
 export default function MediaQueryEdit() {
   const {
@@ -54,8 +55,6 @@ export default function MediaQueryEdit() {
     updateMinMaxFontSizeOnBreakpointAndSelectorChange();
   }
 
-  console.log(entityState);
-
   useEffect(() => {
     onSelectedBreakpointAndSelector();
   }, [currentBreakpointId, currentSelector]);
@@ -63,7 +62,7 @@ export default function MediaQueryEdit() {
   return (
     <InnerContentColumn paddingTop={"0.5rem"}>
       {!mediaQueries && entityState === EntityState.idle && (
-        <MediaQueryEditIdle />
+        <EntityStateIdleMessage context="media queries" />
       )}
       {(entityState !== EntityState.idle || mediaQueries) && (
         <VStackBox gap="4rem" paddingInlineStart="2rem" paddingRight="1rem">

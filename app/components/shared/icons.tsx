@@ -184,14 +184,14 @@ export function SelectorsIcon({
   );
 }
 
-export function NewMediaQueryIcon({
+export function NewEntityIcon({
   size = 20,
   color = "gray",
   ariaLabel = "New media query",
 }: IconProps) {
   return (
     <Image
-      src={`${BASE_URL}/new-media-query-icon-${size}-${color}.svg`}
+      src={`${BASE_URL}/new-entity-icon-${size}-${color}.svg`}
       alt={ariaLabel}
       altaria-label={ariaLabel}
     />
@@ -276,6 +276,34 @@ export function EditIcon({
   return (
     <Image
       src={`${BASE_URL}/edit-icon-${size}-${color}.svg`}
+      alt={ariaLabel}
+      altaria-label={ariaLabel}
+    />
+  );
+}
+
+export function MaxWidthIcon({
+  size = 20,
+  color = "gray",
+  ariaLabel = "Edit",
+}: IconProps) {
+  return (
+    <Image
+      src={`${BASE_URL}/max-width-icon-${size}-${color}.svg`}
+      alt={ariaLabel}
+      altaria-label={ariaLabel}
+    />
+  );
+}
+
+export function MinWidthIcon({
+  size = 20,
+  color = "gray",
+  ariaLabel = "Edit",
+}: IconProps) {
+  return (
+    <Image
+      src={`${BASE_URL}/min-width-icon-${size}-${color}.svg`}
       alt={ariaLabel}
       altaria-label={ariaLabel}
     />

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { createContext } from "use-context-selector";
-import { BreakpointId, Selector } from "../font-size/interfaces";
-import { EntityState } from "./interfaces";
+import { BreakpointId } from "../breakpoint-builder/interfaces";
+import { Selector } from "../font-size/interfaces";
+import { EntityState } from "../shared/interfaces/entity-state";
 
 export interface MediaQueryBuilderContext {
   entityState: EntityState;

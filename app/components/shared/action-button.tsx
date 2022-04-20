@@ -1,6 +1,6 @@
 import { Center, Tooltip } from "@chakra-ui/react";
 
-export default function ToolbarButton({
+export default function ActionButton({
   children,
   label,
   noHoverbg = false,

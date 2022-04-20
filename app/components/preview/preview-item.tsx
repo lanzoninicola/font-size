@@ -6,7 +6,7 @@ import usePreviewService from "~/domain/preview/usePreviewService";
 import { TrashIcon } from "../shared/icons";
 import IframeBox from "./iframe-box";
 import PreviewItemToolbar from "./preview-item-toolbar";
-import ToolbarButton from "../layout/toolbar-button";
+import ActionButton from "../shared/action-button";
 
 // TODO: ADD SENDER_ID TO IFRAME
 
@@ -58,7 +58,7 @@ export default function PreviewItem({ idx }: { idx: number }) {
       />
 
       {showRemoveIcon && (
-        <ToolbarButton
+        <ActionButton
           label="Remove window"
           position="absolute"
           top={3}
@@ -66,7 +66,7 @@ export default function PreviewItem({ idx }: { idx: number }) {
           onClick={() => onRemovePreviewWindow(idx)}
         >
           <TrashIcon size={20} />
-        </ToolbarButton>
+        </ActionButton>
       )}
     </Grid>
   );

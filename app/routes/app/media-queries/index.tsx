@@ -1,5 +1,6 @@
-import CodeIndex from "~/components/code/code-index";
+import CodeIndex from "~/components/code-block/code-index";
 import FlexRowWrapColumn from "~/components/layout/flex-row-wrap-column";
+import SectionSubHeaderWrapper from "~/components/layout/section-sub-header-wrapper";
 import MediaQueriesToolbar from "~/components/media-queries/media-queries-toolbar";
 import MediaQueryEdit from "~/components/media-queries/media-query-edit";
 import MediaQueryList from "~/components/media-queries/media-query-list";
@@ -20,16 +21,10 @@ export default function MediaQueriesContent() {
         borderRightColor={"primaryAlpha.20"}
       >
         <MediaQueryBuilderProvider>
-          <VStackBox
-            h="100px"
-            borderBottom="1px solid"
-            borderBottomColor="primaryAlpha.20"
-            paddingInlineStart="2rem"
-            paddingRight="1rem"
-          >
+          <SectionSubHeaderWrapper>
             <SectionSubHeader>Builder</SectionSubHeader>
             <MediaQueriesToolbar />
-          </VStackBox>
+          </SectionSubHeaderWrapper>
 
           <MediaQueryEdit />
           <MediaQueryList />

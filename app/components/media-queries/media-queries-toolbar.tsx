@@ -1,8 +1,9 @@
 import { HStack } from "@chakra-ui/react";
 import useMediaQueryService from "~/domain/media-query/useMediaQueryService";
-import ToolbarButton from "../layout/toolbar-button";
+
+import ActionButton from "../shared/action-button";
 import ToolbarWrapper from "../layout/toolbar-wrapper";
-import { NewMediaQueryIcon, CodeIcon, ExportConfig } from "../shared/icons";
+import { CodeIcon, NewEntityIcon } from "../shared/icons";
 
 export default function MediaQueriesToolbar() {
   const { initMediaQuery } = useMediaQueryService();
@@ -14,16 +15,16 @@ export default function MediaQueriesToolbar() {
   return (
     <ToolbarWrapper justify="space-between">
       <HStack>
-        <ToolbarButton label="New media query" onClick={onNewMediaQuery}>
-          <NewMediaQueryIcon />
-        </ToolbarButton>
-        <ToolbarButton label="Show me the code">
+        <ActionButton label="New media query" onClick={onNewMediaQuery}>
+          <NewEntityIcon />
+        </ActionButton>
+        <ActionButton label="Show me the code">
           <CodeIcon />
-        </ToolbarButton>
+        </ActionButton>
       </HStack>
-      <ToolbarButton label="Export configuration">
+      {/* <ActionButton label="Export configuration">
         <ExportConfig />
-      </ToolbarButton>
+      </ActionButton> */}
     </ToolbarWrapper>
   );
 }

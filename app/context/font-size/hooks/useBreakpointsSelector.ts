@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Breakpoints } from "~/context/font-size/interfaces";
+import { Breakpoints } from "~/context/breakpoint-builder/interfaces";
 
 import useBreakpointsContext from "./useBreakpointsContext";
 import useBreakpointsLocalStorage from "./useBreakpointsLocalStorage";

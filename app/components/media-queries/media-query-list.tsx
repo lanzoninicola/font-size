@@ -1,9 +1,10 @@
 import { HStack, Text } from "@chakra-ui/react";
-import { useEffect } from "react";
-import { BreakpointId, Selector } from "~/context/font-size/interfaces";
+import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
+import { Selector } from "~/context/font-size/interfaces";
 import useMediaQueryService from "~/domain/media-query/useMediaQueryService";
 
-import ToolbarButton from "../layout/toolbar-button";
+import ActionButton from "../shared/action-button";
+import EntityList from "../shared/entity-list";
 import {
   EditIcon,
   LineHeightIcon,
@@ -47,64 +48,33 @@ export default function MediaQueryList() {
               mediaQueries[currentBreakpointId][selectorId];
 
             return (
-              <HStack
+              <EntityList
                 key={index}
-                justify={"space-between"}
-                w="100%"
-                _hover={{
-                  cursor: "pointer",
-                  backgroundColor: "gray.100",
-                  borderRadius: "5px",
-                  paddingLeft: "1rem",
-                  transition: "all 0.2s ease-in-out",
-                }}
+                entityName={selectorId}
+                onEdit={() => onEditMediaQuery(currentBreakpointId, selectorId)}
+                onDelete={() =>
+                  onDeleteMediaQuery(currentBreakpointId, selectorId)
+                }
               >
-                <Text color="secondary.700">{selectorId}</Text>
-                <HStack gap="1.5rem">
-                  <HStack gap="1rem">
-                    <HStack>
-                      <MinFontSizeIcon color="green" />
-                      <Text color="secondary.700">
-                        {`${mediaQueryData.minFontSize}rem`}
-                      </Text>
-                    </HStack>
-                    <HStack>
-                      <MaxFontSizeIcon color="green" />
-                      <Text color="secondary.700">
-                        {`${mediaQueryData.maxFontSize}rem`}
-                      </Text>
-                    </HStack>
-                    <HStack>
-                      <LineHeightIcon color="green" />
-                      <Text color="secondary.700">0.1</Text>
-                    </HStack>
+                <HStack gap="1rem">
+                  <HStack>
+                    <MinFontSizeIcon color="green" />
+                    <Text color="secondary.700">
+                      {`${mediaQueryData.minFontSize}rem`}
+                    </Text>
                   </HStack>
                   <HStack>
-                    <ToolbarButton
-                      label="Edit media query"
-                      noHoverbg
-                      onClick={() =>
-                        onEditMediaQuery(currentBreakpointId, selectorId)
-                      }
-                    >
-                      <EditIcon ariaLabel="Edit media query" color="green" />
-                    </ToolbarButton>
-                    <ToolbarButton
-                      label="Remove media query"
-                      noHoverbg
-                      onClick={() =>
-                        onDeleteMediaQuery(currentBreakpointId, selectorId)
-                      }
-                    >
-                      <TrashIcon
-                        ariaLabel="Remove media query"
-                        color="green"
-                        size={20}
-                      />
-                    </ToolbarButton>
+                    <MaxFontSizeIcon color="green" />
+                    <Text color="secondary.700">
+                      {`${mediaQueryData.maxFontSize}rem`}
+                    </Text>
+                  </HStack>
+                  <HStack>
+                    <LineHeightIcon color="green" />
+                    <Text color="secondary.700">0.1</Text>
                   </HStack>
                 </HStack>
-              </HStack>
+              </EntityList>
             );
           }
         )}

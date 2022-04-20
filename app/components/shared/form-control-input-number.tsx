@@ -55,7 +55,6 @@ export default function FormControlInputNumber({
             color="primary.500"
             fontWeight={700}
             fontSize={unitFontSize || "sm"}
-            minW="40px"
           >
             {unit.toUpperCase()}
           </Text>

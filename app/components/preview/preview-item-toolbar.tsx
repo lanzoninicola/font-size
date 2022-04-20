@@ -19,7 +19,7 @@ export default function PreviewItemToolbar({ itemIdx }: { itemIdx: number }) {
   }
 
   return (
-    <HStack spacing={0} justify="center" maxW={"min-content"}>
+    <HStack spacing={4} justify="center" maxW={"min-content"}>
       <FormControlInputNumber
         id={`viewport-width-${itemIdx}`}
         value={parseInputString(String(previewWindows[itemIdx].width))}

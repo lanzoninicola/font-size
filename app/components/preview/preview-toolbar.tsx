@@ -5,7 +5,7 @@ import ToolbarWrapper from "../layout/toolbar-wrapper";
 
 import { AddIcon, BrowserIcon } from "../shared/icons";
 import VStackBox from "../shared/vstack-wrapper";
-import ToolbarButton from "../layout/toolbar-button";
+import ActionButton from "../shared/action-button";
 import UrlBar from "./url-bar";
 import ZoomBar from "./zoom-bar";
 
@@ -26,12 +26,12 @@ export default function PreviewToolbar() {
       <VStackBox w="100%" spacing={"1rem"}>
         <HStack w="100%" justify={"space-between"}>
           <HStack>
-            <ToolbarButton label="Add Preview" onClick={onAddPreview}>
+            <ActionButton label="Add Preview" onClick={onAddPreview}>
               <AddIcon size={20} />
-            </ToolbarButton>
-            <ToolbarButton label="Show navigation Bar" onClick={onShowURLBar}>
+            </ActionButton>
+            <ActionButton label="Show navigation Bar" onClick={onShowURLBar}>
               <BrowserIcon size={20} />
-            </ToolbarButton>
+            </ActionButton>
           </HStack>
           <ZoomBar />
         </HStack>

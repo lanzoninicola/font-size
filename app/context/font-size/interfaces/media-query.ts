@@ -1,4 +1,4 @@
-import { BreakpointId } from "./breakpoints";
+import { BreakpointId } from "../../breakpoint-builder/interfaces";
 import { SelectorsFontSizeRange } from "./selectors";
 
 export interface MediaQueryBreakpointFlat {
