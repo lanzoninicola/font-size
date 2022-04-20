@@ -1,10 +1,13 @@
 import { useToast } from "@chakra-ui/react";
+import { useNavigate } from "remix";
+import useBreakpointsFormContext from "~/context/breakpoint-builder/hooks/useBreakpointsFormContext";
 import useBreakpointsBuilderContext from "~/context/breakpoint-builder/hooks/useBreakpointsFormContext";
 import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
 import { EntityState } from "~/context/shared/interfaces/entity-state";
 
 import parseInputString from "../utilities/parseInputString";
 import { DeleteBreakpointResponse } from "./interfaces";
+import { BreakpointResponse } from "./interfaces/data-service";
 import useBreakpointsDataService from "./useBreakpointsDataService";
 import useBreakpointsQueryService from "./useBreakpointsQueryService";
 
@@ -13,43 +16,30 @@ import useBreakpointsQueryService from "./useBreakpointsQueryService";
  *
  */
 export default function useBreakpointsFormService() {
+  const navigate = useNavigate();
+
   const {
-    entityState,
     currentBreakpointId,
     minWidth,
     maxWidth,
     label,
-    setEntityState,
     setCurrentBreakpointId,
     setMinWidth,
     setMaxWidth,
     setLabel,
-  } = useBreakpointsBuilderContext();
+  } = useBreakpointsFormContext();
 
-  const { isBreakpointExists, getViewportSizeByBreakpointId } =
-    useBreakpointsQueryService();
+  const { getBreakpointById } = useBreakpointsQueryService();
 
-  const { createBreakpoint, updateBreakpoint, deleteBreakpoint } =
+  const { buildLabel, createBreakpoint, updateBreakpoint, deleteBreakpoint } =
     useBreakpointsDataService();
 
-  console.log("useBreakpointsFormService fired");
-
-  function onInitBreakpointsCreation() {
-    setEntityState(EntityState.new);
-    setCurrentBreakpointId("");
-    setMinWidth("");
-    setMaxWidth("");
-    setLabel("");
+  function navigateToBreakpointNew() {
+    navigate(`/app/breakpoints/edit/new`);
   }
 
-  function onChangeBreakpoint(breakpointIdSelected: BreakpointId) {
-    if (isBreakpointExists(breakpointIdSelected)) {
-      setEntityState(EntityState.edit);
-      setCurrentBreakpointId(breakpointIdSelected);
-      _updateMinMaxWidthOfBreakpointId(breakpointIdSelected);
-    } else {
-      setEntityState(EntityState.new);
-    }
+  function navigateToBreakpointEdit(breakpointId: BreakpointId) {
+    navigate(`/app/breakpoints/edit/${breakpointId}`);
   }
 
   function onChangeMinWidth(inputMinWidth: string) {
@@ -62,30 +52,10 @@ export default function useBreakpointsFormService() {
     setMaxWidth(maxWidth);
   }
 
-  function _updateMinMaxWidthOfBreakpointId(breakpointId: BreakpointId) {
-    const { minWidth, maxWidth } = getViewportSizeByBreakpointId(breakpointId);
-    setMinWidth(String(minWidth));
-    setMaxWidth(String(maxWidth));
-  }
-
-  function onEditBreakpoint(breakpointId: BreakpointId) {
-    setEntityState(EntityState.edit);
-    setCurrentBreakpointId(breakpointId);
-    _updateMinMaxWidthOfBreakpointId(breakpointId);
-  }
-
   function onDeleteBreakpoint(
     breakpointId: BreakpointId
   ): DeleteBreakpointResponse {
     const deleteResponse = deleteBreakpoint(breakpointId);
-
-    if (deleteResponse.ok) {
-      setEntityState(EntityState.idle);
-      setCurrentBreakpointId("");
-      setMinWidth("");
-      setMaxWidth("");
-      setLabel("");
-    }
 
     return deleteResponse;
   }
@@ -95,7 +65,6 @@ export default function useBreakpointsFormService() {
 
     if (creationResponse.ok) {
       if (creationResponse.payload) {
-        setEntityState(EntityState.edit);
         setCurrentBreakpointId(creationResponse.payload.id);
         setMinWidth(minWidth);
         setMaxWidth(maxWidth);
@@ -104,6 +73,26 @@ export default function useBreakpointsFormService() {
     }
 
     return creationResponse;
+  }
+
+  function onUpdateInit(breakpointId: BreakpointId): BreakpointResponse {
+    const response = getBreakpointById(breakpointId);
+
+    if (response.ok) {
+      if (response.payload) {
+        const { id, minWidth, maxWidth, label } = response.payload;
+        setCurrentBreakpointId(id);
+        setMinWidth(minWidth);
+        setMaxWidth(maxWidth);
+        setLabel(label);
+      }
+    }
+
+    return {
+      ok: response.ok,
+      payload: response.payload,
+      error: response.error,
+    };
   }
 
   function onUpdateBreakpoint() {
@@ -115,7 +104,6 @@ export default function useBreakpointsFormService() {
 
     if (updateResponse.ok) {
       if (updateResponse.payload) {
-        setEntityState(EntityState.edit);
         setCurrentBreakpointId(updateResponse.payload.id);
         setMinWidth(minWidth);
         setMaxWidth(maxWidth);
@@ -127,18 +115,19 @@ export default function useBreakpointsFormService() {
   }
 
   return {
-    entityState,
     currentBreakpointId,
     minWidth,
     maxWidth,
     label,
-    onChangeBreakpoint,
+    navigateToBreakpointEdit,
+    navigateToBreakpointNew,
+    onUpdateInit,
     onChangeMinWidth,
     onChangeMaxWidth,
     onCreateBreakpoint,
     onUpdateBreakpoint,
-    onEditBreakpoint,
     onDeleteBreakpoint,
-    onInitBreakpointsCreation,
+    setCurrentBreakpointId,
+    buildLabel,
   };
 }

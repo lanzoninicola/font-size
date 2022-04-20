@@ -4,19 +4,23 @@ import {
 } from "~/context/breakpoint-builder/interfaces";
 
 export interface BreakpointsDataServiceResponse {
-  createBreakpoint: (
-    minWidth: string,
-    maxWidth: string
-  ) => CreateUpdateBreakpointResponse;
+  buildLabel: ({
+    minWidth,
+    maxWidth,
+  }: {
+    minWidth: string;
+    maxWidth: string;
+  }) => string;
+  createBreakpoint: (minWidth: string, maxWidth: string) => BreakpointResponse;
   updateBreakpoint: (
     id: string,
     minWidth: string,
     maxWidth: string
-  ) => CreateUpdateBreakpointResponse;
+  ) => BreakpointResponse;
   deleteBreakpoint: (id: BreakpointId) => DeleteBreakpointResponse;
 }
 
-export interface CreateUpdateBreakpointResponse {
+export interface BreakpointResponse {
   ok: boolean;
   payload?: {
     id: BreakpointId;

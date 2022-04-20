@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   BreakpointViewportSize,
   Breakpoints,
   BreakpointId,
 } from "~/context/breakpoint-builder/interfaces";
+import useBreakpointsContext from "~/context/font-size/hooks/useBreakpointsContext";
 import useBreakpointsSelector from "~/context/font-size/hooks/useBreakpointsSelector";
 import usePixelsPerRemSelector from "~/context/font-size/hooks/usePixelsPerRemSelector";
+import { BreakpointResponse } from "./interfaces/data-service";
 
 /**
  * @description This hook is responsible to run query against the Breakpoints state.
@@ -15,7 +17,33 @@ export default function useBreakpointsQueryService() {
   const { breakpoints } = useBreakpointsSelector();
   const { pixelsPerRem } = usePixelsPerRemSelector();
 
-  console.log("useBreakpointsQueryService fired", breakpoints);
+  function getBreakpointById(breakpointId: BreakpointId): BreakpointResponse {
+    // The firs time the hook is called, the breakpoints state is null as it is not yet loaded.
+    // So we need to check if the breakpoints state is null before trying to access it.
+    // To not return false positive response, we return a default breakpoint response.
+    if (!breakpoints) {
+      return {
+        ok: true,
+      };
+    }
+
+    if (isBreakpointExists(breakpointId)) {
+      const { label, minWidth, maxWidth } = breakpoints[breakpointId];
+      return {
+        ok: true,
+        payload: {
+          id: breakpointId,
+          label,
+          minWidth: String(minWidth),
+          maxWidth: String(maxWidth),
+        },
+      };
+    }
+    return {
+      ok: false,
+      error: `Breakpoint with id ${breakpointId} does not exist.`,
+    };
+  }
 
   /**
    * @description Check if the global Breakpoints object is empty
@@ -35,7 +63,9 @@ export default function useBreakpointsQueryService() {
    * @returns {boolean}
    */
   function isBreakpointExists(breakpointId: BreakpointId) {
-    return !!breakpoints[breakpointId];
+    if (breakpoints) {
+      return breakpoints[breakpointId] !== undefined;
+    }
   }
 
   /**
@@ -102,6 +132,7 @@ export default function useBreakpointsQueryService() {
 
   return {
     breakpoints,
+    getBreakpointById,
     isBreakpointsEmpty,
     isBreakpointExists,
     isBreakpointExistsByViewportSize,

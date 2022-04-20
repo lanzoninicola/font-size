@@ -309,3 +309,16 @@ export function MinWidthIcon({
     />
   );
 }
+export function NavigateBackIcon({
+  size = 20,
+  color = "gray",
+  ariaLabel = "Navigate Back",
+}: IconProps) {
+  return (
+    <Image
+      src={`${BASE_URL}/navigate-back-icon-${size}-${color}.svg`}
+      alt={ariaLabel}
+      altaria-label={ariaLabel}
+    />
+  );
+}

@@ -2,16 +2,6 @@ import { useContextSelector } from "use-context-selector";
 import { BreakpointsFormContextData } from "../breakpoints-form-context";
 
 export default function useBreakpointsFormContext() {
-  const entityState = useContextSelector(
-    BreakpointsFormContextData,
-    (ctx) => ctx?.entityState
-  );
-
-  const setEntityState = useContextSelector(
-    BreakpointsFormContextData,
-    (ctx) => ctx?.setEntityState
-  );
-
   const currentBreakpointId = useContextSelector(
     BreakpointsFormContextData,
     (ctx) => ctx?.currentBreakpointId
@@ -53,8 +43,6 @@ export default function useBreakpointsFormContext() {
   );
 
   return {
-    entityState,
-    setEntityState,
     currentBreakpointId,
     setCurrentBreakpointId,
     minWidth,

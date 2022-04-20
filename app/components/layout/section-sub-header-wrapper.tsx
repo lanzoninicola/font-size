@@ -7,7 +7,7 @@ export default function SectionSubHeaderWrapper({
 }) {
   return (
     <VStackBox
-      h="100px"
+      minH="100px"
       borderBottom="1px solid"
       borderBottomColor="primaryAlpha.20"
       paddingInlineStart="2rem"

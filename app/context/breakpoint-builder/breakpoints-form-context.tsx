@@ -4,12 +4,10 @@ import { EntityState } from "../shared/interfaces/entity-state";
 import { BreakpointId } from "./interfaces";
 
 export interface BreakpointsFormContext {
-  entityState: EntityState;
   currentBreakpointId: BreakpointId;
   minWidth: string;
   maxWidth: string;
   label: string;
-  setEntityState: (entityState: EntityState) => void;
   setCurrentBreakpointId: (currentBreakpointId: BreakpointId) => void;
   setMinWidth: (minWidth: string) => void;
   setMaxWidth: (maxWidth: string) => void;
@@ -35,12 +33,10 @@ export function BreakpointsFormProvider({
   return (
     <BreakpointsFormContextData.Provider
       value={{
-        entityState,
         currentBreakpointId,
         minWidth,
         maxWidth,
         label,
-        setEntityState,
         setCurrentBreakpointId,
         setMinWidth,
         setMaxWidth,

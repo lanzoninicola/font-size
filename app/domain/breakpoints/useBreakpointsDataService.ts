@@ -13,7 +13,7 @@ import {
 } from "./interfaces";
 import {
   BreakpointValidationResult,
-  CreateUpdateBreakpointResponse,
+  BreakpointResponse,
 } from "./interfaces/data-service";
 import useBreakpointsQueryService from "./useBreakpointsQueryService";
 
@@ -28,7 +28,7 @@ export default function useBreakpointsDataService(): BreakpointsDataServiceRespo
   function createBreakpoint(
     minWidth: string,
     maxWidth: string
-  ): CreateUpdateBreakpointResponse {
+  ): BreakpointResponse {
     const minWidthPx = parseDecimalNumber(minWidth);
     const maxWidthPx = parseDecimalNumber(maxWidth);
 
@@ -45,7 +45,7 @@ export default function useBreakpointsDataService(): BreakpointsDataServiceRespo
     }
 
     const id = _buildId({ minWidth: minWidthPx, maxWidth: maxWidthPx });
-    const label = _buildLabel({ minWidth, maxWidth });
+    const label = buildLabel({ minWidth, maxWidth });
     const viewportSize: BreakpointViewportSize = {
       minWidth: minWidthPx,
       maxWidth: maxWidthPx,
@@ -78,7 +78,7 @@ export default function useBreakpointsDataService(): BreakpointsDataServiceRespo
     breakpointId: string,
     minWidth: string,
     maxWidth: string
-  ): CreateUpdateBreakpointResponse {
+  ): BreakpointResponse {
     const minWidthPx = parseDecimalNumber(minWidth);
     const maxWidthPx = parseDecimalNumber(maxWidth);
 
@@ -96,7 +96,7 @@ export default function useBreakpointsDataService(): BreakpointsDataServiceRespo
 
     let nextBreakpoints = { ...breakpoints };
 
-    const label = _buildLabel({ minWidth, maxWidth });
+    const label = buildLabel({ minWidth, maxWidth });
 
     nextBreakpoints[breakpointId] = {
       label,
@@ -145,7 +145,7 @@ export default function useBreakpointsDataService(): BreakpointsDataServiceRespo
     return `min${minWidth}max${maxWidth}`;
   }
 
-  function _buildLabel({
+  function buildLabel({
     minWidth,
     maxWidth,
   }: {
@@ -206,6 +206,7 @@ export default function useBreakpointsDataService(): BreakpointsDataServiceRespo
   }
 
   return {
+    buildLabel,
     createBreakpoint,
     updateBreakpoint,
     deleteBreakpoint,

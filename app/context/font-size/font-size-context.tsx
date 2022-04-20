@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { createContext } from "use-context-selector";
+import { Breakpoints } from "../breakpoint-builder/interfaces";
 
-import { Breakpoints, MediaQueries, Selector } from "./interfaces";
+import { MediaQueries, Selector } from "./interfaces";
 
 export interface FontSizeContext {
   pixelsPerRem: number;

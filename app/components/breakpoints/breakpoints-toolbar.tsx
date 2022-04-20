@@ -6,10 +6,10 @@ import ActionButton from "../shared/action-button";
 import { NewEntityIcon } from "../shared/icons";
 
 export default function BreakpointsToolbar() {
-  const { onInitBreakpointsCreation } = useBreakpointsFormService();
+  const { navigateToBreakpointNew } = useBreakpointsFormService();
 
   function onCreateBreakpoints() {
-    onInitBreakpointsCreation();
+    navigateToBreakpointNew();
   }
 
   return (

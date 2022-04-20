@@ -2,25 +2,21 @@ import { HStack, Text, useToast } from "@chakra-ui/react";
 import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
 import useBreakpointsSelector from "~/context/font-size/hooks/useBreakpointsSelector";
 import useBreakpointsFormService from "~/domain/breakpoints/useBreakpointsFormService";
-import useBreakpointsQueryService from "~/domain/breakpoints/useBreakpointsQueryService";
 
-import EntityList from "../shared/entity-list";
-import {
-  MaxFontSizeIcon,
-  MaxWidthIcon,
-  MinFontSizeIcon,
-  MinWidthIcon,
-} from "../shared/icons";
+import EntityListFullPage from "../shared/entity-list-full-page";
+import { MaxWidthIcon, MinWidthIcon } from "../shared/icons";
 import VStackBox from "../shared/vstack-wrapper";
 
 export default function BreakpointsList() {
   const toast = useToast();
 
   const { breakpoints } = useBreakpointsSelector();
-  const { onEditBreakpoint, onDeleteBreakpoint } = useBreakpointsFormService();
-  const { isBreakpointsEmpty } = useBreakpointsQueryService();
+  const { navigateToBreakpointEdit, onDeleteBreakpoint } =
+    useBreakpointsFormService();
 
-  console.log("**** BreakpointsList fired", breakpoints);
+  function onBreakpointEdit(breakpointId: BreakpointId) {
+    navigateToBreakpointEdit(breakpointId);
+  }
 
   function onBrekpointDeletion(id: BreakpointId) {
     const deleteResponse = onDeleteBreakpoint(id);
@@ -38,28 +34,28 @@ export default function BreakpointsList() {
 
   return (
     <VStackBox w="100%" gap=".5rem" paddingLeft="2rem" paddingRight="1rem">
-      {!isBreakpointsEmpty() &&
+      {breakpoints &&
         Object.keys(breakpoints).map((breakpointId: BreakpointId, index) => {
           const { minWidth, maxWidth } = breakpoints[breakpointId];
 
           return (
-            <EntityList
+            <EntityListFullPage
               key={index}
               entityName={breakpoints[breakpointId].label}
-              onEdit={() => onEditBreakpoint(breakpointId)}
+              onEdit={() => onBreakpointEdit(breakpointId)}
               onDelete={() => onBrekpointDeletion(breakpointId)}
             >
               <HStack gap="1rem">
                 <HStack>
-                  <MinWidthIcon color="green" />
-                  <Text color="secondary.700">{`${minWidth}px`}</Text>
+                  <MinWidthIcon color="gray" />
+                  <Text color="primary.500">{`${minWidth}px`}</Text>
                 </HStack>
                 <HStack>
-                  <MaxWidthIcon color="green" />
-                  <Text color="secondary.700">{`${maxWidth}px`}</Text>
+                  <MaxWidthIcon color="gray" />
+                  <Text color="primary.500">{`${maxWidth}px`}</Text>
                 </HStack>
               </HStack>
-            </EntityList>
+            </EntityListFullPage>
           );
         })}
     </VStackBox>
