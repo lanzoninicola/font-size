@@ -1,7 +1,7 @@
-import { Button, HStack, Text } from "@chakra-ui/react";
+import { Button, HStack, Text, useToast } from "@chakra-ui/react";
+import useBreakpointsSelector from "~/context/font-size/hooks/useBreakpointsSelector";
 import { EntityState } from "~/context/shared/interfaces/entity-state";
 import useBreakpointsFormService from "~/domain/breakpoints/useBreakpointsFormService";
-import useBreakpointsDataService from "~/domain/breakpoints/useBreakpointsDataService";
 import useBreakpointsQueryService from "~/domain/breakpoints/useBreakpointsQueryService";
 
 import InnerContentColumn from "../layout/inner-content-column";
@@ -11,7 +11,8 @@ import FormControlSelectBreakpoint from "../shared/form-control-select-breakpoin
 import VStackBox from "../shared/vstack-wrapper";
 
 export default function BreakpointsEdit() {
-  const { breakpoints } = useBreakpointsDataService();
+  const toast = useToast();
+  const { breakpoints } = useBreakpointsSelector();
   const { isBreakpointsEmpty } = useBreakpointsQueryService();
   const {
     entityState,
@@ -25,6 +26,8 @@ export default function BreakpointsEdit() {
     onUpdateBreakpoint,
     onCreateBreakpoint,
   } = useBreakpointsFormService();
+
+  console.log("**** BreakpointsEdit fired", breakpoints);
 
   function onChangeMinViewportWidth(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
@@ -42,10 +45,32 @@ export default function BreakpointsEdit() {
   }
 
   function onSaveBreakpoint() {
+    let response = null;
+
     if (entityState === EntityState.new) {
-      onCreateBreakpoint();
+      response = onCreateBreakpoint();
     } else {
-      onUpdateBreakpoint();
+      response = onUpdateBreakpoint();
+    }
+
+    if (response.error) {
+      toast({
+        title: "Error",
+        description: response.error,
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+
+    if (response.ok) {
+      toast({
+        title: "Error",
+        description: "Breakpoint created successfully",
+        status: "info",
+        duration: 9000,
+        isClosable: true,
+      });
     }
   }
 

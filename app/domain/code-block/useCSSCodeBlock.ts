@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
+import useBreakpointsSelector from "~/context/font-size/hooks/useBreakpointsSelector";
 import usePixelsPerRemSelector from "~/context/font-size/hooks/usePixelsPerRemSelector";
 import { Selector } from "~/context/font-size/interfaces";
 
-import useBreakpointsDataService from "../breakpoints/useBreakpointsDataService";
 import useBreakpointsQueryService from "../breakpoints/useBreakpointsQueryService";
 import calculateClampSlope from "../media-query/calculateClampSlope";
 import calculateClampYAxisIntersection from "../media-query/calculateClampYAxisIntersection";
@@ -13,7 +13,7 @@ import useMediaQueryService from "../media-query/useMediaQueryService";
 export default function useCSSCodeBlock(forceImportant = false) {
   const { pixelsPerRem } = usePixelsPerRemSelector();
   const { mediaQueries, getFontSizeRange } = useMediaQueryService();
-  const { breakpoints } = useBreakpointsDataService();
+  const { breakpoints } = useBreakpointsSelector();
   const { getViewportSizeByBreakpointId } = useBreakpointsQueryService();
 
   const [codeBlock, setCodeBlock] = useState<string>("");

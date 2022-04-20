@@ -34,7 +34,7 @@ export default function useMediaQueryService() {
   }
 
   function updateEntityStateOnBreakpointChange(bp: BreakpointId) {
-    if (isMediaQueryForBreakpoint(bp)) {
+    if (isMediaQueryOfBreakpointExists(bp)) {
       setEntityState(EntityState.edit);
     } else {
       setEntityState(EntityState.new);
@@ -42,7 +42,7 @@ export default function useMediaQueryService() {
   }
 
   function updateEntityStateOnSelectorChange(s: Selector) {
-    if (isMediaQueryForBreakpointAndSelector(currentBreakpointId, s)) {
+    if (isMediaQueryOfBreakpointExistsAndSelector(currentBreakpointId, s)) {
       setEntityState(EntityState.edit);
     } else {
       setEntityState(EntityState.new);
@@ -51,7 +51,7 @@ export default function useMediaQueryService() {
 
   function updateMinMaxFontSizeOnBreakpointAndSelectorChange() {
     if (
-      !isMediaQueryForBreakpointAndSelector(
+      !isMediaQueryOfBreakpointExistsAndSelector(
         currentBreakpointId,
         currentSelector
       )
@@ -214,7 +214,7 @@ export default function useMediaQueryService() {
   function listMediaQueriesByBreakpointId(
     bp: BreakpointId
   ): MediaQueryBreakpointFlat[] {
-    if (!isMediaQueryForBreakpoint(bp)) {
+    if (!isMediaQueryOfBreakpointExists(bp)) {
       return [];
     }
 
@@ -238,13 +238,16 @@ export default function useMediaQueryService() {
     return list;
   }
 
-  function isMediaQueryForBreakpoint(bp: BreakpointId) {
+  function isMediaQueryOfBreakpointExists(bp: BreakpointId) {
     if (!mediaQueries) return false;
     if (!mediaQueries[bp]) return false;
     return true;
   }
 
-  function isMediaQueryForBreakpointAndSelector(bp: BreakpointId, s: Selector) {
+  function isMediaQueryOfBreakpointExistsAndSelector(
+    bp: BreakpointId,
+    s: Selector
+  ) {
     if (!mediaQueries) return false;
     if (!mediaQueries[bp]) return false;
     if (!mediaQueries[bp][s]) return false;

@@ -3,14 +3,11 @@ import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
 import { Selector } from "~/context/font-size/interfaces";
 import useMediaQueryService from "~/domain/media-query/useMediaQueryService";
 
-import ActionButton from "../shared/action-button";
 import EntityList from "../shared/entity-list";
 import {
-  EditIcon,
   LineHeightIcon,
   MaxFontSizeIcon,
   MinFontSizeIcon,
-  TrashIcon,
 } from "../shared/icons";
 import VStackBox from "../shared/vstack-wrapper";
 

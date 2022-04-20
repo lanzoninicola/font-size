@@ -1,3 +1,4 @@
+import React from "react";
 import {
   BreakpointViewportSize,
   Breakpoints,
@@ -14,6 +15,12 @@ export default function useBreakpointsQueryService() {
   const { breakpoints } = useBreakpointsSelector();
   const { pixelsPerRem } = usePixelsPerRemSelector();
 
+  console.log("useBreakpointsQueryService fired", breakpoints);
+
+  /**
+   * @description Check if the global Breakpoints object is empty
+   * @returns {boolean}
+   */
   function isBreakpointsEmpty() {
     if (breakpoints) {
       return Object.keys(breakpoints).length === 0;
@@ -22,8 +29,39 @@ export default function useBreakpointsQueryService() {
     return true;
   }
 
+  /**
+   * @description Check if the breakpoint exists in the global Breakpoints object by its id
+   * @param breakpointId - The breakpoint id to check
+   * @returns {boolean}
+   */
   function isBreakpointExists(breakpointId: BreakpointId) {
     return !!breakpoints[breakpointId];
+  }
+
+  /**
+   * @description Check if the breakpoint exists in the global Breakpoints object by viewport size (width and height)
+   * @param viewportSize - The viewport size to check
+   * @returns {boolean}
+   */
+  function isBreakpointExistsByViewportSize(
+    viewportSize: BreakpointViewportSize
+  ) {
+    const { minWidth, maxWidth } = viewportSize;
+
+    for (const breakpointId in breakpoints) {
+      if (breakpoints.hasOwnProperty(breakpointId)) {
+        const breakpoint = breakpoints[breakpointId];
+        const { minWidth: breakpointMinWidth, maxWidth: breakpointMaxWidth } =
+          breakpoint;
+
+        if (
+          minWidth === breakpointMinWidth &&
+          maxWidth === breakpointMaxWidth
+        ) {
+          return true;
+        }
+      }
+    }
   }
 
   /**
@@ -66,6 +104,7 @@ export default function useBreakpointsQueryService() {
     breakpoints,
     isBreakpointsEmpty,
     isBreakpointExists,
+    isBreakpointExistsByViewportSize,
     getViewportSizeByBreakpointId,
   };
 }

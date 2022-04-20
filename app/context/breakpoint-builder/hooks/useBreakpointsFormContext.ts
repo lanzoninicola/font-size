@@ -1,54 +1,54 @@
 import { useContextSelector } from "use-context-selector";
-import { BreakpointsBuilderContextData } from "../breakpoints-builder-context";
+import { BreakpointsFormContextData } from "../breakpoints-form-context";
 
-export default function useBreakpointsBuilderContext() {
+export default function useBreakpointsFormContext() {
   const entityState = useContextSelector(
-    BreakpointsBuilderContextData,
+    BreakpointsFormContextData,
     (ctx) => ctx?.entityState
   );
 
   const setEntityState = useContextSelector(
-    BreakpointsBuilderContextData,
+    BreakpointsFormContextData,
     (ctx) => ctx?.setEntityState
   );
 
   const currentBreakpointId = useContextSelector(
-    BreakpointsBuilderContextData,
+    BreakpointsFormContextData,
     (ctx) => ctx?.currentBreakpointId
   );
 
   const setCurrentBreakpointId = useContextSelector(
-    BreakpointsBuilderContextData,
+    BreakpointsFormContextData,
     (ctx) => ctx?.setCurrentBreakpointId
   );
 
   const minWidth = useContextSelector(
-    BreakpointsBuilderContextData,
+    BreakpointsFormContextData,
     (ctx) => ctx?.minWidth
   );
 
   const setMinWidth = useContextSelector(
-    BreakpointsBuilderContextData,
+    BreakpointsFormContextData,
     (ctx) => ctx?.setMinWidth
   );
 
   const maxWidth = useContextSelector(
-    BreakpointsBuilderContextData,
+    BreakpointsFormContextData,
     (ctx) => ctx?.maxWidth
   );
 
   const setMaxWidth = useContextSelector(
-    BreakpointsBuilderContextData,
+    BreakpointsFormContextData,
     (ctx) => ctx?.setMaxWidth
   );
 
   const label = useContextSelector(
-    BreakpointsBuilderContextData,
+    BreakpointsFormContextData,
     (ctx) => ctx?.label
   );
 
   const setLabel = useContextSelector(
-    BreakpointsBuilderContextData,
+    BreakpointsFormContextData,
     (ctx) => ctx?.setLabel
   );
 

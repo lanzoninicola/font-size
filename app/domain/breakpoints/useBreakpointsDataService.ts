@@ -11,24 +11,19 @@ import {
   BreakpointsDataServiceResponse,
   DeleteBreakpointResponse,
 } from "./interfaces";
-import { CreateUpdateBreakpointResponse } from "./interfaces/data-service";
+import {
+  BreakpointValidationResult,
+  CreateUpdateBreakpointResponse,
+} from "./interfaces/data-service";
+import useBreakpointsQueryService from "./useBreakpointsQueryService";
 
 /**
  * @description This hook is responsible for managing CRUD operations on the breakpoints.
  */
 export default function useBreakpointsDataService(): BreakpointsDataServiceResponse {
   const { breakpoints, setBreakpoints } = useBreakpointsSelector();
-  const { isMediaQueryForBreakpoint } = useMediaQueriesQueryService();
-
-  function buildLabel({
-    minWidth,
-    maxWidth,
-  }: {
-    minWidth: string;
-    maxWidth: string;
-  }) {
-    return `(min-width: ${minWidth}px) and (max-width: ${maxWidth}px)`;
-  }
+  const { isMediaQueryOfBreakpointExists } = useMediaQueriesQueryService();
+  const { isBreakpointExistsByViewportSize } = useBreakpointsQueryService();
 
   function createBreakpoint(
     minWidth: string,
@@ -37,8 +32,20 @@ export default function useBreakpointsDataService(): BreakpointsDataServiceRespo
     const minWidthPx = parseDecimalNumber(minWidth);
     const maxWidthPx = parseDecimalNumber(maxWidth);
 
+    const validationResult = _validateBreakpoint({
+      minWidth: minWidthPx,
+      maxWidth: maxWidthPx,
+    });
+
+    if (!validationResult.ok) {
+      return {
+        ok: false,
+        error: validationResult.error,
+      };
+    }
+
     const id = _buildId({ minWidth: minWidthPx, maxWidth: maxWidthPx });
-    const label = buildLabel({ minWidth, maxWidth });
+    const label = _buildLabel({ minWidth, maxWidth });
     const viewportSize: BreakpointViewportSize = {
       minWidth: minWidthPx,
       maxWidth: maxWidthPx,
@@ -57,10 +64,13 @@ export default function useBreakpointsDataService(): BreakpointsDataServiceRespo
     });
 
     return {
-      id,
-      label,
-      minWidth,
-      maxWidth,
+      ok: true,
+      payload: {
+        id: id,
+        label: label,
+        minWidth: minWidth,
+        maxWidth: maxWidth,
+      },
     };
   }
 
@@ -69,28 +79,46 @@ export default function useBreakpointsDataService(): BreakpointsDataServiceRespo
     minWidth: string,
     maxWidth: string
   ): CreateUpdateBreakpointResponse {
+    const minWidthPx = parseDecimalNumber(minWidth);
+    const maxWidthPx = parseDecimalNumber(maxWidth);
+
+    const validationResult = _validateBreakpoint({
+      minWidth: minWidthPx,
+      maxWidth: maxWidthPx,
+    });
+
+    if (!validationResult.ok) {
+      return {
+        ok: false,
+        error: validationResult.error,
+      };
+    }
+
     let nextBreakpoints = { ...breakpoints };
 
-    const label = buildLabel({ minWidth, maxWidth });
+    const label = _buildLabel({ minWidth, maxWidth });
 
     nextBreakpoints[breakpointId] = {
       label,
-      minWidth: parseDecimalNumber(minWidth),
-      maxWidth: parseDecimalNumber(maxWidth),
+      minWidth: minWidthPx,
+      maxWidth: maxWidthPx,
     };
 
     setBreakpoints(nextBreakpoints);
 
     return {
-      id: breakpointId,
-      label,
-      minWidth,
-      maxWidth,
+      ok: true,
+      payload: {
+        id: breakpointId,
+        label,
+        minWidth,
+        maxWidth,
+      },
     };
   }
 
   function deleteBreakpoint(breakpointId: string): DeleteBreakpointResponse {
-    if (isMediaQueryForBreakpoint(breakpointId)) {
+    if (isMediaQueryOfBreakpointExists(breakpointId)) {
       return {
         ok: false,
         error:
@@ -98,7 +126,7 @@ export default function useBreakpointsDataService(): BreakpointsDataServiceRespo
       };
     }
 
-    let nextBreakpoints = { ...breakpoints };
+    let nextBreakpoints: Breakpoints = { ...breakpoints };
     delete nextBreakpoints[breakpointId];
     setBreakpoints(nextBreakpoints);
 
@@ -117,9 +145,67 @@ export default function useBreakpointsDataService(): BreakpointsDataServiceRespo
     return `min${minWidth}max${maxWidth}`;
   }
 
+  function _buildLabel({
+    minWidth,
+    maxWidth,
+  }: {
+    minWidth: string;
+    maxWidth: string;
+  }) {
+    return `(min-width: ${minWidth}px) and (max-width: ${maxWidth}px)`;
+  }
+
+  function _validateBreakpoint(
+    viewportSize: BreakpointViewportSize
+  ): BreakpointValidationResult {
+    const { minWidth, maxWidth } = viewportSize;
+
+    if (minWidth === maxWidth) {
+      return {
+        ok: false,
+        error: "Min and max widths cannot be the same.",
+      };
+    }
+
+    if (minWidth > maxWidth) {
+      return {
+        ok: false,
+        error: "Min width cannot be greater than max width.",
+      };
+    }
+
+    if (
+      minWidth === null ||
+      maxWidth === null ||
+      minWidth === 0 ||
+      maxWidth === 0 ||
+      isNaN(minWidth) ||
+      isNaN(maxWidth)
+    ) {
+      return {
+        ok: false,
+        error: "Invalid breakpoint widths provided.",
+      };
+    }
+
+    if (
+      isBreakpointExistsByViewportSize({
+        minWidth,
+        maxWidth,
+      })
+    ) {
+      return {
+        ok: false,
+        error: "A breakpoint already exists with the same viewport size",
+      };
+    }
+
+    return {
+      ok: true,
+    };
+  }
+
   return {
-    breakpoints,
-    buildLabel,
     createBreakpoint,
     updateBreakpoint,
     deleteBreakpoint,

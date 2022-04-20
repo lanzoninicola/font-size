@@ -1,4 +1,5 @@
-import useBreakpointsBuilderContext from "~/context/breakpoint-builder/hooks/useBreakpointsBuilderContext";
+import { useToast } from "@chakra-ui/react";
+import useBreakpointsBuilderContext from "~/context/breakpoint-builder/hooks/useBreakpointsFormContext";
 import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
 import { EntityState } from "~/context/shared/interfaces/entity-state";
 
@@ -30,6 +31,8 @@ export default function useBreakpointsFormService() {
 
   const { createBreakpoint, updateBreakpoint, deleteBreakpoint } =
     useBreakpointsDataService();
+
+  console.log("useBreakpointsFormService fired");
 
   function onInitBreakpointsCreation() {
     setEntityState(EntityState.new);
@@ -88,31 +91,39 @@ export default function useBreakpointsFormService() {
   }
 
   function onCreateBreakpoint() {
-    const breakpoint = createBreakpoint(minWidth, maxWidth);
+    const creationResponse = createBreakpoint(minWidth, maxWidth);
 
-    const { id, label } = breakpoint;
+    if (creationResponse.ok) {
+      if (creationResponse.payload) {
+        setEntityState(EntityState.edit);
+        setCurrentBreakpointId(creationResponse.payload.id);
+        setMinWidth(minWidth);
+        setMaxWidth(maxWidth);
+        setLabel(label);
+      }
+    }
 
-    setEntityState(EntityState.edit);
-    setCurrentBreakpointId(id);
-    setMinWidth(minWidth);
-    setMaxWidth(maxWidth);
-    setLabel(label);
+    return creationResponse;
   }
 
   function onUpdateBreakpoint() {
-    const breakpoint = updateBreakpoint(
+    const updateResponse = updateBreakpoint(
       currentBreakpointId,
       minWidth,
       maxWidth
     );
 
-    const { id, label } = breakpoint;
+    if (updateResponse.ok) {
+      if (updateResponse.payload) {
+        setEntityState(EntityState.edit);
+        setCurrentBreakpointId(updateResponse.payload.id);
+        setMinWidth(minWidth);
+        setMaxWidth(maxWidth);
+        setLabel(updateResponse.payload.label);
+      }
+    }
 
-    setEntityState(EntityState.edit);
-    setCurrentBreakpointId(id);
-    setMinWidth(minWidth);
-    setMaxWidth(maxWidth);
-    setLabel(label);
+    return updateResponse;
   }
 
   return {

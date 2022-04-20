@@ -8,13 +8,13 @@ import useMediaQueryService from "./useMediaQueryService";
 export default function useMediaQueriesQueryService() {
   const { mediaQueries } = useMediaQueryService();
 
-  function isMediaQueryForBreakpoint(bp: BreakpointId) {
+  function isMediaQueryOfBreakpointExists(bp: BreakpointId) {
     if (!mediaQueries) return false;
     if (!mediaQueries[bp]) return false;
     return true;
   }
 
   return {
-    isMediaQueryForBreakpoint,
+    isMediaQueryOfBreakpointExists,
   };
 }

@@ -20,6 +20,8 @@ export default function BreakpointsList() {
   const { onEditBreakpoint, onDeleteBreakpoint } = useBreakpointsFormService();
   const { isBreakpointsEmpty } = useBreakpointsQueryService();
 
+  console.log("**** BreakpointsList fired", breakpoints);
+
   function onBrekpointDeletion(id: BreakpointId) {
     const deleteResponse = onDeleteBreakpoint(id);
 

@@ -3,7 +3,7 @@ import { createContext } from "use-context-selector";
 import { EntityState } from "../shared/interfaces/entity-state";
 import { BreakpointId } from "./interfaces";
 
-export interface BreakpointsBuilderContext {
+export interface BreakpointsFormContext {
   entityState: EntityState;
   currentBreakpointId: BreakpointId;
   minWidth: string;
@@ -16,10 +16,11 @@ export interface BreakpointsBuilderContext {
   setLabel: (label: string) => void;
 }
 
-export const BreakpointsBuilderContextData =
-  createContext<BreakpointsBuilderContext>({} as BreakpointsBuilderContext);
+export const BreakpointsFormContextData = createContext<BreakpointsFormContext>(
+  {} as BreakpointsFormContext
+);
 
-export function BreakpointsBuilderProvider({
+export function BreakpointsFormProvider({
   children,
 }: {
   children: React.ReactNode;
@@ -32,7 +33,7 @@ export function BreakpointsBuilderProvider({
   const [label, setLabel] = useState<string>("...");
 
   return (
-    <BreakpointsBuilderContextData.Provider
+    <BreakpointsFormContextData.Provider
       value={{
         entityState,
         currentBreakpointId,
@@ -47,6 +48,6 @@ export function BreakpointsBuilderProvider({
       }}
     >
       {children}
-    </BreakpointsBuilderContextData.Provider>
+    </BreakpointsFormContextData.Provider>
   );
 }
