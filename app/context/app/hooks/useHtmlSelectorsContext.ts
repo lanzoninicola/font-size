@@ -1,16 +1,16 @@
 import { useEffect } from "react";
 import { useContextSelector } from "use-context-selector";
 
-import { FontSizeContextData } from "../font-size-context";
+import { AppContextData } from "../app-context";
 
 export default function useHtmlSelectorsContext() {
   const htmlSelectors = useContextSelector(
-    FontSizeContextData,
+    AppContextData,
     (ctx) => ctx?.htmlSelectors
   );
 
   const setHtmlSelectors = useContextSelector(
-    FontSizeContextData,
+    AppContextData,
     (ctx) => ctx?.setHtmlSelectors
   );
 

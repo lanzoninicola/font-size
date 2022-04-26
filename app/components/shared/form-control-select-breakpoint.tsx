@@ -5,6 +5,7 @@ import {
   BreakpointId,
   Breakpoints,
 } from "~/context/breakpoint-builder/interfaces";
+import VStackBox from "./vstack-wrapper";
 
 export interface SelectOption {
   value: string;
@@ -44,15 +45,16 @@ export default function FormControlSelectBreakpoint({
   }, [breakpoints]);
 
   return (
-    <HStack justify={"space-between"} w="100%">
-      <Text color="primary.500" fontSize={"md"}>
+    <VStackBox w="100%" spacing={1}>
+      <Text color="primary.500" fontSize={"sm"}>
         Breakpoints
       </Text>
       <InputSelect
-        minW="370px"
-        fontSize="16px"
+        maxW="270px"
+        fontSize={"sm"}
         onChange={onChange}
         value={value || "no-selected"}
+        textAlign="left"
         {...props}
       >
         {breakpoints &&
@@ -64,6 +66,6 @@ export default function FormControlSelectBreakpoint({
             );
           })}
       </InputSelect>
-    </HStack>
+    </VStackBox>
   );
 }

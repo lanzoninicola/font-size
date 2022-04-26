@@ -4,9 +4,9 @@ import {
   Breakpoints,
   BreakpointId,
 } from "~/context/breakpoint-builder/interfaces";
-import useBreakpointsContext from "~/context/font-size/hooks/useBreakpointsContext";
-import useBreakpointsSelector from "~/context/font-size/hooks/useBreakpointsSelector";
-import usePixelsPerRemSelector from "~/context/font-size/hooks/usePixelsPerRemSelector";
+import useBreakpointsContext from "~/context/app/hooks/useBreakpointsContext";
+import useBreakpointsSelector from "~/context/app/hooks/useBreakpointsSelector";
+import usePixelsPerRemSelector from "~/context/app/hooks/usePixelsPerRemSelector";
 import { BreakpointResponse } from "./interfaces/data-service";
 
 /**

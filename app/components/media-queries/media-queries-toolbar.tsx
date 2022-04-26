@@ -5,7 +5,12 @@ import useMediaQueriesRoutesLocation from "~/domain/media-query/useMediaQueriesR
 
 import ToolbarWrapper from "../layout/toolbar-wrapper";
 import ActionButton from "../shared/action-button";
-import { CodeIcon, NavigateBackIcon, NewEntityIcon } from "../shared/icons";
+import {
+  CodeIcon,
+  EditIcon,
+  NavigateBackIcon,
+  NewEntityIcon,
+} from "../shared/icons";
 
 export default function MediaQueriesToolbar() {
   const {
@@ -22,9 +27,9 @@ export default function MediaQueriesToolbar() {
       case ROUTE_MEDIA_QUERY_LIST:
         return (
           <>
-            <ActionButton label="New media query">
+            <ActionButton label="Edit media queries">
               <Link to={ROUTE_MEDIA_QUERY_NEW}>
-                <NewEntityIcon />
+                <EditIcon />
               </Link>
             </ActionButton>
             <ActionButton label="Show me the code">

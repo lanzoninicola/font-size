@@ -1,20 +1,23 @@
 import { useEffect, useState } from "react";
 import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
-import useBreakpointsSelector from "~/context/font-size/hooks/useBreakpointsSelector";
-import usePixelsPerRemSelector from "~/context/font-size/hooks/usePixelsPerRemSelector";
-import { SelectorKey } from "~/context/font-size/interfaces";
+import useBreakpointsSelector from "~/context/app/hooks/useBreakpointsSelector";
+import usePixelsPerRemSelector from "~/context/app/hooks/usePixelsPerRemSelector";
+import { SelectorId } from "~/context/app/interfaces";
 
 import useBreakpointsQueryService from "../breakpoints/useBreakpointsQueryService";
-import calculateClampSlope from "../media-query/calculateClampSlope";
-import calculateClampYAxisIntersection from "../media-query/calculateClampYAxisIntersection";
-import generateClampFormula from "../media-query/generateClampFormula";
-import useMediaQueryService from "../media-query/useMediaQueryService";
+import calculateClampSlope from "./calculateClampSlope";
+import calculateClampYAxisIntersection from "./calculateClampYAxisIntersection";
+import generateClampFormula from "./generateClampFormula";
+import useMediaQueriesQueryService from "../media-query/useMediaQueriesQueryService";
+import useMediaQueriesService from "../media-query/useMediaQueriesService";
 
 export default function useCSSCodeBlock(forceImportant = false) {
   const { pixelsPerRem } = usePixelsPerRemSelector();
-  const { mediaQueries, getFontSizeRange } = useMediaQueryService();
+  const { mediaQueries } = useMediaQueriesService();
   const { breakpoints } = useBreakpointsSelector();
+
   const { getViewportSizeByBreakpointId } = useBreakpointsQueryService();
+  const { getFontSizeRange } = useMediaQueriesQueryService();
 
   const [codeBlock, setCodeBlock] = useState<string>("");
 
@@ -53,7 +56,7 @@ export default function useCSSCodeBlock(forceImportant = false) {
       for (const selector in breakpointMediaQuery) {
         const { minFontSize, maxFontSize } = getFontSizeRange(
           breakpointId,
-          selector as SelectorKey
+          selector as SelectorId
         );
 
         const slope = calculateClampSlope(

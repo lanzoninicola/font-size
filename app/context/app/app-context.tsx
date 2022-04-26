@@ -4,7 +4,7 @@ import { createContext } from "use-context-selector";
 import { Breakpoints } from "../breakpoint-builder/interfaces";
 import { MediaQueries, Selectors } from "./interfaces";
 
-export interface FontSizeContext {
+export interface AppContext {
   pixelsPerRem: number;
   htmlSelectors: Selectors | null;
   breakpoints: Breakpoints | null;
@@ -15,18 +15,16 @@ export interface FontSizeContext {
   setMediaQueries: (mediaQueries: MediaQueries | null) => void;
 }
 
-export const FontSizeContextData = createContext<FontSizeContext>(
-  {} as FontSizeContext
-);
+export const AppContextData = createContext<AppContext>({} as AppContext);
 
-export function FontSizeProvider({ children }: { children: React.ReactNode }) {
+export function AppProvider({ children }: { children: React.ReactNode }) {
   const [pixelsPerRem, setPixelsPerRem] = useState(16);
   const [htmlSelectors, setHtmlSelectors] = useState<Selectors | null>(null);
   const [breakpoints, setBreakpoints] = useState<Breakpoints | null>(null);
   const [mediaQueries, setMediaQueries] = useState<MediaQueries | null>(null);
 
   return (
-    <FontSizeContextData.Provider
+    <AppContextData.Provider
       value={{
         pixelsPerRem,
         htmlSelectors,
@@ -39,6 +37,6 @@ export function FontSizeProvider({ children }: { children: React.ReactNode }) {
       }}
     >
       {children}
-    </FontSizeContextData.Provider>
+    </AppContextData.Provider>
   );
 }

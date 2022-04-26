@@ -115,7 +115,7 @@ export function BrowserIcon({
 }
 
 export function CloseIcon({
-  size = 24,
+  size = 20,
   color = "gray",
   ariaLabel = "Close",
 }: IconProps) {
@@ -331,6 +331,34 @@ export function NavigateForwardIcon({
   return (
     <Image
       src={`${BASE_URL}/arrow-circle-right-icon-${size}-${color}.svg`}
+      alt={ariaLabel}
+      altaria-label={ariaLabel}
+    />
+  );
+}
+
+export function ResetIcon({
+  size = 20,
+  color = "gray",
+  ariaLabel = "Reset",
+}: IconProps) {
+  return (
+    <Image
+      src={`${BASE_URL}/reset-icon-${size}-${color}.svg`}
+      alt={ariaLabel}
+      altaria-label={ariaLabel}
+    />
+  );
+}
+
+export function SaveIcon({
+  size = 20,
+  color = "gray",
+  ariaLabel = "Save",
+}: IconProps) {
+  return (
+    <Image
+      src={`${BASE_URL}/save-icon-${size}-${color}.svg`}
       alt={ariaLabel}
       altaria-label={ariaLabel}
     />

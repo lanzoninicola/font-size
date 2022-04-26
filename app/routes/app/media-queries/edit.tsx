@@ -2,6 +2,7 @@ import { Outlet } from "remix";
 import FlexRowWrap from "~/components/layout/flex-row-wrap";
 import FlexRowWrapColumn from "~/components/layout/flex-row-wrap-column";
 import InnerContentColumn from "~/components/layout/inner-content-column";
+import InnerPageContentArea from "~/components/layout/inner-page-content-area";
 import InnerPageHeaderArea from "~/components/layout/inner-page-header-area";
 import MediaQueriesToolbar from "~/components/media-queries/media-queries-toolbar";
 import MediaQueryEdit from "~/components/media-queries/media-query-edit";
@@ -15,8 +16,8 @@ export default function MediaQueriesEditOutletPage() {
   return (
     <FlexRowWrap>
       <FlexRowWrapColumn
-        wrapAt="600px"
-        maxW="650px"
+        wrapAt="250px"
+        maxW="320px"
         borderRight="1px solid"
         borderRightColor={"primaryAlpha.20"}
         minH="800px"
@@ -25,11 +26,9 @@ export default function MediaQueriesEditOutletPage() {
           <SectionSubHeader>Builder</SectionSubHeader>
           <MediaQueriesToolbar />
         </InnerPageHeaderArea>
-        <InnerContentColumn paddingTop={"0.5rem"}>
-          <VStackBox gap="2rem" paddingInlineStart="2rem" paddingRight="1rem">
-            <MediaQueryEdit />
-          </VStackBox>
-        </InnerContentColumn>
+        <InnerPageContentArea>
+          <MediaQueryEdit />
+        </InnerPageContentArea>
       </FlexRowWrapColumn>
 
       <FlexRowWrapColumn wrapAt="600px" h="auto" paddingRight="1rem">

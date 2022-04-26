@@ -2,7 +2,7 @@ import ConverterPixelsRems from "~/components/settings/converter-pixels-rems";
 import FormControlInputNumber from "~/components/shared/form-control-input-number";
 import SectionHeader from "~/components/shared/section-header";
 import VStackBox from "~/components/shared/vstack-wrapper";
-import usePixelsPerRem from "~/context/font-size/hooks/usePixelsPerRemSelector";
+import usePixelsPerRem from "~/context/app/hooks/usePixelsPerRemSelector";
 
 export default function SettingsPage() {
   const { pixelsPerRem, setPixelsPerRem } = usePixelsPerRem();

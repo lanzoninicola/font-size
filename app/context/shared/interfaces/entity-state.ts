@@ -4,3 +4,8 @@ export enum EntityState {
   edit = "edit",
   delete = "delete",
 }
+
+export enum SelectorEntityState {
+  idle = "idle",
+  edit = "edit",
+}

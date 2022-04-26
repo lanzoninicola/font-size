@@ -4,7 +4,7 @@ import { useParams, useSearchParams } from "remix";
 import FormControlInputNumber from "~/components/shared/form-control-input-number";
 import FormControlInputText from "~/components/shared/form-control-input-text";
 import VStackBox from "~/components/shared/vstack-wrapper";
-import useBreakpointsSelector from "~/context/font-size/hooks/useBreakpointsSelector";
+import useBreakpointsSelector from "~/context/app/hooks/useBreakpointsSelector";
 import useBreakpointsFormService from "~/domain/breakpoints/useBreakpointsFormService";
 
 export default function BreakpointFormUpdate() {

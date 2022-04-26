@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { MediaQueries } from "~/context/font-size/interfaces";
+import { MediaQueries } from "~/context/app/interfaces";
 
 import useMediaQueriesContext from "./useMediaQueriesContext";
 import useMediaQueriesLocalStorage from "./useMediaQueriesLocalStorage";

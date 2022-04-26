@@ -4,24 +4,34 @@ export default function ActionButton({
   children,
   label,
   noHoverbg = false,
+  isDisabled = false,
+  onClick,
   ...props
 }: {
   children: React.ReactNode;
   label: string;
   noHoverbg?: boolean;
+  isDisabled?: boolean;
+  onClick?: () => void;
   [key: string]: any;
 }) {
+  const hoverProps = isDisabled
+    ? undefined
+    : {
+        cursor: "pointer",
+        bg: noHoverbg ? "transparent" : "secondary.700",
+        transition: "all .2s ease-in-out",
+      };
+
   return (
     <Center
       w="34px"
       h="34px"
       {...props}
-      _hover={{
-        cursor: "pointer",
-        bg: noHoverbg ? "transparent" : "secondary.700",
-        transition: "all .2s ease-in-out",
-      }}
+      _hover={hoverProps}
       borderRadius={"5px"}
+      onClick={isDisabled ? undefined : onClick}
+      opacity={isDisabled ? 0.3 : 1}
     >
       <Tooltip
         label={label}

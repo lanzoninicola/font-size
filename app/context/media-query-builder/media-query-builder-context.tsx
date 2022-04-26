@@ -1,19 +1,19 @@
 import { useState } from "react";
 import { createContext } from "use-context-selector";
 import { BreakpointId } from "../breakpoint-builder/interfaces";
-import { SelectorKey } from "../font-size/interfaces";
-import { EntityState } from "../shared/interfaces/entity-state";
+import { SelectorId } from "../app/interfaces";
+import { SelectorEntityState } from "../shared/interfaces/entity-state";
 
 export interface MediaQueryBuilderContext {
-  entityState: EntityState;
+  entityState: SelectorEntityState;
   currentBreakpointId: BreakpointId;
-  currentSelector: string;
+  currentSelectorId: string;
   minFontSize: string;
   maxFontSize: string;
 
-  setEntityState: (entityState: EntityState) => void;
+  setEntityState: (entityState: SelectorEntityState) => void;
   setCurrentBreakpointId: (currentBreakpointId: BreakpointId) => void;
-  setCurrentSelector: (currentSelector: string) => void;
+  setCurrentSelector: (currentSelectorId: string) => void;
   setMinFontSize: (minFontSize: string) => void;
   setMaxFontSize: (maxFontSize: string) => void;
 }
@@ -26,10 +26,12 @@ export function MediaQueryBuilderProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [entityState, setEntityState] = useState<EntityState>(EntityState.idle);
+  const [entityState, setEntityState] = useState<SelectorEntityState>(
+    SelectorEntityState.idle
+  );
   const [currentBreakpointId, setCurrentBreakpointId] =
     useState<BreakpointId>("");
-  const [currentSelector, setCurrentSelector] = useState<SelectorKey>("");
+  const [currentSelectorId, setCurrentSelector] = useState<SelectorId>("");
   const [minFontSize, setMinFontSize] = useState<string>("");
   const [maxFontSize, setMaxFontSize] = useState<string>("");
 
@@ -38,7 +40,7 @@ export function MediaQueryBuilderProvider({
       value={{
         entityState,
         currentBreakpointId,
-        currentSelector,
+        currentSelectorId,
         minFontSize,
         maxFontSize,
         setEntityState,

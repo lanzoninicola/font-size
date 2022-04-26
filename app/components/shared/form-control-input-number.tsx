@@ -12,6 +12,8 @@ export default function FormControlInputNumber({
   unitFontSize,
   value,
   unit,
+  leftUnit,
+  rightUnit,
   onChange,
   onBlur,
 
@@ -25,7 +27,8 @@ export default function FormControlInputNumber({
   unitFontSize?: string;
   value?: string;
   unit?: string;
-
+  leftUnit?: string;
+  rightUnit?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.FocusEventHandler<HTMLInputElement>) => void;
   [key: string]: any;
@@ -34,7 +37,7 @@ export default function FormControlInputNumber({
     <HStack
       w="100%"
       aria-label={ariaLabel || (label && `Set the ${label.toLowerCase()}`)}
-      justify={unit ? "space-between" : "center"}
+      justify={unit || leftUnit || rightUnit ? "space-between" : "center"}
       alignItems="center"
       gap={labelSpacing || ".25rem"}
     >
@@ -44,19 +47,29 @@ export default function FormControlInputNumber({
         </FormControlLabel>
       )}
       <HStack>
+        {leftUnit && (
+          <Text
+            color="primary.500"
+            fontWeight={700}
+            fontSize={unitFontSize || "sm"}
+          >
+            {leftUnit && leftUnit.toUpperCase()}
+          </Text>
+        )}
         <InputNumber
           value={value}
           onChange={onChange}
           onBlur={onBlur}
           {...props}
         />
-        {unit && (
+        {(unit || rightUnit) && (
           <Text
             color="primary.500"
             fontWeight={700}
             fontSize={unitFontSize || "sm"}
           >
-            {unit.toUpperCase()}
+            {(unit && unit.toUpperCase()) ||
+              (rightUnit && rightUnit.toUpperCase())}
           </Text>
         )}
       </HStack>

@@ -1,13 +1,13 @@
 import { useContextSelector } from "use-context-selector";
-import { FontSizeContextData } from "../font-size-context";
+import { AppContextData } from "../app-context";
 
 export default function usePixelsPerRemSelector() {
   const pixelsPerRem = useContextSelector(
-    FontSizeContextData,
+    AppContextData,
     (ctx) => ctx?.pixelsPerRem
   );
   const setPixelsPerRem = useContextSelector(
-    FontSizeContextData,
+    AppContextData,
     (ctx) => ctx?.setPixelsPerRem
   );
 

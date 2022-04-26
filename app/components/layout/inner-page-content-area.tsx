@@ -9,7 +9,7 @@ export default function InnerPageContentArea({
     <VStackBox
       w="100%"
       gap=".5rem"
-      paddingLeft="2rem"
+      paddingLeft="1rem"
       paddingRight="1rem"
       mt="2rem"
     >

@@ -12,10 +12,11 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { MediaQueries } from "~/context/font-size/interfaces";
+import { MediaQueries } from "~/context/app/interfaces";
 import useBreakpointsQueryService from "~/domain/breakpoints/useBreakpointsQueryService";
 import useMediaQueriesFilter from "~/domain/media-query/useMediaQueriesFilter";
-import useMediaQueryService from "~/domain/media-query/useMediaQueryService";
+import useMediaQueriesService from "~/domain/media-query/useMediaQueriesService";
+import useSelectorsService from "~/domain/selectors/useSelectorsService";
 
 import ActionButton from "../shared/action-button";
 import {
@@ -28,9 +29,8 @@ import {
 import TableTitle from "../shared/table-title";
 
 export default function MediaQueryList() {
-  const { editMediaQuery, deleteMediaQuery } = useMediaQueryService();
-
   const { getBreakpointName } = useBreakpointsQueryService();
+  const { getSelectorNameById } = useSelectorsService();
 
   const { mediaQueriesFiltered } = useMediaQueriesFilter();
   const [mediaQueries, setMediaQueries] = useState<MediaQueries>();
@@ -46,12 +46,9 @@ export default function MediaQueryList() {
   return (
     <>
       <TableContainer>
-        <Table variant="unstyled">
+        <Table variant="unstyled" size={"sm"}>
           <Thead>
             <Tr>
-              <Th>
-                <TableTitle textAlign="center">Actions</TableTitle>
-              </Th>
               <Th>
                 <TableTitle gridArea={"colTitle2"}>Media Query</TableTitle>
               </Th>
@@ -71,34 +68,10 @@ export default function MediaQueryList() {
                     const { minFontSize, maxFontSize } =
                       mediaQueries[breakpointId][selectorId];
 
+                    const selectorName = getSelectorNameById(selectorId);
+
                     return (
                       <Tr key={index}>
-                        <Td>
-                          <HStack gridArea={"colContent1"}>
-                            <ActionButton
-                              label="Edit entity"
-                              noHoverbg
-                              onClick={() =>
-                                editMediaQuery(breakpointId, selectorId)
-                              }
-                            >
-                              <EditIcon ariaLabel="Edit entity" color="gray" />
-                            </ActionButton>
-                            <ActionButton
-                              label="Remove entity"
-                              noHoverbg
-                              onClick={() =>
-                                deleteMediaQuery(breakpointId, selectorId)
-                              }
-                            >
-                              <TrashIcon
-                                ariaLabel="Remove entity"
-                                color="gray"
-                                size={20}
-                              />
-                            </ActionButton>
-                          </HStack>
-                        </Td>
                         <Td>
                           <Text color="primary.500" gridArea={"colContent2"}>
                             {getBreakpointName(breakpointId)}
@@ -106,7 +79,7 @@ export default function MediaQueryList() {
                         </Td>
                         <Td>
                           <Text color="primary.500" gridArea={"colContent3"}>
-                            {selectorId}
+                            {selectorName}
                           </Text>
                         </Td>
                         <Td>

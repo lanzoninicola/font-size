@@ -6,10 +6,10 @@ const InputSelect = forwardRef<{ [key: string]: any }, "select">(
     return (
       <Select
         variant={"filled"}
-        h="40px"
+        h="30px"
         maxW="120px"
         textAlign="right"
-        borderRadius="10px"
+        borderRadius="5px"
         border="none"
         bg="primary.500"
         _focus={{

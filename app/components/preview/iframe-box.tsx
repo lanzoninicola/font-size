@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
-import useMediaQueriesSelector from "~/context/font-size/hooks/useMediaQueriesSelector";
+import useMediaQueriesSelector from "~/context/app/hooks/useMediaQueriesSelector";
 import usePreviewUrl from "~/context/preview/hooks/usePreviewUrl";
 import useCSSCodeBlock from "~/domain/code-block/useCSSCodeBlock";
 import usePostMessageService from "~/domain/preview/usePostMessageService";

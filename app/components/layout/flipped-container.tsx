@@ -1,4 +1,5 @@
 import { Box } from "@chakra-ui/react";
+import useCustomScrollbar from "~/domain/utilities/useCustomScrollbar";
 
 /**
  * @description: This puts the scrollbar at the top of the container
@@ -12,30 +13,14 @@ export default function FlippedContainer({
   children: React.ReactNode;
   [key: string]: any;
 }) {
+  const appScrollbarStyle = useCustomScrollbar();
+
   return (
     <Box
       w="100%"
       transform={"rotateX(180deg)"}
       overflow="auto"
-      css={{
-        "&::-webkit-scrollbar": {
-          width: "10px",
-          height: "10px",
-        },
-
-        "&::-webkit-scrollbar-track": {
-          borderRadius: "20px",
-          backgroundColor: "#2F303C",
-        },
-        "&::-webkit-scrollbar-thumb": {
-          backgroundColor: "#159898",
-          borderRadius: "20px",
-          "&: hover": {
-            backgroundColor: "#AEF4F4",
-            transition: "all 0.2s ease-in-out",
-          },
-        },
-      }}
+      css={appScrollbarStyle}
       {...props}
     >
       {children}

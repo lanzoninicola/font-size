@@ -13,7 +13,7 @@ import {
 
 import { theme } from "./chackra-ui/theme/theme";
 import { ClientStyleContext, ServerStyleContext } from "./context";
-import { FontSizeProvider } from "./context/font-size/font-size-context";
+import { AppProvider } from "./context/app/app-context";
 
 import type { MetaFunction } from "remix";
 export const meta: MetaFunction = () => {
@@ -24,9 +24,9 @@ export default function App() {
   return (
     <Document>
       <ChakraProvider resetCSS theme={theme}>
-        <FontSizeProvider>
+        <AppProvider>
           <Outlet />
-        </FontSizeProvider>
+        </AppProvider>
       </ChakraProvider>
     </Document>
   );

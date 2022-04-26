@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 export default function useMediaQueriesRoutes() {
   const BASE_ROUTE = "/app/media-queries";
   const ROUTE_MEDIA_QUERY_LIST = `${BASE_ROUTE}/list`;

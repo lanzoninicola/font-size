@@ -3,7 +3,7 @@ import {
   Breakpoints,
   BreakpointViewportSize,
 } from "~/context/breakpoint-builder/interfaces";
-import useBreakpointsSelector from "~/context/font-size/hooks/useBreakpointsSelector";
+import useBreakpointsSelector from "~/context/app/hooks/useBreakpointsSelector";
 
 import useMediaQueriesQueryService from "../media-query/useMediaQueriesQueryService";
 import parseDecimalNumber from "../utilities/parseDecimalNumber";

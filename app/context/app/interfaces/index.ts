@@ -1,16 +1,16 @@
-import { MediaQueries } from "./media-query";
+import { MediaQueries } from "../../media-query-builder/interfaces/media-query";
 import {
   CSSClassAttribute,
   HTMLTags,
   IdAttribute,
   HTMLAttributes,
   SelectorsFontSizeRange,
-  SelectorKey,
+  SelectorId,
   SelectorType,
   Selector,
   Selectors,
   FontSizeConfigKeys,
-} from "./selectors";
+} from "../selectors/interfaces/selectors";
 
 export type {
   CSSClassAttribute,
@@ -18,7 +18,7 @@ export type {
   IdAttribute,
   MediaQueries,
   SelectorsFontSizeRange,
-  SelectorKey,
+  SelectorId,
   Selector,
   Selectors,
   FontSizeConfigKeys,

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
-import useMediaQueriesSelector from "~/context/font-size/hooks/useMediaQueriesSelector";
-import { MediaQueries } from "~/context/font-size/interfaces";
+import useMediaQueriesSelector from "~/context/app/hooks/useMediaQueriesSelector";
+import { MediaQueries } from "~/context/app/interfaces";
 
 export default function useMediaQueryFilter() {
   const { mediaQueries } = useMediaQueriesSelector();
