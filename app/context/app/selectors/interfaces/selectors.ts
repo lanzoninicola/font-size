@@ -27,14 +27,16 @@ export type Selector = {
 
 export type Selectors = Selector[];
 
-export enum FontSizeConfigKeys {
+export enum SelectorConfigKeys {
   minFontSize = "minFontSize",
   maxFontSize = "maxFontSize",
+  lineHeight = "lineHeight",
 }
 
-export interface SelectorsFontSizeRange {
+export interface SelectorsTokensValue {
   [key: SelectorId]: {
-    [FontSizeConfigKeys.minFontSize]?: number;
-    [FontSizeConfigKeys.maxFontSize]?: number;
+    [SelectorConfigKeys.minFontSize]?: number;
+    [SelectorConfigKeys.maxFontSize]?: number;
+    [SelectorConfigKeys.lineHeight]?: number;
   };
 }

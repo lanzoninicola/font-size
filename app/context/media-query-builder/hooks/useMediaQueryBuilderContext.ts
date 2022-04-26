@@ -52,6 +52,16 @@ export default function useMediaQueryBuilderContext() {
     (ctx) => ctx?.setMaxFontSize
   );
 
+  const lineHeight = useContextSelector(
+    MediaQueryBuilderContextData,
+    (ctx) => ctx?.lineHeight
+  );
+
+  const setLineHeight = useContextSelector(
+    MediaQueryBuilderContextData,
+    (ctx) => ctx?.setLineHeight
+  );
+
   return {
     entityState,
     setEntityState,
@@ -63,5 +73,7 @@ export default function useMediaQueryBuilderContext() {
     setMinFontSize,
     maxFontSize,
     setMaxFontSize,
+    lineHeight,
+    setLineHeight,
   };
 }

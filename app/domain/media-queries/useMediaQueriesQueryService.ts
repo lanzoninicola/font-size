@@ -39,10 +39,11 @@ export default function useMediaQueriesQueryService() {
    *
    * @returns The min and max font size for the given selector and breakpoint in REM
    */
-  function getFontSizeRange(breakpointId: BreakpointId, selector: SelectorId) {
+  function getTokenValues(breakpointId: BreakpointId, selector: SelectorId) {
     let breakpoint = null;
     let minFontSize = 0;
     let maxFontSize = 0;
+    let lineHeight = 0;
 
     if (mediaQueries) {
       breakpoint = mediaQueries[breakpointId];
@@ -50,12 +51,14 @@ export default function useMediaQueriesQueryService() {
       if (breakpoint) {
         minFontSize = breakpoint[selector]?.minFontSize ?? 0;
         maxFontSize = breakpoint[selector]?.maxFontSize ?? 0;
+        lineHeight = breakpoint[selector]?.lineHeight ?? 0;
       }
     }
 
     return {
       minFontSize,
       maxFontSize,
+      lineHeight,
     };
   }
 
@@ -73,6 +76,6 @@ export default function useMediaQueriesQueryService() {
     isMediaQueryEmpty,
     isMediaQueryOfBreakpointExists,
     isMediaQueryOfBreakpointAndSelectorExists,
-    getFontSizeRange,
+    getTokenValues,
   };
 }

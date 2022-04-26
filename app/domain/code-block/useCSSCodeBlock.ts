@@ -17,7 +17,7 @@ export default function useCSSCodeBlock(forceImportant = false) {
   const { breakpoints } = useBreakpointsSelector();
 
   const { getViewportSizeByBreakpointId } = useBreakpointsQueryService();
-  const { getFontSizeRange } = useMediaQueriesQueryService();
+  const { getTokenValues } = useMediaQueriesQueryService();
 
   const [codeBlock, setCodeBlock] = useState<string>("");
 
@@ -54,7 +54,7 @@ export default function useCSSCodeBlock(forceImportant = false) {
       codeBlock += `\n`;
 
       for (const selector in breakpointMediaQuery) {
-        const { minFontSize, maxFontSize } = getFontSizeRange(
+        const { minFontSize, maxFontSize } = getTokenValues(
           breakpointId,
           selector as SelectorId
         );

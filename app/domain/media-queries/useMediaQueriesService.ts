@@ -9,10 +9,12 @@ export default function useMediaQueriesService() {
     currentSelectorId,
     minFontSize,
     maxFontSize,
+    lineHeight,
     setEntityState,
     setCurrentSelector,
     setMinFontSize,
     setMaxFontSize,
+    setLineHeight,
   } = useMediaQueryBuilderContext();
   const { mediaQueries, setMediaQueries } = useMediaQueriesSelector();
 
@@ -20,6 +22,7 @@ export default function useMediaQueriesService() {
     const mediaQueryData = {
       minFontSize: parseFloat(minFontSize),
       maxFontSize: parseFloat(maxFontSize),
+      lineHeight: parseFloat(lineHeight),
     };
 
     const nextMediaQueries: MediaQueries = { ...mediaQueries };
@@ -34,6 +37,7 @@ export default function useMediaQueriesService() {
     setCurrentSelector("");
     setMinFontSize("");
     setMaxFontSize("");
+    setLineHeight("");
   }
 
   /**

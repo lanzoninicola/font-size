@@ -27,7 +27,7 @@ export default function MediaQueryEdit() {
     closeEditCurrentSelector,
   } = useMediaQueriesBuilderService();
 
-  const { getFontSizeRange } = useMediaQueriesQueryService();
+  const { getTokenValues } = useMediaQueriesQueryService();
 
   const { htmlSelectors } = useHtmlSelectorsSelector();
   const [selectors, setSelectors] = useState<Selectors | null>(null);
@@ -61,7 +61,7 @@ export default function MediaQueryEdit() {
         {currentBreakpointId !== "" &&
           selectors &&
           selectors.map((s, index) => {
-            const { minFontSize, maxFontSize } = getFontSizeRange(
+            const { minFontSize, maxFontSize, lineHeight } = getTokenValues(
               currentBreakpointId,
               s.key
             );
@@ -94,7 +94,7 @@ export default function MediaQueryEdit() {
                     <SelectorCurrentProps
                       minFontSize={minFontSize}
                       maxFontSize={maxFontSize}
-                      linHeight={100}
+                      lineHeight={lineHeight}
                     />
                   )}
                   {s.key === currentSelectorId && (
@@ -170,11 +170,11 @@ function SelectorActions({ selectorId }: { selectorId: SelectorId }) {
 function SelectorCurrentProps({
   minFontSize,
   maxFontSize,
-  linHeight = 100,
+  lineHeight,
 }: {
   minFontSize: number;
   maxFontSize: number;
-  linHeight: number;
+  lineHeight: number;
 }) {
   const labelProps = {
     color: "secondary.500",
@@ -204,15 +204,21 @@ function SelectorCurrentProps({
       </HStack>
       <HStack {...labelGroupProps}>
         <Text {...labelProps}>Line Height</Text>
-        <Text {...valueProps}>{`${linHeight}%`}</Text>
+        <Text {...valueProps}>{`${lineHeight}%`}</Text>
       </HStack>
     </VStackBox>
   );
 }
 
 export function SelectorFormProps({ selectorId }: { selectorId: SelectorId }) {
-  const { minFontSize, maxFontSize, changeMinFontSize, changeMaxFontSize } =
-    useMediaQueriesBuilderService();
+  const {
+    minFontSize,
+    maxFontSize,
+    lineHeight,
+    changeMinFontSize,
+    changeMaxFontSize,
+    changeLineHeight,
+  } = useMediaQueriesBuilderService();
 
   function onChangeMinFontSize(e: React.ChangeEvent<HTMLInputElement>) {
     changeMinFontSize(e.target.value);
@@ -220,6 +226,10 @@ export function SelectorFormProps({ selectorId }: { selectorId: SelectorId }) {
 
   function onChangeMaxFontSize(e: React.ChangeEvent<HTMLInputElement>) {
     changeMaxFontSize(e.target.value);
+  }
+
+  function onChangeLineHeight(e: React.ChangeEvent<HTMLInputElement>) {
+    changeLineHeight(e.target.value);
   }
 
   return (
@@ -249,9 +259,9 @@ export function SelectorFormProps({ selectorId }: { selectorId: SelectorId }) {
         label="Line Height"
         labelFontSize="smaller"
         leftUnit="%"
-        value={"1"}
+        value={lineHeight}
         unitFontSize="smaller"
-        onChange={(e) => onChangeMaxFontSize(e)}
+        onChange={(e) => onChangeLineHeight(e)}
         maxW="50px"
       />
     </VStackBox>

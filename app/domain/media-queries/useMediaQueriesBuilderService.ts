@@ -12,14 +12,16 @@ export default function useMediaQueriesBuilderService() {
     currentSelectorId,
     minFontSize,
     maxFontSize,
+    lineHeight,
     setEntityState,
     setCurrentBreakpointId,
     setCurrentSelector,
     setMinFontSize,
     setMaxFontSize,
+    setLineHeight,
   } = useMediaQueryBuilderContext();
 
-  const { getFontSizeRange } = useMediaQueriesQueryService();
+  const { getTokenValues } = useMediaQueriesQueryService();
 
   function changeCurrentBreakpoint(bp: BreakpointId) {
     setCurrentBreakpointId(bp);
@@ -37,10 +39,12 @@ export default function useMediaQueriesBuilderService() {
     const {
       minFontSize: selectorMinFontSize,
       maxFontSize: selectorMaxFontSize,
-    } = getFontSizeRange(currentBreakpointId, s);
+      lineHeight: selectorLineHeight,
+    } = getTokenValues(currentBreakpointId, s);
 
     changeMinFontSize(String(selectorMinFontSize));
     changeMaxFontSize(String(selectorMaxFontSize));
+    changeLineHeight(String(selectorLineHeight));
   }
 
   function closeEditCurrentSelector(s: SelectorId) {
@@ -58,16 +62,23 @@ export default function useMediaQueriesBuilderService() {
     setMaxFontSize(maxfs);
   }
 
+  function changeLineHeight(lh: string) {
+    parseInputString(lh);
+    setLineHeight(lh);
+  }
+
   return {
     entityState,
     currentBreakpointId,
     currentSelectorId,
     minFontSize,
     maxFontSize,
+    lineHeight,
     changeCurrentBreakpoint,
     editCurrentSelector,
     closeEditCurrentSelector,
     changeMinFontSize,
     changeMaxFontSize,
+    changeLineHeight,
   };
 }
