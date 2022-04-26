@@ -2,18 +2,26 @@ import { Button, HStack, useToast } from "@chakra-ui/react";
 import { useEffect } from "react";
 import BreakpointsInnerList from "~/components/breakpoints/breakpoints-inner-list";
 import FormControlInputNumber from "~/components/shared/form-control-input-number";
+import FormControlInputText from "~/components/shared/form-control-input-text";
 import VStackBox from "~/components/shared/vstack-wrapper";
 import useBreakpointsFormService from "~/domain/breakpoints/useBreakpointsFormService";
 
 export default function NewBreakpointPage() {
   const toast = useToast();
   const {
+    label,
     minWidth,
     maxWidth,
+    onChangeLabel,
     onChangeMinWidth,
     onChangeMaxWidth,
     onCreateBreakpoint,
   } = useBreakpointsFormService();
+
+  function onChangeBreakpointName(e: React.ChangeEvent<HTMLInputElement>) {
+    const value = e.target.value;
+    onChangeLabel(value);
+  }
 
   function onChangeMinViewportWidth(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
@@ -53,6 +61,13 @@ export default function NewBreakpointPage() {
     <>
       <VStackBox w="100%" gap="3rem">
         <VStackBox gap="1.5rem">
+          <FormControlInputText
+            id="label"
+            label="Name"
+            value={label}
+            minW="370px"
+            onChange={(e) => onChangeBreakpointName(e)}
+          />
           <FormControlInputNumber
             id="minViewportWidth"
             label="Minimum viewport width"
@@ -68,13 +83,6 @@ export default function NewBreakpointPage() {
             onChange={(e) => onChangeMaxViewportWidth(e)}
           />
         </VStackBox>
-        {/* <FormControlInputText
-        id="label"
-        label="Name"
-        value={label}
-        minW="370px"
-        isDisabled
-      /> */}
 
         <HStack justify={"flex-end"} w="100%">
           <Button onClick={onSaveBreakpoint} bg={"secondary.500"}>

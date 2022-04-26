@@ -1,6 +1,6 @@
 import { Button, HStack, useToast } from "@chakra-ui/react";
 import { useEffect } from "react";
-import { useParams, useSearchParams } from "remix";
+import { useParams } from "remix";
 import FormControlInputNumber from "~/components/shared/form-control-input-number";
 import FormControlInputText from "~/components/shared/form-control-input-text";
 import VStackBox from "~/components/shared/vstack-wrapper";
@@ -16,6 +16,7 @@ export default function BreakpointFormUpdate() {
     maxWidth,
     label,
     onUpdateInit,
+    onChangeLabel,
     onChangeMinWidth,
     onChangeMaxWidth,
     onUpdateBreakpoint,
@@ -36,6 +37,11 @@ export default function BreakpointFormUpdate() {
         });
       }
     }
+  }
+
+  function onChangeBreakpointName(e: React.ChangeEvent<HTMLInputElement>) {
+    const value = e.target.value;
+    onChangeLabel(value);
   }
 
   function onChangeMinViewportWidth(e: React.ChangeEvent<HTMLInputElement>) {
@@ -99,10 +105,12 @@ export default function BreakpointFormUpdate() {
         label="Name"
         value={label}
         minW="370px"
-        isDisabled
+        onChange={(e) => onChangeBreakpointName(e)}
       />
       <HStack justify={"flex-end"} w="100%">
-        <Button onClick={onSaveBreakpoint}>Save</Button>
+        <Button onClick={onSaveBreakpoint} bg="secondary.500">
+          Save
+        </Button>
       </HStack>
     </>
   );

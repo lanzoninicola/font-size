@@ -28,7 +28,7 @@ export function BreakpointsFormProvider({
     useState<BreakpointId>("");
   const [minWidth, setMinWidth] = useState<string>("");
   const [maxWidth, setMaxWidth] = useState<string>("");
-  const [label, setLabel] = useState<string>("...");
+  const [label, setLabel] = useState<string>("");
 
   return (
     <BreakpointsFormContextData.Provider

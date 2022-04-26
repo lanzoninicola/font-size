@@ -11,11 +11,16 @@ export interface BreakpointsDataServiceResponse {
     minWidth: string;
     maxWidth: string;
   }) => string;
-  createBreakpoint: (minWidth: string, maxWidth: string) => BreakpointResponse;
+  createBreakpoint: (
+    minWidth: string,
+    maxWidth: string,
+    userLabel?: string
+  ) => BreakpointResponse;
   updateBreakpoint: (
     id: string,
     minWidth: string,
-    maxWidth: string
+    maxWidth: string,
+    userLabel?: string
   ) => BreakpointResponse;
   deleteBreakpoint: (id: BreakpointId) => DeleteBreakpointResponse;
 }

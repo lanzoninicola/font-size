@@ -99,7 +99,7 @@ export default function BreakpointsList() {
                         </ActionButton>
                       </HStack>
                     </Td>
-                    <Td textAlign={"right"}>
+                    <Td textAlign={"left"}>
                       <Text color="primary.500">
                         {breakpoints[breakpointId].label}
                       </Text>

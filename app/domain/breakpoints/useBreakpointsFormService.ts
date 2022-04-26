@@ -1,4 +1,3 @@
-import { useNavigate } from "remix";
 import useBreakpointsFormContext from "~/context/breakpoint-builder/hooks/useBreakpointsFormContext";
 import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
 
@@ -13,8 +12,6 @@ import useBreakpointsQueryService from "./useBreakpointsQueryService";
  *
  */
 export default function useBreakpointsFormService() {
-  const navigate = useNavigate();
-
   const {
     currentBreakpointId,
     minWidth,
@@ -30,6 +27,10 @@ export default function useBreakpointsFormService() {
 
   const { buildLabel, createBreakpoint, updateBreakpoint, deleteBreakpoint } =
     useBreakpointsDataService();
+
+  function onChangeLabel(label: string) {
+    setLabel(label);
+  }
 
   function onChangeMinWidth(inputMinWidth: string) {
     const minWidth = parseInputString(inputMinWidth);
@@ -50,14 +51,14 @@ export default function useBreakpointsFormService() {
   }
 
   function onCreateBreakpoint() {
-    const creationResponse = createBreakpoint(minWidth, maxWidth);
+    const creationResponse = createBreakpoint(minWidth, maxWidth, label);
 
     if (creationResponse.ok) {
       if (creationResponse.payload) {
         setCurrentBreakpointId(creationResponse.payload.id);
         setMinWidth("");
         setMaxWidth("");
-        setLabel(label);
+        setLabel("");
       }
     }
 
@@ -88,7 +89,8 @@ export default function useBreakpointsFormService() {
     const updateResponse = updateBreakpoint(
       currentBreakpointId,
       minWidth,
-      maxWidth
+      maxWidth,
+      label
     );
 
     if (updateResponse.ok) {
@@ -108,7 +110,9 @@ export default function useBreakpointsFormService() {
     minWidth,
     maxWidth,
     label,
+
     onUpdateInit,
+    onChangeLabel,
     onChangeMinWidth,
     onChangeMaxWidth,
     onCreateBreakpoint,
