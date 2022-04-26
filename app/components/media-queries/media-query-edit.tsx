@@ -5,9 +5,9 @@ import useBreakpointsSelector from "~/context/app/hooks/useBreakpointsSelector";
 import useHtmlSelectorsSelector from "~/context/app/hooks/useHtmlSelectorsSelector";
 import { SelectorId, Selectors } from "~/context/app/interfaces";
 import { SelectorEntityState } from "~/context/shared/interfaces/entity-state";
-import useMediaQueriesBuilderService from "~/domain/media-query/useMediaQueriesBuilderService";
-import useMediaQueriesQueryService from "~/domain/media-query/useMediaQueriesQueryService";
-import useMediaQueriesService from "~/domain/media-query/useMediaQueriesService";
+import useMediaQueriesBuilderService from "~/domain/media-queries/useMediaQueriesBuilderService";
+import useMediaQueriesQueryService from "~/domain/media-queries/useMediaQueriesQueryService";
+import useMediaQueriesService from "~/domain/media-queries/useMediaQueriesService";
 import useCustomScrollbar from "~/domain/utilities/useCustomScrollbar";
 
 import ActionButton from "../shared/action-button";

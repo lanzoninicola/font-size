@@ -8,18 +8,6 @@ import { SelectorId } from "~/context/app/interfaces";
 export default function useMediaQueriesQueryService() {
   const { mediaQueries } = useMediaQueriesSelector();
 
-  /**
-   * @description Check if the global Media Queries object is empty
-   * @returns {boolean}
-   */
-  // function isMediaQueryEmpty() {
-  //   if (mediaQueries) {
-  //     return Object.keys(mediaQueries).length === 0;
-  //   }
-
-  //   return true;
-  // }
-
   function isMediaQueryEmpty() {
     return new Promise((resolve, reject) => {
       if (mediaQueries !== null) {

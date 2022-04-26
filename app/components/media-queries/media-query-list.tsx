@@ -14,8 +14,8 @@ import {
 import { useEffect, useState } from "react";
 import { MediaQueries } from "~/context/app/interfaces";
 import useBreakpointsQueryService from "~/domain/breakpoints/useBreakpointsQueryService";
-import useMediaQueriesFilter from "~/domain/media-query/useMediaQueriesFilter";
-import useMediaQueriesService from "~/domain/media-query/useMediaQueriesService";
+import useMediaQueriesFilter from "~/domain/media-queries/useMediaQueriesFilter";
+import useMediaQueriesService from "~/domain/media-queries/useMediaQueriesService";
 import useSelectorsService from "~/domain/selectors/useSelectorsService";
 
 import ActionButton from "../shared/action-button";
@@ -39,24 +39,28 @@ export default function MediaQueryList() {
     if (mediaQueriesFiltered) {
       setMediaQueries(mediaQueriesFiltered);
     }
-
-    console.log("MediaQueryListItems", mediaQueriesFiltered, mediaQueries);
   }, [mediaQueriesFiltered]);
 
   return (
     <>
-      <TableContainer>
-        <Table variant="unstyled" size={"sm"}>
+      <TableContainer maxW={"1440px"}>
+        <Table variant="unstyled">
           <Thead>
             <Tr>
               <Th>
-                <TableTitle gridArea={"colTitle2"}>Media Query</TableTitle>
+                <TableTitle>Media Query</TableTitle>
               </Th>
               <Th>
-                <TableTitle gridArea={"colTitle3"}>Selector</TableTitle>
+                <TableTitle>Selector</TableTitle>
               </Th>
               <Th>
-                <TableTitle gridArea={"colTitle4"}>Values</TableTitle>
+                <TableTitle>Font Size (MIN)</TableTitle>
+              </Th>
+              <Th>
+                <TableTitle>Font Size (MAX)</TableTitle>
+              </Th>
+              <Th>
+                <TableTitle>Line Height</TableTitle>
               </Th>
             </Tr>
           </Thead>
@@ -83,19 +87,21 @@ export default function MediaQueryList() {
                           </Text>
                         </Td>
                         <Td>
-                          <HStack gap="1rem" gridArea={"colContent4"}>
-                            <HStack>
-                              <MinFontSizeIcon color="gray" />
-                              <Text color="primary.500">{`${minFontSize}rem`}</Text>
-                            </HStack>
-                            <HStack>
-                              <MaxFontSizeIcon color="gray" />
-                              <Text color="primary.500">{`${maxFontSize}rem`}</Text>
-                            </HStack>
-                            <HStack>
-                              <LineHeightIcon color="gray" />
-                              <Text color="primary.500">0.1</Text>
-                            </HStack>
+                          <HStack>
+                            <MinFontSizeIcon color="gray" />
+                            <Text color="primary.500">{`${minFontSize}rem`}</Text>
+                          </HStack>
+                        </Td>
+                        <Td>
+                          <HStack>
+                            <MaxFontSizeIcon color="gray" />
+                            <Text color="primary.500">{`${maxFontSize}rem`}</Text>
+                          </HStack>
+                        </Td>
+                        <Td>
+                          <HStack>
+                            <LineHeightIcon color="gray" />
+                            <Text color="primary.500">0.1</Text>
                           </HStack>
                         </Td>
                       </Tr>

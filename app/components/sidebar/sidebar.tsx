@@ -1,5 +1,5 @@
 import { Box, VStack } from "@chakra-ui/react";
-import useMediaQueriesRoutes from "~/domain/media-query/useMediaQueriesRoutes";
+import useMediaQueriesRoutes from "~/domain/media-queries/useMediaQueriesRoutes";
 
 import {
   BreakpointsIcon,

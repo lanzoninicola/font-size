@@ -23,8 +23,8 @@ export default function useMediaQueriesRoutesNavigate() {
     navigate(ROUTE_MEDIA_QUERY_NEW);
   }
 
-  function navigateToUpdateMediaQuery(id: string) {
-    navigate(`${ROUTE_MEDIA_QUERY_UPDATE}/${id}`);
+  function navigateToUpdateMediaQuery() {
+    navigate(`${ROUTE_MEDIA_QUERY_UPDATE}`);
   }
 
   function navigateToShowTheCode() {

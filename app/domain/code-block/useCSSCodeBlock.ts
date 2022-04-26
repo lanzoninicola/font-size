@@ -8,8 +8,8 @@ import useBreakpointsQueryService from "../breakpoints/useBreakpointsQueryServic
 import calculateClampSlope from "./calculateClampSlope";
 import calculateClampYAxisIntersection from "./calculateClampYAxisIntersection";
 import generateClampFormula from "./generateClampFormula";
-import useMediaQueriesQueryService from "../media-query/useMediaQueriesQueryService";
-import useMediaQueriesService from "../media-query/useMediaQueriesService";
+import useMediaQueriesQueryService from "../media-queries/useMediaQueriesQueryService";
+import useMediaQueriesService from "../media-queries/useMediaQueriesService";
 
 export default function useCSSCodeBlock(forceImportant = false) {
   const { pixelsPerRem } = usePixelsPerRemSelector();

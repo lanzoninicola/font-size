@@ -8,7 +8,7 @@ export default function PageHeader({
 }) {
   return (
     <Box
-      paddingLeft="2rem"
+      paddingLeft="1rem"
       borderBottom={"1px solid"}
       borderBottomColor="primaryAlpha.20"
       w="100%"

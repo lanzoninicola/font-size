@@ -5,7 +5,7 @@ import {
 } from "~/context/breakpoint-builder/interfaces";
 import useBreakpointsSelector from "~/context/app/hooks/useBreakpointsSelector";
 
-import useMediaQueriesQueryService from "../media-query/useMediaQueriesQueryService";
+import useMediaQueriesQueryService from "../media-queries/useMediaQueriesQueryService";
 import parseDecimalNumber from "../utilities/parseDecimalNumber";
 import {
   BreakpointsDataServiceResponse,

@@ -1,15 +1,10 @@
-import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
 import useMediaQueriesSelector from "~/context/app/hooks/useMediaQueriesSelector";
 import { MediaQueries, SelectorId } from "~/context/app/interfaces";
 import useMediaQueryBuilderContext from "~/context/media-query-builder/hooks/useMediaQueryBuilderContext";
-import {
-  EntityState,
-  SelectorEntityState,
-} from "~/context/shared/interfaces/entity-state";
+import { SelectorEntityState } from "~/context/shared/interfaces/entity-state";
 
 export default function useMediaQueriesService() {
   const {
-    entityState,
     currentBreakpointId,
     currentSelectorId,
     minFontSize,
@@ -40,44 +35,6 @@ export default function useMediaQueriesService() {
     setMinFontSize("");
     setMaxFontSize("");
   }
-
-  // function createMediaQuery(
-  //   breakpointId: BreakpointId,
-  //   selector: SelectorId,
-  //   minFontSize: number,
-  //   maxFontSize: number
-  // ) {
-  //   const mediaQueryData = {
-  //     minFontSize,
-  //     maxFontSize,
-  //   };
-
-  //   const nextMediaQueries: MediaQueries = { ...mediaQueries };
-  //   nextMediaQueries[breakpointId] = { ...nextMediaQueries[breakpointId] };
-  //   nextMediaQueries[breakpointId][selector] = mediaQueryData;
-
-  //   setMediaQueries(nextMediaQueries);
-  // }
-
-  // function updateMediaQuery(
-  //   breakpointId: BreakpointId,
-  //   selector: SelectorId,
-  //   minFontSize: number,
-  //   maxFontSize: number
-  // ) {
-  //   let nextMediaQueries = { ...mediaQueries };
-
-  //   nextMediaQueries[breakpointId] = {
-  //     ...nextMediaQueries[breakpointId],
-  //     [selector]: {
-  //       ...nextMediaQueries[breakpointId][selector],
-  //       minFontSize,
-  //       maxFontSize,
-  //     },
-  //   } as MediaQueries;
-
-  //   setMediaQueries(nextMediaQueries as MediaQueries);
-  // }
 
   /**
    * @description Delete media query for current breakpoint and selector

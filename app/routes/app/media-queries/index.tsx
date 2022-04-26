@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Outlet } from "remix";
 import VStackBox from "~/components/shared/vstack-wrapper";
 import useBreakpointsQueryService from "~/domain/breakpoints/useBreakpointsQueryService";
-import useMediaQueriesRoutesNavigate from "~/domain/media-query/useMediaQueriesRoutesNavigate";
+import useMediaQueriesRoutesNavigate from "~/domain/media-queries/useMediaQueriesRoutesNavigate";
 
 export default function MediaQueriesIndexPage() {
   const { isBreakpointsEmpty } = useBreakpointsQueryService();

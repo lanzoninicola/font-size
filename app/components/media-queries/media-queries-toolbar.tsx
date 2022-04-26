@@ -1,7 +1,7 @@
 import { HStack } from "@chakra-ui/react";
 import { Link } from "remix";
-import useMediaQueriesRoutes from "~/domain/media-query/useMediaQueriesRoutes";
-import useMediaQueriesRoutesLocation from "~/domain/media-query/useMediaQueriesRoutesLocation";
+import useMediaQueriesRoutes from "~/domain/media-queries/useMediaQueriesRoutes";
+import useMediaQueriesRoutesLocation from "~/domain/media-queries/useMediaQueriesRoutesLocation";
 
 import ToolbarWrapper from "../layout/toolbar-wrapper";
 import ActionButton from "../shared/action-button";

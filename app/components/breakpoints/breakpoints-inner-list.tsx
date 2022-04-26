@@ -1,8 +1,7 @@
 import { Divider, Heading, HStack, Text } from "@chakra-ui/react";
-import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
 import useBreakpointsSelector from "~/context/app/hooks/useBreakpointsSelector";
+import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
 
-import EntityInnerList from "../shared/entity-inner-list";
 import { MaxWidthIcon, MinWidthIcon } from "../shared/icons";
 import VStackBox from "../shared/vstack-wrapper";
 

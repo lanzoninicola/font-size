@@ -1,12 +1,11 @@
-import React, { useEffect } from "react";
-import {
-  BreakpointViewportSize,
-  Breakpoints,
-  BreakpointId,
-} from "~/context/breakpoint-builder/interfaces";
-import useBreakpointsContext from "~/context/app/hooks/useBreakpointsContext";
 import useBreakpointsSelector from "~/context/app/hooks/useBreakpointsSelector";
 import usePixelsPerRemSelector from "~/context/app/hooks/usePixelsPerRemSelector";
+import {
+  BreakpointId,
+  Breakpoints,
+  BreakpointViewportSize,
+} from "~/context/breakpoint-builder/interfaces";
+
 import { BreakpointResponse } from "./interfaces/data-service";
 
 /**
@@ -71,7 +70,6 @@ export default function useBreakpointsQueryService() {
    * @returns {boolean}
    */
   function isBreakpointsEmpty() {
-    console.log("isBreakpointsEmpty", breakpoints);
     if (breakpoints) {
       return Object.keys(breakpoints).length === 0;
     }

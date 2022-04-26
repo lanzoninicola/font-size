@@ -9,7 +9,7 @@ export default function Header() {
       borderBottom={"1px solid"}
       borderColor="primaryAlpha.20"
       gridArea={"hd"}
-      paddingInline={["1rem", "2rem"]}
+      paddingInline={"1rem"}
       wrap="wrap"
       h="50px"
     >

@@ -7,7 +7,7 @@ import MediaQueryList from "~/components/media-queries/media-query-list";
 import EntityStateIdleMessage from "~/components/shared/entity-state-idle-message";
 import SectionSubHeader from "~/components/shared/section-subheader";
 import useMediaQueriesSelector from "~/context/app/hooks/useMediaQueriesSelector";
-import useMediaQueriesQueryService from "~/domain/media-query/useMediaQueriesQueryService";
+import useMediaQueriesQueryService from "~/domain/media-queries/useMediaQueriesQueryService";
 
 export default function MediaQueryListPage() {
   const { mediaQueries } = useMediaQueriesSelector();
@@ -38,7 +38,7 @@ export default function MediaQueryListPage() {
 
   return (
     <>
-      <InnerPageHeaderArea paddingLeft="2rem">
+      <InnerPageHeaderArea>
         <SectionSubHeader>List</SectionSubHeader>
         <MediaQueriesToolbar />
       </InnerPageHeaderArea>
@@ -50,9 +50,8 @@ export default function MediaQueryListPage() {
             <EntityStateIdleMessage context="media queries" />
           </Center>
         )}
-
-        {isLoaded && !showAddMediaQueryMessage && <MediaQueryList />}
       </InnerPageContentArea>
+      {isLoaded && !showAddMediaQueryMessage && <MediaQueryList />}
     </>
   );
 }

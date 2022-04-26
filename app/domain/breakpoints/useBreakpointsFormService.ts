@@ -1,9 +1,6 @@
-import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "remix";
 import useBreakpointsFormContext from "~/context/breakpoint-builder/hooks/useBreakpointsFormContext";
-import useBreakpointsBuilderContext from "~/context/breakpoint-builder/hooks/useBreakpointsFormContext";
 import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
-import { EntityState } from "~/context/shared/interfaces/entity-state";
 
 import parseInputString from "../utilities/parseInputString";
 import { DeleteBreakpointResponse } from "./interfaces";
@@ -33,14 +30,6 @@ export default function useBreakpointsFormService() {
 
   const { buildLabel, createBreakpoint, updateBreakpoint, deleteBreakpoint } =
     useBreakpointsDataService();
-
-  function navigateToBreakpointNew() {
-    navigate(`/app/breakpoints/edit/new`);
-  }
-
-  function navigateToBreakpointEdit(breakpointId: BreakpointId) {
-    navigate(`/app/breakpoints/edit/${breakpointId}`);
-  }
 
   function onChangeMinWidth(inputMinWidth: string) {
     const minWidth = parseInputString(inputMinWidth);
@@ -119,8 +108,6 @@ export default function useBreakpointsFormService() {
     minWidth,
     maxWidth,
     label,
-    navigateToBreakpointEdit,
-    navigateToBreakpointNew,
     onUpdateInit,
     onChangeMinWidth,
     onChangeMaxWidth,

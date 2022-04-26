@@ -1,24 +1,42 @@
-import { HStack, Text, useToast } from "@chakra-ui/react";
-import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
+import {
+  HStack,
+  Table,
+  TableContainer,
+  Tbody,
+  Td,
+  Text,
+  Th,
+  Thead,
+  Tr,
+  useToast,
+} from "@chakra-ui/react";
 import useBreakpointsSelector from "~/context/app/hooks/useBreakpointsSelector";
+import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
 import useBreakpointsFormService from "~/domain/breakpoints/useBreakpointsFormService";
+import useBreakpointsRoutesNavigate from "~/domain/breakpoints/useBreakpointsRoutesNavigate";
 
-import EntityListFullPage from "../shared/entity-list-full-page";
-import { MaxWidthIcon, MinWidthIcon } from "../shared/icons";
-import VStackBox from "../shared/vstack-wrapper";
+import ActionButton from "../shared/action-button";
+import {
+  EditIcon,
+  MaxWidthIcon,
+  MinWidthIcon,
+  TrashIcon,
+} from "../shared/icons";
+import TableTitle from "../shared/table-title";
 
 export default function BreakpointsList() {
   const toast = useToast();
 
   const { breakpoints } = useBreakpointsSelector();
-  const { navigateToBreakpointEdit, onDeleteBreakpoint } =
-    useBreakpointsFormService();
+  const { onDeleteBreakpoint } = useBreakpointsFormService();
 
-  function onBreakpointEdit(breakpointId: BreakpointId) {
-    navigateToBreakpointEdit(breakpointId);
+  const { navigateTuUpdateBreakpoint } = useBreakpointsRoutesNavigate();
+
+  function onBreakpointUpdate(breakpointId: BreakpointId) {
+    navigateTuUpdateBreakpoint(breakpointId);
   }
 
-  function onBrekpointDeletion(id: BreakpointId) {
+  function onBreakpointDelete(id: BreakpointId) {
     const deleteResponse = onDeleteBreakpoint(id);
 
     if (!deleteResponse.ok) {
@@ -33,31 +51,77 @@ export default function BreakpointsList() {
   }
 
   return (
-    <VStackBox w="100%" gap=".5rem" paddingLeft="2rem" paddingRight="1rem">
-      {breakpoints &&
-        Object.keys(breakpoints).map((breakpointId: BreakpointId, index) => {
-          const { minWidth, maxWidth } = breakpoints[breakpointId];
+    <TableContainer>
+      <Table variant="unstyled">
+        <Thead>
+          <Tr>
+            <Th>
+              <TableTitle>Actions</TableTitle>
+            </Th>
+            <Th>
+              <TableTitle>Breakpoint</TableTitle>
+            </Th>
+            <Th>
+              <TableTitle>Min Viewport Width</TableTitle>
+            </Th>
+            <Th>
+              <TableTitle>Max Viewport Width</TableTitle>
+            </Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {breakpoints &&
+            Object.keys(breakpoints).map(
+              (breakpointId: BreakpointId, index) => {
+                const { minWidth, maxWidth } = breakpoints[breakpointId];
 
-          return (
-            <EntityListFullPage
-              key={index}
-              entityName={breakpoints[breakpointId].label}
-              onEdit={() => onBreakpointEdit(breakpointId)}
-              onDelete={() => onBrekpointDeletion(breakpointId)}
-            >
-              <HStack gap="1rem">
-                <HStack>
-                  <MinWidthIcon color="gray" />
-                  <Text color="primary.500">{`${minWidth}px`}</Text>
-                </HStack>
-                <HStack>
-                  <MaxWidthIcon color="gray" />
-                  <Text color="primary.500">{`${maxWidth}px`}</Text>
-                </HStack>
-              </HStack>
-            </EntityListFullPage>
-          );
-        })}
-    </VStackBox>
+                return (
+                  <Tr key={index}>
+                    <Td>
+                      <HStack>
+                        <ActionButton
+                          label="Edit entity"
+                          noHoverbg
+                          onClick={() => onBreakpointUpdate(breakpointId)}
+                        >
+                          <EditIcon ariaLabel="Edit entity" color="gray" />
+                        </ActionButton>
+                        <ActionButton
+                          label="Remove entity"
+                          noHoverbg
+                          onClick={() => onBreakpointDelete(breakpointId)}
+                        >
+                          <TrashIcon
+                            ariaLabel="Remove entity"
+                            color="gray"
+                            size={20}
+                          />
+                        </ActionButton>
+                      </HStack>
+                    </Td>
+                    <Td textAlign={"right"}>
+                      <Text color="primary.500">
+                        {breakpoints[breakpointId].label}
+                      </Text>
+                    </Td>
+                    <Td>
+                      <HStack>
+                        <MinWidthIcon color="gray" />
+                        <Text color="primary.500">{`${minWidth}px`}</Text>
+                      </HStack>
+                    </Td>
+                    <Td>
+                      <HStack>
+                        <MaxWidthIcon color="gray" />
+                        <Text color="primary.500">{`${maxWidth}px`}</Text>
+                      </HStack>
+                    </Td>
+                  </Tr>
+                );
+              }
+            )}
+        </Tbody>
+      </Table>
+    </TableContainer>
   );
 }

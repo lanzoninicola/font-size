@@ -19,46 +19,15 @@ export default function useMediaQueriesBuilderService() {
     setMaxFontSize,
   } = useMediaQueryBuilderContext();
 
-  const {
-    getFontSizeRange,
-    isMediaQueryOfBreakpointExists,
-    isMediaQueryOfBreakpointAndSelectorExists,
-  } = useMediaQueriesQueryService();
+  const { getFontSizeRange } = useMediaQueriesQueryService();
 
   function changeCurrentBreakpoint(bp: BreakpointId) {
-    // updateEntityStateOnBreakpointChange(bp);
     setCurrentBreakpointId(bp);
   }
-
-  //   function editCurrentSelector(selector: SelectorId) {
-  //     if (entityState === SelectorEntityState.idle) {
-  //       setEntityState(SelectorEntityState.edit);
-  //       setCurrentSelector(selector);
-  //     }
-
-  //     if (entityState === SelectorEntityState.edit) {
-  //       setEntityState(SelectorEntityState.idle);
-  //       setCurrentSelector("");
-  //     }
-  //   }
-
-  // function editCurrentSelector(s: SelectorId) {
-  //   updateEntityStateOnSelectorChange(s);
-  //   setCurrentSelector(s);
-  // }
-
-  //   function updateEntityStateOnBreakpointChange(bp: BreakpointId) {
-  //     if (isMediaQueryOfBreakpointExists(bp)) {
-  //       setEntityState(SelectorEntityState.edit);
-  //     } else {
-  //       setEntityState(SelectorEntityState.new);
-  //     }
-  //   }
 
   /**
    * @description Show selector details to edit or create new media query
    *
-   * @param bp - the breakpoint id
    * @param s - the selector
    */
   function editCurrentSelector(s: SelectorId) {

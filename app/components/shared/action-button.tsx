@@ -5,14 +5,12 @@ export default function ActionButton({
   label,
   noHoverbg = false,
   isDisabled = false,
-  onClick,
   ...props
 }: {
   children: React.ReactNode;
   label: string;
   noHoverbg?: boolean;
   isDisabled?: boolean;
-  onClick?: () => void;
   [key: string]: any;
 }) {
   const hoverProps = isDisabled
@@ -30,7 +28,7 @@ export default function ActionButton({
       {...props}
       _hover={hoverProps}
       borderRadius={"5px"}
-      onClick={isDisabled ? undefined : onClick}
+      onClick={isDisabled ? undefined : props.onClick}
       opacity={isDisabled ? 0.3 : 1}
     >
       <Tooltip

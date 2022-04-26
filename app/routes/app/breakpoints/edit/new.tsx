@@ -77,7 +77,9 @@ export default function NewBreakpointPage() {
       /> */}
 
         <HStack justify={"flex-end"} w="100%">
-          <Button onClick={onSaveBreakpoint}>Save</Button>
+          <Button onClick={onSaveBreakpoint} bg={"secondary.500"}>
+            Save
+          </Button>
         </HStack>
       </VStackBox>
       <BreakpointsInnerList />

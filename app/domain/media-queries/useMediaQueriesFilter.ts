@@ -53,8 +53,6 @@ export default function useMediaQueryFilter() {
     if (mediaQueries) {
       setMediaQueriesFiltered(mediaQueries);
     }
-
-    console.log(mediaQueriesFiltered);
   }, [mediaQueries]);
 
   return {
