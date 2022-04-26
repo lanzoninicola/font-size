@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { createContext } from "use-context-selector";
-import { Breakpoints } from "../breakpoint-builder/interfaces";
 
-import { MediaQueries, Selector } from "./interfaces";
+import { Breakpoints } from "../breakpoint-builder/interfaces";
+import { MediaQueries, Selectors } from "./interfaces";
 
 export interface FontSizeContext {
   pixelsPerRem: number;
-  selector: Selector | null;
+  htmlSelectors: Selectors | null;
   breakpoints: Breakpoints | null;
   mediaQueries: MediaQueries | null;
   setPixelsPerRem: (pixelsPerRem: number) => void;
-  setSelector: (selector: Selector | null) => void;
+  setHtmlSelectors: (htmlSelectors: Selectors | null) => void;
   setBreakpoints: (breakpoints: Breakpoints | null) => void;
   setMediaQueries: (mediaQueries: MediaQueries | null) => void;
 }
@@ -21,7 +21,7 @@ export const FontSizeContextData = createContext<FontSizeContext>(
 
 export function FontSizeProvider({ children }: { children: React.ReactNode }) {
   const [pixelsPerRem, setPixelsPerRem] = useState(16);
-  const [selector, setSelector] = useState<Selector | null>(null);
+  const [htmlSelectors, setHtmlSelectors] = useState<Selectors | null>(null);
   const [breakpoints, setBreakpoints] = useState<Breakpoints | null>(null);
   const [mediaQueries, setMediaQueries] = useState<MediaQueries | null>(null);
 
@@ -29,11 +29,11 @@ export function FontSizeProvider({ children }: { children: React.ReactNode }) {
     <FontSizeContextData.Provider
       value={{
         pixelsPerRem,
-        selector,
+        htmlSelectors,
         breakpoints,
         mediaQueries,
         setPixelsPerRem,
-        setSelector,
+        setHtmlSelectors,
         setBreakpoints,
         setMediaQueries,
       }}

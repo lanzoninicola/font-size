@@ -1,11 +1,11 @@
-import { Button, HStack } from "@chakra-ui/react";
+import { Button, HStack, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
-import { Selector } from "~/context/font-size/interfaces";
+import useHtmlSelectorsSelector from "~/context/font-size/hooks/useHtmlSelectorsSelector";
+import { SelectorKey, Selectors } from "~/context/font-size/interfaces";
 import { EntityState } from "~/context/shared/interfaces/entity-state";
 import useMediaQueryService from "~/domain/media-query/useMediaQueryService";
 
-import InnerContentColumn from "../layout/inner-content-column";
 import EntityStateIdleMessage from "../shared/entity-state-idle-message";
 import FormControlInputNumber from "../shared/form-control-input-number";
 import FormControlSelectBreakpoint from "../shared/form-control-select-breakpoint";
@@ -29,13 +29,16 @@ export default function MediaQueryEdit() {
     saveMediaQuery,
   } = useMediaQueryService();
 
+  const { htmlSelectors } = useHtmlSelectorsSelector();
+  const [selectors, setSelectors] = useState<Selectors | null>(null);
+
   function onChangeBreakpoint(e: React.ChangeEvent<HTMLInputElement>) {
     const bp = e.target.value as BreakpointId;
     changeBreakpoint(bp);
   }
 
   function onChangeSelector(e: React.ChangeEvent<HTMLInputElement>) {
-    const s = e.target.value as Selector;
+    const s = e.target.value as SelectorKey;
     changeSelector(s);
   }
 
@@ -59,58 +62,63 @@ export default function MediaQueryEdit() {
     onSelectedBreakpointAndSelector();
   }, [currentBreakpointId, currentSelector]);
 
+  useEffect(() => {
+    setSelectors(htmlSelectors);
+  }, [htmlSelectors]);
+
   return (
-    <InnerContentColumn paddingTop={"0.5rem"}>
-      {!mediaQueries && entityState === EntityState.idle && (
-        <EntityStateIdleMessage context="media queries" />
-      )}
-      {(entityState !== EntityState.idle || mediaQueries) && (
-        <VStackBox gap="4rem" paddingInlineStart="2rem" paddingRight="1rem">
-          <VStackBox w="100%" gap="1rem">
-            <FormControlSelectBreakpoint
-              breakpoints={breakpoints}
-              onChange={onChangeBreakpoint}
-            />
-            <FormControlSelectSelector
-              onChange={(e) => onChangeSelector(e)}
-              isDisabled={!currentBreakpointId}
-            />
-          </VStackBox>
-          <VStackBox w="100%" gap="1rem">
-            <FormControlInputNumber
-              id="minFontSize"
-              label="Minimum font size"
-              value={minFontSize}
-              unit="rem"
-              onChange={(e) => onChangeMinFontSize(e)}
-              isDisabled={!currentBreakpointId}
-            />
-            <FormControlInputNumber
-              id="maxFontSize"
-              label="Maximum font size"
-              value={maxFontSize}
-              unit="rem"
-              onChange={(e) => onChangeMaxFontSize(e)}
-              isDisabled={!currentBreakpointId}
-            />
-          </VStackBox>
-          <HStack justify={"flex-end"} w="100%">
-            <Button
-              onClick={() => onSaveMediaQuery()}
-              isDisabled={
-                currentBreakpointId === "" ||
-                currentSelector === "" ||
-                currentBreakpointId === "no-selected" ||
-                currentSelector === "no-selected" ||
-                minFontSize === "" ||
-                maxFontSize === ""
-              }
-            >
-              Save
-            </Button>
-          </HStack>
-        </VStackBox>
-      )}
-    </InnerContentColumn>
+    <>
+      <FormControlSelectBreakpoint
+        breakpoints={breakpoints}
+        onChange={onChangeBreakpoint}
+        value={currentBreakpointId}
+      />
+      <VStackBox w="100%" gap="1rem">
+        {selectors &&
+          selectors.map((s, index) => {
+            return (
+              <HStack key={index} w="100%">
+                <Text color="primary.500" fontSize={"sm"} fontWeight={700}>
+                  {s.value}
+                </Text>
+                <HStack w="100%" gap=".5rem">
+                  <FormControlInputNumber
+                    id="minFontSize"
+                    value={minFontSize}
+                    onChange={(e) => onChangeMinFontSize(e)}
+                    isDisabled={!currentBreakpointId}
+                  />
+                  <FormControlInputNumber
+                    id="maxFontSize"
+                    value={maxFontSize}
+                    onChange={(e) => onChangeMaxFontSize(e)}
+                    isDisabled={!currentBreakpointId}
+                  />
+                  <FormControlInputNumber
+                    id="linHeight"
+                    value={"1"}
+                    onChange={(e) => onChangeMaxFontSize(e)}
+                    isDisabled={!currentBreakpointId}
+                  />
+                </HStack>
+                <Button
+                  size={"sm"}
+                  onClick={() => onSaveMediaQuery()}
+                  isDisabled={
+                    currentBreakpointId === "" ||
+                    currentSelector === "" ||
+                    currentBreakpointId === "no-selected" ||
+                    currentSelector === "no-selected" ||
+                    minFontSize === "" ||
+                    maxFontSize === ""
+                  }
+                >
+                  Save
+                </Button>
+              </HStack>
+            );
+          })}
+      </VStackBox>
+    </>
   );
 }

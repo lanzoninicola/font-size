@@ -7,11 +7,13 @@ export default function EntityListFullPage({
   children,
   onEdit,
   onDelete,
+  ...props
 }: {
   entityName: string;
   children: React.ReactElement;
   onEdit: () => void;
   onDelete: () => void;
+  [key: string]: any;
 }) {
   return (
     <HStack
@@ -24,6 +26,7 @@ export default function EntityListFullPage({
         borderRadius: "5px",
         transition: "all 0.2s ease-in-out",
       }}
+      {...props}
     >
       <HStack spacing={8}>
         <HStack>

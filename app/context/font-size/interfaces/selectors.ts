@@ -12,7 +12,20 @@ export type CSSClassAttribute = string;
 export type IdAttribute = string;
 export type HTMLAttributes = CSSClassAttribute | IdAttribute;
 
-export type Selector = HTMLTags | HTMLAttributes;
+export type SelectorKey = HTMLTags | HTMLAttributes;
+export enum SelectorType {
+  tag = "tag",
+  class = "class",
+  id = "id",
+}
+
+export type Selector = {
+  key: SelectorKey;
+  type: SelectorType;
+  value: HTMLTags | CSSClassAttribute | IdAttribute;
+};
+
+export type Selectors = Selector[];
 
 export enum FontSizeConfigKeys {
   minFontSize = "minFontSize",
@@ -20,7 +33,7 @@ export enum FontSizeConfigKeys {
 }
 
 export interface SelectorsFontSizeRange {
-  [key: Selector]: {
+  [key: SelectorKey]: {
     [FontSizeConfigKeys.minFontSize]?: number;
     [FontSizeConfigKeys.maxFontSize]?: number;
   };

@@ -66,8 +66,8 @@ export default function useBreakpointsFormService() {
     if (creationResponse.ok) {
       if (creationResponse.payload) {
         setCurrentBreakpointId(creationResponse.payload.id);
-        setMinWidth(minWidth);
-        setMaxWidth(maxWidth);
+        setMinWidth("");
+        setMaxWidth("");
         setLabel(label);
       }
     }

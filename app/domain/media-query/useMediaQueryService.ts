@@ -1,7 +1,7 @@
 import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
 import useBreakpointsSelector from "~/context/font-size/hooks/useBreakpointsSelector";
 import useMediaQueriesSelector from "~/context/font-size/hooks/useMediaQueriesSelector";
-import { MediaQueries, Selector } from "~/context/font-size/interfaces";
+import { MediaQueries, SelectorKey } from "~/context/font-size/interfaces";
 import { MediaQueryBreakpointFlat } from "~/context/font-size/interfaces/media-query";
 import useMediaQueryBuilderContext from "~/context/media-query-builder/hooks/useMediaQueryBuilderContext";
 import { EntityState } from "~/context/shared/interfaces/entity-state";
@@ -28,7 +28,7 @@ export default function useMediaQueryService() {
     setCurrentBreakpointId(bp);
   }
 
-  function changeSelector(s: Selector) {
+  function changeSelector(s: SelectorKey) {
     updateEntityStateOnSelectorChange(s);
     setCurrentSelector(s);
   }
@@ -41,7 +41,7 @@ export default function useMediaQueryService() {
     }
   }
 
-  function updateEntityStateOnSelectorChange(s: Selector) {
+  function updateEntityStateOnSelectorChange(s: SelectorKey) {
     if (isMediaQueryOfBreakpointExistsAndSelector(currentBreakpointId, s)) {
       setEntityState(EntityState.edit);
     } else {
@@ -106,7 +106,7 @@ export default function useMediaQueryService() {
 
   function createMediaQuery(
     breakpointId: BreakpointId,
-    selector: Selector,
+    selector: SelectorKey,
     minFontSize: number,
     maxFontSize: number
   ) {
@@ -124,7 +124,7 @@ export default function useMediaQueryService() {
 
   function updateMediaQuery(
     breakpointId: BreakpointId,
-    selector: Selector,
+    selector: SelectorKey,
     minFontSize: number,
     maxFontSize: number
   ) {
@@ -148,7 +148,8 @@ export default function useMediaQueryService() {
    * @param bp - the breakpoint id
    * @param s - the selector
    */
-  function editMediaQuery(bp: BreakpointId, s: Selector) {
+  function editMediaQuery(bp: BreakpointId, s: SelectorKey) {
+    console.log("editMediaQuery", bp, s);
     setCurrentBreakpointId(bp);
     setCurrentSelector(s);
     setEntityState(EntityState.edit);
@@ -162,7 +163,7 @@ export default function useMediaQueryService() {
    * @param bp - the breakpoint id
    * @param s - the selector
    */
-  function deleteMediaQuery(bp: BreakpointId, s: Selector) {
+  function deleteMediaQuery(bp: BreakpointId, s: SelectorKey) {
     let nextMediaQueries: MediaQueries | null = { ...mediaQueries };
 
     delete nextMediaQueries[bp][s];
@@ -182,12 +183,12 @@ export default function useMediaQueryService() {
   /**
    *
    * @param {BreakpointId} breakpointId - The breakpoint id
-   * @param {Selector} selector - The selector (tag, class, id) to get the media query info
+   * @param {SelectorKey} selector - The selector (tag, class, id) to get the media query info
    * @param {MediaQueries} mq - Optional if the component cannot access to the mediaqueries context
    *
    * @returns The min and max font size for the given selector and breakpoint in REM
    */
-  function getFontSizeRange(breakpointId: BreakpointId, selector: Selector) {
+  function getFontSizeRange(breakpointId: BreakpointId, selector: SelectorKey) {
     let breakpoint = null;
     let minFontSize = 0;
     let maxFontSize = 0;
@@ -246,7 +247,7 @@ export default function useMediaQueryService() {
 
   function isMediaQueryOfBreakpointExistsAndSelector(
     bp: BreakpointId,
-    s: Selector
+    s: SelectorKey
   ) {
     if (!mediaQueries) return false;
     if (!mediaQueries[bp]) return false;

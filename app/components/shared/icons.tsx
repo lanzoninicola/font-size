@@ -316,7 +316,21 @@ export function NavigateBackIcon({
 }: IconProps) {
   return (
     <Image
-      src={`${BASE_URL}/navigate-back-icon-${size}-${color}.svg`}
+      src={`${BASE_URL}/arrow-circle-left-icon-${size}-${color}.svg`}
+      alt={ariaLabel}
+      altaria-label={ariaLabel}
+    />
+  );
+}
+
+export function NavigateForwardIcon({
+  size = 20,
+  color = "gray",
+  ariaLabel = "Navigate Forward",
+}: IconProps) {
+  return (
+    <Image
+      src={`${BASE_URL}/arrow-circle-right-icon-${size}-${color}.svg`}
       alt={ariaLabel}
       altaria-label={ariaLabel}
     />

@@ -1,10 +1,11 @@
 import { Button, HStack, useToast } from "@chakra-ui/react";
 import { useEffect } from "react";
+import BreakpointsInnerList from "~/components/breakpoints/breakpoints-inner-list";
 import FormControlInputNumber from "~/components/shared/form-control-input-number";
 import VStackBox from "~/components/shared/vstack-wrapper";
 import useBreakpointsFormService from "~/domain/breakpoints/useBreakpointsFormService";
 
-export default function BreakpointFormNew() {
+export default function NewBreakpointPage() {
   const toast = useToast();
   const {
     minWidth,
@@ -49,24 +50,25 @@ export default function BreakpointFormNew() {
   }
 
   return (
-    <VStackBox w="100%" gap="3rem">
-      <VStackBox gap="1.5rem">
-        <FormControlInputNumber
-          id="minViewportWidth"
-          label="Minimum viewport width"
-          value={minWidth}
-          unit="px"
-          onChange={(e) => onChangeMinViewportWidth(e)}
-        />
-        <FormControlInputNumber
-          id="maxViewportWidth"
-          label="Maximum viewport width"
-          value={maxWidth}
-          unit="px"
-          onChange={(e) => onChangeMaxViewportWidth(e)}
-        />
-      </VStackBox>
-      {/* <FormControlInputText
+    <>
+      <VStackBox w="100%" gap="3rem">
+        <VStackBox gap="1.5rem">
+          <FormControlInputNumber
+            id="minViewportWidth"
+            label="Minimum viewport width"
+            value={minWidth}
+            unit="px"
+            onChange={(e) => onChangeMinViewportWidth(e)}
+          />
+          <FormControlInputNumber
+            id="maxViewportWidth"
+            label="Maximum viewport width"
+            value={maxWidth}
+            unit="px"
+            onChange={(e) => onChangeMaxViewportWidth(e)}
+          />
+        </VStackBox>
+        {/* <FormControlInputText
         id="label"
         label="Name"
         value={label}
@@ -74,9 +76,11 @@ export default function BreakpointFormNew() {
         isDisabled
       /> */}
 
-      <HStack justify={"flex-end"} w="100%">
-        <Button onClick={onSaveBreakpoint}>Save</Button>
-      </HStack>
-    </VStackBox>
+        <HStack justify={"flex-end"} w="100%">
+          <Button onClick={onSaveBreakpoint}>Save</Button>
+        </HStack>
+      </VStackBox>
+      <BreakpointsInnerList />
+    </>
   );
 }

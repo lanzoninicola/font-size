@@ -3,9 +3,11 @@ import InputSelect from "~/components/shared/input-select";
 
 export default function FormControlSelectSelector({
   isDisabled,
+  value,
   onChange,
 }: {
   isDisabled?: boolean;
+  value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
   return (
@@ -17,7 +19,7 @@ export default function FormControlSelectSelector({
         minW="370px"
         fontSize="16px"
         onChange={onChange}
-        defaultValue="no-selected"
+        value={value || "no-selected"}
         isDisabled={isDisabled}
       >
         <option value="no-selected">--- Choose a selector ---</option>

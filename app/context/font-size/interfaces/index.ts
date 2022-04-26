@@ -5,17 +5,23 @@ import {
   IdAttribute,
   HTMLAttributes,
   SelectorsFontSizeRange,
+  SelectorKey,
+  SelectorType,
   Selector,
+  Selectors,
   FontSizeConfigKeys,
 } from "./selectors";
 
 export type {
   CSSClassAttribute,
   HTMLAttributes,
-  HTMLTags,
   IdAttribute,
   MediaQueries,
   SelectorsFontSizeRange,
+  SelectorKey,
   Selector,
+  Selectors,
   FontSizeConfigKeys,
 };
+
+export { HTMLTags, SelectorType };

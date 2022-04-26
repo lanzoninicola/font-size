@@ -11,6 +11,8 @@ export default function PageHeader({
       paddingLeft="2rem"
       borderBottom={"1px solid"}
       borderBottomColor="primaryAlpha.20"
+      w="100%"
+      className="page-title"
     >
       <SectionHeader>{children}</SectionHeader>
     </Box>

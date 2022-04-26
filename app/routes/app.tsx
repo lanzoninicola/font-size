@@ -8,14 +8,12 @@ import Sidebar from "~/components/sidebar/sidebar";
 
 export default function App() {
   return (
-    <Box as="main" bg="background.300" minH="100vh">
-      <MainGridWrapper minH="100vh">
-        <Header />
+    <MainGridWrapper as="main" bg="background.300" minH="100vh">
+      <Header />
 
-        <Sidebar />
-        <Outlet />
-        <Footer />
-      </MainGridWrapper>
-    </Box>
+      <Sidebar />
+      <Outlet />
+      <Footer />
+    </MainGridWrapper>
   );
 }

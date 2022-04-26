@@ -1,8 +1,8 @@
 import { Button, Center, Text } from "@chakra-ui/react";
 import { Link } from "remix";
-import VStackBox from "./vstack-wrapper";
+import VStackBox from "~/components/shared/vstack-wrapper";
 
-export default function BreakpointsMissingMessage() {
+export default function MissingBreakpointPage() {
   return (
     <Center>
       <VStackBox gap="2rem">

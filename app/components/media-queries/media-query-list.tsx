@@ -1,80 +1,138 @@
-import { HStack, Text } from "@chakra-ui/react";
-import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
-import { Selector } from "~/context/font-size/interfaces";
+import {
+  Grid,
+  HStack,
+  Table,
+  TableCaption,
+  TableContainer,
+  Tbody,
+  Td,
+  Text,
+  Th,
+  Thead,
+  Tr,
+} from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { MediaQueries } from "~/context/font-size/interfaces";
+import useBreakpointsQueryService from "~/domain/breakpoints/useBreakpointsQueryService";
+import useMediaQueriesFilter from "~/domain/media-query/useMediaQueriesFilter";
 import useMediaQueryService from "~/domain/media-query/useMediaQueryService";
 
-import EntityList from "../shared/entity-list";
+import ActionButton from "../shared/action-button";
 import {
+  EditIcon,
   LineHeightIcon,
   MaxFontSizeIcon,
   MinFontSizeIcon,
+  TrashIcon,
 } from "../shared/icons";
-import VStackBox from "../shared/vstack-wrapper";
+import TableTitle from "../shared/table-title";
 
 export default function MediaQueryList() {
-  const {
-    currentBreakpointId,
-    mediaQueries,
-    editMediaQuery,
-    deleteMediaQuery,
-  } = useMediaQueryService();
+  const { editMediaQuery, deleteMediaQuery } = useMediaQueryService();
 
-  function onEditMediaQuery(bp: BreakpointId, s: Selector) {
-    editMediaQuery(bp, s);
-  }
+  const { getBreakpointName } = useBreakpointsQueryService();
 
-  function onDeleteMediaQuery(bp: BreakpointId, s: Selector) {
-    deleteMediaQuery(bp, s);
-  }
+  const { mediaQueriesFiltered } = useMediaQueriesFilter();
+  const [mediaQueries, setMediaQueries] = useState<MediaQueries>();
+
+  useEffect(() => {
+    if (mediaQueriesFiltered) {
+      setMediaQueries(mediaQueriesFiltered);
+    }
+
+    console.log("MediaQueryListItems", mediaQueriesFiltered, mediaQueries);
+  }, [mediaQueriesFiltered]);
 
   return (
-    <VStackBox w="100%" gap=".5rem" paddingLeft="2rem" paddingRight="1rem">
-      {mediaQueries &&
-        mediaQueries[currentBreakpointId] &&
-        Object.keys(mediaQueries[currentBreakpointId]).map(
-          (selectorId, index) => {
-            if (!currentBreakpointId) {
-              return;
-            }
+    <>
+      <TableContainer>
+        <Table variant="unstyled">
+          <Thead>
+            <Tr>
+              <Th>
+                <TableTitle textAlign="center">Actions</TableTitle>
+              </Th>
+              <Th>
+                <TableTitle gridArea={"colTitle2"}>Media Query</TableTitle>
+              </Th>
+              <Th>
+                <TableTitle gridArea={"colTitle3"}>Selector</TableTitle>
+              </Th>
+              <Th>
+                <TableTitle gridArea={"colTitle4"}>Values</TableTitle>
+              </Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {mediaQueries &&
+              Object.keys(mediaQueries).map((breakpointId) => {
+                return Object.keys(mediaQueries[breakpointId]).map(
+                  (selectorId, index) => {
+                    const { minFontSize, maxFontSize } =
+                      mediaQueries[breakpointId][selectorId];
 
-            if (!selectorId) {
-              return;
-            }
-
-            const mediaQueryData =
-              mediaQueries[currentBreakpointId][selectorId];
-
-            return (
-              <EntityList
-                key={index}
-                entityName={selectorId}
-                onEdit={() => onEditMediaQuery(currentBreakpointId, selectorId)}
-                onDelete={() =>
-                  onDeleteMediaQuery(currentBreakpointId, selectorId)
-                }
-              >
-                <HStack gap="1rem">
-                  <HStack>
-                    <MinFontSizeIcon color="green" />
-                    <Text color="secondary.700">
-                      {`${mediaQueryData.minFontSize}rem`}
-                    </Text>
-                  </HStack>
-                  <HStack>
-                    <MaxFontSizeIcon color="green" />
-                    <Text color="secondary.700">
-                      {`${mediaQueryData.maxFontSize}rem`}
-                    </Text>
-                  </HStack>
-                  <HStack>
-                    <LineHeightIcon color="green" />
-                    <Text color="secondary.700">0.1</Text>
-                  </HStack>
-                </HStack>
-              </EntityList>
-            );
-          }
-        )}
-    </VStackBox>
+                    return (
+                      <Tr key={index}>
+                        <Td>
+                          <HStack gridArea={"colContent1"}>
+                            <ActionButton
+                              label="Edit entity"
+                              noHoverbg
+                              onClick={() =>
+                                editMediaQuery(breakpointId, selectorId)
+                              }
+                            >
+                              <EditIcon ariaLabel="Edit entity" color="gray" />
+                            </ActionButton>
+                            <ActionButton
+                              label="Remove entity"
+                              noHoverbg
+                              onClick={() =>
+                                deleteMediaQuery(breakpointId, selectorId)
+                              }
+                            >
+                              <TrashIcon
+                                ariaLabel="Remove entity"
+                                color="gray"
+                                size={20}
+                              />
+                            </ActionButton>
+                          </HStack>
+                        </Td>
+                        <Td>
+                          <Text color="primary.500" gridArea={"colContent2"}>
+                            {getBreakpointName(breakpointId)}
+                          </Text>
+                        </Td>
+                        <Td>
+                          <Text color="primary.500" gridArea={"colContent3"}>
+                            {selectorId}
+                          </Text>
+                        </Td>
+                        <Td>
+                          <HStack gap="1rem" gridArea={"colContent4"}>
+                            <HStack>
+                              <MinFontSizeIcon color="gray" />
+                              <Text color="primary.500">{`${minFontSize}rem`}</Text>
+                            </HStack>
+                            <HStack>
+                              <MaxFontSizeIcon color="gray" />
+                              <Text color="primary.500">{`${maxFontSize}rem`}</Text>
+                            </HStack>
+                            <HStack>
+                              <LineHeightIcon color="gray" />
+                              <Text color="primary.500">0.1</Text>
+                            </HStack>
+                          </HStack>
+                        </Td>
+                      </Tr>
+                    );
+                  }
+                );
+              })}
+          </Tbody>
+        </Table>
+      </TableContainer>
+    </>
   );
 }

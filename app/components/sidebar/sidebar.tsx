@@ -1,4 +1,5 @@
 import { Box, VStack } from "@chakra-ui/react";
+import useMediaQueriesRoutes from "~/domain/media-query/useMediaQueriesRoutes";
 
 import {
   BreakpointsIcon,
@@ -19,6 +20,8 @@ interface SidebarItemConfig {
 // TODO: Add a sidebar context and Service Hooks to add/disable sidebar items. Remove data from the view
 
 export default function Sidebar() {
+  const { ROUTE_MEDIA_QUERY_LIST } = useMediaQueriesRoutes();
+
   const items: SidebarItemConfig[] = [
     {
       to: "/app/breakpoints",
@@ -28,7 +31,7 @@ export default function Sidebar() {
       isDisabled: false,
     },
     {
-      to: "/app/media-queries",
+      to: ROUTE_MEDIA_QUERY_LIST,
       label: "Media Queries",
       ariaLabel: "Define media queries and styles",
       icon: <MediaQueryIcon size={24} color="gray" />,

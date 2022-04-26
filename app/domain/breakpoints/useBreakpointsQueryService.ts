@@ -17,6 +17,27 @@ export default function useBreakpointsQueryService() {
   const { breakpoints } = useBreakpointsSelector();
   const { pixelsPerRem } = usePixelsPerRemSelector();
 
+  /**
+   * @description Returns the name of the given breakpointId
+   * @returns {string}
+   * */
+  function getBreakpointName(breakpointId: BreakpointId): string {
+    if (breakpoints) {
+      const breakpoint = breakpoints[breakpointId];
+
+      if (breakpoint) {
+        return breakpoint.label;
+      }
+    }
+
+    return "";
+  }
+
+  /**
+   * @description Returns the breakpoint information for the specified breakpoint id
+   * @param {BreakpointId} breakpointId
+   * @returns {BreakpointResponse}
+   * */
   function getBreakpointById(breakpointId: BreakpointId): BreakpointResponse {
     // The firs time the hook is called, the breakpoints state is null as it is not yet loaded.
     // So we need to check if the breakpoints state is null before trying to access it.
@@ -50,6 +71,7 @@ export default function useBreakpointsQueryService() {
    * @returns {boolean}
    */
   function isBreakpointsEmpty() {
+    console.log("isBreakpointsEmpty", breakpoints);
     if (breakpoints) {
       return Object.keys(breakpoints).length === 0;
     }
@@ -132,6 +154,7 @@ export default function useBreakpointsQueryService() {
 
   return {
     breakpoints,
+    getBreakpointName,
     getBreakpointById,
     isBreakpointsEmpty,
     isBreakpointExists,

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createContext } from "use-context-selector";
 import { BreakpointId } from "../breakpoint-builder/interfaces";
-import { Selector } from "../font-size/interfaces";
+import { SelectorKey } from "../font-size/interfaces";
 import { EntityState } from "../shared/interfaces/entity-state";
 
 export interface MediaQueryBuilderContext {
@@ -29,7 +29,7 @@ export function MediaQueryBuilderProvider({
   const [entityState, setEntityState] = useState<EntityState>(EntityState.idle);
   const [currentBreakpointId, setCurrentBreakpointId] =
     useState<BreakpointId>("");
-  const [currentSelector, setCurrentSelector] = useState<Selector>("");
+  const [currentSelector, setCurrentSelector] = useState<SelectorKey>("");
   const [minFontSize, setMinFontSize] = useState<string>("");
   const [maxFontSize, setMaxFontSize] = useState<string>("");
 

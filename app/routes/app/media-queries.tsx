@@ -1,10 +1,11 @@
 import { Box } from "@chakra-ui/react";
 import { Outlet } from "remix";
-import FlexRowWrap from "~/components/layout/flex-row-wrap";
-import FlexRowWrapColumn from "~/components/layout/flex-row-wrap-column";
-import BreakpointsMissingMessage from "~/components/shared/breakpoints-missing-message";
+import InnerPageContentArea from "~/components/layout/inner-page-content-area";
+import InnerPageHeaderArea from "~/components/layout/inner-page-header-area";
+import MediaQueriesToolbar from "~/components/media-queries/media-queries-toolbar";
 import PageHeader from "~/components/shared/page-header";
-import useBreakpointsQueryService from "~/domain/breakpoints/useBreakpointsQueryService";
+import SectionSubHeader from "~/components/shared/section-subheader";
+import { MediaQueryBuilderProvider } from "~/context/media-query-builder/media-query-builder-context";
 
 // export interface LoaderData {
 //   ENV: {
@@ -25,20 +26,12 @@ import useBreakpointsQueryService from "~/domain/breakpoints/useBreakpointsQuery
 // }
 
 export default function MediaQueriesPage() {
-  const { isBreakpointsEmpty } = useBreakpointsQueryService();
-
   return (
     <Box>
-      <PageHeader>Media Queries</PageHeader>
-
-      <FlexRowWrap gap={0}>
-        {isBreakpointsEmpty() && (
-          <FlexRowWrapColumn wrapAt="600px" maxW={`auto`} h="auto">
-            <BreakpointsMissingMessage />
-          </FlexRowWrapColumn>
-        )}
-        {!isBreakpointsEmpty() && <Outlet />}
-      </FlexRowWrap>
+      <MediaQueryBuilderProvider>
+        <PageHeader>Media Queries</PageHeader>
+        <Outlet />
+      </MediaQueryBuilderProvider>
     </Box>
   );
 }

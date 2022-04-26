@@ -1,6 +1,6 @@
 import VStackBox from "../shared/vstack-wrapper";
 
-export default function SectionSubHeaderWrapper({
+export default function InnerPageHeaderArea({
   children,
 }: {
   children: React.ReactNode;
@@ -12,6 +12,7 @@ export default function SectionSubHeaderWrapper({
       borderBottomColor="primaryAlpha.20"
       paddingInlineStart="2rem"
       paddingRight="1rem"
+      className="inner-page-header-area"
     >
       {children}
     </VStackBox>

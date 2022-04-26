@@ -2,7 +2,7 @@ import { HStack } from "@chakra-ui/react";
 import { Outlet, useNavigate } from "remix";
 import FlexRowWrapColumn from "~/components/layout/flex-row-wrap-column";
 import InnerContentColumn from "~/components/layout/inner-content-column";
-import SectionSubHeaderWrapper from "~/components/layout/section-sub-header-wrapper";
+import InnerPageHeaderArea from "~/components/layout/inner-page-header-area";
 import ToolbarWrapper from "~/components/layout/toolbar-wrapper";
 import ActionButton from "~/components/shared/action-button";
 import { NavigateBackIcon } from "~/components/shared/icons";
@@ -25,7 +25,7 @@ export default function EditBreakpointPage() {
         borderRightColor={"primaryAlpha.20"}
         minH="800px"
       >
-        <SectionSubHeaderWrapper>
+        <InnerPageHeaderArea>
           <SectionSubHeader>Builder</SectionSubHeader>
           <ToolbarWrapper justify="space-between">
             <HStack>
@@ -34,7 +34,7 @@ export default function EditBreakpointPage() {
               </ActionButton>
             </HStack>
           </ToolbarWrapper>
-        </SectionSubHeaderWrapper>
+        </InnerPageHeaderArea>
         <InnerContentColumn paddingTop={"0.5rem"}>
           <VStackBox gap="2rem" paddingInlineStart="2rem" paddingRight="1rem">
             <Outlet />
@@ -43,9 +43,9 @@ export default function EditBreakpointPage() {
       </FlexRowWrapColumn>
 
       <FlexRowWrapColumn wrapAt="600px" maxW={`calc(100vw - 850px)`} h="auto">
-        {/*<SectionSubHeaderWrapper>
+        {/*<InnerPageHeaderArea>
           <SectionSubHeader>Preview</SectionSubHeader>
-        </SectionSubHeaderWrapper>
+        </InnerPageHeaderArea>
       <PreviewIndex /> */}
       </FlexRowWrapColumn>
     </>

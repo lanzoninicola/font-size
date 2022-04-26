@@ -1,27 +1,59 @@
 import { HStack } from "@chakra-ui/react";
-import useMediaQueryService from "~/domain/media-query/useMediaQueryService";
+import { Link } from "remix";
+import useMediaQueriesRoutes from "~/domain/media-query/useMediaQueriesRoutes";
+import useMediaQueriesRoutesLocation from "~/domain/media-query/useMediaQueriesRoutesLocation";
 
-import ActionButton from "../shared/action-button";
 import ToolbarWrapper from "../layout/toolbar-wrapper";
-import { CodeIcon, NewEntityIcon } from "../shared/icons";
+import ActionButton from "../shared/action-button";
+import { CodeIcon, NavigateBackIcon, NewEntityIcon } from "../shared/icons";
 
 export default function MediaQueriesToolbar() {
-  const { initMediaQuery } = useMediaQueryService();
+  const {
+    ROUTE_MEDIA_QUERY_LIST,
+    ROUTE_MEDIA_QUERY_SHOW_CODE,
+    ROUTE_MEDIA_QUERY_NEW,
+    ROUTE_MEDIA_QUERY_UPDATE,
+  } = useMediaQueriesRoutes();
 
-  function onNewMediaQuery() {
-    initMediaQuery();
+  const { currentRoute } = useMediaQueriesRoutesLocation();
+
+  function getActionButtons() {
+    switch (currentRoute) {
+      case ROUTE_MEDIA_QUERY_LIST:
+        return (
+          <>
+            <ActionButton label="New media query">
+              <Link to={ROUTE_MEDIA_QUERY_NEW}>
+                <NewEntityIcon />
+              </Link>
+            </ActionButton>
+            <ActionButton label="Show me the code">
+              <Link to={ROUTE_MEDIA_QUERY_SHOW_CODE}>
+                <CodeIcon />
+              </Link>
+            </ActionButton>
+          </>
+        );
+      case ROUTE_MEDIA_QUERY_NEW || ROUTE_MEDIA_QUERY_UPDATE:
+        return (
+          <>
+            <ActionButton label="Go back">
+              <Link to={ROUTE_MEDIA_QUERY_LIST}>
+                <NavigateBackIcon />
+              </Link>
+            </ActionButton>
+          </>
+        );
+    }
   }
+
+  // useEffect(() => {
+  //   getActionButtons();
+  // }, [currentRoute]);
 
   return (
     <ToolbarWrapper justify="space-between">
-      <HStack>
-        <ActionButton label="New media query" onClick={onNewMediaQuery}>
-          <NewEntityIcon />
-        </ActionButton>
-        <ActionButton label="Show me the code">
-          <CodeIcon />
-        </ActionButton>
-      </HStack>
+      <HStack>{getActionButtons()}</HStack>
       {/* <ActionButton label="Export configuration">
         <ExportConfig />
       </ActionButton> */}

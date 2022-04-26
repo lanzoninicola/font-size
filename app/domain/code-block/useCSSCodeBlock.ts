@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
 import useBreakpointsSelector from "~/context/font-size/hooks/useBreakpointsSelector";
 import usePixelsPerRemSelector from "~/context/font-size/hooks/usePixelsPerRemSelector";
-import { Selector } from "~/context/font-size/interfaces";
+import { SelectorKey } from "~/context/font-size/interfaces";
 
 import useBreakpointsQueryService from "../breakpoints/useBreakpointsQueryService";
 import calculateClampSlope from "../media-query/calculateClampSlope";
@@ -53,7 +53,7 @@ export default function useCSSCodeBlock(forceImportant = false) {
       for (const selector in breakpointMediaQuery) {
         const { minFontSize, maxFontSize } = getFontSizeRange(
           breakpointId,
-          selector as Selector
+          selector as SelectorKey
         );
 
         const slope = calculateClampSlope(
