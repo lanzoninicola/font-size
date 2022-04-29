@@ -11,14 +11,14 @@ export default function usePreviewService() {
 
   /**
    * @description Add new preview window. The new window is added to the begin of the list.
-   * The size of the new window is set to the default value.
+   * The size of the new window is set to the default value if a width and height have not given.
    */
-  function addWindow() {
+  function addWindow(userWidth?: number, userHeight?: number) {
     const nextState = [...previewWindows];
 
     const newItem: PreviewItem = {
-      width: DEFAULT_WIDTH,
-      height: DEFAULT_HEIGHT,
+      width: userWidth || DEFAULT_WIDTH,
+      height: userHeight || DEFAULT_HEIGHT,
     };
 
     nextState.unshift(newItem);

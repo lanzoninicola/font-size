@@ -72,8 +72,8 @@ export default function useBreakpointsFormService() {
       if (response.payload) {
         const { id, minWidth, maxWidth, label } = response.payload;
         setCurrentBreakpointId(id);
-        setMinWidth(minWidth);
-        setMaxWidth(maxWidth);
+        setMinWidth(String(minWidth));
+        setMaxWidth(String(maxWidth));
         setLabel(label);
       }
     }

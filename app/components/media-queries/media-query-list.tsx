@@ -69,7 +69,7 @@ export default function MediaQueryList() {
               Object.keys(mediaQueries).map((breakpointId) => {
                 return Object.keys(mediaQueries[breakpointId]).map(
                   (selectorId, index) => {
-                    const { minFontSize, maxFontSize } =
+                    const { minFontSize, maxFontSize, lineHeight } =
                       mediaQueries[breakpointId][selectorId];
 
                     const selectorName = getSelectorNameById(selectorId);
@@ -101,7 +101,7 @@ export default function MediaQueryList() {
                         <Td>
                           <HStack>
                             <LineHeightIcon color="gray" />
-                            <Text color="primary.500">0.1</Text>
+                            <Text color="primary.500">{`${lineHeight}%`}</Text>
                           </HStack>
                         </Td>
                       </Tr>

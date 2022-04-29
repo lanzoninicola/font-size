@@ -5,7 +5,6 @@ import usePreviewZoomSelector from "~/context/preview/hooks/usePreviewZoomSelect
 import FlippedContainer from "../layout/flipped-container";
 import InnerContentColumn from "../layout/inner-content-column";
 import PreviewItem from "./preview-item";
-import PreviewToolbar from "./preview-toolbar";
 
 export default function PreviewIndex() {
   const { previewWindows } = usePreviewWindowsSelector();
@@ -21,6 +20,7 @@ export default function PreviewIndex() {
             gap="2rem"
             align={"flex-start"}
             paddingLeft="2rem"
+            paddingTop="1rem"
           >
             <>
               {previewWindows.map((_, idx) => (

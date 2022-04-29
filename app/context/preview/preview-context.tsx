@@ -17,12 +17,7 @@ export const PreviewContextData = createContext<PreviewContext>(
 );
 
 export function PreviewProvider({ children }: { children: React.ReactNode }) {
-  const [previewWindows, setPreviewWindows] = useState<PreviewItem[]>([
-    {
-      width: SETTINGS.preview.iframeDefaultWidth,
-      height: SETTINGS.preview.iframeDefaultHeight,
-    },
-  ]);
+  const [previewWindows, setPreviewWindows] = useState<PreviewItem[]>([]);
   const [previewUrl, setPreviewUrl] = useState("");
   const [zoom, setZoom] = useState(100);
 

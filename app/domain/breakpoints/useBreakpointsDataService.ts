@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import useBreakpointsSelector from "~/context/app/hooks/useBreakpointsSelector";
 import {
   Breakpoints,
@@ -9,11 +10,13 @@ import parseDecimalNumber from "../utilities/parseDecimalNumber";
 import {
   BreakpointsDataServiceResponse,
   DeleteBreakpointResponse,
-} from "./interfaces";
-import {
+  BreakpointListAllOptions,
   BreakpointResponse,
   BreakpointValidationResult,
-} from "./interfaces/data-service";
+  OrderByParameter,
+  BreakpointListAllResponse,
+  BreakpointFlat,
+} from "./interfaces";
 import useBreakpointsQueryService from "./useBreakpointsQueryService";
 
 /**
@@ -21,8 +24,85 @@ import useBreakpointsQueryService from "./useBreakpointsQueryService";
  */
 export default function useBreakpointsDataService(): BreakpointsDataServiceResponse {
   const { breakpoints, setBreakpoints } = useBreakpointsSelector();
+
   const { isMediaQueryOfBreakpointExists } = useMediaQueriesQueryService();
   const { isBreakpointExistsByViewportSize } = useBreakpointsQueryService();
+
+  function listAll(
+    options?: BreakpointListAllOptions
+  ): BreakpointListAllResponse {
+    let orderby: OrderByParameter = "minWidth";
+
+    if (options) {
+      if (options.orderby) {
+        orderby = options.orderby;
+      }
+    }
+
+    if (!breakpoints) {
+      return {
+        ok: false,
+      };
+    }
+
+    const breakpointsList: BreakpointFlat[] = Object.keys(breakpoints).map(
+      (breakpointId) => {
+        return {
+          id: breakpointId,
+          label: breakpoints[breakpointId].label,
+          minWidth: breakpoints[breakpointId].minWidth,
+          maxWidth: breakpoints[breakpointId].maxWidth,
+        };
+      }
+    );
+
+    if (orderby === "label") {
+      breakpointsList.sort((a, b) => {
+        if (a.label < b.label) {
+          return -1;
+        }
+
+        if (a.label > b.label) {
+          return 1;
+        }
+
+        return 0;
+      });
+    }
+
+    if (orderby === "minWidth") {
+      breakpointsList.sort((a, b) => {
+        if (a.minWidth < b.minWidth) {
+          return -1;
+        }
+
+        if (a.minWidth > b.minWidth) {
+          return 1;
+        }
+
+        return 0;
+      });
+    }
+
+    if (orderby === "maxWidth") {
+      breakpointsList.sort((a, b) => {
+        if (a.maxWidth < b.maxWidth) {
+          return -1;
+        }
+
+        if (a.maxWidth > b.maxWidth) {
+          return 1;
+        }
+
+        return 0;
+      });
+    }
+
+    return {
+      ok: true,
+      payload: breakpointsList,
+    };
+  }
 
   function createBreakpoint(
     minWidth: string,
@@ -71,8 +151,8 @@ export default function useBreakpointsDataService(): BreakpointsDataServiceRespo
       payload: {
         id: id,
         label: label,
-        minWidth: minWidth,
-        maxWidth: maxWidth,
+        minWidth: minWidthPx,
+        maxWidth: maxWidthPx,
       },
     };
   }
@@ -118,8 +198,8 @@ export default function useBreakpointsDataService(): BreakpointsDataServiceRespo
       payload: {
         id: breakpointId,
         label,
-        minWidth,
-        maxWidth,
+        minWidth: minWidthPx,
+        maxWidth: maxWidthPx,
       },
     };
   }
@@ -216,6 +296,7 @@ export default function useBreakpointsDataService(): BreakpointsDataServiceRespo
 
   return {
     buildLabel,
+    listAll,
     createBreakpoint,
     updateBreakpoint,
     deleteBreakpoint,

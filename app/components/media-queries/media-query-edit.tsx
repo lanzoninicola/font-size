@@ -15,10 +15,10 @@ import FormControlInputNumber from "../shared/form-control-input-number";
 import FormControlSelectBreakpoint from "../shared/form-control-select-breakpoint";
 import { CloseIcon, EditIcon, ResetIcon, SaveIcon } from "../shared/icons";
 import VStackBox from "../shared/vstack-wrapper";
+import useBreakpointsDataService from "~/domain/breakpoints/useBreakpointsDataService";
+import { BreakpointFlat } from "~/domain/breakpoints/interfaces";
 
 export default function MediaQueryEdit() {
-  const { breakpoints } = useBreakpointsSelector();
-
   const {
     entityState,
     currentBreakpointId,
@@ -28,8 +28,8 @@ export default function MediaQueryEdit() {
   } = useMediaQueriesBuilderService();
 
   const { getTokenValues } = useMediaQueriesQueryService();
-
   const { htmlSelectors } = useHtmlSelectorsSelector();
+
   const [selectors, setSelectors] = useState<Selectors | null>(null);
 
   const appScrollbarStyle = useCustomScrollbar();
@@ -46,7 +46,6 @@ export default function MediaQueryEdit() {
   return (
     <VStackBox gap="1.5rem">
       <FormControlSelectBreakpoint
-        breakpoints={breakpoints}
         onChange={onchangeCurrentBreakpoint}
         value={currentBreakpointId}
       />

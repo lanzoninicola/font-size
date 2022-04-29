@@ -7,6 +7,7 @@ import { SelectorId } from "~/context/app/interfaces";
 
 export default function useMediaQueriesQueryService() {
   const { mediaQueries } = useMediaQueriesSelector();
+  const DEFAULT_LINE_HEIGHT = 120;
 
   function isMediaQueryEmpty() {
     return new Promise((resolve, reject) => {
@@ -43,7 +44,7 @@ export default function useMediaQueriesQueryService() {
     let breakpoint = null;
     let minFontSize = 0;
     let maxFontSize = 0;
-    let lineHeight = 0;
+    let lineHeight = DEFAULT_LINE_HEIGHT;
 
     if (mediaQueries) {
       breakpoint = mediaQueries[breakpointId];
@@ -51,7 +52,7 @@ export default function useMediaQueriesQueryService() {
       if (breakpoint) {
         minFontSize = breakpoint[selector]?.minFontSize ?? 0;
         maxFontSize = breakpoint[selector]?.maxFontSize ?? 0;
-        lineHeight = breakpoint[selector]?.lineHeight ?? 0;
+        lineHeight = breakpoint[selector]?.lineHeight ?? lineHeight;
       }
     }
 

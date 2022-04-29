@@ -23,7 +23,6 @@ export function BreakpointsFormProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [entityState, setEntityState] = useState<EntityState>(EntityState.idle);
   const [currentBreakpointId, setCurrentBreakpointId] =
     useState<BreakpointId>("");
   const [minWidth, setMinWidth] = useState<string>("");

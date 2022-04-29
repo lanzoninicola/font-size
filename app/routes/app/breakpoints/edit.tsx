@@ -23,7 +23,7 @@ export default function EditBreakpointPage() {
         maxW="650px"
         borderRight="1px solid"
         borderRightColor={"primaryAlpha.20"}
-        minH="800px"
+        minH="100vh"
       >
         <InnerPageHeaderArea>
           <SectionSubHeader>Builder</SectionSubHeader>

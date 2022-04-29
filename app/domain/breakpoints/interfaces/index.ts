@@ -1,6 +1,21 @@
 import {
+  BreakpointFlat,
+  BreakpointResponse,
   BreakpointsDataServiceResponse,
   DeleteBreakpointResponse,
+  BreakpointListAllResponse,
+  BreakpointListAllOptions,
+  OrderByParameter,
+  BreakpointValidationResult,
 } from "./data-service";
 
-export type { BreakpointsDataServiceResponse, DeleteBreakpointResponse };
+export type {
+  BreakpointFlat,
+  BreakpointResponse,
+  BreakpointsDataServiceResponse,
+  DeleteBreakpointResponse,
+  BreakpointListAllResponse,
+  BreakpointValidationResult,
+  BreakpointListAllOptions,
+  OrderByParameter,
+};

@@ -29,7 +29,7 @@ export default function MediaQueriesToolbar() {
           <>
             <ActionButton label="Edit media queries">
               <Link to={ROUTE_MEDIA_QUERY_NEW}>
-                <EditIcon />
+                <NewEntityIcon />
               </Link>
             </ActionButton>
             <ActionButton label="Show me the code">

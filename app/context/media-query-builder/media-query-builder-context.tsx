@@ -35,7 +35,7 @@ export function MediaQueryBuilderProvider({
   const [currentSelectorId, setCurrentSelector] = useState<SelectorId>("");
   const [minFontSize, setMinFontSize] = useState<string>("");
   const [maxFontSize, setMaxFontSize] = useState<string>("");
-  const [lineHeight, setLineHeight] = useState<string>("");
+  const [lineHeight, setLineHeight] = useState<string>("110");
 
   return (
     <MediaQueryBuilderContextData.Provider

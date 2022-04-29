@@ -11,6 +11,7 @@ export interface BreakpointsDataServiceResponse {
     minWidth: string;
     maxWidth: string;
   }) => string;
+  listAll: (options?: BreakpointListAllOptions) => BreakpointListAllResponse;
   createBreakpoint: (
     minWidth: string,
     maxWidth: string,
@@ -25,14 +26,26 @@ export interface BreakpointsDataServiceResponse {
   deleteBreakpoint: (id: BreakpointId) => DeleteBreakpointResponse;
 }
 
+export interface BreakpointListAllOptions {
+  orderby?: OrderByParameter;
+}
+
+export type OrderByParameter = "label" | "minWidth" | "maxWidth";
+
+export interface BreakpointFlat {
+  id: BreakpointId;
+  label: string;
+  minWidth: number;
+  maxWidth: number;
+}
+
+export interface BreakpointListAllResponse {
+  ok: boolean;
+  payload?: BreakpointFlat[]; // if ok === true
+}
 export interface BreakpointResponse {
   ok: boolean;
-  payload?: {
-    id: BreakpointId;
-    label: string;
-    minWidth: string;
-    maxWidth: string;
-  }; // if ok === true
+  payload?: BreakpointFlat; // if ok === true
   error?: string; // if ok === false
 }
 

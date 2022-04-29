@@ -364,3 +364,31 @@ export function SaveIcon({
     />
   );
 }
+
+export function CollapseIcon({
+  size = 20,
+  color = "gray",
+  ariaLabel = "Collapse Item",
+}: IconProps) {
+  return (
+    <Image
+      src={`${BASE_URL}/collapse-icon-${size}-${color}.svg`}
+      alt={ariaLabel}
+      altaria-label={ariaLabel}
+    />
+  );
+}
+
+export function ExpandIcon({
+  size = 20,
+  color = "gray",
+  ariaLabel = "Expan Item",
+}: IconProps) {
+  return (
+    <Image
+      src={`${BASE_URL}/expand-icon-${size}-${color}.svg`}
+      alt={ariaLabel}
+      altaria-label={ariaLabel}
+    />
+  );
+}

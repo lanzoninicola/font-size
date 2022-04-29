@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
-import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
 import useBreakpointsSelector from "~/context/app/hooks/useBreakpointsSelector";
+import useMediaQueriesSelector from "~/context/app/hooks/useMediaQueriesSelector";
 import usePixelsPerRemSelector from "~/context/app/hooks/usePixelsPerRemSelector";
 import { SelectorId } from "~/context/app/interfaces";
+import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
 
 import useBreakpointsQueryService from "../breakpoints/useBreakpointsQueryService";
+import useMediaQueriesQueryService from "../media-queries/useMediaQueriesQueryService";
 import calculateClampSlope from "./calculateClampSlope";
 import calculateClampYAxisIntersection from "./calculateClampYAxisIntersection";
 import generateClampFormula from "./generateClampFormula";
-import useMediaQueriesQueryService from "../media-queries/useMediaQueriesQueryService";
-import useMediaQueriesService from "../media-queries/useMediaQueriesService";
 
 export default function useCSSCodeBlock(forceImportant = false) {
   const { pixelsPerRem } = usePixelsPerRemSelector();
-  const { mediaQueries } = useMediaQueriesService();
+  const { mediaQueries } = useMediaQueriesSelector();
   const { breakpoints } = useBreakpointsSelector();
 
   const { getViewportSizeByBreakpointId } = useBreakpointsQueryService();
@@ -45,16 +45,11 @@ export default function useCSSCodeBlock(forceImportant = false) {
       const { minWidth, maxWidth, minWidthREM, maxWidthREM } =
         getViewportSizeByBreakpointId(breakpointId, breakpoints);
 
-      // const minWidth = breakpoints[breakpointId as BreakpointId].minWidth || 0;
-      // const maxWidth = breakpoints[breakpointId as BreakpointId].maxWidth || 0;
-      // const minWidthREM = minWidth / pixelsPerRem;
-      // const maxWidthREM = maxWidth / pixelsPerRem;
-
       codeBlock += `@media only screen and (min-width: ${minWidth}px) and (max-width: ${maxWidth}px) {`;
       codeBlock += `\n`;
 
       for (const selector in breakpointMediaQuery) {
-        const { minFontSize, maxFontSize } = getTokenValues(
+        const { minFontSize, maxFontSize, lineHeight } = getTokenValues(
           breakpointId,
           selector as SelectorId
         );
@@ -82,6 +77,10 @@ export default function useCSSCodeBlock(forceImportant = false) {
         codeBlock += `  ${selector} {`;
         codeBlock += `\n`;
         codeBlock += `   font-size: ${clampFormula}${
+          forceImportant ? " !important" : ""
+        };`;
+        codeBlock += `\n`;
+        codeBlock += `   line-height: ${lineHeight}% ${
           forceImportant ? " !important" : ""
         };`;
         codeBlock += `\n`;

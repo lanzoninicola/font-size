@@ -5,7 +5,7 @@ import { HTMLTags, Selectors, SelectorType } from "../interfaces";
 export default function useHtmlSelecotrsLocalStorage() {
   const [htmlSelectors, setHtmlSelectors] = useLocalStorage<Selectors | null>(
     FS_CONTEXT_SELECTORS,
-    INIT_SELECTORS
+    DEFAULT_SELECTORS
   );
 
   return {
@@ -14,7 +14,7 @@ export default function useHtmlSelecotrsLocalStorage() {
   };
 }
 
-const INIT_SELECTORS: Selectors = [
+const DEFAULT_SELECTORS: Selectors = [
   {
     key: HTMLTags.h1,
     type: SelectorType.tag,

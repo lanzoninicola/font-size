@@ -1,10 +1,13 @@
 import { HStack, Text } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import InputSelect from "~/components/shared/input-select";
+import useBreakpointsSelector from "~/context/app/hooks/useBreakpointsSelector";
 import {
   BreakpointId,
   Breakpoints,
 } from "~/context/breakpoint-builder/interfaces";
+import { BreakpointFlat } from "~/domain/breakpoints/interfaces";
+import useBreakpointsDataService from "~/domain/breakpoints/useBreakpointsDataService";
 import VStackBox from "./vstack-wrapper";
 
 export interface SelectOption {
@@ -13,19 +16,33 @@ export interface SelectOption {
 }
 
 export default function FormControlSelectBreakpoint({
-  breakpoints,
   value,
   onChange,
   ...props
 }: {
-  breakpoints: Breakpoints | null;
   value?: BreakpointId;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   [key: string]: any;
 }) {
+  const { breakpoints } = useBreakpointsSelector();
+
+  const { listAll } = useBreakpointsDataService();
   const [selectOptions, setSelectOptions] = useState<SelectOption[]>([]);
 
-  useEffect(() => {
+  function initOptions() {
+    const breakpointsResponse = listAll();
+    if (breakpointsResponse) {
+      const { ok, payload } = breakpointsResponse;
+
+      if (ok) {
+        if (payload) {
+          buildOptions(payload);
+        }
+      }
+    }
+  }
+
+  function buildOptions(breakpoints: BreakpointFlat[]) {
     if (breakpoints) {
       let options: SelectOption[] = [
         {
@@ -34,14 +51,20 @@ export default function FormControlSelectBreakpoint({
         },
       ];
 
-      Object.keys(breakpoints).map((key) => {
+      breakpoints.map((b) => {
+        const optionLabel = `${b.label} (${b.minWidth}x${b.maxWidth})`;
+
         options.push({
-          value: key,
-          label: breakpoints[key].label ? breakpoints[key].label : "",
+          value: b.id,
+          label: optionLabel || "",
         });
       });
       setSelectOptions(options);
     }
+  }
+
+  useEffect(() => {
+    initOptions();
   }, [breakpoints]);
 
   return (
@@ -57,14 +80,13 @@ export default function FormControlSelectBreakpoint({
         textAlign="left"
         {...props}
       >
-        {breakpoints &&
-          selectOptions.map((selectOption, index) => {
-            return (
-              <option key={index + 1} value={selectOption.value}>
-                {selectOption.label}
-              </option>
-            );
-          })}
+        {selectOptions.map((selectOption, index) => {
+          return (
+            <option key={index + 1} value={selectOption.value}>
+              {selectOption.label}
+            </option>
+          );
+        })}
       </InputSelect>
     </VStackBox>
   );
