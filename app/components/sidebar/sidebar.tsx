@@ -1,4 +1,5 @@
 import { Box, VStack } from "@chakra-ui/react";
+import { useState } from "react";
 import useMediaQueriesRoutes from "~/domain/media-queries/useMediaQueriesRoutes";
 
 import {
@@ -53,6 +54,16 @@ export default function Sidebar() {
     },
   ];
 
+  const [isActive, setIsActive] = useState(false);
+
+  function onMouseEnter() {
+    setIsActive(true);
+  }
+
+  function onMouseLeave() {
+    setIsActive(false);
+  }
+
   return (
     <Box
       as="aside"
@@ -61,6 +72,8 @@ export default function Sidebar() {
       borderColor={"primaryAlpha.20"}
       paddingInline=".5rem"
       minW="50px"
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       <VStack
         position={"sticky"}
@@ -71,7 +84,7 @@ export default function Sidebar() {
         {items
           .filter((item) => !item.isDisabled)
           .map((item, idx) => (
-            <SidebarItem key={idx} {...item}>
+            <SidebarItem key={idx} {...item} isSidebarActive={isActive}>
               {item.icon}
             </SidebarItem>
           ))}
