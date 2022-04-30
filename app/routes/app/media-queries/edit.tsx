@@ -1,34 +1,27 @@
 import { Box, HStack } from "@chakra-ui/react";
-import { useState } from "react";
-import { json, Outlet } from "remix";
+import { useEffect, useState } from "react";
+import { json } from "remix";
 import FlexRowWrap from "~/components/layout/flex-row-wrap";
 import FlexRowWrapColumn from "~/components/layout/flex-row-wrap-column";
-import InnerContentColumn from "~/components/layout/inner-content-column";
 import InnerPageContentArea from "~/components/layout/inner-page-content-area";
 import InnerPageHeaderArea from "~/components/layout/inner-page-header-area";
 import MediaQueriesToolbar from "~/components/media-queries/media-queries-toolbar";
 import MediaQueryEdit from "~/components/media-queries/media-query-edit";
-import PreviewIndex from "~/components/preview/preview-index";
+import PreviewContent from "~/components/preview/preview-content";
 import PreviewToolbar from "~/components/preview/preview-toolbar";
 import ActionButton from "~/components/shared/action-button";
 import { CollapseIcon, ExpandIcon } from "~/components/shared/icons";
 import SectionSubHeader from "~/components/shared/section-subheader";
 import VStackBox from "~/components/shared/vstack-wrapper";
 import { PreviewProvider } from "~/context/preview/preview-context";
+import devices from "~/domain/preview/deviceProviders/yesviz/data/devices.json";
 
 export async function loader() {
-  // const url = "https://yesviz.com/viewport/";
-  // // return json();
-  // const response = await fetch(url);
-  // const html = await response.text();
-  // const parser = new DOMParser();
-  // const doc = parser.parseFromString(html, "text/html");
-  // console.log(doc);
-  return null;
+  return json(devices);
 }
 
 export default function MediaQueriesEditOutletPage() {
-  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   function toggleCollapse() {
     setIsCollapsed(!isCollapsed);
@@ -42,6 +35,7 @@ export default function MediaQueriesEditOutletPage() {
         borderRight="1px solid"
         borderRightColor={"primaryAlpha.20"}
         minH="100vh"
+        transition="max-width 0.2s ease-in-out"
       >
         {!isCollapsed && (
           <>
@@ -93,7 +87,7 @@ export default function MediaQueriesEditOutletPage() {
             <SectionSubHeader>Preview</SectionSubHeader>
             <PreviewToolbar />
           </VStackBox>
-          <PreviewIndex />
+          <PreviewContent />
         </PreviewProvider>
       </FlexRowWrapColumn>
     </FlexRowWrap>

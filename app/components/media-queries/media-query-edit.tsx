@@ -1,9 +1,9 @@
 import { Box, Grid, HStack, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
-import useBreakpointsSelector from "~/context/app/hooks/useBreakpointsSelector";
+import { useLoaderData } from "remix";
 import useHtmlSelectorsSelector from "~/context/app/hooks/useHtmlSelectorsSelector";
 import { SelectorId, Selectors } from "~/context/app/interfaces";
+import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
 import { SelectorEntityState } from "~/context/shared/interfaces/entity-state";
 import useMediaQueriesBuilderService from "~/domain/media-queries/useMediaQueriesBuilderService";
 import useMediaQueriesQueryService from "~/domain/media-queries/useMediaQueriesQueryService";
@@ -15,8 +15,6 @@ import FormControlInputNumber from "../shared/form-control-input-number";
 import FormControlSelectBreakpoint from "../shared/form-control-select-breakpoint";
 import { CloseIcon, EditIcon, ResetIcon, SaveIcon } from "../shared/icons";
 import VStackBox from "../shared/vstack-wrapper";
-import useBreakpointsDataService from "~/domain/breakpoints/useBreakpointsDataService";
-import { BreakpointFlat } from "~/domain/breakpoints/interfaces";
 
 export default function MediaQueryEdit() {
   const {
@@ -26,7 +24,6 @@ export default function MediaQueryEdit() {
     changeCurrentBreakpoint,
     closeEditCurrentSelector,
   } = useMediaQueriesBuilderService();
-
   const { getTokenValues } = useMediaQueriesQueryService();
   const { htmlSelectors } = useHtmlSelectorsSelector();
 
@@ -241,7 +238,7 @@ export function SelectorFormProps({ selectorId }: { selectorId: SelectorId }) {
         unitFontSize="smaller"
         value={minFontSize}
         onChange={(e) => onChangeMinFontSize(e)}
-        maxW="50px"
+        maxW="70px"
       />
       <FormControlInputNumber
         id={`maxFontSize-${selectorId}`}
@@ -251,7 +248,7 @@ export function SelectorFormProps({ selectorId }: { selectorId: SelectorId }) {
         unitFontSize="smaller"
         value={maxFontSize}
         onChange={(e) => onChangeMaxFontSize(e)}
-        maxW="50px"
+        maxW="70px"
       />
       <FormControlInputNumber
         id={`lineHeight-${selectorId}`}
@@ -261,7 +258,7 @@ export function SelectorFormProps({ selectorId }: { selectorId: SelectorId }) {
         value={lineHeight}
         unitFontSize="smaller"
         onChange={(e) => onChangeLineHeight(e)}
-        maxW="50px"
+        maxW="70px"
       />
     </VStackBox>
   );

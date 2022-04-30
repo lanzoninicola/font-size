@@ -1,11 +1,11 @@
 import { HStack } from "@chakra-ui/react";
 import usePreviewWindowsSelector from "~/context/preview/hooks/usePreviewWindowsSelector";
-import usePreviewService from "~/domain/preview/usePreviewService";
+import usePreviewWindowsService from "~/domain/preview/usePreviewWindowsService";
 import parseInputString from "~/domain/utilities/parseInputString";
 import FormControlInputNumber from "../shared/form-control-input-number";
 
 export default function PreviewItemToolbar({ itemIdx }: { itemIdx: number }) {
-  const { changeWindowWidth, changeWindowHeight } = usePreviewService();
+  const { changeWindowWidth, changeWindowHeight } = usePreviewWindowsService();
   const { previewWindows } = usePreviewWindowsSelector();
 
   function onChangeWidth(e: React.ChangeEvent<HTMLInputElement>) {
@@ -23,11 +23,11 @@ export default function PreviewItemToolbar({ itemIdx }: { itemIdx: number }) {
       <FormControlInputNumber
         id={`viewport-width-${itemIdx}`}
         value={parseInputString(String(previewWindows[itemIdx].width))}
-        fontSize="16px"
-        h="30px"
-        w="80px"
+        fontSize="12px"
+        h="20px"
+        w="60px"
         label="W"
-        labelFontSize="16px"
+        labelFontSize="12px"
         ariaLabel="Set the width of the preview"
         unit="PX"
         unitFontSize="12px"
@@ -36,11 +36,11 @@ export default function PreviewItemToolbar({ itemIdx }: { itemIdx: number }) {
       <FormControlInputNumber
         id={`viewport-height-${itemIdx}`}
         value={parseInputString(String(previewWindows[itemIdx].height))}
-        fontSize="16px"
-        h="30px"
-        w="80px"
+        fontSize="12px"
+        h="20px"
+        w="60px"
         label="H"
-        labelFontSize="16px"
+        labelFontSize="12px"
         ariaLabel="Set the height of the preview"
         unit="PX"
         unitFontSize="12px"

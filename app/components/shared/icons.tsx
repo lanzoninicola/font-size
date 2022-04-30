@@ -392,3 +392,17 @@ export function ExpandIcon({
     />
   );
 }
+
+export function ClearAllIcon({
+  size = 20,
+  color = "gray",
+  ariaLabel = "Remove All Items",
+}: IconProps) {
+  return (
+    <Image
+      src={`${BASE_URL}/clear-all-icon-${size}-${color}.svg`}
+      alt={ariaLabel}
+      altaria-label={ariaLabel}
+    />
+  );
+}

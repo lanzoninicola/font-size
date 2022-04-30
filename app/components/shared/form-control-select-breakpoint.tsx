@@ -1,13 +1,11 @@
-import { HStack, Text } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
+import { Text } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import InputSelect from "~/components/shared/input-select";
 import useBreakpointsSelector from "~/context/app/hooks/useBreakpointsSelector";
-import {
-  BreakpointId,
-  Breakpoints,
-} from "~/context/breakpoint-builder/interfaces";
+import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
 import { BreakpointFlat } from "~/domain/breakpoints/interfaces";
 import useBreakpointsDataService from "~/domain/breakpoints/useBreakpointsDataService";
+
 import VStackBox from "./vstack-wrapper";
 
 export interface SelectOption {
@@ -73,7 +71,8 @@ export default function FormControlSelectBreakpoint({
         Breakpoints
       </Text>
       <InputSelect
-        maxW="270px"
+        className="input-select"
+        maxW="100%"
         fontSize={"sm"}
         onChange={onChange}
         value={value || "no-selected"}

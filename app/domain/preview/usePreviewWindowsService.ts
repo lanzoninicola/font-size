@@ -1,9 +1,9 @@
 import usePreviewWindowsSelector from "~/context/preview/hooks/usePreviewWindowsSelector";
-import { PreviewItem } from "~/context/preview/interfaces";
+import { DeviceViewportSize, PreviewItem } from "~/context/preview/interfaces";
 import SETTINGS from "../settings";
 import parseDecimalNumber from "../utilities/parseDecimalNumber";
 
-export default function usePreviewService() {
+export default function usePreviewWindowsService() {
   const DEFAULT_WIDTH = SETTINGS.preview.iframeDefaultWidth;
   const DEFAULT_HEIGHT = SETTINGS.preview.iframeDefaultHeight;
 
@@ -26,6 +26,22 @@ export default function usePreviewService() {
   }
 
   /**
+   * @description Add new preview windows. The new window is added to the begin of the list.
+   * The size of the new window is set to the default value if a width and height have not given.
+   */
+  function addBulkWindow(sizes: DeviceViewportSize[]) {
+    const nextState = [...previewWindows];
+
+    const newItems: PreviewItem[] = sizes.map((size) => ({
+      width: size.width,
+      height: size.height,
+    }));
+
+    nextState.unshift(...newItems);
+    setPreviewWindows(nextState);
+  }
+
+  /**
    * @description Remove the selected window from the previewWindows array
    * @param id of the window to remove
    */
@@ -33,6 +49,13 @@ export default function usePreviewService() {
     let nextState = [...previewWindows];
     nextState.splice(id, 1);
     setPreviewWindows(nextState);
+  }
+
+  /**
+   * @description Remove all the windows from the previewWindows array
+   */
+  function removeAllWindows() {
+    setPreviewWindows([]);
   }
 
   /**
@@ -61,7 +84,9 @@ export default function usePreviewService() {
 
   return {
     addWindow,
+    addBulkWindow,
     removeWindow,
+    removeAllWindows,
     changeWindowWidth,
     changeWindowHeight,
   };

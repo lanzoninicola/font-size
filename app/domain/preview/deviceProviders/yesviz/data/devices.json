@@ -1,0 +1,1892 @@
+[
+  {
+    "type": "Mobile",
+    "name": "OnePlus 9 Pro",
+    "viewportSize": { "width": 412, "height": 919 },
+    "screenSize": "1440 x 3216",
+    "devicePixelRatio": "6.7″",
+    "ppi": "3.5",
+    "cssPpi": "525"
+  },
+  {
+    "type": "Mobile",
+    "name": "OnePlus 9",
+    "viewportSize": { "width": 412, "height": 915 },
+    "screenSize": "1080 x 2400",
+    "devicePixelRatio": "6.55″",
+    "ppi": "2.625",
+    "cssPpi": "402"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung S21 Ultra 5G",
+    "viewportSize": { "width": 384, "height": 854 },
+    "screenSize": "1440 x 3200",
+    "devicePixelRatio": "6.8″",
+    "ppi": "3.75",
+    "cssPpi": "515"
+  },
+  {
+    "type": "Mobile",
+    "name": "Apple iPhone 12 mini",
+    "viewportSize": { "width": 360, "height": 780 },
+    "screenSize": "1080 x 2340",
+    "devicePixelRatio": "5.4″",
+    "ppi": "3.0",
+    "cssPpi": "476"
+  },
+  {
+    "type": "Mobile",
+    "name": "Apple iPhone 12 Pro Max",
+    "viewportSize": { "width": 428, "height": 926 },
+    "screenSize": "1284 x 2778",
+    "devicePixelRatio": "6.7″",
+    "ppi": "3.0",
+    "cssPpi": "458"
+  },
+  {
+    "type": "Mobile",
+    "name": "Apple iPhone 12 Pro",
+    "viewportSize": { "width": 390, "height": 844 },
+    "screenSize": "1170 x 2532",
+    "devicePixelRatio": "6.1″",
+    "ppi": "3.0",
+    "cssPpi": "460"
+  },
+  {
+    "type": "Mobile",
+    "name": "Apple iPhone 12",
+    "viewportSize": { "width": 390, "height": 844 },
+    "screenSize": "1170 x 2532",
+    "devicePixelRatio": "6.1″",
+    "ppi": "3.0",
+    "cssPpi": "460"
+  },
+  {
+    "type": "Mobile",
+    "name": "OnePlus 8T",
+    "viewportSize": { "width": 412, "height": 914 },
+    "screenSize": "1080 x 2400",
+    "devicePixelRatio": "6.55″",
+    "ppi": "2.625",
+    "cssPpi": "402"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung Z Fold2",
+    "viewportSize": { "width": 884, "height": 1104 },
+    "screenSize": "1768 x 2208",
+    "devicePixelRatio": "7.6″",
+    "ppi": "2.0",
+    "cssPpi": "373"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung Z Flip",
+    "viewportSize": { "width": 412, "height": 1004 },
+    "screenSize": "1080 x 2636",
+    "devicePixelRatio": "6.7″",
+    "ppi": "2.625",
+    "cssPpi": "425"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung Fold",
+    "viewportSize": { "width": 768, "height": 1076 },
+    "screenSize": "1536 x 2152",
+    "devicePixelRatio": "7.3″",
+    "ppi": "2.0",
+    "cssPpi": "362"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung S20 FE",
+    "viewportSize": { "width": 412, "height": 914 },
+    "screenSize": "1080 x 2400",
+    "devicePixelRatio": "6.5″",
+    "ppi": "2.625",
+    "cssPpi": "407"
+  },
+  {
+    "type": "Mobile",
+    "name": "OnePlus Nord",
+    "viewportSize": { "width": 412, "height": 915 },
+    "screenSize": "1080 x 2400",
+    "devicePixelRatio": "6.44″",
+    "ppi": "2.625",
+    "cssPpi": "408"
+  },
+  {
+    "type": "Mobile",
+    "name": "OnePlus 8 Pro",
+    "viewportSize": { "width": 412, "height": 906 },
+    "screenSize": "1440 x 3168",
+    "devicePixelRatio": "6.78″",
+    "ppi": "3.5",
+    "cssPpi": "513"
+  },
+  {
+    "type": "Mobile",
+    "name": "OnePlus 8",
+    "viewportSize": { "width": 412, "height": 915 },
+    "screenSize": "1080 x 2400",
+    "devicePixelRatio": "6.55″",
+    "ppi": "2.625",
+    "cssPpi": "402"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung Note20 Ultra",
+    "viewportSize": { "width": 412, "height": 883 },
+    "screenSize": "1440 x 3088",
+    "devicePixelRatio": "6.9″",
+    "ppi": "3.5",
+    "cssPpi": "496"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung Note20",
+    "viewportSize": { "width": 412, "height": 915 },
+    "screenSize": "1080 x 2400",
+    "devicePixelRatio": "6.7″",
+    "ppi": "2.625",
+    "cssPpi": "393"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung S20 Ultra",
+    "viewportSize": { "width": 412, "height": 915 },
+    "screenSize": "1440 x 3200",
+    "devicePixelRatio": "6.9″",
+    "ppi": "3.5",
+    "cssPpi": "511"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung S20+",
+    "viewportSize": { "width": 384, "height": 854 },
+    "screenSize": "1440 x 3200",
+    "devicePixelRatio": "6.7″",
+    "ppi": "3.75",
+    "cssPpi": "525"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung S20",
+    "viewportSize": { "width": 360, "height": 800 },
+    "screenSize": "1440 x 3200",
+    "devicePixelRatio": "6.2″",
+    "ppi": "4.0",
+    "cssPpi": "563"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung Note10",
+    "viewportSize": { "width": 412, "height": 869 },
+    "screenSize": "1080 x 2280",
+    "devicePixelRatio": "6.3″",
+    "ppi": "2.625",
+    "cssPpi": "401"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung Note10+",
+    "viewportSize": { "width": 412, "height": 869 },
+    "screenSize": "1440 x 3040",
+    "devicePixelRatio": "6.8″",
+    "ppi": "3.5",
+    "cssPpi": "498"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung A32",
+    "viewportSize": { "width": 412, "height": 915 },
+    "screenSize": "1080 x 2400",
+    "devicePixelRatio": "6.4″",
+    "ppi": "2.625",
+    "cssPpi": "411"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung A31",
+    "viewportSize": { "width": 412, "height": 915 },
+    "screenSize": "1080 x 2400",
+    "devicePixelRatio": "6.4″",
+    "ppi": "2.625",
+    "cssPpi": "411"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung S10 Lite",
+    "viewportSize": { "width": 412, "height": 914 },
+    "screenSize": "1080 x 2400",
+    "devicePixelRatio": "6.7″",
+    "ppi": "2.625",
+    "cssPpi": "394"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung S10+",
+    "viewportSize": { "width": 412, "height": 869 },
+    "screenSize": "1440 x 3040",
+    "devicePixelRatio": "6.4″",
+    "ppi": "3.5",
+    "cssPpi": "522"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung S10",
+    "viewportSize": { "width": 360, "height": 760 },
+    "screenSize": "1440 x 3040",
+    "devicePixelRatio": "6.1″",
+    "ppi": "4.0",
+    "cssPpi": "550"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung A6s",
+    "viewportSize": { "width": 360, "height": 720 },
+    "screenSize": "1080 x 2160",
+    "devicePixelRatio": "6.0″",
+    "ppi": "3.0",
+    "cssPpi": "402"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung A50",
+    "viewportSize": { "width": 412, "height": 892 },
+    "screenSize": "1080 x 2340",
+    "devicePixelRatio": "6.4″",
+    "ppi": "2.625",
+    "cssPpi": "403"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung Note 9",
+    "viewportSize": { "width": 360, "height": 740 },
+    "screenSize": "1440 x 2960",
+    "devicePixelRatio": "6.4″",
+    "ppi": "4.0",
+    "cssPpi": "516"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung S9+",
+    "viewportSize": { "width": 360, "height": 740 },
+    "screenSize": "1440 x 2960",
+    "devicePixelRatio": "6.2″",
+    "ppi": "4.0",
+    "cssPpi": "529"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung S9",
+    "viewportSize": { "width": 360, "height": 740 },
+    "screenSize": "1440 x 2960",
+    "devicePixelRatio": "5.8″",
+    "ppi": "4.0",
+    "cssPpi": "570"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung Note 8",
+    "viewportSize": { "width": 360, "height": 740 },
+    "screenSize": "1440 x 2960",
+    "devicePixelRatio": "6.3″",
+    "ppi": "4.0",
+    "cssPpi": "521"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung S8+",
+    "viewportSize": { "width": 360, "height": 740 },
+    "screenSize": "1440 x 2960",
+    "devicePixelRatio": "6.2″",
+    "ppi": "4.0",
+    "cssPpi": "529"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung S8",
+    "viewportSize": { "width": 360, "height": 740 },
+    "screenSize": "1440 x 2960",
+    "devicePixelRatio": "5.8″",
+    "ppi": "4.0",
+    "cssPpi": "570"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung S7",
+    "viewportSize": { "width": 360, "height": 640 },
+    "screenSize": "1440 x 2560",
+    "devicePixelRatio": "5.1″",
+    "ppi": "4.0",
+    "cssPpi": "577"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung S7 Edge",
+    "viewportSize": { "width": 360, "height": 640 },
+    "screenSize": "1440 x 2560",
+    "devicePixelRatio": "5.5″",
+    "ppi": "4.0",
+    "cssPpi": "534"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung S6",
+    "viewportSize": { "width": 360, "height": 640 },
+    "screenSize": "1440 x 2560",
+    "devicePixelRatio": "5.1″",
+    "ppi": "4.0",
+    "cssPpi": "577"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung S6 edge",
+    "viewportSize": { "width": 360, "height": 640 },
+    "screenSize": "1440 x 2560",
+    "devicePixelRatio": "5.1″",
+    "ppi": "4.0",
+    "cssPpi": "577"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung J7 Prime2",
+    "viewportSize": { "width": 412, "height": 732 },
+    "screenSize": "1080 x 1920",
+    "devicePixelRatio": "5.5″",
+    "ppi": "2.625",
+    "cssPpi": "401"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung A71",
+    "viewportSize": { "width": 412, "height": 914 },
+    "screenSize": "1080 x 2400",
+    "devicePixelRatio": "6.7″",
+    "ppi": "2.625",
+    "cssPpi": "393"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung A51",
+    "viewportSize": { "width": 412, "height": 915 },
+    "screenSize": "1080 x 2400",
+    "devicePixelRatio": "6.5″",
+    "ppi": "2.625",
+    "cssPpi": "405"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung A70s",
+    "viewportSize": { "width": 412, "height": 914 },
+    "screenSize": "1080 x 2400",
+    "devicePixelRatio": "6.7″",
+    "ppi": "2.625",
+    "cssPpi": "393"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung A50s",
+    "viewportSize": { "width": 412, "height": 892 },
+    "screenSize": "1080 x 2340",
+    "devicePixelRatio": "6.4″",
+    "ppi": "2.625",
+    "cssPpi": "403"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung A30",
+    "viewportSize": { "width": 412, "height": 892 },
+    "screenSize": "1080 x 2340",
+    "devicePixelRatio": "6.4″",
+    "ppi": "2.625",
+    "cssPpi": "403"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung Note 4",
+    "viewportSize": { "width": 360, "height": 640 },
+    "screenSize": "1440 x 2560",
+    "devicePixelRatio": "5.7″",
+    "ppi": "4.0",
+    "cssPpi": "518"
+  },
+  {
+    "type": "Mobile",
+    "name": "Samsung Note 3",
+    "viewportSize": { "width": 360, "height": 640 },
+    "screenSize": "1080 x 1920",
+    "devicePixelRatio": "5.7″",
+    "ppi": "3.0",
+    "cssPpi": "386"
+  },
+  {
+    "type": "Mobile",
+    "name": "Apple iPhone SE (2020)",
+    "viewportSize": { "width": 375, "height": 667 },
+    "screenSize": "750 x 1334",
+    "devicePixelRatio": "4.7″",
+    "ppi": "2.0",
+    "cssPpi": "326"
+  },
+  {
+    "type": "Mobile",
+    "name": "Apple iPhone 11 Pro Max",
+    "viewportSize": { "width": 414, "height": 896 },
+    "screenSize": "1242 x 2688",
+    "devicePixelRatio": "6.5″",
+    "ppi": "3.0",
+    "cssPpi": "458"
+  },
+  {
+    "type": "Mobile",
+    "name": "Apple iPhone 11 Pro",
+    "viewportSize": { "width": 375, "height": 812 },
+    "screenSize": "1125 x 2436",
+    "devicePixelRatio": "5.8″",
+    "ppi": "3.0",
+    "cssPpi": "458"
+  },
+  {
+    "type": "Mobile",
+    "name": "Apple iPhone 11",
+    "viewportSize": { "width": 414, "height": 896 },
+    "screenSize": "828 x 1792",
+    "devicePixelRatio": "6.1″",
+    "ppi": "2.0",
+    "cssPpi": "326"
+  },
+  {
+    "type": "Mobile",
+    "name": "Apple iPhone XS Max",
+    "viewportSize": { "width": 414, "height": 896 },
+    "screenSize": "1242 x 2688",
+    "devicePixelRatio": "6.5″",
+    "ppi": "3.0",
+    "cssPpi": "458"
+  },
+  {
+    "type": "Mobile",
+    "name": "Apple iPhone XR",
+    "viewportSize": { "width": 414, "height": 896 },
+    "screenSize": "828 x 1792",
+    "devicePixelRatio": "6.1″",
+    "ppi": "2.0",
+    "cssPpi": "326"
+  },
+  {
+    "type": "Mobile",
+    "name": "Apple iPhone X",
+    "viewportSize": { "width": 375, "height": 812 },
+    "screenSize": "1125 x 2436",
+    "devicePixelRatio": "5.8″",
+    "ppi": "3.0",
+    "cssPpi": "458"
+  },
+  {
+    "type": "Mobile",
+    "name": "Apple iPhone 8",
+    "viewportSize": { "width": 375, "height": 667 },
+    "screenSize": "750 x 1334",
+    "devicePixelRatio": "4.7″",
+    "ppi": "2.0",
+    "cssPpi": "326"
+  },
+  {
+    "type": "Mobile",
+    "name": "Apple iPhone 8 Plus",
+    "viewportSize": { "width": 414, "height": 736 },
+    "screenSize": "1080 x 1920",
+    "devicePixelRatio": "5.5″",
+    "ppi": "3.0",
+    "cssPpi": "401"
+  },
+  {
+    "type": "Mobile",
+    "name": "Apple iPhone 7",
+    "viewportSize": { "width": 375, "height": 667 },
+    "screenSize": "750 x 1334",
+    "devicePixelRatio": "4.7″",
+    "ppi": "2.0",
+    "cssPpi": "326"
+  },
+  {
+    "type": "Mobile",
+    "name": "Apple iPhone 7 Plus",
+    "viewportSize": { "width": 414, "height": 736 },
+    "screenSize": "1080 x 1920",
+    "devicePixelRatio": "5.5″",
+    "ppi": "3.0",
+    "cssPpi": "401"
+  },
+  {
+    "type": "Mobile",
+    "name": "Apple iPhone 6s Plus",
+    "viewportSize": { "width": 414, "height": 736 },
+    "screenSize": "1080 x 1920",
+    "devicePixelRatio": "5.5″",
+    "ppi": "3.0",
+    "cssPpi": "401"
+  },
+  {
+    "type": "Mobile",
+    "name": "Apple iPhone SE",
+    "viewportSize": { "width": 320, "height": 568 },
+    "screenSize": "640 x 1136",
+    "devicePixelRatio": "4.0″",
+    "ppi": "2.0",
+    "cssPpi": "326"
+  },
+  {
+    "type": "Mobile",
+    "name": "Apple iPhone 6s",
+    "viewportSize": { "width": 375, "height": 667 },
+    "screenSize": "750 x 1334",
+    "devicePixelRatio": "4.7″",
+    "ppi": "2.0",
+    "cssPpi": "326"
+  },
+  {
+    "type": "Mobile",
+    "name": "Apple iPhone 6",
+    "viewportSize": { "width": 375, "height": 667 },
+    "screenSize": "750 x 1334",
+    "devicePixelRatio": "4.7″",
+    "ppi": "2.0",
+    "cssPpi": "326"
+  },
+  {
+    "type": "Mobile",
+    "name": "Apple iPhone 5s",
+    "viewportSize": { "width": 320, "height": 568 },
+    "screenSize": "640 x 1136",
+    "devicePixelRatio": "4.0″",
+    "ppi": "2.0",
+    "cssPpi": "326"
+  },
+  {
+    "type": "Mobile",
+    "name": "Apple iPhone 5c",
+    "viewportSize": { "width": 320, "height": 568 },
+    "screenSize": "640 x 1136",
+    "devicePixelRatio": "4.0″",
+    "ppi": "2.0",
+    "cssPpi": "326"
+  },
+  {
+    "type": "Mobile",
+    "name": "Apple iPhone 5",
+    "viewportSize": { "width": 320, "height": 568 },
+    "screenSize": "640 x 1136",
+    "devicePixelRatio": "4.0″",
+    "ppi": "2.0",
+    "cssPpi": "326"
+  },
+  {
+    "type": "Mobile",
+    "name": "Google Pixel 5",
+    "viewportSize": { "width": 393, "height": 851 },
+    "screenSize": "1080 x 2340",
+    "devicePixelRatio": "6.0″",
+    "ppi": "2.75",
+    "cssPpi": "432"
+  },
+  {
+    "type": "Mobile",
+    "name": "Google Pixel 4a",
+    "viewportSize": { "width": 393, "height": 851 },
+    "screenSize": "1080 x 2340",
+    "devicePixelRatio": "5.81″",
+    "ppi": "2.75",
+    "cssPpi": "443"
+  },
+  {
+    "type": "Mobile",
+    "name": "Google Pixel 4 XL",
+    "viewportSize": { "width": 412, "height": 869 },
+    "screenSize": "1440 x 3040",
+    "devicePixelRatio": "6.3″",
+    "ppi": "3.5",
+    "cssPpi": "537"
+  },
+  {
+    "type": "Mobile",
+    "name": "Google Pixel 4",
+    "viewportSize": { "width": 393, "height": 830 },
+    "screenSize": "1080 x 2280",
+    "devicePixelRatio": "5.7″",
+    "ppi": "2.75",
+    "cssPpi": "444"
+  },
+  {
+    "type": "Mobile",
+    "name": "Google Pixel 3a XL",
+    "viewportSize": { "width": 412, "height": 823 },
+    "screenSize": "1080 x 2160",
+    "devicePixelRatio": "6.0″",
+    "ppi": "2.625",
+    "cssPpi": "402"
+  },
+  {
+    "type": "Mobile",
+    "name": "Google Pixel 3a",
+    "viewportSize": { "width": 393, "height": 808 },
+    "screenSize": "1080 x 2220",
+    "devicePixelRatio": "5.6″",
+    "ppi": "2.75",
+    "cssPpi": "441"
+  },
+  {
+    "type": "Mobile",
+    "name": "Google Pixel 3 XL",
+    "viewportSize": { "width": 412, "height": 846 },
+    "screenSize": "1440 x 2960",
+    "devicePixelRatio": "6.3″",
+    "ppi": "3.5",
+    "cssPpi": "523"
+  },
+  {
+    "type": "Mobile",
+    "name": "Google Pixel 3",
+    "viewportSize": { "width": 393, "height": 786 },
+    "screenSize": "1080 x 2160",
+    "devicePixelRatio": "5.5″",
+    "ppi": "2.75",
+    "cssPpi": "443"
+  },
+  {
+    "type": "Mobile",
+    "name": "Google Pixel 2 XL",
+    "viewportSize": { "width": 412, "height": 823 },
+    "screenSize": "1440 x 2880",
+    "devicePixelRatio": "6.0″",
+    "ppi": "3.5",
+    "cssPpi": "538"
+  },
+  {
+    "type": "Mobile",
+    "name": "Google Pixel 2",
+    "viewportSize": { "width": 412, "height": 732 },
+    "screenSize": "1080 x 1920",
+    "devicePixelRatio": "5.0″",
+    "ppi": "2.625",
+    "cssPpi": "441"
+  },
+  {
+    "type": "Mobile",
+    "name": "Google Pixel XL",
+    "viewportSize": { "width": 412, "height": 732 },
+    "screenSize": "1440 x 2560",
+    "devicePixelRatio": "5.5″",
+    "ppi": "3.5",
+    "cssPpi": "534"
+  },
+  {
+    "type": "Mobile",
+    "name": "Google Pixel",
+    "viewportSize": { "width": 412, "height": 732 },
+    "screenSize": "1080 x 1920",
+    "devicePixelRatio": "5.0″",
+    "ppi": "2.625",
+    "cssPpi": "441"
+  },
+  {
+    "type": "Mobile",
+    "name": "OnePlus 7T Pro",
+    "viewportSize": { "width": 412, "height": 892 },
+    "screenSize": "1440 x 3120",
+    "devicePixelRatio": "6.67″",
+    "ppi": "3.5",
+    "cssPpi": "516"
+  },
+  {
+    "type": "Mobile",
+    "name": "OnePlus 7T",
+    "viewportSize": { "width": 412, "height": 914 },
+    "screenSize": "1080 x 2400",
+    "devicePixelRatio": "6.55″",
+    "ppi": "2.625",
+    "cssPpi": "402"
+  },
+  {
+    "type": "Mobile",
+    "name": "OnePlus 7 Pro",
+    "viewportSize": { "width": 412, "height": 892 },
+    "screenSize": "1440 x 3120",
+    "devicePixelRatio": "6.67″",
+    "ppi": "3.5",
+    "cssPpi": "516"
+  },
+  {
+    "type": "Mobile",
+    "name": "OnePlus 7",
+    "viewportSize": { "width": 412, "height": 892 },
+    "screenSize": "1080 x 2340",
+    "devicePixelRatio": "6.41″",
+    "ppi": "2.625",
+    "cssPpi": "402"
+  },
+  {
+    "type": "Mobile",
+    "name": "OnePlus 6T",
+    "viewportSize": { "width": 412, "height": 892 },
+    "screenSize": "1080 x 2340",
+    "devicePixelRatio": "6.41″",
+    "ppi": "2.625",
+    "cssPpi": "402"
+  },
+  {
+    "type": "Mobile",
+    "name": "OnePlus 6",
+    "viewportSize": { "width": 412, "height": 869 },
+    "screenSize": "1080 x 2280",
+    "devicePixelRatio": "4.0″",
+    "ppi": "2.625",
+    "cssPpi": "402"
+  },
+  {
+    "type": "Mobile",
+    "name": "Xiaomi Mi 10T, Xiaomi Mi 10T Pro",
+    "viewportSize": { "width": 393, "height": 873 },
+    "screenSize": "1080 x 2400",
+    "devicePixelRatio": "6.67″",
+    "ppi": "2.75",
+    "cssPpi": "395"
+  },
+  {
+    "type": "Mobile",
+    "name": "Xiaomi Mi 10 Pro",
+    "viewportSize": { "width": 393, "height": 851 },
+    "screenSize": "1080 x 2340",
+    "devicePixelRatio": "6.67″",
+    "ppi": "2.75",
+    "cssPpi": "386"
+  },
+  {
+    "type": "Mobile",
+    "name": "Xiaomi Mi 10",
+    "viewportSize": { "width": 393, "height": 851 },
+    "screenSize": "1080 x 2340",
+    "devicePixelRatio": "6.67″",
+    "ppi": "2.75",
+    "cssPpi": "386"
+  },
+  {
+    "type": "Mobile",
+    "name": "Xiaomi Mi 9 SE",
+    "viewportSize": { "width": 393, "height": 851 },
+    "screenSize": "1080 x 2340",
+    "devicePixelRatio": "5.97″",
+    "ppi": "2.75",
+    "cssPpi": "432"
+  },
+  {
+    "type": "Mobile",
+    "name": "Xiaomi Mi 9 Lite",
+    "viewportSize": { "width": 393, "height": 851 },
+    "screenSize": "1080 x 2340",
+    "devicePixelRatio": "6.39″",
+    "ppi": "2.75",
+    "cssPpi": "403"
+  },
+  {
+    "type": "Mobile",
+    "name": "Xiaomi Mi 9, Mi 9T",
+    "viewportSize": { "width": 393, "height": 851 },
+    "screenSize": "1080 x 2340",
+    "devicePixelRatio": "6.39″",
+    "ppi": "2.75",
+    "cssPpi": "403"
+  },
+  {
+    "type": "Mobile",
+    "name": "Xiaomi Mi 8, Mi 8 Pro",
+    "viewportSize": { "width": 393, "height": 817 },
+    "screenSize": "1080 x 2244",
+    "devicePixelRatio": "6.21″",
+    "ppi": "2.75",
+    "cssPpi": "402"
+  },
+  {
+    "type": "Mobile",
+    "name": "Xiaomi Mi 8 SE",
+    "viewportSize": { "width": 393, "height": 816 },
+    "screenSize": "1080 x 2244",
+    "devicePixelRatio": "5.88″",
+    "ppi": "2.75",
+    "cssPpi": "423"
+  },
+  {
+    "type": "Mobile",
+    "name": "Xiaomi Redmi Note 9 Pro",
+    "viewportSize": { "width": 393, "height": 873 },
+    "screenSize": "1080 x 2400",
+    "devicePixelRatio": "6.67″",
+    "ppi": "2.75",
+    "cssPpi": "395"
+  },
+  {
+    "type": "Mobile",
+    "name": "Xiaomi Redmi Note 9",
+    "viewportSize": { "width": 393, "height": 851 },
+    "screenSize": "1080 x 2340",
+    "devicePixelRatio": "6.53″",
+    "ppi": "2.75",
+    "cssPpi": "395"
+  },
+  {
+    "type": "Mobile",
+    "name": "Xiaomi Redmi Note 8 Pro",
+    "viewportSize": { "width": 393, "height": 851 },
+    "screenSize": "1080 x 2340",
+    "devicePixelRatio": "6.53″",
+    "ppi": "2.75",
+    "cssPpi": "395"
+  },
+  {
+    "type": "Mobile",
+    "name": "Xiaomi Redmi Note 8",
+    "viewportSize": { "width": 393, "height": 851 },
+    "screenSize": "1080 x 2340",
+    "devicePixelRatio": "6.3″",
+    "ppi": "2.75",
+    "cssPpi": "409"
+  },
+  {
+    "type": "Mobile",
+    "name": "Xiaomi Redmi Note 7",
+    "viewportSize": { "width": 393, "height": 851 },
+    "screenSize": "1080 x 2340",
+    "devicePixelRatio": "6.3″",
+    "ppi": "2.75",
+    "cssPpi": "409"
+  },
+  {
+    "type": "Mobile",
+    "name": "Xiaomi Mi 6",
+    "viewportSize": { "width": 393, "height": 816 },
+    "screenSize": "1080 x 2244",
+    "devicePixelRatio": "5.88″",
+    "ppi": "2.75",
+    "cssPpi": "423"
+  },
+  {
+    "type": "Mobile",
+    "name": "Xiaomi Mi 3",
+    "viewportSize": { "width": 360, "height": 640 },
+    "screenSize": "1080 x 1920",
+    "devicePixelRatio": "5.0″",
+    "ppi": "3.0",
+    "cssPpi": "441"
+  },
+  {
+    "type": "Tablet",
+    "name": "LG G Pad 5 10.1\"",
+    "viewportSize": { "width": 600, "height": 960 },
+    "screenSize": "1200 x 1920",
+    "devicePixelRatio": "10.1″",
+    "ppi": "2.0",
+    "cssPpi": "224"
+  },
+  {
+    "type": "Mobile",
+    "name": "LG Stylo 5",
+    "viewportSize": { "width": 360, "height": 720 },
+    "screenSize": "1080 x 2160",
+    "devicePixelRatio": "6.2″",
+    "ppi": "3.0",
+    "cssPpi": "390"
+  },
+  {
+    "type": "Mobile",
+    "name": "LG Stylo 4",
+    "viewportSize": { "width": 360, "height": 720 },
+    "screenSize": "1080 x 2160",
+    "devicePixelRatio": "6.2″",
+    "ppi": "3.0",
+    "cssPpi": "390"
+  },
+  {
+    "type": "Mobile",
+    "name": "LG W30",
+    "viewportSize": { "width": 360, "height": 760 },
+    "screenSize": "720 x 1520",
+    "devicePixelRatio": "6.26″",
+    "ppi": "2.0",
+    "cssPpi": "269"
+  },
+  {
+    "type": "Mobile",
+    "name": "LG Tribute Empire",
+    "viewportSize": { "width": 360, "height": 640 },
+    "screenSize": "720 x 1280",
+    "devicePixelRatio": "5.0″",
+    "ppi": "2.0",
+    "cssPpi": "294"
+  },
+  {
+    "type": "Mobile",
+    "name": "LG K51S",
+    "viewportSize": { "width": 360, "height": 800 },
+    "screenSize": "720 x 1600",
+    "devicePixelRatio": "6.55″",
+    "ppi": "2.0",
+    "cssPpi": "282"
+  },
+  {
+    "type": "Mobile",
+    "name": "LG K61",
+    "viewportSize": { "width": 360, "height": 780 },
+    "screenSize": "1080 x 2340",
+    "devicePixelRatio": "6.53″",
+    "ppi": "3.0",
+    "cssPpi": "394"
+  },
+  {
+    "type": "Mobile",
+    "name": "LG K50",
+    "viewportSize": { "width": 360, "height": 760 },
+    "screenSize": "720 x 1520",
+    "devicePixelRatio": "6.26″",
+    "ppi": "2.0",
+    "cssPpi": "269"
+  },
+  {
+    "type": "Mobile",
+    "name": "LG K40",
+    "viewportSize": { "width": 360, "height": 720 },
+    "screenSize": "720 x 1440",
+    "devicePixelRatio": "5.7″",
+    "ppi": "2.0",
+    "cssPpi": "282"
+  },
+  {
+    "type": "Mobile",
+    "name": "LG G8X ThinQ",
+    "viewportSize": { "width": 360, "height": 780 },
+    "screenSize": "1080 x 2340",
+    "devicePixelRatio": "6.4″",
+    "ppi": "3.0",
+    "cssPpi": "403"
+  },
+  {
+    "type": "Mobile",
+    "name": "LG G8 ThinQ",
+    "viewportSize": { "width": 360, "height": 780 },
+    "screenSize": "1440 x 3120",
+    "devicePixelRatio": "6.1″",
+    "ppi": "4.0",
+    "cssPpi": "564"
+  },
+  {
+    "type": "Mobile",
+    "name": "LG K20 (2019)",
+    "viewportSize": { "width": 320, "height": 640 },
+    "screenSize": "480 x 960",
+    "devicePixelRatio": "5.45″",
+    "ppi": "1.5",
+    "cssPpi": "197"
+  },
+  {
+    "type": "Mobile",
+    "name": "LG K30",
+    "viewportSize": { "width": 360, "height": 640 },
+    "screenSize": "720 x 1280",
+    "devicePixelRatio": "5.3″",
+    "ppi": "2.0",
+    "cssPpi": "277"
+  },
+  {
+    "type": "Mobile",
+    "name": "LG K10, K11 Plus",
+    "viewportSize": { "width": 360, "height": 640 },
+    "screenSize": "720 x 1280",
+    "devicePixelRatio": "5.3″",
+    "ppi": "2.0",
+    "cssPpi": "277"
+  },
+  {
+    "type": "Mobile",
+    "name": "LG G7 Fit, G7 One",
+    "viewportSize": { "width": 360, "height": 780 },
+    "screenSize": "1440 x 3120",
+    "devicePixelRatio": "6.1″",
+    "ppi": "4.0",
+    "cssPpi": "563"
+  },
+  {
+    "type": "Mobile",
+    "name": "LG G6",
+    "viewportSize": { "width": 360, "height": 720 },
+    "screenSize": "1440 x 2880",
+    "devicePixelRatio": "5.7″",
+    "ppi": "4.0",
+    "cssPpi": "564"
+  },
+  {
+    "type": "Mobile",
+    "name": "LG G5",
+    "viewportSize": { "width": 360, "height": 640 },
+    "screenSize": "1440 x 2560",
+    "devicePixelRatio": "5.3″",
+    "ppi": "4.0",
+    "cssPpi": "554"
+  },
+  {
+    "type": "Mobile",
+    "name": "LG G4, G3",
+    "viewportSize": { "width": 360, "height": 640 },
+    "screenSize": "1440 x 2560",
+    "devicePixelRatio": "5.5″",
+    "ppi": "4.0",
+    "cssPpi": "538"
+  },
+  {
+    "type": "Mobile",
+    "name": "LG Nexus 5",
+    "viewportSize": { "width": 360, "height": 640 },
+    "screenSize": "1080 x 1920",
+    "devicePixelRatio": "4.95″",
+    "ppi": "3.0",
+    "cssPpi": "445"
+  },
+  {
+    "type": "Mobile",
+    "name": "Huawei Mate 30 Pro",
+    "viewportSize": { "width": 392, "height": 800 },
+    "screenSize": "1176 x 2400",
+    "devicePixelRatio": "6.53″",
+    "ppi": "3.0",
+    "cssPpi": "409"
+  },
+  {
+    "type": "Mobile",
+    "name": "Huawei Mate 30",
+    "viewportSize": { "width": 360, "height": 780 },
+    "screenSize": "1080 x 2340",
+    "devicePixelRatio": "6.62″",
+    "ppi": "3.0",
+    "cssPpi": "389"
+  },
+  {
+    "type": "Mobile",
+    "name": "Huawei Y9s",
+    "viewportSize": { "width": 360, "height": 780 },
+    "screenSize": "1080 x 2340",
+    "devicePixelRatio": "6.59″",
+    "ppi": "3.0",
+    "cssPpi": "391"
+  },
+  {
+    "type": "Mobile",
+    "name": "Huawei Mate 20 Pro",
+    "viewportSize": { "width": 360, "height": 780 },
+    "screenSize": "1440 x 3120",
+    "devicePixelRatio": "6.39″",
+    "ppi": "4.0",
+    "cssPpi": "538"
+  },
+  {
+    "type": "Mobile",
+    "name": "Huawei Nova 7 Pro",
+    "viewportSize": { "width": 360, "height": 780 },
+    "screenSize": "1080 x 2340",
+    "devicePixelRatio": "6.57″",
+    "ppi": "3.0",
+    "cssPpi": "392"
+  },
+  {
+    "type": "Mobile",
+    "name": "Huawei Nova 7 SE",
+    "viewportSize": { "width": 360, "height": 800 },
+    "screenSize": "1080 x 2400",
+    "devicePixelRatio": "6.5″",
+    "ppi": "3.0",
+    "cssPpi": "405"
+  },
+  {
+    "type": "Mobile",
+    "name": "Huawei Nova 7i",
+    "viewportSize": { "width": 360, "height": 770 },
+    "screenSize": "1080 x 2310",
+    "devicePixelRatio": "6.4″",
+    "ppi": "3.0",
+    "cssPpi": "398"
+  },
+  {
+    "type": "Mobile",
+    "name": "Huawei Nova 6",
+    "viewportSize": { "width": 360, "height": 800 },
+    "screenSize": "1080 x 2400",
+    "devicePixelRatio": "6.57″",
+    "ppi": "3.0",
+    "cssPpi": "401"
+  },
+  {
+    "type": "Mobile",
+    "name": "Huawei Mate 20 Lite",
+    "viewportSize": { "width": 360, "height": 780 },
+    "screenSize": "1080 x 2340",
+    "devicePixelRatio": "6.3″",
+    "ppi": "3.0",
+    "cssPpi": "409"
+  },
+  {
+    "type": "Mobile",
+    "name": "Huawei Mate 10 Lite",
+    "viewportSize": { "width": 360, "height": 720 },
+    "screenSize": "1080 x 2160",
+    "devicePixelRatio": "5.9″",
+    "ppi": "3.0",
+    "cssPpi": "409"
+  },
+  {
+    "type": "Mobile",
+    "name": "Huawei Y9 Prime",
+    "viewportSize": { "width": 360, "height": 780 },
+    "screenSize": "1080 x 2340",
+    "devicePixelRatio": "6.59″",
+    "ppi": "3.0",
+    "cssPpi": "391"
+  },
+  {
+    "type": "Tablet",
+    "name": "Huawei MatePad Pro",
+    "viewportSize": { "width": 1280, "height": 800 },
+    "screenSize": "2560 x 1600",
+    "devicePixelRatio": "10.8″",
+    "ppi": "2.0",
+    "cssPpi": "280"
+  },
+  {
+    "type": "Mobile",
+    "name": "Sony Xperia L4",
+    "viewportSize": { "width": 360, "height": 840 },
+    "screenSize": "720 x 1680",
+    "devicePixelRatio": "6.2″",
+    "ppi": "2.0",
+    "cssPpi": "295"
+  },
+  {
+    "type": "Mobile",
+    "name": "Sony Xperia 10 Plus",
+    "viewportSize": { "width": 360, "height": 840 },
+    "screenSize": "1080 x 2520",
+    "devicePixelRatio": "6.5″",
+    "ppi": "3.0",
+    "cssPpi": "422"
+  },
+  {
+    "type": "Mobile",
+    "name": "Sony Xperia 10",
+    "viewportSize": { "width": 360, "height": 840 },
+    "screenSize": "1080 x 2520",
+    "devicePixelRatio": "6.0″",
+    "ppi": "3.0",
+    "cssPpi": "457"
+  },
+  {
+    "type": "Mobile",
+    "name": "Sony Xperia 1",
+    "viewportSize": { "width": 411, "height": 960 },
+    "screenSize": "1644 x 3840",
+    "devicePixelRatio": "6.5″",
+    "ppi": "4.0",
+    "cssPpi": "643"
+  },
+  {
+    "type": "Mobile",
+    "name": "Sony Xperia 5",
+    "viewportSize": { "width": 360, "height": 840 },
+    "screenSize": "1080 x 2520",
+    "devicePixelRatio": "6.1″",
+    "ppi": "3.0",
+    "cssPpi": "449"
+  },
+  {
+    "type": "Mobile",
+    "name": "Sony Xperia Z5",
+    "viewportSize": { "width": 360, "height": 640 },
+    "screenSize": "1080 x 1920",
+    "devicePixelRatio": "5.2″",
+    "ppi": "3.0",
+    "cssPpi": "428"
+  },
+  {
+    "type": "Mobile",
+    "name": "Sony Xperia Z2 / Z3",
+    "viewportSize": { "width": 360, "height": 640 },
+    "screenSize": "1080 x 1920",
+    "devicePixelRatio": "5.2″",
+    "ppi": "3.0",
+    "cssPpi": "424"
+  },
+  {
+    "type": "Mobile",
+    "name": "Sony Xperia C4",
+    "viewportSize": { "width": 540, "height": 960 },
+    "screenSize": "1080 x 1920",
+    "devicePixelRatio": "5.5″",
+    "ppi": "2.0",
+    "cssPpi": "401"
+  },
+  {
+    "type": "Mobile",
+    "name": "Sony Xperia Z Ultra",
+    "viewportSize": { "width": 540, "height": 960 },
+    "screenSize": "1080 x 1920",
+    "devicePixelRatio": "6.4″",
+    "ppi": "2.0",
+    "cssPpi": "344"
+  },
+  {
+    "type": "Mobile",
+    "name": "Sony Xperia Z3",
+    "viewportSize": { "width": 360, "height": 640 },
+    "screenSize": "1080 x 1920",
+    "devicePixelRatio": "5.2″",
+    "ppi": "3.0",
+    "cssPpi": "424"
+  },
+  {
+    "type": "Mobile",
+    "name": "Sony Xperia XZ",
+    "viewportSize": { "width": 360, "height": 640 },
+    "screenSize": "1080 x 1920",
+    "devicePixelRatio": "5.2″",
+    "ppi": "3.0",
+    "cssPpi": "424"
+  },
+  {
+    "type": "Mobile",
+    "name": "Sony Xperia X",
+    "viewportSize": { "width": 360, "height": 640 },
+    "screenSize": "1080 x 1920",
+    "devicePixelRatio": "5.0″",
+    "ppi": "3.0",
+    "cssPpi": "441"
+  },
+  {
+    "type": "Mobile",
+    "name": "Honor 9X",
+    "viewportSize": { "width": 360, "height": 780 },
+    "screenSize": "1080 x 2340",
+    "devicePixelRatio": "6.59″",
+    "ppi": "3.0",
+    "cssPpi": "391"
+  },
+  {
+    "type": "Mobile",
+    "name": "Honor 8X",
+    "viewportSize": { "width": 360, "height": 780 },
+    "screenSize": "1080 x 2340",
+    "devicePixelRatio": "6.5″",
+    "ppi": "3.0",
+    "cssPpi": "397"
+  },
+  {
+    "type": "Mobile",
+    "name": "Honor 7X",
+    "viewportSize": { "width": 360, "height": 720 },
+    "screenSize": "1080 x 2160",
+    "devicePixelRatio": "5.93″",
+    "ppi": "3.0",
+    "cssPpi": "407"
+  },
+  {
+    "type": "Mobile",
+    "name": "Honor 6X",
+    "viewportSize": { "width": 360, "height": 640 },
+    "screenSize": "1080 x 1920",
+    "devicePixelRatio": "5.5″",
+    "ppi": "3.0",
+    "cssPpi": "403"
+  },
+  {
+    "type": "Tablet",
+    "name": "Apple iPad Air (2020)",
+    "viewportSize": { "width": 820, "height": 1180 },
+    "screenSize": "1640 x 2360",
+    "devicePixelRatio": "10.9″",
+    "ppi": "2.0",
+    "cssPpi": "264"
+  },
+  {
+    "type": "Tablet",
+    "name": "Apple iPad Air",
+    "viewportSize": { "width": 834, "height": 1112 },
+    "screenSize": "1668 x 2224",
+    "devicePixelRatio": "10.5″",
+    "ppi": "2.0",
+    "cssPpi": "264"
+  },
+  {
+    "type": "Tablet",
+    "name": "Apple iPad Pro 12.9\"",
+    "viewportSize": { "width": 1024, "height": 1366 },
+    "screenSize": "2048 x 2732",
+    "devicePixelRatio": "12.9″",
+    "ppi": "2.0",
+    "cssPpi": "264"
+  },
+  {
+    "type": "Mobile",
+    "name": "Apple iPad Pro 11\"",
+    "viewportSize": { "width": 834, "height": 1194 },
+    "screenSize": "1668 x 2388",
+    "devicePixelRatio": "11.0″",
+    "ppi": "2.0",
+    "cssPpi": "264"
+  },
+  {
+    "type": "Tablet",
+    "name": "Apple iPad 10.2\"",
+    "viewportSize": { "width": 810, "height": 1080 },
+    "screenSize": "1620 x 2160",
+    "devicePixelRatio": "10.2″",
+    "ppi": "2.0",
+    "cssPpi": "264"
+  },
+  {
+    "type": "Tablet",
+    "name": "Apple iPad Mini",
+    "viewportSize": { "width": 768, "height": 1024 },
+    "screenSize": "1536 x 2048",
+    "devicePixelRatio": "7.9″",
+    "ppi": "2.0",
+    "cssPpi": "324"
+  },
+  {
+    "type": "Laptop",
+    "name": "MacBook Pro",
+    "viewportSize": { "width": 1440, "height": 900 },
+    "screenSize": "2880 x 1800",
+    "devicePixelRatio": "15.4″",
+    "ppi": "2.0",
+    "cssPpi": "220"
+  },
+  {
+    "type": "Laptop",
+    "name": "MacBook Pro 13.3\"",
+    "viewportSize": { "width": 1280, "height": 800 },
+    "screenSize": "2560 x 1600",
+    "devicePixelRatio": "13.3″",
+    "ppi": "2.0",
+    "cssPpi": "227"
+  },
+  {
+    "type": "Laptop",
+    "name": "MacBook Pro 16\"",
+    "viewportSize": { "width": 1536, "height": 960 },
+    "screenSize": "3072 x 1920",
+    "devicePixelRatio": "16″",
+    "ppi": "2.0",
+    "cssPpi": "226"
+  },
+  {
+    "type": "Laptop",
+    "name": "MacBook Air 13.3\"",
+    "viewportSize": { "width": 1280, "height": 800 },
+    "screenSize": "2560 x 1600",
+    "devicePixelRatio": "13.3″",
+    "ppi": "2.0",
+    "cssPpi": "227"
+  },
+  {
+    "type": "Mobile",
+    "name": "Motorola Nexus 6",
+    "viewportSize": { "width": 411, "height": 731 },
+    "screenSize": "1440 x 2560",
+    "devicePixelRatio": "5.96″",
+    "ppi": "3.5",
+    "cssPpi": "493"
+  },
+  {
+    "type": "Mobile",
+    "name": "Motorola Nexus 6P",
+    "viewportSize": { "width": 411, "height": 731 },
+    "screenSize": "1440 x 2560",
+    "devicePixelRatio": "5.7″",
+    "ppi": "3.5",
+    "cssPpi": "518"
+  },
+  {
+    "type": "Mobile",
+    "name": "Motorola Moto G8",
+    "viewportSize": { "width": 360, "height": 780 },
+    "screenSize": "720 x 1560",
+    "devicePixelRatio": "6.4″",
+    "ppi": "2.0",
+    "cssPpi": "268"
+  },
+  {
+    "type": "Mobile",
+    "name": "Huawei P40 Lite",
+    "viewportSize": { "width": 360, "height": 770 },
+    "screenSize": "1080 x 2310",
+    "devicePixelRatio": "6.4″",
+    "ppi": "3.0",
+    "cssPpi": "398"
+  },
+  {
+    "type": "Mobile",
+    "name": "Huawei P40 Pro",
+    "viewportSize": { "width": 400, "height": 880 },
+    "screenSize": "1200 x 2640",
+    "devicePixelRatio": "6.58″",
+    "ppi": "3.0",
+    "cssPpi": "441"
+  },
+  {
+    "type": "Mobile",
+    "name": "Huawei P40",
+    "viewportSize": { "width": 360, "height": 780 },
+    "screenSize": "1080 x 2340",
+    "devicePixelRatio": "6.1″",
+    "ppi": "3.0",
+    "cssPpi": "422"
+  },
+  {
+    "type": "Mobile",
+    "name": "Huawei P30 Lite",
+    "viewportSize": { "width": 360, "height": 771 },
+    "screenSize": "1080 x 2312",
+    "devicePixelRatio": "6.15″",
+    "ppi": "3.0",
+    "cssPpi": "415"
+  },
+  {
+    "type": "Mobile",
+    "name": "Huawei P30 Pro",
+    "viewportSize": { "width": 360, "height": 780 },
+    "screenSize": "1080 x 2340",
+    "devicePixelRatio": "6.47″",
+    "ppi": "3.0",
+    "cssPpi": "398"
+  },
+  {
+    "type": "Mobile",
+    "name": "Huawei P30",
+    "viewportSize": { "width": 360, "height": 780 },
+    "screenSize": "1080 x 2340",
+    "devicePixelRatio": "6.1″",
+    "ppi": "3.0",
+    "cssPpi": "422"
+  },
+  {
+    "type": "Mobile",
+    "name": "Huawei P20 lite",
+    "viewportSize": { "width": 360, "height": 760 },
+    "screenSize": "1080 x 2280",
+    "devicePixelRatio": "5.84″",
+    "ppi": "3.0",
+    "cssPpi": "432"
+  },
+  {
+    "type": "Mobile",
+    "name": "Huawei P20 Pro",
+    "viewportSize": { "width": 360, "height": 747 },
+    "screenSize": "1080 x 2240",
+    "devicePixelRatio": "6.1″",
+    "ppi": "3.0",
+    "cssPpi": "408"
+  },
+  {
+    "type": "Mobile",
+    "name": "Huawei P10 Plus",
+    "viewportSize": { "width": 360, "height": 640 },
+    "screenSize": "1440 x 2560",
+    "devicePixelRatio": "5.5″",
+    "ppi": "4.0",
+    "cssPpi": "540"
+  },
+  {
+    "type": "Mobile",
+    "name": "Huawei P9, P9 Lite",
+    "viewportSize": { "width": 360, "height": 640 },
+    "screenSize": "1080 x 1920",
+    "devicePixelRatio": "5.2″",
+    "ppi": "3.0",
+    "cssPpi": "424"
+  },
+  {
+    "type": "Mobile",
+    "name": "Huawei P8 Lite (2017)",
+    "viewportSize": { "width": 360, "height": 640 },
+    "screenSize": "1080 x 1920",
+    "devicePixelRatio": "5.2″",
+    "ppi": "3.0",
+    "cssPpi": "424"
+  },
+  {
+    "type": "Mobile",
+    "name": "vivo Y20",
+    "viewportSize": { "width": 385, "height": 854 },
+    "screenSize": "720 x 1600",
+    "devicePixelRatio": "6.51″",
+    "ppi": "1.875",
+    "cssPpi": "270"
+  },
+  {
+    "type": "Mobile",
+    "name": "BlackBerry Keyone",
+    "viewportSize": { "width": 360, "height": 540 },
+    "screenSize": "1080 x 1620",
+    "devicePixelRatio": "4.5″",
+    "ppi": "3.0",
+    "cssPpi": "434"
+  },
+  {
+    "type": "Mobile",
+    "name": "BlackBerry Priv",
+    "viewportSize": { "width": 360, "height": 640 },
+    "screenSize": "1440 x 2560",
+    "devicePixelRatio": "5.4″",
+    "ppi": "4.0",
+    "cssPpi": "540"
+  },
+  {
+    "type": "Mobile",
+    "name": "Blackberry Passport",
+    "viewportSize": { "width": 504, "height": 504 },
+    "screenSize": "1440 x 1440",
+    "devicePixelRatio": "4.5″",
+    "ppi": "2.85",
+    "cssPpi": "453"
+  },
+  {
+    "type": "Mobile",
+    "name": "Blackberry Leap",
+    "viewportSize": { "width": 390, "height": 695 },
+    "screenSize": "720 x 1280",
+    "devicePixelRatio": "5.0″",
+    "ppi": "1.85",
+    "cssPpi": "294"
+  },
+  {
+    "type": "Mobile",
+    "name": "Blackberry Q10",
+    "viewportSize": { "width": 346, "height": 346 },
+    "screenSize": "720 x 720",
+    "devicePixelRatio": "3.1″",
+    "ppi": "2.0",
+    "cssPpi": "328"
+  },
+  {
+    "type": "Mobile",
+    "name": "Blackberry Z30",
+    "viewportSize": { "width": 360, "height": 640 },
+    "screenSize": "720 x 1280",
+    "devicePixelRatio": "5.0″",
+    "ppi": "2.0",
+    "cssPpi": "294"
+  },
+  {
+    "type": "Mobile",
+    "name": "Blackberry Z10",
+    "viewportSize": { "width": 384, "height": 640 },
+    "screenSize": "768 x 1280",
+    "devicePixelRatio": "4.2″",
+    "ppi": "2.0",
+    "cssPpi": "355"
+  },
+  {
+    "type": "Mobile",
+    "name": "Blackberry Classic",
+    "viewportSize": { "width": 390, "height": 390 },
+    "screenSize": "720 x 720",
+    "devicePixelRatio": "3.5″",
+    "ppi": "1.85",
+    "cssPpi": "294"
+  },
+  {
+    "type": "Mobile",
+    "name": "HTC Desire 19s",
+    "viewportSize": { "width": 360, "height": 760 },
+    "screenSize": "720 x 1520",
+    "devicePixelRatio": "6.2″",
+    "ppi": "2.0",
+    "cssPpi": "271"
+  },
+  {
+    "type": "Mobile",
+    "name": "HTC Wildfire X",
+    "viewportSize": { "width": 360, "height": 760 },
+    "screenSize": "720 x 1520",
+    "devicePixelRatio": "6.2″",
+    "ppi": "2.0",
+    "cssPpi": "271"
+  },
+  {
+    "type": "Mobile",
+    "name": "HTC One M9",
+    "viewportSize": { "width": 360, "height": 640 },
+    "screenSize": "1080 x 1920",
+    "devicePixelRatio": "5.0″",
+    "ppi": "3.0",
+    "cssPpi": "441"
+  },
+  {
+    "type": "Mobile",
+    "name": "HTC One M8",
+    "viewportSize": { "width": 360, "height": 640 },
+    "screenSize": "1080 x 1920",
+    "devicePixelRatio": "5.0″",
+    "ppi": "3.0",
+    "cssPpi": "441"
+  },
+  {
+    "type": "Mobile",
+    "name": "HTC U12+",
+    "viewportSize": { "width": 360, "height": 720 },
+    "screenSize": "1440 x 2880",
+    "devicePixelRatio": "6.0″",
+    "ppi": "4.0",
+    "cssPpi": "537"
+  },
+  {
+    "type": "Mobile",
+    "name": "HTC U11+",
+    "viewportSize": { "width": 360, "height": 720 },
+    "screenSize": "1440 x 2880",
+    "devicePixelRatio": "6.0″",
+    "ppi": "4.0",
+    "cssPpi": "537"
+  },
+  {
+    "type": "Mobile",
+    "name": "HTC U11",
+    "viewportSize": { "width": 360, "height": 640 },
+    "screenSize": "1440 x 2560",
+    "devicePixelRatio": "5.5″",
+    "ppi": "4.0",
+    "cssPpi": "534"
+  },
+  {
+    "type": "Mobile",
+    "name": "HTC U Ultra",
+    "viewportSize": { "width": 360, "height": 640 },
+    "screenSize": "1440 x 2560",
+    "devicePixelRatio": "5.7″",
+    "ppi": "4.0",
+    "cssPpi": "513"
+  },
+  {
+    "type": "Mobile",
+    "name": "HTC One",
+    "viewportSize": { "width": 360, "height": 640 },
+    "screenSize": "1080 x 1920",
+    "devicePixelRatio": "4.7″",
+    "ppi": "3.0",
+    "cssPpi": "469"
+  },
+  {
+    "type": "Mobile",
+    "name": "Microsoft Lumia 1020",
+    "viewportSize": { "width": 320, "height": 480 },
+    "screenSize": "768 x 1280",
+    "devicePixelRatio": "4.5″",
+    "ppi": "2.4",
+    "cssPpi": "332"
+  },
+  {
+    "type": "Mobile",
+    "name": "Microsoft Lumia 950 XL",
+    "viewportSize": { "width": 411, "height": 731 },
+    "screenSize": "1440 x 2560",
+    "devicePixelRatio": "5.7″",
+    "ppi": "3.5",
+    "cssPpi": "518"
+  },
+  {
+    "type": "Mobile",
+    "name": "Microsoft Lumia 1520",
+    "viewportSize": { "width": 432, "height": 768 },
+    "screenSize": "1080 x 1920",
+    "devicePixelRatio": "6.0″",
+    "ppi": "2.5",
+    "cssPpi": "367"
+  },
+  {
+    "type": "Mobile",
+    "name": "Microsoft Lumia 925",
+    "viewportSize": { "width": 320, "height": 480 },
+    "screenSize": "768 x 1280",
+    "devicePixelRatio": "4.5″",
+    "ppi": "2.4",
+    "cssPpi": "332"
+  },
+  {
+    "type": "Mobile",
+    "name": "Microsoft Lumia 650",
+    "viewportSize": { "width": 360, "height": 640 },
+    "screenSize": "720 x 1280",
+    "devicePixelRatio": "5.0″",
+    "ppi": "2.0",
+    "cssPpi": "297"
+  },
+  {
+    "type": "Mobile",
+    "name": "Microsoft Lumia 520",
+    "viewportSize": { "width": 320, "height": 480 },
+    "screenSize": "480 x 800",
+    "devicePixelRatio": "4.0″",
+    "ppi": "1.5",
+    "cssPpi": "233"
+  },
+  {
+    "type": "Laptop",
+    "name": "Microsoft Surface Laptop 3 (15\")",
+    "viewportSize": { "width": 1664, "height": 1110 },
+    "screenSize": "2496 x 1664",
+    "devicePixelRatio": "15″",
+    "ppi": "1.5",
+    "cssPpi": "201"
+  },
+  {
+    "type": "Laptop",
+    "name": "Microsoft Surface Laptop 3 (13.5\")",
+    "viewportSize": { "width": 1504, "height": 1003 },
+    "screenSize": "2256 x 1504",
+    "devicePixelRatio": "13.5″",
+    "ppi": "1.5",
+    "cssPpi": "201"
+  },
+  {
+    "type": "Laptop",
+    "name": "Microsoft Surface Laptop",
+    "viewportSize": { "width": 1504, "height": 1003 },
+    "screenSize": "2256 x 1504",
+    "devicePixelRatio": "13.5″",
+    "ppi": "1.5",
+    "cssPpi": "201"
+  },
+  {
+    "type": "Laptop",
+    "name": "Microsoft Surface Book 3 (15\")",
+    "viewportSize": { "width": 1620, "height": 1080 },
+    "screenSize": "3240 x 2160",
+    "devicePixelRatio": "15″",
+    "ppi": "2.0",
+    "cssPpi": "260"
+  },
+  {
+    "type": "Laptop",
+    "name": "Microsoft Surface Book 3 (13.5\")",
+    "viewportSize": { "width": 1500, "height": 1000 },
+    "screenSize": "3000 x 2000",
+    "devicePixelRatio": "13.5″",
+    "ppi": "2.0",
+    "cssPpi": "267"
+  },
+  {
+    "type": "Laptop",
+    "name": "Microsoft Surface Book",
+    "viewportSize": { "width": 1500, "height": 1000 },
+    "screenSize": "3000 x 2000",
+    "devicePixelRatio": "13.5″",
+    "ppi": "2.0",
+    "cssPpi": "267"
+  },
+  {
+    "type": "Laptop",
+    "name": "Microsoft Surface Pro X",
+    "viewportSize": { "width": 1440, "height": 960 },
+    "screenSize": "2880 x 1920",
+    "devicePixelRatio": "13″",
+    "ppi": "2.0",
+    "cssPpi": "267"
+  },
+  {
+    "type": "Laptop",
+    "name": "Microsoft Surface Pro 7",
+    "viewportSize": { "width": 1368, "height": 912 },
+    "screenSize": "2736 x 1824",
+    "devicePixelRatio": "12.3″",
+    "ppi": "2.0",
+    "cssPpi": "267"
+  },
+  {
+    "type": "Laptop",
+    "name": "Microsoft Surface Pro 6",
+    "viewportSize": { "width": 1368, "height": 912 },
+    "screenSize": "2736 x 1824",
+    "devicePixelRatio": "12.3″",
+    "ppi": "2.0",
+    "cssPpi": "267"
+  },
+  {
+    "type": "Laptop",
+    "name": "Microsoft Surface Pro 5",
+    "viewportSize": { "width": 1368, "height": 912 },
+    "screenSize": "2736 x 1824",
+    "devicePixelRatio": "12.3″",
+    "ppi": "2.0",
+    "cssPpi": "267"
+  },
+  {
+    "type": "Laptop",
+    "name": "Microsoft Surface Pro 4",
+    "viewportSize": { "width": 1368, "height": 912 },
+    "screenSize": "2736 x 1824",
+    "devicePixelRatio": "12.3″",
+    "ppi": "2.0",
+    "cssPpi": "267"
+  },
+  {
+    "type": "Laptop",
+    "name": "Microsoft Surface Pro 3",
+    "viewportSize": { "width": 1440, "height": 960 },
+    "screenSize": "2160 x 1440",
+    "devicePixelRatio": "12″",
+    "ppi": "1.5",
+    "cssPpi": "216"
+  },
+  {
+    "type": "Laptop",
+    "name": "Microsoft Surface Pro 2",
+    "viewportSize": { "width": 1280, "height": 720 },
+    "screenSize": "1920 x 1080",
+    "devicePixelRatio": "10.6″",
+    "ppi": "1.5",
+    "cssPpi": "208"
+  },
+  {
+    "type": "Laptop",
+    "name": "Microsoft Surface Pro",
+    "viewportSize": { "width": 1280, "height": 720 },
+    "screenSize": "1920 x 1080",
+    "devicePixelRatio": "10.6″",
+    "ppi": "1.5",
+    "cssPpi": "208"
+  },
+  {
+    "type": "Laptop",
+    "name": "Microsoft Surface 3",
+    "viewportSize": { "width": 1280, "height": 720 },
+    "screenSize": "1920 x 1080",
+    "devicePixelRatio": "10.8″",
+    "ppi": "1.5",
+    "cssPpi": "204"
+  },
+  {
+    "type": "Laptop",
+    "name": "Microsoft Surface 2",
+    "viewportSize": { "width": 1280, "height": 720 },
+    "screenSize": "1920 x 1080",
+    "devicePixelRatio": "10.6″",
+    "ppi": "1.5",
+    "cssPpi": "208"
+  },
+  {
+    "type": "Laptop",
+    "name": "Microsoft Surface",
+    "viewportSize": { "width": 1366, "height": 768 },
+    "screenSize": "1366 x 768",
+    "devicePixelRatio": "10.6″",
+    "ppi": "1.0",
+    "cssPpi": "148"
+  }
+]

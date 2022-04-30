@@ -1,7 +1,7 @@
 import { Grid } from "@chakra-ui/react";
 import { useState } from "react";
 import usePreviewWindowsSelector from "~/context/preview/hooks/usePreviewWindowsSelector";
-import usePreviewService from "~/domain/preview/usePreviewService";
+import usePreviewWindowsService from "~/domain/preview/usePreviewWindowsService";
 
 import { TrashIcon } from "../shared/icons";
 import IframeBox from "./iframe-box";
@@ -11,7 +11,7 @@ import ActionButton from "../shared/action-button";
 // TODO: ADD SENDER_ID TO IFRAME
 
 export default function PreviewItem({ idx }: { idx: number }) {
-  const { removeWindow } = usePreviewService();
+  const { removeWindow } = usePreviewWindowsService();
   const { previewWindows } = usePreviewWindowsSelector();
 
   const [showRemoveIcon, setShowRemoveIcon] = useState(false);
@@ -42,7 +42,7 @@ export default function PreviewItem({ idx }: { idx: number }) {
       padding="1rem"
       _hover={{
         cursor: "pointer",
-        backgroundColor: "secondary.700",
+        backgroundColor: "secondaryAlpha.40",
         borderRadius: "5px",
         transition: "all .2s ease-in-out",
       }}
