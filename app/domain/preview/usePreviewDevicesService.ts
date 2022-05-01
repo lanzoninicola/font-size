@@ -22,6 +22,7 @@ export default function usePreviewDevicesService() {
   }
 
   function getSmallestDevice(minWidth?: number): YesVizDeviceInfo | null {
+    console.log("getSmallestDevice", devices);
     if (devices.length === 0) {
       return null;
     }

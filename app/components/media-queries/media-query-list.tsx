@@ -77,7 +77,11 @@ export default function MediaQueryList() {
                     return (
                       <Tr key={index}>
                         <Td>
-                          <Text color="primary.500" gridArea={"colContent2"}>
+                          <Text
+                            color="primary.500"
+                            fontSize={"sm"}
+                            gridArea={"colContent2"}
+                          >
                             {getBreakpointName(breakpointId)}
                           </Text>
                         </Td>

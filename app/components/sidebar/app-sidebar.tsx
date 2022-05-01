@@ -8,6 +8,7 @@ import {
   SelectorsIcon,
   SettingsIcon,
 } from "../shared/icons";
+import SidebarContainer from "../shared/sidebar-container";
 import SidebarItem from "./sidebar-item";
 
 interface SidebarItemConfig {
@@ -20,8 +21,8 @@ interface SidebarItemConfig {
 
 // TODO: Add a sidebar context and Service Hooks to add/disable sidebar items. Remove data from the view
 
-export default function Sidebar() {
-  const { ROUTE_MEDIA_QUERY_LIST } = useMediaQueriesRoutes();
+export default function AppSidebar() {
+  const { ROUTE_MEDIA_QUERY_EDIT } = useMediaQueriesRoutes();
 
   const items: SidebarItemConfig[] = [
     {
@@ -32,7 +33,7 @@ export default function Sidebar() {
       isDisabled: false,
     },
     {
-      to: ROUTE_MEDIA_QUERY_LIST,
+      to: ROUTE_MEDIA_QUERY_EDIT,
       label: "Media Queries",
       ariaLabel: "Define media queries and styles",
       icon: <MediaQueryIcon size={24} color="gray" />,
@@ -65,13 +66,9 @@ export default function Sidebar() {
   }
 
   return (
-    <Box
-      as="aside"
-      gridArea={"sd"}
-      borderRight={"1px solid"}
-      borderColor={"primaryAlpha.20"}
-      paddingInline=".5rem"
-      minW="50px"
+    <SidebarContainer
+      gridArea="app-sidebar"
+      isLeft={true}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
@@ -89,6 +86,6 @@ export default function Sidebar() {
             </SidebarItem>
           ))}
       </VStack>
-    </Box>
+    </SidebarContainer>
   );
 }

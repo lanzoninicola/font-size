@@ -8,7 +8,7 @@ export default function Header() {
       justify="space-between"
       borderBottom={"1px solid"}
       borderColor="primaryAlpha.20"
-      gridArea={"hd"}
+      gridArea={"header"}
       paddingInline={"1rem"}
       wrap="wrap"
       h="50px"

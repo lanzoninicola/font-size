@@ -20,6 +20,7 @@ export default function FlippedContainer({
       transform={"rotateX(180deg)"}
       overflow="auto"
       css={appScrollbarStyle}
+      position="relative"
       {...props}
     >
       <Box w="100%" transform={`rotateX(180deg)`}>

@@ -5,10 +5,12 @@ export default function ActionButton({
   label,
   noHoverbg = false,
   isDisabled = false,
+  tooltipOffset,
   ...props
 }: {
   children: React.ReactNode;
   label: string;
+  tooltipOffset?: [number, number];
   noHoverbg?: boolean;
   isDisabled?: boolean;
   [key: string]: any;
@@ -37,7 +39,7 @@ export default function ActionButton({
         bg="secondary.700"
         color="background.500"
         gutter={16}
-        offset={[-20, -60]}
+        offset={tooltipOffset || [-20, -60]}
         borderRadius={"5px"}
         fontSize=".85rem"
       >

@@ -10,26 +10,14 @@ export default function MainGridWrapper({
 }) {
   return (
     <Grid
-      gridTemplateColumns={"auto 1fr"}
+      gridTemplateColumns={"auto auto 1fr auto"}
       gridTemplateRows={"auto 1fr auto"}
-      gridTemplateAreas='"sd hd"
-      "sd main"
-      "sd ft"'
+      gridTemplateAreas='"header header header header"
+      "app-sidebar panel main preview-sidebar"
+      "footer footer footer footer"'
       {...props}
     >
       {children}
     </Grid>
   );
 }
-
-/**
- * .wrapper {
-    display: grid;
-    grid-template-columns: repeat(9, 1fr);
-    grid-auto-rows: minmax(100px, auto);
-    grid-template-areas:
-      "sd hd   hd"
-      "sd main main"
-      "sd ft   ft  ";
-}
- */

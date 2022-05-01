@@ -7,9 +7,7 @@ export default function BreakpointsPage() {
   return (
     <Box>
       <FlexRowWrap gap={0}>
-        <BreakpointsFormProvider>
-          <Outlet />
-        </BreakpointsFormProvider>
+        <Outlet />
       </FlexRowWrap>
     </Box>
   );
