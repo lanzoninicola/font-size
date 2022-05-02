@@ -406,3 +406,73 @@ export function ClearAllIcon({
     />
   );
 }
+
+export function SearchIcon({
+  size = 20,
+  color = "gray",
+  ariaLabel = "Search Items",
+}: IconProps) {
+  return (
+    <Image
+      src={`${BASE_URL}/search-icon-${size}-${color}.svg`}
+      alt={ariaLabel}
+      altaria-label={ariaLabel}
+    />
+  );
+}
+
+export function MobileIcon({
+  size = 20,
+  color = "gray",
+  ariaLabel = "Mobile Device",
+}: IconProps) {
+  return (
+    <Image
+      src={`${BASE_URL}/mobile-icon-${size}-${color}.svg`}
+      alt={ariaLabel}
+      altaria-label={ariaLabel}
+    />
+  );
+}
+
+export function TabletIcon({
+  size = 20,
+  color = "gray",
+  ariaLabel = "Tablet Device",
+}: IconProps) {
+  return (
+    <Image
+      src={`${BASE_URL}/tablet-icon-${size}-${color}.svg`}
+      alt={ariaLabel}
+      altaria-label={ariaLabel}
+    />
+  );
+}
+
+export function LaptopIcon({
+  size = 20,
+  color = "gray",
+  ariaLabel = "Tablet Device",
+}: IconProps) {
+  return (
+    <Image
+      src={`${BASE_URL}/laptop-icon-${size}-${color}.svg`}
+      alt={ariaLabel}
+      altaria-label={ariaLabel}
+    />
+  );
+}
+
+export function WatchIcon({
+  size = 20,
+  color = "gray",
+  ariaLabel = "Watch Device",
+}: IconProps) {
+  return (
+    <Image
+      src={`${BASE_URL}/watch-icon-${size}-${color}.svg`}
+      alt={ariaLabel}
+      altaria-label={ariaLabel}
+    />
+  );
+}

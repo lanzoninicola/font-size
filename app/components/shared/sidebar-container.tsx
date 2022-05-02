@@ -8,7 +8,7 @@ export default function SidebarContainer({
   children,
   ...props
 }: {
-  gridArea: string;
+  gridArea?: string;
 
   isLeft?: boolean;
   isRight?: boolean;
@@ -24,6 +24,7 @@ export default function SidebarContainer({
       borderColor={"primaryAlpha.20"}
       paddingInline=".5rem"
       minW="50px"
+      h="100%"
       {...props}
     >
       {children}

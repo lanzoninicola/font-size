@@ -13,8 +13,7 @@ export default function SidebarItem({
   to: string;
   label: string;
   ariaLabel: string;
-
-  isSidebarActive: boolean;
+  isSidebarActive?: boolean;
   children: React.ReactNode;
 }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -32,8 +31,8 @@ export default function SidebarItem({
       position={"relative"}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      w={isSidebarActive ? "60px" : "30px"}
-      h={isSidebarActive ? "60px" : "40px"}
+      w={isSidebarActive || isSidebarActive === undefined ? "60px" : "30px"}
+      h={isSidebarActive || isSidebarActive === undefined ? "60px" : "40px"}
       transition="all 200ms ease-in-out"
     >
       <Link to={to}>
@@ -50,7 +49,7 @@ export default function SidebarItem({
           {children}
           <SidebarItemLabel
             aria-label={ariaLabel}
-            opacity={isSidebarActive ? 1 : 0}
+            opacity={isSidebarActive || isSidebarActive === undefined ? 1 : 0}
             transition="all 200ms ease-in-out"
           >
             {label}

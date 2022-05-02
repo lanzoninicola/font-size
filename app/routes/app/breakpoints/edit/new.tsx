@@ -63,10 +63,12 @@ export default function NewBreakpointPage() {
         <VStackBox gap="1.5rem">
           <FormControlInputText
             id="label"
+            orientation="vertical"
             label="Name"
             value={label}
-            minW="370px"
             onChange={(e) => onChangeBreakpointName(e)}
+            maxW="100%"
+            w="100%"
           />
           <FormControlInputNumber
             id="minViewportWidth"

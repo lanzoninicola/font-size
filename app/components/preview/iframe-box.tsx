@@ -3,8 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import useMediaQueriesSelector from "~/context/app/hooks/useMediaQueriesSelector";
 import usePreviewUrl from "~/context/preview/hooks/usePreviewUrl";
 import useCSSCodeBlock from "~/domain/code-block/useCSSCodeBlock";
+import PREVIEW_SETTINGS from "~/domain/preview/settings";
 import usePostMessageService from "~/domain/preview/usePostMessageService";
-import SETTINGS from "~/domain/settings";
 
 export default function IframeBox({
   width,
@@ -22,7 +22,7 @@ export default function IframeBox({
 
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
-  const DEFAULT_URL = SETTINGS.preview.iframeDefaultURL;
+  const DEFAULT_URL = PREVIEW_SETTINGS.iframeDefaultURL;
 
   function sendMessage() {
     postMessage({ iframeRef, message: codeBlock });

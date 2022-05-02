@@ -1,11 +1,13 @@
 import usePreviewWindowsSelector from "~/context/preview/hooks/usePreviewWindowsSelector";
-import { DeviceViewportSize, PreviewItem } from "~/context/preview/interfaces";
-import SETTINGS from "../settings";
+import { PreviewDevice } from "~/context/preview/interfaces";
+
 import parseDecimalNumber from "../utilities/parseDecimalNumber";
+import PREVIEW_SETTINGS from "./settings";
 
 export default function usePreviewWindowsService() {
-  const DEFAULT_WIDTH = SETTINGS.preview.iframeDefaultWidth;
-  const DEFAULT_HEIGHT = SETTINGS.preview.iframeDefaultHeight;
+  const DEFAULT_WIDTH = PREVIEW_SETTINGS.iframeDefaultWidth;
+  const DEFAULT_HEIGHT = PREVIEW_SETTINGS.iframeDefaultHeight;
+  const DEFAULT_DEVICE_NAME = PREVIEW_SETTINGS.deviceName;
 
   const { previewWindows, setPreviewWindows } = usePreviewWindowsSelector();
 
@@ -13,15 +15,10 @@ export default function usePreviewWindowsService() {
    * @description Add new preview window. The new window is added to the begin of the list.
    * The size of the new window is set to the default value if a width and height have not given.
    */
-  function addWindow(userWidth?: number, userHeight?: number) {
+  function addWindow(device: PreviewDevice) {
     const nextState = [...previewWindows];
 
-    const newItem: PreviewItem = {
-      width: userWidth || DEFAULT_WIDTH,
-      height: userHeight || DEFAULT_HEIGHT,
-    };
-
-    nextState.unshift(newItem);
+    nextState.unshift(device);
     setPreviewWindows(nextState);
   }
 
@@ -29,15 +26,10 @@ export default function usePreviewWindowsService() {
    * @description Add new preview windows. The new window is added to the begin of the list.
    * The size of the new window is set to the default value if a width and height have not given.
    */
-  function addBulkWindow(sizes: DeviceViewportSize[]) {
+  function addBulkWindow(devices: PreviewDevice[]) {
     const nextState = [...previewWindows];
 
-    const newItems: PreviewItem[] = sizes.map((size) => ({
-      width: size.width,
-      height: size.height,
-    }));
-
-    nextState.unshift(...newItems);
+    nextState.unshift(...devices);
     setPreviewWindows(nextState);
   }
 
@@ -82,6 +74,18 @@ export default function usePreviewWindowsService() {
     setPreviewWindows(nextState);
   }
 
+  function getNewPreviewDevice(
+    width?: number,
+    height?: number,
+    deviceName?: string
+  ): PreviewDevice {
+    return {
+      width: width || DEFAULT_WIDTH,
+      height: height || DEFAULT_HEIGHT,
+      deviceName: deviceName || DEFAULT_DEVICE_NAME,
+    };
+  }
+
   return {
     addWindow,
     addBulkWindow,
@@ -89,5 +93,6 @@ export default function usePreviewWindowsService() {
     removeAllWindows,
     changeWindowWidth,
     changeWindowHeight,
+    getNewPreviewDevice,
   };
 }

@@ -1,4 +1,5 @@
 import { useContextSelector } from "use-context-selector";
+import { YesVizDeviceInfo } from "../interfaces";
 
 import { PreviewContextData } from "../preview-context";
 
@@ -10,8 +11,16 @@ export default function usePreviewDevicesSelector() {
     (ctx) => ctx?.setDevices
   );
 
+  function setDevicesOrderedByName(devices: YesVizDeviceInfo[]) {
+    setDevices(
+      devices.sort((a, b) => {
+        return a.name.localeCompare(b.name);
+      })
+    );
+  }
+
   return {
     devices,
-    setDevices,
+    setDevices: setDevicesOrderedByName,
   };
 }

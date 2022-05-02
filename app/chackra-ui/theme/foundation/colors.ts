@@ -25,8 +25,9 @@ const colors: Colors = {
     500: "#F8F8F8",
   },
   background: {
-    300: "#2F303C",
+    300: "#6C6E89",
     500: "#1F2028",
+    700: "#2F303C",
   },
   secondary: {
     300: "#AEF4F4",

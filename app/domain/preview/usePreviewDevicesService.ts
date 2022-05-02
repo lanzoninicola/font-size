@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import usePreviewDevicesSelector from "~/context/preview/hooks/usePreviewDevicesSelector";
 import { DeviceTypes, YesVizDeviceInfo } from "~/context/preview/interfaces";
 
@@ -6,8 +7,49 @@ type OrderOrientation = "ASC" | "DESC";
 export default function usePreviewDevicesService() {
   const { devices } = usePreviewDevicesSelector();
 
-  function getDevicesByType(type: DeviceTypes) {
-    return devices.filter((device) => device.type === type);
+  function getDevicesOrderedByName(
+    order: OrderOrientation
+  ): YesVizDeviceInfo[] {
+    return devices.sort((a, b) => {
+      if (order === "ASC") {
+        return a.name.localeCompare(b.name);
+      } else {
+        return b.name.localeCompare(a.name);
+      }
+    });
+  }
+
+  function getDevicesByName(
+    name: string,
+    filteredDevices?: YesVizDeviceInfo[]
+  ) {
+    let nextDevices = filteredDevices || devices;
+
+    return nextDevices.filter((device) =>
+      device.name.toLowerCase().includes(name.toLowerCase())
+    );
+  }
+
+  function getDeviceTypes(): DeviceTypes[] {
+    return devices
+      .reduce((acc, device) => {
+        if (!acc.includes(device.type)) {
+          acc.push(device.type);
+        }
+        return acc;
+      }, [] as DeviceTypes[])
+      .sort((a, b) => {
+        return a.localeCompare(b);
+      });
+  }
+
+  function getDevicesByType(
+    type: DeviceTypes,
+    filteredDevices?: YesVizDeviceInfo[]
+  ) {
+    let nextDevices = filteredDevices || devices;
+
+    return nextDevices.filter((device) => device.type === type);
   }
 
   function orderByViewportWidth(orientation: OrderOrientation) {
@@ -22,7 +64,6 @@ export default function usePreviewDevicesService() {
   }
 
   function getSmallestDevice(minWidth?: number): YesVizDeviceInfo | null {
-    console.log("getSmallestDevice", devices);
     if (devices.length === 0) {
       return null;
     }
@@ -67,6 +108,9 @@ export default function usePreviewDevicesService() {
   }
 
   return {
+    getDevicesOrderedByName,
+    getDeviceTypes,
+    getDevicesByName,
     getDevicesByType,
     getSmallestDevice,
     getLargestDevice,

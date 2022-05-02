@@ -13,7 +13,7 @@ export default function MainGridWrapper({
       gridTemplateColumns={"auto auto 1fr auto"}
       gridTemplateRows={"auto 1fr auto"}
       gridTemplateAreas='"header header header header"
-      "app-sidebar panel main preview-sidebar"
+      "app-sidebar panel main preview-side-content"
       "footer footer footer footer"'
       {...props}
     >

@@ -1,23 +1,29 @@
-import { HStack } from "@chakra-ui/react";
+import { HStack, StackProps } from "@chakra-ui/react";
 import React from "react";
 import FormControlLabel from "~/components/shared/form-control-label";
 
+import InputWrapper from "./form-control-input-wrapper";
 import InputText from "./input-text";
 
 export default function FormControlInputText({
   id,
+  orientation,
   label,
   labelFontSize,
   labelSpacing,
   ariaLabel,
   value,
   unit,
+
+  justify,
+
   onChange,
   onBlur,
 
   ...props
 }: {
   id: string;
+  orientation?: "horizontal" | "vertical";
   label?: string;
   labelFontSize?: string;
   labelSpacing?: string;
@@ -25,16 +31,18 @@ export default function FormControlInputText({
   value?: string;
   unit?: string;
 
+  justify?: StackProps["justify"];
+
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.FocusEventHandler<HTMLInputElement>) => void;
   [key: string]: any;
 }) {
   return (
-    <HStack
+    <InputWrapper
+      orientation={orientation}
       w="100%"
       aria-label={ariaLabel || (label && `Set the ${label.toLowerCase()}`)}
-      justify={"space-between"}
-      alignItems="center"
+      justify={justify || "space-between"}
       gap={labelSpacing || ".25rem"}
     >
       {label && (
@@ -42,7 +50,7 @@ export default function FormControlInputText({
           {label}
         </FormControlLabel>
       )}
-      <HStack>
+      <HStack w="100%">
         <InputText
           value={value}
           onChange={onChange}
@@ -50,6 +58,6 @@ export default function FormControlInputText({
           {...props}
         />
       </HStack>
-    </HStack>
+    </InputWrapper>
   );
 }

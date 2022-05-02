@@ -16,14 +16,11 @@ export default function SidePanelCollapsed({
       <ActionButton label="Collpase" onClick={toggleCollapse}>
         <ExpandIcon />
       </ActionButton>
-      <Box w="100%" position={"relative"}>
+      <Box w="100%" transform={"rotate(90deg) translateX(30px)"}>
         <SectionSubHeader
-          position={"absolute"}
-          top={"50px"}
-          left={"-35px"}
-          transform={"rotate(90deg)"}
           transformOrigin="center"
           minW="max-content"
+          lineHeight="1"
         >
           {title}
         </SectionSubHeader>

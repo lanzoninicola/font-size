@@ -55,33 +55,13 @@ export default function AppSidebar() {
     },
   ];
 
-  const [isActive, setIsActive] = useState(false);
-
-  function onMouseEnter() {
-    setIsActive(true);
-  }
-
-  function onMouseLeave() {
-    setIsActive(false);
-  }
-
   return (
-    <SidebarContainer
-      gridArea="app-sidebar"
-      isLeft={true}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-    >
-      <VStack
-        position={"sticky"}
-        top="50%"
-        transform="translateY(-50%)"
-        spacing={4}
-      >
+    <SidebarContainer gridArea="app-sidebar" isLeft={true}>
+      <VStack position={"sticky"} top="calc(50px + 1rem)" spacing={4}>
         {items
           .filter((item) => !item.isDisabled)
           .map((item, idx) => (
-            <SidebarItem key={idx} {...item} isSidebarActive={isActive}>
+            <SidebarItem key={idx} {...item}>
               {item.icon}
             </SidebarItem>
           ))}

@@ -11,20 +11,21 @@ import usePreviewDevicesService from "~/domain/preview/usePreviewDevicesService"
 import usePreviewWindowsService from "~/domain/preview/usePreviewWindowsService";
 import FlippedContainer from "../layout/flipped-container";
 
-import PreviewItem from "./preview-item";
+import PreviewDevice from "./preview-device";
 
 type LoaderData = YesVizDeviceInfo[];
 
 export default function PreviewContent() {
   const devicesData: LoaderData = useLoaderData();
-  const { devices, setDevices } = usePreviewDevicesSelector();
+  const { setDevices } = usePreviewDevicesSelector();
 
   const { currentBreakpointId } = useMediaQueriesBuilderService();
   const { getViewportSizeByBreakpointId } = useBreakpointsQueryService();
 
   const { previewWindows } = usePreviewWindowsSelector();
   const { getSmallestDevice, getLargestDevice } = usePreviewDevicesService();
-  const { addBulkWindow, removeAllWindows } = usePreviewWindowsService();
+  const { addBulkWindow, removeAllWindows, getNewPreviewDevice } =
+    usePreviewWindowsService();
   const { zoom } = usePreviewZoomSelector();
 
   function onChangeBreakpointLoadWindows() {
@@ -36,21 +37,25 @@ export default function PreviewContent() {
       getViewportSizeByBreakpointId(currentBreakpointId);
 
     const smallestDevice = getSmallestDevice(minWidth);
-    // const largestDevice = getLargestDevice(maxWidth);
+    const largestDevice = getLargestDevice(maxWidth);
 
-    // if (smallestDevice && largestDevice) {
-    //   const { width: smallestWidth, height: smallestHeight } =
-    //     smallestDevice.viewportSize;
-    //   const { width: largetstWidth, height: largestHeight } =
-    //     largestDevice.viewportSize;
+    if (smallestDevice && largestDevice) {
+      removeAllWindows();
 
-    //   removeAllWindows();
+      const previewSmallestDevice = getNewPreviewDevice(
+        smallestDevice.viewportSize.width,
+        smallestDevice.viewportSize.height,
+        smallestDevice.name
+      );
 
-    //   addBulkWindow([
-    //     { width: smallestWidth, height: smallestHeight },
-    //     { width: largetstWidth, height: largestHeight },
-    //   ]);
-    // }
+      const previewLargestDevice = getNewPreviewDevice(
+        largestDevice.viewportSize.width,
+        largestDevice.viewportSize.height,
+        largestDevice.name
+      );
+
+      addBulkWindow([previewSmallestDevice, previewLargestDevice]);
+    }
   }
 
   useEffect(() => {
@@ -58,7 +63,6 @@ export default function PreviewContent() {
   }, []);
 
   useEffect(() => {
-    console.log(currentBreakpointId);
     onChangeBreakpointLoadWindows();
   }, [currentBreakpointId]);
 
@@ -80,7 +84,7 @@ export default function PreviewContent() {
           >
             <>
               {previewWindows.map((_, idx) => (
-                <PreviewItem key={idx} idx={idx} />
+                <PreviewDevice key={idx} idx={idx} />
               ))}
             </>
           </HStack>

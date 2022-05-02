@@ -5,12 +5,12 @@ import usePreviewWindowsService from "~/domain/preview/usePreviewWindowsService"
 
 import { TrashIcon } from "../shared/icons";
 import IframeBox from "./iframe-box";
-import PreviewItemToolbar from "./preview-item-toolbar";
+import PreviewDeviceToolbar from "./preview-device-toolbar";
 import ActionButton from "../shared/action-button";
 
 // TODO: ADD SENDER_ID TO IFRAME
 
-export default function PreviewItem({ idx }: { idx: number }) {
+export default function PreviewDevice({ idx }: { idx: number }) {
   const { removeWindow } = usePreviewWindowsService();
   const { previewWindows } = usePreviewWindowsSelector();
 
@@ -50,7 +50,7 @@ export default function PreviewItem({ idx }: { idx: number }) {
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      <PreviewItemToolbar itemIdx={idx} />
+      <PreviewDeviceToolbar itemIdx={idx} />
 
       <IframeBox
         width={previewWindows[idx].width}
