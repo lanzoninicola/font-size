@@ -84,7 +84,7 @@ export default function BreakpointFormUpdate() {
 
   return (
     <>
-      <VStackBox gap="1.5rem">
+      <VStackBox gap="1.5rem" w="100%">
         <FormControlInputNumber
           id="minViewportWidth"
           label="Minimum viewport width"

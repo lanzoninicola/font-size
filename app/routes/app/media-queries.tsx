@@ -1,31 +1,46 @@
-import { Box } from "@chakra-ui/react";
-import { Outlet } from "remix";
-import { MediaQueryBuilderProvider } from "~/context/media-query-builder/media-query-builder-context";
+import { HStack } from "@chakra-ui/react";
+import { useState } from "react";
+import { Outlet, useOutletContext } from "remix";
+import InnerPageContentArea from "~/components/layout/inner-page-content-area";
+import InnerPageHeaderArea from "~/components/layout/inner-page-header-area";
+import MediaQueriesToolbar from "~/components/media-queries/media-queries-toolbar";
+import ActionButton from "~/components/shared/action-button";
+import { CollapseIcon } from "~/components/shared/icons";
+import SectionSubHeader from "~/components/shared/section-subheader";
+import SidePanelCollapsed from "~/components/shared/side-panel-collapsed";
 
-// export interface LoaderData {
-//   ENV: {
-//     IFRAME_ORIGIN: string;
-//   };
-//   senderId: string;
-// }
-
-// export async function loader() {
-//   const uuid = uuidv4();
-
-//   return json({
-//     ENV: {
-//       IFRAME_ORIGIN: process.env.IFRAME_ORIGIN,
-//     },
-//     senderId: uuid,
-//   });
-// }
+import { ContextType } from "../app";
 
 export default function MediaQueriesPage() {
+  const { isPanelCollapsed, togglePanelCollapse } =
+    useOutletContext<ContextType>();
+
   return (
-    <Box>
-      <MediaQueryBuilderProvider>
-        <Outlet />
-      </MediaQueryBuilderProvider>
-    </Box>
+    <>
+      {!isPanelCollapsed && (
+        <>
+          <InnerPageHeaderArea>
+            <HStack w="100%" justify={"space-between"}>
+              <SectionSubHeader>Media Queries</SectionSubHeader>
+              <ActionButton label="Collpase" onClick={togglePanelCollapse}>
+                <CollapseIcon />
+              </ActionButton>
+            </HStack>
+            <MediaQueriesToolbar />
+          </InnerPageHeaderArea>
+          <InnerPageContentArea>
+            <Outlet />
+          </InnerPageContentArea>
+        </>
+      )}
+      {isPanelCollapsed && (
+        <>
+          <SidePanelCollapsed
+            title="Media Queries"
+            toggleCollapse={togglePanelCollapse}
+          />
+        </>
+      )}
+    </>
   );
 }

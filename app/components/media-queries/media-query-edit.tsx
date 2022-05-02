@@ -1,6 +1,5 @@
 import { Box, Grid, HStack, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { useLoaderData } from "remix";
 import useHtmlSelectorsSelector from "~/context/app/hooks/useHtmlSelectorsSelector";
 import { SelectorId, Selectors } from "~/context/app/interfaces";
 import { BreakpointId } from "~/context/breakpoint-builder/interfaces";

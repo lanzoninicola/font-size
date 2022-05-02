@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { createContext } from "use-context-selector";
 
-import { PreviewItem, YesVizDeviceInfo } from "./interfaces";
+import { PreviewDevice, YesVizDeviceInfo } from "./interfaces";
 
 export interface PreviewContext {
   devices: YesVizDeviceInfo[];
-  previewWindows: PreviewItem[];
+  previewWindows: PreviewDevice[];
   previewUrl: string;
   zoom: number;
   setDevices: (devices: YesVizDeviceInfo[]) => void;
-  setPreviewWindows: (previewWindows: PreviewItem[]) => void;
+  setPreviewWindows: (previewWindows: PreviewDevice[]) => void;
   setPreviewUrl: (url: string) => void;
   setZoom: (zoom: number) => void;
 }
@@ -20,7 +20,7 @@ export const PreviewContextData = createContext<PreviewContext>(
 
 export function PreviewProvider({ children }: { children: React.ReactNode }) {
   const [devices, setDevices] = useState<YesVizDeviceInfo[]>([]);
-  const [previewWindows, setPreviewWindows] = useState<PreviewItem[]>([]);
+  const [previewWindows, setPreviewWindows] = useState<PreviewDevice[]>([]);
   const [previewUrl, setPreviewUrl] = useState("");
   const [zoom, setZoom] = useState(100);
 

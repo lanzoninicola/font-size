@@ -5,10 +5,8 @@ import useMediaQueriesRoutes from "./useMediaQueriesRoutes";
 export default function useMediaQueriesRoutesLocation() {
   const {
     BASE_ROUTE,
-    ROUTE_MEDIA_QUERY_LIST,
     ROUTE_MEDIA_QUERY_ERROR_MISSING_BREAKPOINTS,
-    ROUTE_MEDIA_QUERY_NEW,
-    ROUTE_MEDIA_QUERY_UPDATE,
+    ROUTE_MEDIA_QUERY_EDIT,
     ROUTE_MEDIA_QUERY_SHOW_CODE,
   } = useMediaQueriesRoutes();
   const { pathname } = useLocation();
@@ -20,20 +18,12 @@ export default function useMediaQueriesRoutesLocation() {
   }
 
   function _updateCurrentRoute() {
-    if (_isCurrentRoute(ROUTE_MEDIA_QUERY_LIST)) {
-      setCurrentRoute(ROUTE_MEDIA_QUERY_LIST);
-    }
-
     if (_isCurrentRoute(ROUTE_MEDIA_QUERY_ERROR_MISSING_BREAKPOINTS)) {
       setCurrentRoute(ROUTE_MEDIA_QUERY_ERROR_MISSING_BREAKPOINTS);
     }
 
-    if (_isCurrentRoute(ROUTE_MEDIA_QUERY_NEW)) {
-      setCurrentRoute(ROUTE_MEDIA_QUERY_NEW);
-    }
-
-    if (_isCurrentRoute(ROUTE_MEDIA_QUERY_UPDATE)) {
-      setCurrentRoute(ROUTE_MEDIA_QUERY_UPDATE);
+    if (_isCurrentRoute(ROUTE_MEDIA_QUERY_EDIT)) {
+      setCurrentRoute(ROUTE_MEDIA_QUERY_EDIT);
     }
 
     if (_isCurrentRoute(ROUTE_MEDIA_QUERY_SHOW_CODE)) {

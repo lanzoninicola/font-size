@@ -2,9 +2,12 @@ import { HStack, Text } from "@chakra-ui/react";
 import React from "react";
 import FormControlLabel from "~/components/shared/form-control-label";
 import InputNumber from "~/components/shared/input-number";
+import InputWrapper from "./form-control-input-wrapper";
+import VStackBox from "./vstack-wrapper";
 
 export default function FormControlInputNumber({
   id,
+  orientation,
   label,
   labelFontSize,
   labelSpacing,
@@ -20,6 +23,7 @@ export default function FormControlInputNumber({
   ...props
 }: {
   id: string;
+  orientation?: "horizontal" | "vertical";
   label?: string;
   labelFontSize?: string;
   labelSpacing?: string;
@@ -34,7 +38,7 @@ export default function FormControlInputNumber({
   [key: string]: any;
 }) {
   return (
-    <HStack
+    <InputWrapper
       w="100%"
       aria-label={ariaLabel || (label && `Set the ${label.toLowerCase()}`)}
       justify={unit || leftUnit || rightUnit ? "space-between" : "center"}
@@ -73,6 +77,6 @@ export default function FormControlInputNumber({
           </Text>
         )}
       </HStack>
-    </HStack>
+    </InputWrapper>
   );
 }

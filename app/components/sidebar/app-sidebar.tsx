@@ -8,6 +8,7 @@ import {
   SelectorsIcon,
   SettingsIcon,
 } from "../shared/icons";
+import SidebarContainer from "../shared/sidebar-container";
 import SidebarItem from "./sidebar-item";
 
 interface SidebarItemConfig {
@@ -20,8 +21,8 @@ interface SidebarItemConfig {
 
 // TODO: Add a sidebar context and Service Hooks to add/disable sidebar items. Remove data from the view
 
-export default function Sidebar() {
-  const { ROUTE_MEDIA_QUERY_LIST } = useMediaQueriesRoutes();
+export default function AppSidebar() {
+  const { ROUTE_MEDIA_QUERY_EDIT } = useMediaQueriesRoutes();
 
   const items: SidebarItemConfig[] = [
     {
@@ -32,7 +33,7 @@ export default function Sidebar() {
       isDisabled: false,
     },
     {
-      to: ROUTE_MEDIA_QUERY_LIST,
+      to: ROUTE_MEDIA_QUERY_EDIT,
       label: "Media Queries",
       ariaLabel: "Define media queries and styles",
       icon: <MediaQueryIcon size={24} color="gray" />,
@@ -54,41 +55,17 @@ export default function Sidebar() {
     },
   ];
 
-  const [isActive, setIsActive] = useState(false);
-
-  function onMouseEnter() {
-    setIsActive(true);
-  }
-
-  function onMouseLeave() {
-    setIsActive(false);
-  }
-
   return (
-    <Box
-      as="aside"
-      gridArea={"sd"}
-      borderRight={"1px solid"}
-      borderColor={"primaryAlpha.20"}
-      paddingInline=".5rem"
-      minW="50px"
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-    >
-      <VStack
-        position={"sticky"}
-        top="50%"
-        transform="translateY(-50%)"
-        spacing={4}
-      >
+    <SidebarContainer gridArea="app-sidebar" isLeft={true}>
+      <VStack position={"sticky"} top="calc(50px + 1rem)" spacing={4}>
         {items
           .filter((item) => !item.isDisabled)
           .map((item, idx) => (
-            <SidebarItem key={idx} {...item} isSidebarActive={isActive}>
+            <SidebarItem key={idx} {...item}>
               {item.icon}
             </SidebarItem>
           ))}
       </VStack>
-    </Box>
+    </SidebarContainer>
   );
 }

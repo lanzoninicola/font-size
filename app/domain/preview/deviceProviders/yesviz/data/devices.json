@@ -1332,7 +1332,7 @@
     "cssPpi": "264"
   },
   {
-    "type": "Mobile",
+    "type": "Tablet",
     "name": "Apple iPad Pro 11\"",
     "viewportSize": { "width": 834, "height": 1194 },
     "screenSize": "1668 x 2388",

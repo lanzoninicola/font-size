@@ -1,10 +1,12 @@
-export interface PreviewItem {
+export interface PreviewDevice {
   width: number;
   height: number;
+  deviceName?: string;
 }
 
 export enum DeviceTypes {
   mobile = "Mobile",
+  tablet = "Tablet",
   laptop = "Laptop",
   watch = "Watch",
   unknown = "Unknown",
