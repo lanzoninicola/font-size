@@ -1,5 +1,6 @@
 import { Box, VStack } from "@chakra-ui/react";
 import { useState } from "react";
+import useBreakpointsRoutes from "~/domain/breakpoints/useBreakpointsRoutes";
 import useMediaQueriesRoutes from "~/domain/media-queries/useMediaQueriesRoutes";
 
 import {
@@ -22,18 +23,19 @@ interface SidebarItemConfig {
 // TODO: Add a sidebar context and Service Hooks to add/disable sidebar items. Remove data from the view
 
 export default function AppSidebar() {
-  const { ROUTE_MEDIA_QUERY_EDIT } = useMediaQueriesRoutes();
+  const { ROUTE_MEDIA_QUERY_BASE_ROUTE } = useMediaQueriesRoutes();
+  const { ROUTE_BREAKPOINTS_BASE_ROUTE } = useBreakpointsRoutes();
 
   const items: SidebarItemConfig[] = [
     {
-      to: "/app/breakpoints",
+      to: ROUTE_BREAKPOINTS_BASE_ROUTE,
       label: "Breakpoints",
       ariaLabel: "Define your custom breakpoints",
       icon: <BreakpointsIcon size={24} color="gray" />,
       isDisabled: false,
     },
     {
-      to: ROUTE_MEDIA_QUERY_EDIT,
+      to: ROUTE_MEDIA_QUERY_BASE_ROUTE,
       label: "Media Queries",
       ariaLabel: "Define media queries and styles",
       icon: <MediaQueryIcon size={24} color="gray" />,
