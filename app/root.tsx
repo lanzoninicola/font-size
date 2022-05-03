@@ -1,6 +1,6 @@
 import { ChakraProvider, Heading, Text, VStack } from "@chakra-ui/react";
 import { withEmotionCache } from "@emotion/react";
-import React from "react";
+import React, { useState } from "react";
 import {
   Links,
   LiveReload,
@@ -17,15 +17,28 @@ import { AppProvider } from "./context/app/app-context";
 
 import type { MetaFunction } from "remix";
 export const meta: MetaFunction = () => {
-  return { title: "Font-size" };
+  return { title: "Font Scale" };
+};
+
+export type ContextType = {
+  isPanelCollapsed: boolean;
+  togglePanelCollapse: () => void;
 };
 
 export default function App() {
+  const [isPanelCollapsed, setIsPanelCollapsed] = useState(false);
+
+  function togglePanelCollapse() {
+    setIsPanelCollapsed(!isPanelCollapsed);
+  }
+
+  const context: ContextType = { isPanelCollapsed, togglePanelCollapse };
+
   return (
     <Document>
       <ChakraProvider resetCSS theme={theme}>
         <AppProvider>
-          <Outlet />
+          <Outlet context={context} />
         </AppProvider>
       </ChakraProvider>
     </Document>

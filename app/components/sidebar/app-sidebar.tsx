@@ -1,5 +1,6 @@
 import { Box, VStack } from "@chakra-ui/react";
 import { useState } from "react";
+import useBreakpointsRoutes from "~/domain/breakpoints/useBreakpointsRoutes";
 import useMediaQueriesRoutes from "~/domain/media-queries/useMediaQueriesRoutes";
 
 import {
@@ -23,10 +24,11 @@ interface SidebarItemConfig {
 
 export default function AppSidebar() {
   const { ROUTE_MEDIA_QUERY_EDIT } = useMediaQueriesRoutes();
+  const { ROUTE_BREAKPOINTS_BASE_ROUTE } = useBreakpointsRoutes();
 
   const items: SidebarItemConfig[] = [
     {
-      to: "/app/breakpoints",
+      to: ROUTE_BREAKPOINTS_BASE_ROUTE,
       label: "Breakpoints",
       ariaLabel: "Define your custom breakpoints",
       icon: <BreakpointsIcon size={24} color="gray" />,

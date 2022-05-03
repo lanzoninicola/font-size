@@ -1,35 +1,56 @@
-import { Button, Center, Flex, Grid, Heading } from "@chakra-ui/react";
-import { Link, LoaderFunction, redirect } from "remix";
-import VStackBox from "~/components/shared/vstack-wrapper";
+import { useState } from "react";
+import { json, MetaFunction, Outlet, useOutletContext } from "remix";
+import Footer from "~/components/footer/footer";
+import Header from "~/components/header/header";
+import PreviewContent from "~/components/preview/preview-content";
+import PreviewSideContent from "~/components/preview/preview-side-content";
+import MainGridWrapper from "~/components/shared/main-grid-wrapper";
+import SidePanel from "~/components/shared/side-panel";
+import AppSidebar from "~/components/sidebar/app-sidebar";
+import { BreakpointsFormProvider } from "~/context/breakpoint-builder/breakpoints-form-context";
+import { MediaQueryBuilderProvider } from "~/context/media-query-builder/media-query-builder-context";
+import { PreviewProvider } from "~/context/preview/preview-context";
+import devices from "~/domain/preview/deviceProviders/yesviz/data/devices.json";
+import { ContextType } from "~/root";
 
-export const loader: LoaderFunction = async () => {
-  // TODO: loading the google fonts
-
-  return null;
+export const meta: MetaFunction = () => {
+  return {
+    title: "Font Scale",
+    description: "Let me help you",
+  };
 };
 
+export async function loader() {
+  return json(devices);
+}
+
 export default function Index() {
+  const { isPanelCollapsed, togglePanelCollapse } =
+    useOutletContext<ContextType>();
+
   return (
-    <Flex w="100%" minH="100vh" justify="center" align={"center"}>
-      <VStackBox m="auto" w="max-content" gap="1rem">
-        <Heading
-          as="h1"
-          size={"4xl"}
-          color="white"
-          lineHeight={"1"}
-          letterSpacing={-4}
-        >
-          Welcome to
-          <br /> Font Scale
-        </Heading>
-        <Heading as="h2" size={"lg"} color="white" fontWeight={400}>
-          This tool will help you choose <br />
-          the right font size for your project
-        </Heading>
-        <Link to="/app">
-          <Button>START</Button>
-        </Link>
-      </VStackBox>
-    </Flex>
+    <MainGridWrapper as="main" bg="background.700" minH="100vh">
+      <Header />
+
+      <AppSidebar />
+      <BreakpointsFormProvider>
+        <MediaQueryBuilderProvider>
+          <SidePanel
+            minW="50px"
+            maxW="370px"
+            isCollapsed={isPanelCollapsed}
+            gridArea="panel"
+          >
+            <Outlet />
+          </SidePanel>
+
+          <PreviewProvider>
+            <PreviewContent />
+            <PreviewSideContent />
+          </PreviewProvider>
+        </MediaQueryBuilderProvider>
+      </BreakpointsFormProvider>
+      <Footer />
+    </MainGridWrapper>
   );
 }
