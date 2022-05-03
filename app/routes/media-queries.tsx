@@ -8,8 +8,7 @@ import ActionButton from "~/components/shared/action-button";
 import { CollapseIcon } from "~/components/shared/icons";
 import SectionSubHeader from "~/components/shared/section-subheader";
 import SidePanelCollapsed from "~/components/shared/side-panel-collapsed";
-
-import { ContextType } from "../app";
+import { ContextType } from "~/root";
 
 export default function MediaQueriesPage() {
   const { isPanelCollapsed, togglePanelCollapse } =

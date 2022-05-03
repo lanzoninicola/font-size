@@ -1,11 +1,19 @@
+import { Heading, HStack } from "@chakra-ui/react";
 import { useState } from "react";
 import { json, MetaFunction, Outlet, useOutletContext } from "remix";
+import BreakpointsToolbar from "~/components/breakpoints/breakpoints-toolbar";
 import Footer from "~/components/footer/footer";
 import Header from "~/components/header/header";
+import InnerPageContentArea from "~/components/layout/inner-page-content-area";
+import InnerPageHeaderArea from "~/components/layout/inner-page-header-area";
 import PreviewContent from "~/components/preview/preview-content";
 import PreviewSideContent from "~/components/preview/preview-side-content";
+import ActionButton from "~/components/shared/action-button";
+import { CollapseIcon } from "~/components/shared/icons";
 import MainGridWrapper from "~/components/shared/main-grid-wrapper";
+import SectionSubHeader from "~/components/shared/section-subheader";
 import SidePanel from "~/components/shared/side-panel";
+import SidePanelCollapsed from "~/components/shared/side-panel-collapsed";
 import AppSidebar from "~/components/sidebar/app-sidebar";
 import { BreakpointsFormProvider } from "~/context/breakpoint-builder/breakpoints-form-context";
 import { MediaQueryBuilderProvider } from "~/context/media-query-builder/media-query-builder-context";
@@ -20,37 +28,35 @@ export const meta: MetaFunction = () => {
   };
 };
 
-export async function loader() {
-  return json(devices);
-}
-
 export default function Index() {
   const { isPanelCollapsed, togglePanelCollapse } =
     useOutletContext<ContextType>();
 
   return (
-    <MainGridWrapper as="main" bg="background.700" minH="100vh">
-      <Header />
-
-      <AppSidebar />
-      <BreakpointsFormProvider>
-        <MediaQueryBuilderProvider>
-          <SidePanel
-            minW="50px"
-            maxW="370px"
-            isCollapsed={isPanelCollapsed}
-            gridArea="panel"
-          >
-            <Outlet />
-          </SidePanel>
-
-          <PreviewProvider>
-            <PreviewContent />
-            <PreviewSideContent />
-          </PreviewProvider>
-        </MediaQueryBuilderProvider>
-      </BreakpointsFormProvider>
-      <Footer />
-    </MainGridWrapper>
+    <>
+      {!isPanelCollapsed && (
+        <>
+          <InnerPageHeaderArea>
+            <HStack w="100%" justify={"space-between"}>
+              <SectionSubHeader>Home</SectionSubHeader>
+              <ActionButton label="Collpase" onClick={togglePanelCollapse}>
+                <CollapseIcon />
+              </ActionButton>
+            </HStack>
+          </InnerPageHeaderArea>
+          <InnerPageContentArea>
+            <Heading color="white">Welcome!</Heading>
+          </InnerPageContentArea>
+        </>
+      )}
+      {isPanelCollapsed && (
+        <>
+          <SidePanelCollapsed
+            title="Home"
+            toggleCollapse={togglePanelCollapse}
+          />
+        </>
+      )}
+    </>
   );
 }

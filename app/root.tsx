@@ -2,6 +2,7 @@ import { ChakraProvider, Heading, Text, VStack } from "@chakra-ui/react";
 import { withEmotionCache } from "@emotion/react";
 import React, { useState } from "react";
 import {
+  json,
   Links,
   LiveReload,
   Meta,
@@ -16,14 +17,30 @@ import { ClientStyleContext, ServerStyleContext } from "./context";
 import { AppProvider } from "./context/app/app-context";
 
 import type { MetaFunction } from "remix";
-export const meta: MetaFunction = () => {
-  return { title: "Font Scale" };
-};
+import Footer from "./components/footer/footer";
+import Header from "./components/header/header";
+import PreviewContent from "./components/preview/preview-content";
+import PreviewSideContent from "./components/preview/preview-side-content";
+import MainGridWrapper from "./components/shared/main-grid-wrapper";
+import SidePanel from "./components/shared/side-panel";
+import AppSidebar from "./components/sidebar/app-sidebar";
+import { BreakpointsFormProvider } from "./context/breakpoint-builder/breakpoints-form-context";
+import { MediaQueryBuilderProvider } from "./context/media-query-builder/media-query-builder-context";
+import { PreviewProvider } from "./context/preview/preview-context";
+import devices from "~/domain/preview/deviceProviders/yesviz/data/devices.json";
 
 export type ContextType = {
   isPanelCollapsed: boolean;
   togglePanelCollapse: () => void;
 };
+
+export const meta: MetaFunction = () => {
+  return { title: "Font Scale" };
+};
+
+export async function loader() {
+  return json(devices);
+}
 
 export default function App() {
   const [isPanelCollapsed, setIsPanelCollapsed] = useState(false);
@@ -38,7 +55,29 @@ export default function App() {
     <Document>
       <ChakraProvider resetCSS theme={theme}>
         <AppProvider>
-          <Outlet context={context} />
+          <MainGridWrapper as="main" bg="background.700" minH="100vh">
+            <Header />
+
+            <AppSidebar />
+            <BreakpointsFormProvider>
+              <MediaQueryBuilderProvider>
+                <SidePanel
+                  minW="50px"
+                  maxW="370px"
+                  isCollapsed={isPanelCollapsed}
+                  gridArea="panel"
+                >
+                  <Outlet context={context} />
+                </SidePanel>
+
+                <PreviewProvider>
+                  <PreviewContent />
+                  <PreviewSideContent />
+                </PreviewProvider>
+              </MediaQueryBuilderProvider>
+            </BreakpointsFormProvider>
+            <Footer />
+          </MainGridWrapper>
         </AppProvider>
       </ChakraProvider>
     </Document>
