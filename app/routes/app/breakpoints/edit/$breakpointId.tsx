@@ -84,34 +84,37 @@ export default function BreakpointFormUpdate() {
 
   return (
     <>
-      <VStackBox gap="1.5rem" w="100%">
-        <FormControlInputNumber
-          id="minViewportWidth"
-          label="Minimum viewport width"
-          value={minWidth}
-          unit="px"
-          onChange={(e) => onChangeMinViewportWidth(e)}
+      <VStackBox gap="2rem">
+        <VStackBox gap="1.5rem" w="100%">
+          <FormControlInputNumber
+            id="minViewportWidth"
+            label="Minimum viewport width"
+            value={minWidth}
+            unit="px"
+            onChange={(e) => onChangeMinViewportWidth(e)}
+          />
+          <FormControlInputNumber
+            id="maxViewportWidth"
+            label="Maximum viewport width"
+            value={maxWidth}
+            unit="px"
+            onChange={(e) => onChangeMaxViewportWidth(e)}
+          />
+        </VStackBox>
+        <FormControlInputText
+          orientation="vertical"
+          id="label"
+          label="Name"
+          value={label}
+          minW="320px"
+          onChange={(e) => onChangeBreakpointName(e)}
         />
-        <FormControlInputNumber
-          id="maxViewportWidth"
-          label="Maximum viewport width"
-          value={maxWidth}
-          unit="px"
-          onChange={(e) => onChangeMaxViewportWidth(e)}
-        />
+        <HStack justify={"flex-end"} w="100%">
+          <Button onClick={onSaveBreakpoint} bg="secondary.500">
+            Save
+          </Button>
+        </HStack>
       </VStackBox>
-      <FormControlInputText
-        id="label"
-        label="Name"
-        value={label}
-        minW="370px"
-        onChange={(e) => onChangeBreakpointName(e)}
-      />
-      <HStack justify={"flex-end"} w="100%">
-        <Button onClick={onSaveBreakpoint} bg="secondary.500">
-          Save
-        </Button>
-      </HStack>
     </>
   );
 }

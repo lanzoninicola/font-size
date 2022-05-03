@@ -43,9 +43,9 @@ export default function PreviewSidebar({
     >
       <VStack position={"sticky"} top="calc(50px + 1rem)" spacing={4}>
         <ActionButton
-          label="Add Preview"
+          label="Add device to the preview"
           onClick={onAddPreview}
-          tooltipOffset={[-80, -20]}
+          tooltipOffset={[-130, -20]}
         >
           <AddIcon size={20} />
         </ActionButton>

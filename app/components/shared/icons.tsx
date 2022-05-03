@@ -476,3 +476,31 @@ export function WatchIcon({
     />
   );
 }
+
+export function SortAlphabeticallyIcon({
+  size = 20,
+  color = "gray",
+  ariaLabel = "Sort Alphabetically Ascending",
+}: IconProps) {
+  return (
+    <Image
+      src={`${BASE_URL}/sort-alphabetically-icon-${size}-${color}.svg`}
+      alt={ariaLabel}
+      altaria-label={ariaLabel}
+    />
+  );
+}
+
+export function SortSizeIcon({
+  size = 20,
+  color = "gray",
+  ariaLabel = "Sort By Size Ascending",
+}: IconProps) {
+  return (
+    <Image
+      src={`${BASE_URL}/sort-sizing-icon-${size}-${color}.svg`}
+      alt={ariaLabel}
+      altaria-label={ariaLabel}
+    />
+  );
+}

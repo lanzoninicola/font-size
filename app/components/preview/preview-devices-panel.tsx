@@ -1,16 +1,18 @@
-import { Box, HStack, Text } from "@chakra-ui/react";
+import { HStack, Text, Tooltip } from "@chakra-ui/react";
 import React, { SetStateAction, useCallback, useEffect, useState } from "react";
 import usePreviewDevicesSelector from "~/context/preview/hooks/usePreviewDevicesSelector";
 import { DeviceTypes, YesVizDeviceInfo } from "~/context/preview/interfaces";
 import usePreviewDevicesService from "~/domain/preview/usePreviewDevicesService";
 import usePreviewWindowsService from "~/domain/preview/usePreviewWindowsService";
 import useCustomScrollbar from "~/domain/utilities/useCustomScrollbar";
+
 import ActionButton from "../shared/action-button";
 import {
   CloseIcon,
   LaptopIcon,
   MobileIcon,
-  SearchIcon,
+  SortAlphabeticallyIcon,
+  SortSizeIcon,
   TabletIcon,
   WatchIcon,
 } from "../shared/icons";
@@ -65,8 +67,36 @@ export default function PreviewDevicesPanel({
     addWindow(previewDevice);
   }
 
+  function onSetDevices(devices: YesVizDeviceInfo[]) {
+    setDevices(
+      devices.sort((a, b) => {
+        return a.name.localeCompare(b.name);
+      })
+    );
+  }
+
+  function onSortAlphabeticallyASC() {
+    const nextDevices = [...devices];
+
+    setDevices(
+      nextDevices.sort((a, b) => {
+        return a.name.localeCompare(b.name);
+      })
+    );
+  }
+
+  function onSortByViewportWidthASC() {
+    const nextDevices = [...devices];
+
+    setDevices(
+      nextDevices.sort((a, b) => {
+        return a.viewportSize.width - b.viewportSize.width;
+      })
+    );
+  }
+
   useEffect(() => {
-    setDevices(providerDevices);
+    onSetDevices(providerDevices);
   }, [providerDevices]);
 
   useEffect(() => {
@@ -75,13 +105,13 @@ export default function PreviewDevicesPanel({
 
   return (
     <VStackBox
-      minW="250px"
-      gap="1rem"
+      minW="300px"
+      gap=".75rem"
       p="1rem"
       bg="background.500"
       borderRadius="5px"
       position="absolute"
-      left="-270px"
+      left="-300px"
       top="2rem"
     >
       <VStackBox spacing={2}>
@@ -95,12 +125,33 @@ export default function PreviewDevicesPanel({
             <CloseIcon />
           </ActionButton>
         </HStack>
-        <SearchDevice
-          value={deviceNameSearched}
-          onChange={(e: { target: { value: SetStateAction<string> } }) =>
-            setDeviceNameSearched(e.target.value)
-          }
-        />
+        <HStack w="100%" justify="space-between">
+          <SearchDevice
+            value={deviceNameSearched}
+            onChange={(e: { target: { value: SetStateAction<string> } }) =>
+              setDeviceNameSearched(e.target.value)
+            }
+          />
+          <HStack spacing={0}>
+            <ActionButton label="Sort A-Z" onClick={onSortAlphabeticallyASC}>
+              <SortAlphabeticallyIcon />
+            </ActionButton>
+            <ActionButton
+              label="Sort by Width"
+              onClick={onSortByViewportWidthASC}
+            >
+              <SortSizeIcon />
+            </ActionButton>
+          </HStack>
+        </HStack>
+        <Text
+          fontSize="smaller"
+          color={"primary.500"}
+          lineHeight={1.1}
+          fontStyle="italic"
+        >
+          Click on the device to add it to the preview
+        </Text>
       </VStackBox>
       <VStackBox
         h="75vh"
@@ -176,10 +227,6 @@ function DeviceList({
   selectedDevice: (device: any) => void;
   [key: string]: any;
 }) {
-  function onMouseEnter() {}
-
-  function onMouseLeave() {}
-
   function getDeviceIcon(type: DeviceTypes) {
     switch (type) {
       case DeviceTypes.mobile:
@@ -199,19 +246,34 @@ function DeviceList({
     <VStackBox paddingInline=".5rem">
       {devices.map((device, index) => {
         return (
-          <HStack
+          <Tooltip
             key={index}
-            cursor="pointer"
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-            onClick={() => selectedDevice(device)}
-            {...props}
+            label={`${device.name} (${device.viewportSize.width}x${device.viewportSize.height})`}
+            aria-label={"fioo"}
+            bg="secondary.700"
+            color="background.500"
+            gutter={16}
+            placement="left-start"
+            borderRadius={"5px"}
+            fontSize=".85rem"
           >
-            {getDeviceIcon(device.type)}
-            <Text fontSize={"smaller"} color="primary.500">
-              {device.name}
-            </Text>
-          </HStack>
+            <HStack
+              cursor="pointer"
+              onClick={() => selectedDevice(device)}
+              {...props}
+            >
+              {getDeviceIcon(device.type)}
+              <Text
+                fontSize={"smaller"}
+                color="primary.500"
+                _hover={{
+                  color: "secondary.300",
+                }}
+              >
+                {device.name}
+              </Text>
+            </HStack>
+          </Tooltip>
         );
       })}
     </VStackBox>

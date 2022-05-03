@@ -27,8 +27,6 @@ export default function PreviewDeviceToolbar({ itemIdx }: { itemIdx: number }) {
     unitFontSize: "smaller",
   };
 
-  console.log(previewWindows);
-
   return (
     <VStackBox spacing={2}>
       <HStack spacing={4} justify="center" maxW={"min-content"}>

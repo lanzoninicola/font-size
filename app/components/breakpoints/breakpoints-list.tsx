@@ -91,6 +91,7 @@ export default function BreakpointsList() {
                 label="Edit entity"
                 noHoverbg
                 onClick={() => onBreakpointUpdate(id)}
+                tooltipOffset={[-20, -50]}
               >
                 <EditIcon ariaLabel="Edit entity" color="gray" />
               </ActionButton>
@@ -98,6 +99,7 @@ export default function BreakpointsList() {
                 label="Remove entity"
                 noHoverbg
                 onClick={() => onBreakpointDelete(id)}
+                tooltipOffset={[-20, -50]}
               >
                 <TrashIcon ariaLabel="Remove entity" color="gray" size={20} />
               </ActionButton>
