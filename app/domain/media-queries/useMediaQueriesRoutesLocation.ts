@@ -4,14 +4,17 @@ import useMediaQueriesRoutes from "./useMediaQueriesRoutes";
 
 export default function useMediaQueriesRoutesLocation() {
   const {
-    BASE_ROUTE,
+    ROUTE_MEDIA_QUERY_BASE_ROUTE,
     ROUTE_MEDIA_QUERY_ERROR_MISSING_BREAKPOINTS,
     ROUTE_MEDIA_QUERY_EDIT,
     ROUTE_MEDIA_QUERY_SHOW_CODE,
+    ROUTE_MEDIA_QUERY_REMOVE_ALL,
   } = useMediaQueriesRoutes();
   const { pathname } = useLocation();
 
-  const [currentRoute, setCurrentRoute] = useState(BASE_ROUTE);
+  const [currentRoute, setCurrentRoute] = useState(
+    ROUTE_MEDIA_QUERY_BASE_ROUTE
+  );
 
   function _isCurrentRoute(route: string) {
     return pathname === route;
@@ -28,6 +31,10 @@ export default function useMediaQueriesRoutesLocation() {
 
     if (_isCurrentRoute(ROUTE_MEDIA_QUERY_SHOW_CODE)) {
       setCurrentRoute(ROUTE_MEDIA_QUERY_SHOW_CODE);
+    }
+
+    if (_isCurrentRoute(ROUTE_MEDIA_QUERY_REMOVE_ALL)) {
+      setCurrentRoute(ROUTE_MEDIA_QUERY_REMOVE_ALL);
     }
   }
 

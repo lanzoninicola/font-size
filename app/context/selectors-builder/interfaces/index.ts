@@ -9,20 +9,20 @@ export enum HTMLTags {
   caption = "caption",
 }
 export type CSSClassAttribute = string;
-export type IdAttribute = string;
-export type HTMLAttributes = CSSClassAttribute | IdAttribute;
+export type HTMLAttributes = CSSClassAttribute;
 
 export type SelectorId = HTMLTags | HTMLAttributes;
 export enum SelectorType {
   tag = "tag",
   class = "class",
-  id = "id",
 }
 
 export type Selector = {
   key: SelectorId;
   type: SelectorType;
-  value: HTMLTags | CSSClassAttribute | IdAttribute;
+  value: HTMLTags | CSSClassAttribute;
+  isBaseline: boolean;
+  order: number;
 };
 
 export type Selectors = Selector[];

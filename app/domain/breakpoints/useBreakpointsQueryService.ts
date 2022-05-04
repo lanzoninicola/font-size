@@ -54,8 +54,8 @@ export default function useBreakpointsQueryService() {
         payload: {
           id: breakpointId,
           label,
-          minWidth: String(minWidth),
-          maxWidth: String(maxWidth),
+          minWidth: minWidth,
+          maxWidth: maxWidth,
         },
       };
     }

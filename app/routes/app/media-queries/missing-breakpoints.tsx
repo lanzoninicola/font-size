@@ -1,4 +1,4 @@
-import { Button, Center, Text } from "@chakra-ui/react";
+import { Button, Center, Heading, Text } from "@chakra-ui/react";
 import { Link } from "remix";
 import VStackBox from "~/components/shared/vstack-wrapper";
 
@@ -7,9 +7,9 @@ export default function MissingBreakpointPage() {
     <Center>
       <VStackBox gap="2rem">
         <VStackBox>
-          <Text fontSize="28px" color="white">
+          <Heading fontSize="lg" color="white" lineHeight={1.1}>
             No breakpoints created yet.
-          </Text>
+          </Heading>
           <Text color="white">
             Please create some breakpoints and come back here.
           </Text>

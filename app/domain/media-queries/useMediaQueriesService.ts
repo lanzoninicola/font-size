@@ -63,8 +63,13 @@ export default function useMediaQueriesService() {
     setMediaQueries(nextMediaQueries as MediaQueries | null);
   }
 
+  function deleteAllMediaQueries() {
+    setMediaQueries({} as MediaQueries);
+  }
+
   return {
     saveMediaQuery,
     deleteMediaQuery,
+    deleteAllMediaQueries,
   };
 }

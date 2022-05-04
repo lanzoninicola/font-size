@@ -6,33 +6,32 @@ import useBreakpointsData, {
 } from "~/domain/breakpoints/useBreakpointsData";
 import useBreakpointsRoutes from "~/domain/breakpoints/useBreakpointsRoutes";
 import useBreakpointRoutesLocation from "~/domain/breakpoints/useBreakpointsRoutesLocation";
+import useSelectorsData from "~/domain/selectors/useSelectorsData";
+import useSelectorsRoutes from "~/domain/selectors/useSelectorsRoutes";
 
 import ToolbarWrapper from "../layout/toolbar-wrapper";
 import ActionButton from "../shared/action-button";
-import { InitIcon, NewEntityIcon } from "../shared/icons";
+import { EditIcon, InitIcon, NewEntityIcon } from "../shared/icons";
 
-export default function BreakpointsToolbar() {
-  const { ROUTE_BREAKPOINTS_NEW } = useBreakpointsRoutes();
-  const { initBreakpoints } = useBreakpointsData();
+export default function SelectorsToolbar() {
+  const { ROUTE_SELECTORS_UPDATE } = useSelectorsRoutes();
+  const { initSelectors } = useSelectorsData();
 
   const { currentRoute } = useBreakpointRoutesLocation();
 
-  function onInitBreakpoints() {
-    initBreakpoints(DataProvider.default);
+  function onInitSelectors() {
+    initSelectors();
   }
 
   return (
     <ToolbarWrapper justify="space-between">
       <HStack>
-        <Link to={ROUTE_BREAKPOINTS_NEW}>
-          <ActionButton label="New breakpoint">
-            <NewEntityIcon />
+        <Link to={ROUTE_SELECTORS_UPDATE}>
+          <ActionButton label="Edit Selectors">
+            <EditIcon />
           </ActionButton>
         </Link>
-        <ActionButton
-          label="Load Pre-made Breakpoints"
-          onClick={onInitBreakpoints}
-        >
+        <ActionButton label="Load Pre-made Selectors" onClick={onInitSelectors}>
           <InitIcon />
         </ActionButton>
       </HStack>

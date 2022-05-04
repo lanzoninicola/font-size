@@ -9,8 +9,7 @@ import {
   SelectorType,
   Selector,
   Selectors,
-  FontSizeConfigKeys,
-} from "../selectors/interfaces/selectors";
+} from "../../selectors-builder/interfaces";
 
 export type {
   CSSClassAttribute,
@@ -21,7 +20,6 @@ export type {
   SelectorId,
   Selector,
   Selectors,
-  FontSizeConfigKeys,
 };
 
 export { HTMLTags, SelectorType };

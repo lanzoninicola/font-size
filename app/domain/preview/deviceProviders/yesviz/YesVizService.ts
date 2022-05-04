@@ -1,4 +1,4 @@
-import { YesVizDeviceInfo } from "./interfaces";
+import { YesVizDeviceInfo } from "~/context/preview/interfaces";
 
 export default class YesVizService {
   URL = "https://yesviz.com/viewport/";

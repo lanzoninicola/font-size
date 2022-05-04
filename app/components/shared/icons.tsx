@@ -504,3 +504,45 @@ export function SortSizeIcon({
     />
   );
 }
+
+export function InitIcon({
+  size = 20,
+  color = "gray",
+  ariaLabel = "Initialize data",
+}: IconProps) {
+  return (
+    <Image
+      src={`${BASE_URL}/init-icon-${size}-${color}.svg`}
+      alt={ariaLabel}
+      altaria-label={ariaLabel}
+    />
+  );
+}
+
+export function ArrowUpIcon({
+  size = 20,
+  color = "gray",
+  ariaLabel = "Move Up",
+}: IconProps) {
+  return (
+    <Image
+      src={`${BASE_URL}/arrow-up-icon-${size}-${color}.svg`}
+      alt={ariaLabel}
+      altaria-label={ariaLabel}
+    />
+  );
+}
+
+export function ArrowDownIcon({
+  size = 20,
+  color = "gray",
+  ariaLabel = "Move Down",
+}: IconProps) {
+  return (
+    <Image
+      src={`${BASE_URL}/arrow-down-icon-${size}-${color}.svg`}
+      alt={ariaLabel}
+      altaria-label={ariaLabel}
+    />
+  );
+}

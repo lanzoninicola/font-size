@@ -1,5 +1,5 @@
 import { BreakpointId } from "../../breakpoint-builder/interfaces";
-import { SelectorsTokensValue } from "../../app/selectors/interfaces/selectors";
+import { SelectorsTokensValue } from "../../selectors-builder/interfaces";
 
 export interface MediaQueryBreakpointFlat {
   selector: string;

@@ -4,7 +4,7 @@ import useBreakpointsRoutes from "./useBreakpointsRoutes";
 
 export default function useBreakpointRoutesLocation() {
   const {
-    BASE_ROUTE,
+    ROUTE_BREAKPOINTS_BASE_ROUTE,
     ROUTE_BREAKPOINTS_ERROR_MISSING_BREAKPOINTS,
     ROUTE_BREAKPOINTS_LIST,
     ROUTE_BREAKPOINTS_NEW,
@@ -13,7 +13,9 @@ export default function useBreakpointRoutesLocation() {
 
   const { pathname } = useLocation();
 
-  const [currentRoute, setCurrentRoute] = useState(BASE_ROUTE);
+  const [currentRoute, setCurrentRoute] = useState(
+    ROUTE_BREAKPOINTS_BASE_ROUTE
+  );
 
   function _isCurrentRoute(route: string) {
     return pathname === route;

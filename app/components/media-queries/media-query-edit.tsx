@@ -4,6 +4,8 @@ import useHtmlSelectorsSelector from "~/context/app/hooks/useHtmlSelectorsSelect
 import { SelectorId, Selectors } from "~/context/app/interfaces";
 import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
 import { SelectorEntityState } from "~/context/shared/interfaces/entity-state";
+import useBreakpointsDataService from "~/domain/breakpoints/useBreakpointsDataService";
+import useBreakpointsQueryService from "~/domain/breakpoints/useBreakpointsQueryService";
 import useMediaQueriesBuilderService from "~/domain/media-queries/useMediaQueriesBuilderService";
 import useMediaQueriesQueryService from "~/domain/media-queries/useMediaQueriesQueryService";
 import useMediaQueriesService from "~/domain/media-queries/useMediaQueriesService";
@@ -71,7 +73,7 @@ export default function MediaQueryEdit() {
               >
                 <Grid
                   w="100%"
-                  gridTemplateColumns={".75fr 1fr"}
+                  gridTemplateColumns={".25fr 1fr"}
                   columnGap="1rem"
                 >
                   <VStackBox minH="65px">
@@ -171,6 +173,9 @@ function SelectorCurrentProps({
   maxFontSize: number;
   lineHeight: number;
 }) {
+  const { currentBreakpointId } = useMediaQueriesBuilderService();
+  const { getViewportSizeByBreakpointId } = useBreakpointsQueryService();
+
   const labelProps = {
     color: "secondary.500",
     fontSize: "smaller",
@@ -187,14 +192,28 @@ function SelectorCurrentProps({
     w: "100%",
   };
 
+  function breakpointViewportMinSize() {
+    const { minWidth } = getViewportSizeByBreakpointId(currentBreakpointId);
+    return minWidth;
+  }
+
+  function breakpointViewportMaxSize() {
+    const { maxWidth } = getViewportSizeByBreakpointId(currentBreakpointId);
+    return maxWidth;
+  }
+
   return (
     <VStackBox w="100%" gap=".15rem">
       <HStack {...labelGroupProps}>
-        <Text {...labelProps}>Font Size (MIN)</Text>
+        <Text
+          {...labelProps}
+        >{`Font Size at ${breakpointViewportMinSize()}px`}</Text>
         <Text {...valueProps}>{`${minFontSize}rem`}</Text>
       </HStack>
       <HStack {...labelGroupProps}>
-        <Text {...labelProps}>Font Size (MAX)</Text>
+        <Text
+          {...labelProps}
+        >{`Font Size at ${breakpointViewportMaxSize()}px`}</Text>
         <Text {...valueProps}>{`${maxFontSize}rem`}</Text>
       </HStack>
       <HStack {...labelGroupProps}>
@@ -215,6 +234,19 @@ export function SelectorFormProps({ selectorId }: { selectorId: SelectorId }) {
     changeLineHeight,
   } = useMediaQueriesBuilderService();
 
+  const { currentBreakpointId } = useMediaQueriesBuilderService();
+  const { getViewportSizeByBreakpointId } = useBreakpointsQueryService();
+
+  function breakpointViewportMinSize() {
+    const { minWidth } = getViewportSizeByBreakpointId(currentBreakpointId);
+    return minWidth;
+  }
+
+  function breakpointViewportMaxSize() {
+    const { maxWidth } = getViewportSizeByBreakpointId(currentBreakpointId);
+    return maxWidth;
+  }
+
   function onChangeMinFontSize(e: React.ChangeEvent<HTMLInputElement>) {
     changeMinFontSize(e.target.value);
   }
@@ -231,7 +263,7 @@ export function SelectorFormProps({ selectorId }: { selectorId: SelectorId }) {
     <VStackBox w="100%" gap=".5rem" justify="space-between" mt="1rem">
       <FormControlInputNumber
         id={`minFontSize-${selectorId}`}
-        label="Font Size (MIN)"
+        label={`Min font size at ${breakpointViewportMinSize()}px`}
         labelFontSize="smaller"
         leftUnit="REM"
         unitFontSize="smaller"
@@ -241,7 +273,7 @@ export function SelectorFormProps({ selectorId }: { selectorId: SelectorId }) {
       />
       <FormControlInputNumber
         id={`maxFontSize-${selectorId}`}
-        label="Font Size (MAX)"
+        label={`Max font size at ${breakpointViewportMaxSize()}px`}
         labelFontSize="smaller"
         leftUnit="REM"
         unitFontSize="smaller"
