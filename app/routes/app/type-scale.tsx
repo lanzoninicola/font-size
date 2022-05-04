@@ -20,7 +20,7 @@ export default function SelectorsPage() {
         <>
           <InnerPageHeaderArea>
             <HStack w="100%" justify={"space-between"}>
-              <SectionSubHeader>Type Scale</SectionSubHeader>
+              <SectionSubHeader>Scale Steps</SectionSubHeader>
               <ActionButton label="Collpase" onClick={togglePanelCollapse}>
                 <CollapseIcon />
               </ActionButton>
