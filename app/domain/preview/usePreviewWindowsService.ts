@@ -2,12 +2,14 @@ import usePreviewWindowsSelector from "~/context/preview/hooks/usePreviewWindows
 import { PreviewDevice } from "~/context/preview/interfaces";
 
 import parseDecimalNumber from "../utilities/parseDecimalNumber";
-import PREVIEW_SETTINGS from "./settings";
+import usePreviewSettings from "./usePreviewSettings";
 
 export default function usePreviewWindowsService() {
-  const DEFAULT_WIDTH = PREVIEW_SETTINGS.iframeDefaultWidth;
-  const DEFAULT_HEIGHT = PREVIEW_SETTINGS.iframeDefaultHeight;
-  const DEFAULT_DEVICE_NAME = PREVIEW_SETTINGS.deviceName;
+  const {
+    iframeDefaultWidth: DEFAULT_WIDTH,
+    iframeDefaultHeight: DEFAULT_HEIGHT,
+    deviceName: DEFAULT_DEVICE_NAME,
+  } = usePreviewSettings();
 
   const { previewWindows, setPreviewWindows } = usePreviewWindowsSelector();
 
