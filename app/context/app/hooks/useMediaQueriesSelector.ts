@@ -1,46 +1,46 @@
 import { useContextSelector } from "use-context-selector";
+import useTypeScaleCalculatorFormSelector from "~/context/type-scale-calculator-form/hooks/useTypeScaleCalculatorFormSelector";
 
 import { AppContextData } from "../app-context";
 import { TypeScaleConfig } from "../interfaces";
 import useHtmlSelectorsSelector from "./useHtmlSelectorsSelector";
+import useTypeScaleSelector from "./useTypeScaleSelector";
 
 export default function useMediaQueriesSelector() {
   const mediaQueries = useContextSelector(
     AppContextData,
     (ctx) => ctx?.mediaQueries
   );
-
   const setMediaQueries = useContextSelector(
     AppContextData,
     (ctx) => ctx?.setMediaQueries
   );
 
-  const {htmlSelectors} = useHtmlSelectorsSelector()
-
   const actions = {
-    SET_BREAKPOINT_TYPE_SCALE_STEP_DATA: {
-      dispatch: (payload: TypeScaleConfig) =>
-        setBreakpointTypeScaleStepData(payload),
+    SET_BREAKPOINT_TYPE_SCALE_AFTER_SAVING_CONFIGURATION: {
+      dispatch: (payload: TypeScaleConfig) => setBreakpointTypeScale(payload),
     },
   };
 
-  function setBreakpointTypeScaleStepData(payload: TypeScaleConfig) {
-    const isMediaQueriesEmpty = mediaQueries === null || Object.keys(mediaQueries).length === 0
+  const { htmlSelectors } = useHtmlSelectorsSelector();
+  const { typeScale } = useTypeScaleSelector();
 
+  function setBreakpointTypeScale(payload: TypeScaleConfig) {
+    const isMediaQueriesEmpty =
+      mediaQueries === null || Object.keys(mediaQueries).length === 0;
 
-    htmlSelectors.forEach((selector) => {
+    // get the type scale configuration for the given breakpoint
+    const { breakpointId, min, max } = payload;
 
-    
-    if (isMediaQueriesEmpty) {
+    // calculate the min and max font size for each selector base on the type scale configuration
+    if (htmlSelectors) {
+      const breakpointMQ = {};
 
-
-
-
-      const breakpointMediaQueries = {
-        [payload.breakpointId]: {
-          [payload.baseStep]: {
+      htmlSelectors.forEach((selector) => {
+        // Math.min(min.fontSizeREM * Math.pow(min.scaleRatio, selector.position));
+        // Math.max(max.fontSizeREM * Math.pow(max.scaleRatio, selector.position));
+      });
     }
-
 
     let breakpointMediaQueries = mediaQueries;
   }

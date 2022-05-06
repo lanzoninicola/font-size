@@ -40,6 +40,7 @@ export default function GroupBaselineStep() {
       minW="200px"
       textAlign="right"
       onChange={onChangeBaseStep}
+      isDisabled={true}
     >
       {htmlSelectors &&
         htmlSelectors.map((selector, idx) => (

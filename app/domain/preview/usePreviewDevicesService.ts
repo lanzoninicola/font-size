@@ -2,16 +2,14 @@ import { useCallback } from "react";
 import usePreviewDevicesSelector from "~/context/preview/hooks/usePreviewDevicesSelector";
 import { DeviceTypes, YesVizDeviceInfo } from "~/context/preview/interfaces";
 
-type OrderOrientation = "ASC" | "DESC";
+type SortOrientation = "ASC" | "DESC";
 
 export default function usePreviewDevicesService() {
   const { devices } = usePreviewDevicesSelector();
 
-  function getDevicesOrderedByName(
-    order: OrderOrientation
-  ): YesVizDeviceInfo[] {
+  function getDevicesOrderedByName(sort: SortOrientation): YesVizDeviceInfo[] {
     return devices.sort((a, b) => {
-      if (order === "ASC") {
+      if (sort === "ASC") {
         return a.name.localeCompare(b.name);
       } else {
         return b.name.localeCompare(a.name);
@@ -52,8 +50,8 @@ export default function usePreviewDevicesService() {
     return nextDevices.filter((device) => device.type === type);
   }
 
-  function orderByViewportWidth(orientation: OrderOrientation) {
-    // return devices order by viewport width desc
+  function sortByViewportWidth(orientation: SortOrientation) {
+    // return devices sort by viewport width desc
     return devices.sort((a, b) => {
       if (orientation === "ASC") {
         return a.viewportSize.width - b.viewportSize.width;
@@ -68,7 +66,7 @@ export default function usePreviewDevicesService() {
       return null;
     }
 
-    const devicesOrdered = orderByViewportWidth("ASC");
+    const devicesOrdered = sortByViewportWidth("ASC");
 
     if (minWidth) {
       // get the device that has the smallest viewport width that is greater than or equal to the minWidth
@@ -90,7 +88,7 @@ export default function usePreviewDevicesService() {
       return null;
     }
 
-    const devicesOrdered = orderByViewportWidth("DESC");
+    const devicesOrdered = sortByViewportWidth("DESC");
 
     if (maxWidth) {
       // get the device that has the largetst viewport width that is less than or equal to the maxWidth

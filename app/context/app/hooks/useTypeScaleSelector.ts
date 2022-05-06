@@ -4,6 +4,7 @@ import { AppContextData } from "../app-context";
 import { TypeScaleConfig } from "../interfaces";
 
 export default function useTypeScaleSelector() {
+  // This is the state of the type scale configuration made by the user for each breakpoint
   const typeScale = useContextSelector(AppContextData, (ctx) => ctx?.typeScale);
 
   const setTypeScale = useContextSelector(
@@ -39,7 +40,6 @@ export default function useTypeScaleSelector() {
 
   return {
     typeScale,
-    setTypeScale,
     actions,
   };
 }

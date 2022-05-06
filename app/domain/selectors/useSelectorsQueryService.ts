@@ -1,7 +1,7 @@
 import useHtmlSelectorsSelector from "~/context/app/hooks/useHtmlSelectorsSelector";
 import { Selector } from "~/context/app/interfaces";
 
-type OrderOrientation = "ASC" | "DESC";
+type SortOrientation = "ASC" | "DESC";
 
 export default function useSelectorsQueryService() {
   const { htmlSelectors } = useHtmlSelectorsSelector();
@@ -21,15 +21,15 @@ export default function useSelectorsQueryService() {
   }
 
   /**
-   * @description Get the selectors array ordered by order property ascendant or descendant
+   * @description Get the selectors array sorted by position property ascendant or descendant
    * @param {boolean} [descendant=false]
    */
-  function getSelectorsSortByOrder(order: OrderOrientation): Selector[] {
+  function getSelectorsSortByPosition(sort: SortOrientation): Selector[] {
     if (htmlSelectors) {
-      if (order === "ASC") {
-        return htmlSelectors.sort((a, b) => a.order - b.order);
+      if (sort === "ASC") {
+        return htmlSelectors.sort((a, b) => a.position - b.position);
       } else {
-        return htmlSelectors.sort((a, b) => b.order - a.order);
+        return htmlSelectors.sort((a, b) => b.position - a.position);
       }
     }
 
@@ -38,6 +38,6 @@ export default function useSelectorsQueryService() {
 
   return {
     isSelectorsEmpty,
-    getSelectorsSortByOrder,
+    getSelectorsSortByPosition,
   };
 }

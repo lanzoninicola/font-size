@@ -22,7 +22,7 @@ export type Selector = {
   type: SelectorType;
   value: HTMLTags | CSSClassAttribute;
   isBaseline: boolean;
-  order: number;
+  position: number;
 };
 
 export enum SelectorConfigKeys {
