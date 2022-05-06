@@ -1,24 +1,19 @@
 import useLocalStorage from "~/components/shared/hooks/useLocalStorage";
 import useMediaQueriesSelector from "~/context/app/hooks/useMediaQueriesSelector";
-import { MediaQueries } from "~/context/app/interfaces";
+import { DataProvider, MediaQueries } from "~/context/app/interfaces";
 
-export enum DataProvider {
-  default = "default",
-  chakraui = "chackraui",
-  tailwindcss = "tailwindcss",
-  bootstrap = "bootstrap",
-}
+// TODO: deprecated, remove in the future
 
 export default function useMediaQueriesData() {
   const { setMediaQueries } = useMediaQueriesSelector();
   const [provider, _] = useLocalStorage("FS_INIT_BREAKPOINTS_PROVIDER");
 
   function initMediaQueries() {
-    const mq = getMediaQueriesByProvider(provider as DataProvider);
+    const mq = getByProvider(provider as DataProvider);
     setMediaQueries(mq);
   }
 
-  function getMediaQueriesByProvider(provider: DataProvider) {
+  function getByProvider(provider: DataProvider) {
     if (provider === DataProvider.default) {
       return _getDefaultMediaQueries();
     }
@@ -63,5 +58,6 @@ export default function useMediaQueriesData() {
 
   return {
     initMediaQueries,
+    getByProvider,
   };
 }

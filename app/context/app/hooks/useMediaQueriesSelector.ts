@@ -1,38 +1,52 @@
-import { useEffect } from "react";
-import { MediaQueries } from "~/context/app/interfaces";
+import { useContextSelector } from "use-context-selector";
 
-import useMediaQueriesContext from "./useMediaQueriesContext";
-import useMediaQueriesLocalStorage from "./useMediaQueriesLocalStorage";
+import { AppContextData } from "../app-context";
+import { TypeScaleConfig } from "../interfaces";
+import useHtmlSelectorsSelector from "./useHtmlSelectorsSelector";
 
 export default function useMediaQueriesSelector() {
-  const {
-    mediaQueries: mediaQueriesContext,
-    setMediaQueries: setMediaQueriesContext,
-  } = useMediaQueriesContext();
-  const {
-    mediaQueries: mediaQueriesLocalStorage,
-    setMediaQueries: setMediaQueriesLocalStorage,
-  } = useMediaQueriesLocalStorage();
+  const mediaQueries = useContextSelector(
+    AppContextData,
+    (ctx) => ctx?.mediaQueries
+  );
 
-  function setMediaQueries(nextState: MediaQueries | null) {
-    if (nextState) {
-      setMediaQueriesContext(nextState);
-      setMediaQueriesLocalStorage(nextState);
+  const setMediaQueries = useContextSelector(
+    AppContextData,
+    (ctx) => ctx?.setMediaQueries
+  );
+
+  const {htmlSelectors} = useHtmlSelectorsSelector()
+
+  const actions = {
+    SET_BREAKPOINT_TYPE_SCALE_STEP_DATA: {
+      dispatch: (payload: TypeScaleConfig) =>
+        setBreakpointTypeScaleStepData(payload),
+    },
+  };
+
+  function setBreakpointTypeScaleStepData(payload: TypeScaleConfig) {
+    const isMediaQueriesEmpty = mediaQueries === null || Object.keys(mediaQueries).length === 0
+
+
+    htmlSelectors.forEach((selector) => {
+
+    
+    if (isMediaQueriesEmpty) {
+
+
+
+
+      const breakpointMediaQueries = {
+        [payload.breakpointId]: {
+          [payload.baseStep]: {
     }
+
+
+    let breakpointMediaQueries = mediaQueries;
   }
 
-  // Commented this because it cause a re-rendering of the whole app
-  // every time a component is render.
-  // With this configuration, if local storage is not enabled or accessible then the app will crash
-  //
-  useEffect(() => {
-    if (mediaQueriesLocalStorage) {
-      setMediaQueriesContext(mediaQueriesLocalStorage);
-    }
-  }, [mediaQueriesLocalStorage]);
-
   return {
-    mediaQueries: mediaQueriesContext,
+    mediaQueries,
     setMediaQueries,
   };
 }

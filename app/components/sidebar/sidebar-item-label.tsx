@@ -12,7 +12,7 @@ export default function SidebarItemLabel({
       fontSize="10px"
       color="primary.500"
       textAlign={"center"}
-      lineHeight="1.1"
+      lineHeight="1.2"
       {...props}
     >
       {children}

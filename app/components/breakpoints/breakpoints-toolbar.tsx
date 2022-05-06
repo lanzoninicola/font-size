@@ -1,9 +1,7 @@
 import { HStack } from "@chakra-ui/react";
 import { Link } from "remix";
-import useBreakpointsSelector from "~/context/app/hooks/useBreakpointsSelector";
-import useBreakpointsData, {
-  DataProvider,
-} from "~/domain/breakpoints/useBreakpointsData";
+import { DataProvider } from "~/context/app/interfaces";
+import useBreakpointsData from "~/domain/breakpoints/useBreakpointsData";
 import useBreakpointsRoutes from "~/domain/breakpoints/useBreakpointsRoutes";
 import useBreakpointRoutesLocation from "~/domain/breakpoints/useBreakpointsRoutesLocation";
 
@@ -29,12 +27,12 @@ export default function BreakpointsToolbar() {
             <NewEntityIcon />
           </ActionButton>
         </Link>
-        <ActionButton
+        {/* <ActionButton
           label="Load Pre-made Breakpoints"
           onClick={onInitBreakpoints}
         >
           <InitIcon />
-        </ActionButton>
+        </ActionButton> */}
       </HStack>
       {/* <ActionButton label="Export configuration">
         <ExportConfig />

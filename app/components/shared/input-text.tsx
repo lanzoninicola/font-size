@@ -6,9 +6,9 @@ const InputText = forwardRef<{ [key: string]: any }, "input">((props, ref) => {
     <Input
       type="text"
       variant={"filled"}
-      h="40px"
+      h="30px"
       maxW="120px"
-      borderRadius="10px"
+      borderRadius="5px"
       border="none"
       bg="primary.500"
       isDisabled={props.isDisabled}

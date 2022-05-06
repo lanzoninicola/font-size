@@ -7,13 +7,15 @@ export default function useLocalStorage<T>(
 ) {
   const [state, setState] = useState<T | null>(initialValue);
 
-  // You can fix this by moving the code into useEffect, which only runs in the browser.
+  // The code below is moved into useEffect, which only runs in the browser.
   useEffect(() => {
-    // Check if data exists with the key in localStorage
+    // Check if data exists in localStorage with the key provided
+
+    // get the data from localStorage
     const itemFromLocalStorage = getWithLocalStorage(key);
 
     // if data exists,
-    if (itemFromLocalStorage) {
+    if (itemFromLocalStorage !== null) {
       // set the state to the data in memory
       setState(itemFromLocalStorage);
     } else {

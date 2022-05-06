@@ -7,6 +7,7 @@ import ActionButton from "~/components/shared/action-button";
 import { CollapseIcon } from "~/components/shared/icons";
 import SectionSubHeader from "~/components/shared/section-subheader";
 import SidePanelCollapsed from "~/components/shared/side-panel-collapsed";
+import { TypeScaleCalculatorFormProvider } from "~/context/type-scale-calculator-form/type-scale-calculator-form-context";
 
 import { ContextType } from "../app";
 
@@ -20,7 +21,7 @@ export default function SelectorsPage() {
         <>
           <InnerPageHeaderArea>
             <HStack w="100%" justify={"space-between"}>
-              <SectionSubHeader>Scale Steps</SectionSubHeader>
+              <SectionSubHeader>Type Scale</SectionSubHeader>
               <ActionButton label="Collpase" onClick={togglePanelCollapse}>
                 <CollapseIcon />
               </ActionButton>
@@ -28,7 +29,9 @@ export default function SelectorsPage() {
             <SelectorsToolbar />
           </InnerPageHeaderArea>
           <InnerPageContentArea>
-            <Outlet />
+            <TypeScaleCalculatorFormProvider>
+              <Outlet />
+            </TypeScaleCalculatorFormProvider>
           </InnerPageContentArea>
         </>
       )}

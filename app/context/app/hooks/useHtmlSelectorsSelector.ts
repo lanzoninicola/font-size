@@ -1,31 +1,21 @@
 import { useEffect } from "react";
-import { Selectors } from "../interfaces";
-import useHtmlSelectorsContext from "./useHtmlSelectorsContext";
-import useHtmlSelecotrsLocalStorage from "./useHtmlSelectorsLocalStorage";
+import { useContextSelector } from "use-context-selector";
+
+import { AppContextData } from "../app-context";
 
 export default function useHtmlSelectorsSelector() {
-  const {
-    htmlSelectors: htmlSelectorsContext,
-    setHtmlSelectors: setHtmlSelectorsContext,
-  } = useHtmlSelectorsContext();
+  const htmlSelectors = useContextSelector(
+    AppContextData,
+    (ctx) => ctx?.htmlSelectors
+  );
 
-  const {
-    htmlSelectors: htmlSelectorsLocalStorage,
-    setHtmlSelectors: setHtmlSelectorsLocalStorage,
-  } = useHtmlSelecotrsLocalStorage();
-
-  function setHtmlSelectors(nextState: Selectors | null) {
-    setHtmlSelectorsLocalStorage(nextState);
-  }
-
-  useEffect(() => {
-    if (htmlSelectorsLocalStorage) {
-      setHtmlSelectorsContext(htmlSelectorsLocalStorage);
-    }
-  }, [htmlSelectorsLocalStorage]);
+  const setHtmlSelectors = useContextSelector(
+    AppContextData,
+    (ctx) => ctx?.setHtmlSelectors
+  );
 
   return {
-    htmlSelectors: htmlSelectorsContext,
+    htmlSelectors,
     setHtmlSelectors,
   };
 }

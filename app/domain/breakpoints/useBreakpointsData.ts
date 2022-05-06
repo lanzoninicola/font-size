@@ -1,33 +1,38 @@
 import useLocalStorage from "~/components/shared/hooks/useLocalStorage";
 import useBreakpointsSelector from "~/context/app/hooks/useBreakpointsSelector";
+import { DataProvider } from "~/context/app/interfaces";
 import { Breakpoints } from "~/context/breakpoint-builder/interfaces";
-
-export enum DataProvider {
-  default = "default",
-  chakraui = "chackraui",
-  tailwindcss = "tailwindcss",
-  bootstrap = "bootstrap",
-}
 
 export default function useBreakpointsData() {
   const { setBreakpoints } = useBreakpointsSelector();
-  const [_, setProvider] = useLocalStorage("FS_INIT_BREAKPOINTS_PROVIDER");
+  const [dataProvider, setDataProvider] = useLocalStorage(
+    "FS_INIT_BREAKPOINTS_PROVIDER",
+    DataProvider.default
+  );
 
-  function initBreakpoints(provider: DataProvider) {
-    const b = getBreakpointByProvider(provider);
+  /**
+   * @description Initialize the state of breakpoints data and set the provider to local storage
+   */
+  function initBreakpoints(provider?: DataProvider) {
+    const b = getByProvider(provider);
     setBreakpoints(b);
-    setProvider(provider);
   }
 
-  function getBreakpointByProvider(provider: DataProvider) {
-    if (provider === DataProvider.default) {
-      return _getDefaultBreakpoints();
+  /**
+   * @description Returns the breakpoints data based on the provider of data (default, chakraui, tailwindcss, bootstrap).
+   * Also, set the provider name to local storage
+   */
+  function getByProvider(provider?: DataProvider) {
+    const currentProvider = provider || DataProvider.default;
+
+    if (currentProvider === DataProvider.default) {
+      return _getDefaults();
     }
 
-    return _getDefaultBreakpoints();
+    return _getDefaults();
   }
 
-  function _getDefaultBreakpoints(): Breakpoints {
+  function _getDefaults(): Breakpoints {
     return {
       min300max768: { label: "xsmall & small", minWidth: 300, maxWidth: 768 },
       min769max1280: { label: "medium & large", minWidth: 769, maxWidth: 1279 },
@@ -41,5 +46,6 @@ export default function useBreakpointsData() {
 
   return {
     initBreakpoints,
+    getByProvider,
   };
 }

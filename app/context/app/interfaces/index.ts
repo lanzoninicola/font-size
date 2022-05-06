@@ -1,25 +1,33 @@
 import { MediaQueries } from "../../media-query-builder/interfaces/media-query";
+import { Breakpoints } from "../../breakpoint-builder/interfaces";
+import { TypeScaleConfig } from "../../type-scale-calculator-form/interfaces";
+
 import {
   CSSClassAttribute,
   HTMLTags,
-  IdAttribute,
   HTMLAttributes,
   SelectorsTokensValue,
   SelectorId,
   SelectorType,
   Selector,
-  Selectors,
 } from "../../selectors-builder/interfaces";
 
+enum DataProvider {
+  default = "default",
+  chakraui = "chackraui",
+  tailwindcss = "tailwindcss",
+  bootstrap = "bootstrap",
+}
+
 export type {
+  MediaQueries,
+  Breakpoints,
+  TypeScaleConfig,
   CSSClassAttribute,
   HTMLAttributes,
-  IdAttribute,
-  MediaQueries,
   SelectorsTokensValue,
   SelectorId,
   Selector,
-  Selectors,
 };
 
-export { HTMLTags, SelectorType };
+export { HTMLTags, SelectorType, DataProvider };

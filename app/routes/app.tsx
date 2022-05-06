@@ -1,18 +1,11 @@
-import { Box } from "@chakra-ui/react";
 import { useState } from "react";
 import { json, Outlet } from "remix";
 import Footer from "~/components/footer/footer";
 import Header from "~/components/header/header";
-import FlippedContainer from "~/components/layout/flipped-container";
 import PreviewContent from "~/components/preview/preview-content";
 import PreviewSideContent from "~/components/preview/preview-side-content";
-import PreviewSidebar from "~/components/preview/preview-sidebar";
-
 import MainGridWrapper from "~/components/shared/main-grid-wrapper";
-import SectionHeader from "~/components/shared/section-header";
-import SectionSubHeader from "~/components/shared/section-subheader";
 import SidePanel from "~/components/shared/side-panel";
-import VStackBox from "~/components/shared/vstack-wrapper";
 import AppSidebar from "~/components/sidebar/app-sidebar";
 import { BreakpointsFormProvider } from "~/context/breakpoint-builder/breakpoints-form-context";
 import { MediaQueryBuilderProvider } from "~/context/media-query-builder/media-query-builder-context";
@@ -46,7 +39,7 @@ export default function App() {
         <MediaQueryBuilderProvider>
           <SidePanel
             minW="50px"
-            maxW="370px"
+            maxW="400px"
             isCollapsed={isPanelCollapsed}
             gridArea="panel"
           >

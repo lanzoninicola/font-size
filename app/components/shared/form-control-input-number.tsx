@@ -22,7 +22,7 @@ export default function FormControlInputNumber({
 
   ...props
 }: {
-  id: string;
+  id?: string;
   orientation?: "horizontal" | "vertical";
   label?: string;
   labelFontSize?: string;
@@ -46,7 +46,11 @@ export default function FormControlInputNumber({
       gap={labelSpacing || ".25rem"}
     >
       {label && (
-        <FormControlLabel fontSize={labelFontSize} htmlFor={id} m={0}>
+        <FormControlLabel
+          fontSize={props.size || labelFontSize}
+          htmlFor={id}
+          m={0}
+        >
           {label}
         </FormControlLabel>
       )}

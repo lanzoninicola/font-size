@@ -28,12 +28,12 @@ export default function MediaQueriesToolbar() {
       case ROUTE_MEDIA_QUERY_EDIT:
         return (
           <>
-            <ActionButton
+            {/* <ActionButton
               label="Load Pre-made Media Queries"
               onClick={onInitMediaQueries}
             >
               <InitIcon />
-            </ActionButton>
+            </ActionButton> */}
             <Link to={ROUTE_MEDIA_QUERY_SHOW_CODE}>
               <ActionButton label="Show me the code">
                 <CodeIcon />

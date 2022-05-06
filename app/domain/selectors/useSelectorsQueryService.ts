@@ -1,5 +1,5 @@
 import useHtmlSelectorsSelector from "~/context/app/hooks/useHtmlSelectorsSelector";
-import { Selectors } from "~/context/app/interfaces";
+import { Selector } from "~/context/app/interfaces";
 
 type OrderOrientation = "ASC" | "DESC";
 
@@ -24,7 +24,7 @@ export default function useSelectorsQueryService() {
    * @description Get the selectors array ordered by order property ascendant or descendant
    * @param {boolean} [descendant=false]
    */
-  function getSelectorsSortByOrder(order: OrderOrientation): Selectors {
+  function getSelectorsSortByOrder(order: OrderOrientation): Selector[] {
     if (htmlSelectors) {
       if (order === "ASC") {
         return htmlSelectors.sort((a, b) => a.order - b.order);

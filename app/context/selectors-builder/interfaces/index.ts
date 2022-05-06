@@ -25,8 +25,6 @@ export type Selector = {
   order: number;
 };
 
-export type Selectors = Selector[];
-
 export enum SelectorConfigKeys {
   minFontSize = "minFontSize",
   maxFontSize = "maxFontSize",

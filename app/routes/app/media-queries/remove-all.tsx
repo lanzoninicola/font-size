@@ -1,11 +1,11 @@
 import { Button, Heading, HStack, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import VStackBox from "~/components/shared/vstack-wrapper";
-import useMediaQueriesRoutesNavigate from "~/domain/media-queries/useMediaQueriesRoutesNavigate";
+import useMediaQueriesRoutes from "~/domain/media-queries/useMediaQueriesRoutes";
 import useMediaQueriesService from "~/domain/media-queries/useMediaQueriesService";
 
 export default function MediaQueriesRemoveAll() {
-  const { navigateToEditMediaQuery } = useMediaQueriesRoutesNavigate();
+  const { actions } = useMediaQueriesRoutes();
   const { deleteAllMediaQueries } = useMediaQueriesService();
   const [showRemoveAllButton, setShowRemoveAllButton] = useState(false);
 
@@ -14,7 +14,7 @@ export default function MediaQueriesRemoveAll() {
   }
 
   function onRedirectToEdit() {
-    navigateToEditMediaQuery();
+    actions.NAVIGATE_TO_EDIT_MEDIA_QUERY.dispatch();
   }
 
   function onRemoveAllMediaQueries() {

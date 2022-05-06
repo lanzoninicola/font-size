@@ -1,28 +1,22 @@
 import useLocalStorage from "~/components/shared/hooks/useLocalStorage";
 import useHtmlSelectorsSelector from "~/context/app/hooks/useHtmlSelectorsSelector";
+import { DataProvider } from "~/context/app/interfaces";
 import {
   HTMLTags,
-  Selectors,
+  Selector,
   SelectorType,
 } from "~/context/selectors-builder/interfaces";
-
-export enum DataProvider {
-  default = "default",
-  chakraui = "chackraui",
-  tailwindcss = "tailwindcss",
-  bootstrap = "bootstrap",
-}
 
 export default function useSelectorsData() {
   const { setHtmlSelectors } = useHtmlSelectorsSelector();
   const [provider, _] = useLocalStorage("FS_INIT_BREAKPOINTS_PROVIDER");
 
   function initSelectors() {
-    const s = getSelectorsByProvider(provider as DataProvider);
+    const s = getByProvider(provider as DataProvider);
     setHtmlSelectors(s);
   }
 
-  function getSelectorsByProvider(provider: DataProvider) {
+  function getByProvider(provider: DataProvider) {
     if (provider === DataProvider.default) {
       return _getDefaultSelectors();
     }
@@ -30,7 +24,7 @@ export default function useSelectorsData() {
     return _getDefaultSelectors();
   }
 
-  function _getDefaultSelectors(): Selectors {
+  function _getDefaultSelectors(): Selector[] {
     return [
       {
         key: HTMLTags.h1,
@@ -92,6 +86,7 @@ export default function useSelectorsData() {
   }
 
   return {
+    getByProvider,
     initSelectors,
   };
 }

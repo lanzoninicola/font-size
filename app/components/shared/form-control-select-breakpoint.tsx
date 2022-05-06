@@ -5,6 +5,7 @@ import useBreakpointsSelector from "~/context/app/hooks/useBreakpointsSelector";
 import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
 import { BreakpointFlat } from "~/domain/breakpoints/interfaces";
 import useBreakpointsDataService from "~/domain/breakpoints/useBreakpointsDataService";
+import FormControlInputSelect from "./form-control-input-select";
 
 import VStackBox from "./vstack-wrapper";
 
@@ -66,6 +67,24 @@ export default function FormControlSelectBreakpoint({
   }, [breakpoints]);
 
   return (
+    <FormControlInputSelect
+      id="breakpoint"
+      size={"md"}
+      orientation="vertical"
+      value={value || "no-selected"}
+      maxW="100%"
+      onChange={onChange}
+      {...props}
+    >
+      {selectOptions.map((selectOption, index) => {
+        return (
+          <option key={index + 1} value={selectOption.value}>
+            {selectOption.label}
+          </option>
+        );
+      })}
+    </FormControlInputSelect>
+    /**
     <VStackBox w="100%" spacing={1}>
       <Text color="primary.500" fontSize={"sm"}>
         Breakpoints
@@ -88,5 +107,6 @@ export default function FormControlSelectBreakpoint({
         })}
       </InputSelect>
     </VStackBox>
+     */
   );
 }

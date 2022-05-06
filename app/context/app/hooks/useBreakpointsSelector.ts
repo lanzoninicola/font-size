@@ -1,33 +1,20 @@
-import { useEffect } from "react";
-import { Breakpoints } from "~/context/breakpoint-builder/interfaces";
+import { useContextSelector } from "use-context-selector";
 
-import useBreakpointsContext from "./useBreakpointsContext";
-import useBreakpointsLocalStorage from "./useBreakpointsLocalStorage";
+import { AppContextData } from "../app-context";
 
 export default function useBreakpointsSelector() {
-  const {
-    breakpoints: breakpointsContext,
-    setBreakpoints: setBreakpointsContext,
-  } = useBreakpointsContext();
+  const breakpoints = useContextSelector(
+    AppContextData,
+    (ctx) => ctx?.breakpoints
+  );
 
-  const {
-    breakpoints: breakpointsLocalStorage,
-    setBreakpoints: setBreakpointsLocalStorage,
-  } = useBreakpointsLocalStorage();
-
-  function setBreakpoints(nextState: Breakpoints | null) {
-    setBreakpointsContext(nextState);
-    setBreakpointsLocalStorage(nextState);
-  }
-
-  useEffect(() => {
-    if (breakpointsLocalStorage) {
-      setBreakpointsContext(breakpointsLocalStorage);
-    }
-  }, [breakpointsLocalStorage]);
+  const setBreakpoints = useContextSelector(
+    AppContextData,
+    (ctx) => ctx?.setBreakpoints
+  );
 
   return {
-    breakpoints: breakpointsContext,
+    breakpoints,
     setBreakpoints,
   };
 }

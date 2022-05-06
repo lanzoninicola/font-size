@@ -12,8 +12,9 @@ export default function InputWrapper({
 }) {
   return (
     <>
-      {orientation === "horizontal" ||
-        (orientation === undefined && <HStack {...props}>{children}</HStack>)}
+      {(orientation === "horizontal" || orientation === undefined) && (
+        <HStack {...props}>{children}</HStack>
+      )}
       {orientation === "vertical" && (
         <VStackBox {...props}>{children}</VStackBox>
       )}

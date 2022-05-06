@@ -1,42 +1,30 @@
 import { HStack, StackProps, ThemingProps } from "@chakra-ui/react";
-import React from "react";
-import FormControlLabel from "~/components/shared/form-control-label";
-
 import InputWrapper from "./form-control-input-wrapper";
+import FormControlLabel from "./form-control-label";
+import InputSelect from "./input-select";
 import InputText from "./input-text";
 
-export default function FormControlInputText({
+export default function FormControlInputSelect({
   id,
   orientation,
   size,
   label,
-  labelFontSize,
   labelSpacing,
   ariaLabel,
-  value,
-  unit,
-
   justify,
-
-  onChange,
-  onBlur,
-
+  children,
   ...props
 }: {
-  id: string;
+  id?: string;
   orientation?: "horizontal" | "vertical";
   size?: ThemingProps<"Input">["size"];
   label?: string;
-  labelFontSize?: string;
   labelSpacing?: string;
   ariaLabel?: string;
-  value?: string;
-  unit?: string;
 
   justify?: StackProps["justify"];
 
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur?: (e: React.FocusEventHandler<HTMLInputElement>) => void;
+  children: React.ReactNode;
   [key: string]: any;
 }) {
   return (
@@ -48,12 +36,14 @@ export default function FormControlInputText({
       gap={labelSpacing || ".25rem"}
     >
       {label && (
-        <FormControlLabel fontSize={size || labelFontSize} htmlFor={id} m={0}>
+        <FormControlLabel fontSize={size} htmlFor={id} m={0}>
           {label}
         </FormControlLabel>
       )}
 
-      <InputText value={value} onChange={onChange} onBlur={onBlur} {...props} />
+      <InputSelect size={size} w="100%" {...props}>
+        {children}
+      </InputSelect>
     </InputWrapper>
   );
 }

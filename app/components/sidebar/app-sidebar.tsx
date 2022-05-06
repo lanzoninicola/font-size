@@ -3,6 +3,7 @@ import { useState } from "react";
 import useBreakpointsRoutes from "~/domain/breakpoints/useBreakpointsRoutes";
 import useMediaQueriesRoutes from "~/domain/media-queries/useMediaQueriesRoutes";
 import useSelectorsRoutes from "~/domain/selectors/useSelectorsRoutes";
+import useTypeScaleCalculatorRoutes from "~/domain/type-scale-calculator/useTypeScaleCalculatorRoutes";
 
 import {
   BreakpointsIcon,
@@ -26,7 +27,7 @@ interface SidebarItemConfig {
 export default function AppSidebar() {
   const { ROUTE_MEDIA_QUERY_BASE_ROUTE } = useMediaQueriesRoutes();
   const { ROUTE_BREAKPOINTS_BASE_ROUTE } = useBreakpointsRoutes();
-  const { ROUTE_SELECTORS_BASE_ROUTE } = useSelectorsRoutes();
+  const { ROUTE_TYPE_SCALE_CALCULATOR } = useTypeScaleCalculatorRoutes();
 
   const items: SidebarItemConfig[] = [
     {
@@ -37,8 +38,8 @@ export default function AppSidebar() {
       isDisabled: false,
     },
     {
-      to: ROUTE_SELECTORS_BASE_ROUTE,
-      label: "Type Scale",
+      to: ROUTE_TYPE_SCALE_CALCULATOR,
+      label: "Type Scale Calculator",
       ariaLabel: "Define the selector to customize",
       icon: <SelectorsIcon size={24} color="gray" />,
       isDisabled: false,
@@ -50,7 +51,6 @@ export default function AppSidebar() {
       icon: <MediaQueryIcon size={24} color="gray" />,
       isDisabled: false,
     },
-
     {
       to: "/app/settings",
       label: "Settings",
