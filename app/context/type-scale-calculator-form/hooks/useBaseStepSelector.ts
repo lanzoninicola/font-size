@@ -1,11 +1,12 @@
 import { useEffect } from "react";
-import useTypeScaleSelector from "~/context/app/hooks/useTypeScaleSelector";
+import useTypeScaleConfigSelector from "~/context/app/hooks/useTypeScaleConfigSelector";
 import { BaseStepFormControl } from "../interfaces";
 import { initialState } from "../type-scale-calculator-form-context";
 import useTypeScaleCalculatorFormSelector from "./useTypeScaleCalculatorFormSelector";
 
 export default function useBaseStepSelector() {
-  const { typeScale, actions: typeScaleActions } = useTypeScaleSelector();
+  const { typeScaleConfig, actions: typeScaleActions } =
+    useTypeScaleConfigSelector();
   const { baseStep, setBaseStep } = useTypeScaleCalculatorFormSelector();
 
   const actions = {
@@ -18,15 +19,15 @@ export default function useBaseStepSelector() {
   };
 
   function initBaseStep(payload: BaseStepFormControl) {
-    if (!typeScale) {
+    if (!typeScaleConfig) {
       return;
     }
 
-    const typeScaleConfig = typeScale.find(
-      (typeScale) => typeScale.breakpointId === payload.breakpointId
+    const breakpointTypeScaleConfig = typeScaleConfig.find(
+      (config) => config.breakpointId === payload.breakpointId
     );
 
-    if (typeScaleConfig) {
+    if (breakpointTypeScaleConfig) {
       setBaseStep(payload);
     } else {
       setBaseStep(initialState.baseStep);
@@ -34,7 +35,6 @@ export default function useBaseStepSelector() {
   }
 
   useEffect(() => {
-    console.log(baseStep);
     if (baseStep === undefined) {
       throw new Error(
         "useBaseStepSelector hook is used outside of the TypeScaleCalculatorFormContext"

@@ -1,23 +1,22 @@
-import { useContext } from "react";
-import useTypeScaleSelector from "~/context/app/hooks/useTypeScaleSelector";
+import useTypeScaleConfigSelector from "~/context/app/hooks/useTypeScaleConfigSelector";
 
 import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
 import useTypeScaleCalculatorFormSelector from "~/context/type-scale-calculator-form/hooks/useTypeScaleCalculatorFormSelector";
 
 export default function useTypeScaleCalculatorQueryService() {
-  const { typeScale } = useTypeScaleSelector();
+  const { typeScaleConfig } = useTypeScaleConfigSelector();
   const { min, setMinimum } = useTypeScaleCalculatorFormSelector();
 
   function getBreakpointConfig(breakpointId: BreakpointId) {
-    if (!typeScale) {
+    if (!typeScaleConfig) {
       return null;
     }
 
-    const typeScaleConfig = typeScale.find(
-      (typeScale) => typeScale.breakpointId === breakpointId
+    const breakpointTypeScaleConfig = typeScaleConfig.find(
+      (config) => config.breakpointId === breakpointId
     );
 
-    return typeScaleConfig;
+    return breakpointTypeScaleConfig;
   }
 
   function isBreakpointConfigExists(breakpointId: BreakpointId) {

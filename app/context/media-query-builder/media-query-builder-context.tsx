@@ -1,19 +1,22 @@
 import { useState } from "react";
 import { createContext } from "use-context-selector";
 import { BreakpointId } from "../breakpoint-builder/interfaces";
-import { SelectorId } from "../app/interfaces";
-import { SelectorEntityState } from "../shared/interfaces/entity-state";
+import {
+  MediaQuery,
+  TypeScaleStepConfig,
+  TypeScaleStepEntityState,
+} from "../app/interfaces";
 
 export interface MediaQueryBuilderContext {
-  entityState: SelectorEntityState;
+  entityState: TypeScaleStepEntityState;
   currentBreakpointId: BreakpointId;
-  currentSelectorId: string;
+  currentTypeScaleStepId: string;
   minFontSize: string;
   maxFontSize: string;
   lineHeight: string;
-  setEntityState: (entityState: SelectorEntityState) => void;
+  setEntityState: (entityState: TypeScaleStepEntityState) => void;
   setCurrentBreakpointId: (currentBreakpointId: BreakpointId) => void;
-  setCurrentSelector: (currentSelectorId: string) => void;
+  setCurrentTypeScaleStepId: (currentTypeScaleStepId: string) => void;
   setMinFontSize: (minFontSize: string) => void;
   setMaxFontSize: (maxFontSize: string) => void;
   setLineHeight: (lineHeight: string) => void;
@@ -27,12 +30,13 @@ export function MediaQueryBuilderProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [entityState, setEntityState] = useState<SelectorEntityState>(
-    SelectorEntityState.idle
+  const [entityState, setEntityState] = useState<TypeScaleStepEntityState>(
+    TypeScaleStepEntityState.idle
   );
   const [currentBreakpointId, setCurrentBreakpointId] =
     useState<BreakpointId>("");
-  const [currentSelectorId, setCurrentSelector] = useState<SelectorId>("");
+  const [currentTypeScaleStepId, setCurrentTypeScaleStepId] =
+    useState<string>("");
   const [minFontSize, setMinFontSize] = useState<string>("");
   const [maxFontSize, setMaxFontSize] = useState<string>("");
   const [lineHeight, setLineHeight] = useState<string>("110");
@@ -42,13 +46,13 @@ export function MediaQueryBuilderProvider({
       value={{
         entityState,
         currentBreakpointId,
-        currentSelectorId,
+        currentTypeScaleStepId,
         minFontSize,
         maxFontSize,
         lineHeight,
         setEntityState,
         setCurrentBreakpointId,
-        setCurrentSelector,
+        setCurrentTypeScaleStepId,
         setMinFontSize,
         setMaxFontSize,
         setLineHeight,

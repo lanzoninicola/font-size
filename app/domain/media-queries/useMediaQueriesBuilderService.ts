@@ -1,55 +1,60 @@
+import useMediaQueriesSelector from "~/context/app/hooks/useMediaQueriesSelector";
+import { TypeScaleStepEntityState } from "~/context/app/interfaces";
 import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
-import { SelectorId } from "~/context/app/interfaces";
 import useMediaQueryBuilderContext from "~/context/media-query-builder/hooks/useMediaQueryBuilderContext";
-import { SelectorEntityState } from "~/context/shared/interfaces/entity-state";
+import { TypeScaleStepConfig } from "~/context/type-scale-steps-builder/interfaces";
 import parseInputString from "../utilities/parseInputString";
 import useMediaQueriesQueryService from "./useMediaQueriesQueryService";
 
 export default function useMediaQueriesBuilderService() {
+  const { mediaQueries } = useMediaQueriesSelector();
   const {
     entityState,
     currentBreakpointId,
-    currentSelectorId,
+    currentTypeScaleStepId,
     minFontSize,
     maxFontSize,
     lineHeight,
     setEntityState,
     setCurrentBreakpointId,
-    setCurrentSelector,
+    setCurrentTypeScaleStepId,
     setMinFontSize,
     setMaxFontSize,
     setLineHeight,
   } = useMediaQueryBuilderContext();
 
-  const { getTokenValues } = useMediaQueriesQueryService();
+  const { getMediaQueryByBreakpointIdAndStepId } =
+    useMediaQueriesQueryService(mediaQueries);
 
   function changeCurrentBreakpoint(bp: BreakpointId) {
     setCurrentBreakpointId(bp);
   }
 
   /**
-   * @description Show selector details to edit or create new media query
+   * @description Show step details to edit or create new media query
    *
-   * @param s - the selector
+   * @param s - the step
    */
-  function editCurrentSelector(s: SelectorId) {
-    setEntityState(SelectorEntityState.edit);
-    setCurrentSelector(s);
+  function editCurrentSelector(step: TypeScaleStepConfig) {
+    setEntityState(TypeScaleStepEntityState.edit);
+    setCurrentTypeScaleStepId(step.key);
 
     const {
-      minFontSize: selectorMinFontSize,
-      maxFontSize: selectorMaxFontSize,
-      lineHeight: selectorLineHeight,
-    } = getTokenValues(currentBreakpointId, s);
+      minFontSize: stepMinFontSize,
+      maxFontSize: stepMaxFontSize,
+      lineHeight: stepLineHeight,
+      marginBottom: stepMarginBottom,
+      fontFamily: stepFontFamily,
+    } = getMediaQueryByBreakpointIdAndStepId(currentBreakpointId, step.key);
 
-    changeMinFontSize(String(selectorMinFontSize));
-    changeMaxFontSize(String(selectorMaxFontSize));
-    changeLineHeight(String(selectorLineHeight));
+    changeMinFontSize(String(stepMinFontSize));
+    changeMaxFontSize(String(stepMaxFontSize));
+    changeLineHeight(String(stepLineHeight));
   }
 
-  function closeEditCurrentSelector(s: SelectorId) {
-    setEntityState(SelectorEntityState.idle);
-    setCurrentSelector("");
+  function closeEditCurrentSelector() {
+    setEntityState(TypeScaleStepEntityState.idle);
+    setCurrentTypeScaleStepId("");
   }
 
   function changeMinFontSize(minfs: string) {
@@ -70,7 +75,7 @@ export default function useMediaQueriesBuilderService() {
   return {
     entityState,
     currentBreakpointId,
-    currentSelectorId,
+    currentTypeScaleStepId,
     minFontSize,
     maxFontSize,
     lineHeight,

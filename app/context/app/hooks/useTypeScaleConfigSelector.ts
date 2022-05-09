@@ -3,9 +3,12 @@ import { useContextSelector } from "use-context-selector";
 import { AppContextData } from "../app-context";
 import { TypeScaleConfig } from "../interfaces";
 
-export default function useTypeScaleSelector() {
+export default function useTypeScaleConfigSelector() {
   // This is the state of the type scale configuration made by the user for each breakpoint
-  const typeScale = useContextSelector(AppContextData, (ctx) => ctx?.typeScale);
+  const typeScaleConfig = useContextSelector(
+    AppContextData,
+    (ctx) => ctx?.typeScaleConfig
+  );
 
   const setTypeScale = useContextSelector(
     AppContextData,
@@ -21,12 +24,12 @@ export default function useTypeScaleSelector() {
   function updateGlobalState(payload: TypeScaleConfig) {
     let nextTypeScale = [] as TypeScaleConfig[];
 
-    if (typeScale) {
-      nextTypeScale = [...typeScale];
+    if (typeScaleConfig) {
+      nextTypeScale = [...typeScaleConfig];
     }
 
     const index = nextTypeScale.findIndex(
-      (typeScale) => typeScale.breakpointId === payload.breakpointId
+      (typeScaleConfig) => typeScaleConfig.breakpointId === payload.breakpointId
     );
 
     if (index > -1) {
@@ -39,7 +42,7 @@ export default function useTypeScaleSelector() {
   }
 
   return {
-    typeScale,
+    typeScaleConfig,
     actions,
   };
 }

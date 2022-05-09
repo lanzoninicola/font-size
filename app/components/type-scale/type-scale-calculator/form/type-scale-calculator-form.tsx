@@ -1,6 +1,7 @@
 import { Button, Divider, Heading } from "@chakra-ui/react";
 import VStackBox from "~/components/shared/vstack-wrapper";
-import useTypeScaleSelector from "~/context/app/hooks/useTypeScaleSelector";
+import useMediaQueriesSelector from "~/context/app/hooks/useMediaQueriesSelector";
+import useTypeScaleConfigSelector from "~/context/app/hooks/useTypeScaleConfigSelector";
 import useTypeScaleCalculatorFormSelector from "~/context/type-scale-calculator-form/hooks/useTypeScaleCalculatorFormSelector";
 
 import GroupBaselineStep from "./group-baseline-step";
@@ -8,12 +9,13 @@ import GroupMaximum from "./group-maximum";
 import GroupMinimum from "./group-minimum";
 
 export default function TypeScaleCalculatorForm() {
-  const { actions } = useTypeScaleSelector();
+  const { actions } = useTypeScaleConfigSelector();
+  const { actions: mediaQueriesAction } = useMediaQueriesSelector();
   const { currentBreakpointId, baseStep, min, max } =
     useTypeScaleCalculatorFormSelector();
 
   function onSaveTypeScaleCalculation() {
-    actions.UPDATE_GLOBAL_STATE.dispatch({
+    const payload = {
       breakpointId: currentBreakpointId,
       baseStep: baseStep.step,
       min: {
@@ -24,7 +26,13 @@ export default function TypeScaleCalculatorForm() {
         fontSizeREM: max.fontSizeREM,
         scaleRatio: String(max.scaleRatio),
       },
-    });
+    };
+
+    actions.UPDATE_GLOBAL_STATE.dispatch(payload);
+
+    mediaQueriesAction.SET_BREAKPOINT_MEDIA_QUERY_BASED_ON_TYPE_SCALE_CONFIGURATION.dispatch(
+      payload
+    );
   }
 
   return (

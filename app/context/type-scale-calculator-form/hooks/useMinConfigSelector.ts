@@ -49,7 +49,7 @@ export default function useMinConfigSelector() {
   useEffect(() => {
     if (min === undefined) {
       throw new Error(
-        "useTypeScaleMaxConfigSelector hook is used outside of the TypeScaleCalculatorFormContext"
+        "useMinConfigSelector hook is used outside of the TypeScaleCalculatorFormContext"
       );
     }
   }, []);

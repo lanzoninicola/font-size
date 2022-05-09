@@ -1,57 +1,63 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { createContext } from "use-context-selector";
 import useLocalStorage from "~/components/shared/hooks/useLocalStorage";
 import useBreakpointsData from "~/domain/breakpoints/useBreakpointsData";
-import useMediaQueriesData from "~/domain/media-queries/useMediaQueriesData";
-import useSelectorsData from "~/domain/selectors/useSelectorsData";
+import useTypeScaleStepsData from "~/domain/type-scale-steps/useTypeScaleStepsData";
+
 import {
   FS_CONTEXT_BREAKPOINTS,
   FS_CONTEXT_MEDIA_QUERIES,
-  FS_CONTEXT_SELECTORS,
-  FS_CONTEXT_TYPESCALE,
+  FS_CONTEXT_TYPESCALE_CONFIG,
+  FS_CONTEXT_TYPESCALE_STEPS,
 } from "./constants";
 import {
+  AppContext,
   Breakpoints,
-  TypeScaleConfig,
   DataProvider,
-  MediaQueries,
-  Selector,
+  MediaQuery,
+  TypeScaleConfig,
+  TypeScaleStepConfig,
 } from "./interfaces";
-
-export interface AppContext {
-  pixelsPerRem: number;
-  htmlSelectors: Selector[] | null;
-  breakpoints: Breakpoints | null;
-  mediaQueries: MediaQueries | null;
-  typeScale: TypeScaleConfig[] | null;
-  setPixelsPerRem: (pixelsPerRem: number) => void;
-  setHtmlSelectors: (htmlSelectors: Selector[] | null) => void;
-  setBreakpoints: (breakpoints: Breakpoints | null) => void;
-  setMediaQueries: (mediaQueries: MediaQueries | null) => void;
-  setTypeScale: (typeScale: TypeScaleConfig[]) => void;
-}
 
 export const AppContextData = createContext<AppContext>({} as AppContext);
 
+export const mediaQueryInitialStatePartial: Omit<
+  MediaQuery,
+  "breakpointId" | "stepId"
+> = {
+  minFontSize: 1,
+  maxFontSize: 1,
+  lineHeight: 120,
+  marginBottom: 0,
+  fontFamily: "Times New Roman",
+};
+
 export function AppProvider({ children }: { children: React.ReactNode }) {
   const { getByProvider: getBreakpointsByProvider } = useBreakpointsData();
-  const { getByProvider: getSelectorsByProvider } = useSelectorsData();
+  const { getByProvider: getTypeScaleStepsByProvider } =
+    useTypeScaleStepsData();
 
   const [pixelsPerRem, setPixelsPerRem] = useState(16);
 
-  const [htmlSelectors, setHtmlSelectors] = useLocalStorage<Selector[] | null>(
-    FS_CONTEXT_SELECTORS,
-    getSelectorsByProvider(DataProvider.default)
-  );
+  // On app load, default breakpoints are loaded
   const [breakpoints, setBreakpoints] = useLocalStorage<Breakpoints | null>(
     FS_CONTEXT_BREAKPOINTS,
     getBreakpointsByProvider(DataProvider.default)
   );
 
-  const [typeScale, setTypeScale] =
-    useLocalStorage<TypeScaleConfig[]>(FS_CONTEXT_TYPESCALE);
+  // On app load, default type scale steps are loaded
+  const [typeScaleSteps, setTypeScaleSteps] = useLocalStorage<
+    TypeScaleStepConfig[] | null
+  >(
+    FS_CONTEXT_TYPESCALE_STEPS,
+    getTypeScaleStepsByProvider(DataProvider.default)
+  );
 
-  const [mediaQueries, setMediaQueries] = useLocalStorage<MediaQueries | null>(
+  const [typeScaleConfig, setTypeScale] = useLocalStorage<TypeScaleConfig[]>(
+    FS_CONTEXT_TYPESCALE_CONFIG
+  );
+
+  const [mediaQueries, setMediaQueries] = useLocalStorage<MediaQuery[] | null>(
     FS_CONTEXT_MEDIA_QUERIES
   );
 
@@ -59,12 +65,12 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     <AppContextData.Provider
       value={{
         pixelsPerRem,
-        htmlSelectors,
+        typeScaleSteps,
         breakpoints,
-        typeScale,
+        typeScaleConfig,
         mediaQueries,
         setPixelsPerRem,
-        setHtmlSelectors,
+        setTypeScaleSteps,
         setBreakpoints,
         setTypeScale,
         setMediaQueries,

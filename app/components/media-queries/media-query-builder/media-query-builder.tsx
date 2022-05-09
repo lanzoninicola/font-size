@@ -1,12 +1,12 @@
 import { Box, Grid, HStack, Text } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
-import useHtmlSelectorsSelector from "~/context/app/hooks/useHtmlSelectorsSelector";
-import { Selector } from "~/context/selectors-builder/interfaces";
-import { SelectorEntityState } from "~/context/shared/interfaces/entity-state";
-import useTypeScaleCalculatorFormSelector from "~/context/type-scale-calculator-form/hooks/useTypeScaleCalculatorFormSelector";
+import { useEffect, useState } from "react";
+import useMediaQueriesSelector from "~/context/app/hooks/useMediaQueriesSelector";
+import useTypeScaleStepsSelector from "~/context/app/hooks/useTypeScaleStepsSelector";
+import { TypeScaleStepEntityState } from "~/context/app/interfaces";
 import useMediaQueriesBuilderService from "~/domain/media-queries/useMediaQueriesBuilderService";
 import useMediaQueriesQueryService from "~/domain/media-queries/useMediaQueriesQueryService";
 import useCustomScrollbar from "~/domain/utilities/useCustomScrollbar";
+
 import ActionButton from "../../shared/action-button";
 import { CloseIcon } from "../../shared/icons";
 import VStackBox from "../../shared/vstack-wrapper";
@@ -14,19 +14,19 @@ import StepActions from "./step-actions";
 import { StepDetailForm } from "./step-detail-form";
 import StepDetails from "./step-details";
 
-export default function MediaQueryEdit() {
+export default function MediaQueryBuilder() {
   const appScrollbarStyle = useCustomScrollbar();
-  const { entityState, currentSelectorId, closeEditCurrentSelector } =
-    useMediaQueriesBuilderService();
-  const { currentBreakpointId } = useTypeScaleCalculatorFormSelector();
-  const { getTokenValues } = useMediaQueriesQueryService();
+  const { mediaQueries } = useMediaQueriesSelector();
+  const {
+    entityState,
+    currentBreakpointId,
+    currentTypeScaleStepId,
+    closeEditCurrentSelector,
+  } = useMediaQueriesBuilderService();
+  const { getMediaQueryByBreakpointIdAndStepId } =
+    useMediaQueriesQueryService(mediaQueries);
 
-  const { htmlSelectors } = useHtmlSelectorsSelector();
-  const [selectors, setSelectors] = useState<Selector[] | null>(null);
-
-  useEffect(() => {
-    setSelectors(htmlSelectors);
-  }, [htmlSelectors]);
+  const { typeScaleSteps } = useTypeScaleStepsSelector();
 
   return (
     <VStackBox
@@ -37,11 +37,11 @@ export default function MediaQueryEdit() {
       overflow="auto"
       css={appScrollbarStyle}
     >
-      {selectors &&
-        selectors.map((s, index) => {
-          const { minFontSize, maxFontSize, lineHeight } = getTokenValues(
+      {typeScaleSteps &&
+        typeScaleSteps.map((step, index) => {
+          const stepMediaQuery = getMediaQueryByBreakpointIdAndStepId(
             currentBreakpointId,
-            s.key
+            step.key
           );
 
           return (
@@ -60,31 +60,33 @@ export default function MediaQueryEdit() {
                     fontWeight={700}
                     flexGrow={2}
                   >
-                    {s.value}
+                    {step.value}
                   </Text>
-                  <StepActions selectorId={s.key} />
+                  <StepActions step={step} />
                 </VStackBox>
-                {s.key !== currentSelectorId && (
+                {step.key !== currentTypeScaleStepId && (
                   <StepDetails
-                    minFontSize={minFontSize}
-                    maxFontSize={maxFontSize}
-                    lineHeight={lineHeight}
+                    minFontSize={stepMediaQuery.minFontSize}
+                    maxFontSize={stepMediaQuery.maxFontSize}
+                    lineHeight={stepMediaQuery.lineHeight}
+                    marginBottom={stepMediaQuery.marginBottom}
+                    fontFamily={stepMediaQuery.fontFamily}
                   />
                 )}
-                {s.key === currentSelectorId && (
+                {step.key === currentTypeScaleStepId && (
                   <HStack justify={"flex-end"} align={"flex-end"}>
                     <ActionButton
                       label="Close Edit Selector"
-                      onClick={() => closeEditCurrentSelector(s.key)}
+                      onClick={() => closeEditCurrentSelector()}
                     >
                       <CloseIcon />
                     </ActionButton>
                   </HStack>
                 )}
               </Grid>
-              {entityState === SelectorEntityState.edit &&
-                s.key === currentSelectorId && (
-                  <StepDetailForm selectorId={s.key} />
+              {entityState === TypeScaleStepEntityState.edit &&
+                step.key === currentTypeScaleStepId && (
+                  <StepDetailForm selectorId={step.key} />
                 )}
             </Box>
           );

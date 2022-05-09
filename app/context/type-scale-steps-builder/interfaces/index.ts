@@ -1,3 +1,5 @@
+import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
+
 export enum HTMLTags {
   h1 = "h1",
   h2 = "h2",
@@ -9,9 +11,8 @@ export enum HTMLTags {
   caption = "caption",
 }
 export type CSSClassAttribute = string;
-export type HTMLAttributes = CSSClassAttribute;
 
-export type SelectorId = HTMLTags | HTMLAttributes;
+export type SelectorId = HTMLTags | CSSClassAttribute;
 export enum SelectorType {
   tag = "tag",
   class = "class",
@@ -38,3 +39,12 @@ export interface SelectorsTokensValue {
     [SelectorConfigKeys.lineHeight]?: number;
   };
 }
+
+// NEW VERSION
+export type TypeScaleStepConfig = {
+  key: string;
+  type: SelectorType;
+  value: HTMLTags | CSSClassAttribute;
+  isBaseline: boolean;
+  position: number;
+};

@@ -1,5 +1,5 @@
 import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
-import { SelectorId } from "~/context/selectors-builder/interfaces";
+import { SelectorId } from "~/context/type-scale-steps-builder/interfaces";
 
 export interface MinMaxTypeScaleConfig {
   fontSizeREM: string;
@@ -19,18 +19,27 @@ export interface TypeScaleRatio {
   ratio: number;
 }
 
-// Interfaces for the type scale calculator form context.
+// START: Interfaces for the type scale calculator form context.
 export type DefaultBreakpointId = "default";
 
 export type BreakpointIdFormControl = BreakpointId | DefaultBreakpointId;
-
 export interface BaseStepFormControl {
   breakpointId: BreakpointIdFormControl;
   step: SelectorId;
 }
-
 export interface MinMaxConfigFormControl {
   breakpointId: BreakpointIdFormControl;
   fontSizeREM: string;
   scaleRatio: TypeScaleRatio["ratio"];
+}
+// END: Interfaces for the type scale calculator form context.
+
+export interface BreakpointTypeScale {
+  breakpointId: BreakpointId;
+  // step key of the type scale
+  stepKey: string;
+  // min font size calculated for the breakpoint
+  minFontSize: number;
+  // max font size calculated for the breakpoint
+  maxFontSize: number;
 }

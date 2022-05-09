@@ -1,31 +1,29 @@
 import {
   Alert,
   AlertIcon,
-  Center,
   Grid,
   Heading,
   HStack,
   Text,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import useHtmlSelectorsSelector from "~/context/app/hooks/useHtmlSelectorsSelector";
-import { Selector } from "~/context/selectors-builder/interfaces";
-import useSelectorsQueryService from "~/domain/selectors/useSelectorsQueryService";
-import ActionButton from "../shared/action-button";
-import { ArrowDownIcon, ArrowUpIcon } from "../shared/icons";
-import VStackBox from "../shared/vstack-wrapper";
+import useHtmlSelectorsSelector from "~/context/app/hooks/useTypeScaleStepsSelector";
+import { TypeScaleStepConfig } from "~/context/type-scale-steps-builder/interfaces";
+import useTypeScaleStepsQueryService from "~/domain/type-scale-steps/useTypeScaleStepsQueryService";
 
-export default function SelectorsList() {
-  const { htmlSelectors, setHtmlSelectors } = useHtmlSelectorsSelector();
-  const { getSelectorsSortByOrder } = useSelectorsQueryService();
+import VStackBox from "../../shared/vstack-wrapper";
 
-  const [selectors, setSelectors] = useState<Selector[]>([]);
+export default function TypeScaleStepsList() {
+  const { typeScaleSteps, setTypeScaleSteps } = useHtmlSelectorsSelector();
+  const { getTypeScaleStepsSortedByPosition } = useTypeScaleStepsQueryService();
+
+  const [selectors, setSelectors] = useState<TypeScaleStepConfig[]>([]);
 
   useEffect(() => {
-    setSelectors(getSelectorsSortByOrder("DESC"));
+    setSelectors(getTypeScaleStepsSortedByPosition("DESC"));
 
     console.log(selectors);
-  }, [htmlSelectors]);
+  }, [typeScaleSteps]);
 
   return (
     <>

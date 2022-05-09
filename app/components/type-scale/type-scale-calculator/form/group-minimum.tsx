@@ -7,7 +7,6 @@ import useCurrentBreakpointIdSelector from "~/context/type-scale-calculator-form
 import useMinConfigSelector from "~/context/type-scale-calculator-form/hooks/useMinConfigSelector";
 import useBreakpointsQueryService from "~/domain/breakpoints/useBreakpointsQueryService";
 import useTypeScaleCalculatorData from "~/domain/type-scale-calculator/useTypeScaleCalculatorData";
-import useTypeScaleCalculatorQueryService from "~/domain/type-scale-calculator/useTypeScaleCalculatorQueryService";
 import parseDecimalNumber from "~/domain/utilities/parseDecimalNumber";
 
 export default function GroupMinimum() {

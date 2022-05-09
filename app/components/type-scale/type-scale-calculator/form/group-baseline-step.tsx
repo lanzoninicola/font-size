@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import FormControlInputSelect from "~/components/shared/form-control-input-select";
-import useHtmlSelectorsSelector from "~/context/app/hooks/useHtmlSelectorsSelector";
+import useHtmlSelectorsSelector from "~/context/app/hooks/useTypeScaleStepsSelector";
 import useBaseStepSelector from "~/context/type-scale-calculator-form/hooks/useBaseStepSelector";
 import useCurrentBreakpointIdSelector from "~/context/type-scale-calculator-form/hooks/useCurrentBreakpointIdSelector";
 
 export default function GroupBaselineStep() {
   const { currentBreakpointId } = useCurrentBreakpointIdSelector();
   const { baseStep, actions } = useBaseStepSelector();
-  const { htmlSelectors } = useHtmlSelectorsSelector();
+  const { typeScaleSteps } = useHtmlSelectorsSelector();
 
   function onChangeBaseStep(event: React.ChangeEvent<HTMLInputElement>) {
     const value = event.target.value;
@@ -42,8 +42,8 @@ export default function GroupBaselineStep() {
       onChange={onChangeBaseStep}
       isDisabled={true}
     >
-      {htmlSelectors &&
-        htmlSelectors.map((selector, idx) => (
+      {typeScaleSteps &&
+        typeScaleSteps.map((selector, idx) => (
           <option key={idx} value={selector.key}>
             {`${selector.value} (${selector.key})`}
           </option>

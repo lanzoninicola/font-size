@@ -16,7 +16,7 @@ export default function useMediaQueriesRoutes() {
     NAVIGATE_TO_MISSING_BREAKPOINTS: {
       dispatch: () => navigate(ROUTE_APP_ERROR_MISSING_BREAKPOINTS),
     },
-    NAVIGATE_TO_EDIT_MEDIA_QUERY: {
+    NAVIGATE_TO_MEDIA_QUERY_BUILDER: {
       dispatch: () => navigate(ROUTE_MEDIA_QUERY_EDIT),
     },
     NAVIGATE_TO_SHOW_THE_CODE: {

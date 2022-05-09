@@ -1,28 +1,27 @@
-import { Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import InputSelect from "~/components/shared/input-select";
 import useBreakpointsSelector from "~/context/app/hooks/useBreakpointsSelector";
 import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
 import { BreakpointFlat } from "~/domain/breakpoints/interfaces";
 import useBreakpointsDataService from "~/domain/breakpoints/useBreakpointsDataService";
-import FormControlInputSelect from "./form-control-input-select";
 
-import VStackBox from "./vstack-wrapper";
+import FormControlInputSelect from "./form-control-input-select";
 
 export interface SelectOption {
   value: string;
   label: string;
 }
 
+export interface Props {
+  value?: BreakpointId;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  [key: string]: any;
+}
+
 export default function FormControlSelectBreakpoint({
   value,
   onChange,
   ...props
-}: {
-  value?: BreakpointId;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  [key: string]: any;
-}) {
+}: Props) {
   const { breakpoints } = useBreakpointsSelector();
 
   const { listAll } = useBreakpointsDataService();

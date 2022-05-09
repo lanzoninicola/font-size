@@ -1,30 +1,30 @@
 import useLocalStorage from "~/components/shared/hooks/useLocalStorage";
-import useHtmlSelectorsSelector from "~/context/app/hooks/useHtmlSelectorsSelector";
+import useHtmlSelectorsSelector from "~/context/app/hooks/useTypeScaleStepsSelector";
 import { DataProvider } from "~/context/app/interfaces";
 import {
   HTMLTags,
-  Selector,
+  TypeScaleStepConfig,
   SelectorType,
-} from "~/context/selectors-builder/interfaces";
+} from "~/context/type-scale-steps-builder/interfaces";
 
-export default function useSelectorsData() {
-  const { setHtmlSelectors } = useHtmlSelectorsSelector();
+export default function useTypeScaleStepsData() {
+  const { setTypeScaleSteps } = useHtmlSelectorsSelector();
   const [provider, _] = useLocalStorage("FS_INIT_BREAKPOINTS_PROVIDER");
 
-  function initSelectors() {
+  function initTypeScaleSteps() {
     const s = getByProvider(provider as DataProvider);
-    setHtmlSelectors(s);
+    setTypeScaleSteps(s);
   }
 
   function getByProvider(provider: DataProvider) {
     if (provider === DataProvider.default) {
-      return _getDefaultSelectors();
+      return _getDefault();
     }
 
-    return _getDefaultSelectors();
+    return _getDefault();
   }
 
-  function _getDefaultSelectors(): Selector[] {
+  function _getDefault(): TypeScaleStepConfig[] {
     return [
       {
         key: HTMLTags.h1,
@@ -87,6 +87,6 @@ export default function useSelectorsData() {
 
   return {
     getByProvider,
-    initSelectors,
+    initTypeScaleSteps,
   };
 }

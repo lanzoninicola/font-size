@@ -1,6 +1,6 @@
 import FormControlInputNumber from "~/components/shared/form-control-input-number";
 import VStackBox from "~/components/shared/vstack-wrapper";
-import { SelectorId } from "~/context/selectors-builder/interfaces";
+import { SelectorId } from "~/context/type-scale-steps-builder/interfaces";
 import useBreakpointsQueryService from "~/domain/breakpoints/useBreakpointsQueryService";
 import useMediaQueriesBuilderService from "~/domain/media-queries/useMediaQueriesBuilderService";
 

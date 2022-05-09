@@ -14,7 +14,7 @@ export default function MediaQueriesRemoveAll() {
   }
 
   function onRedirectToEdit() {
-    actions.NAVIGATE_TO_EDIT_MEDIA_QUERY.dispatch();
+    actions.NAVIGATE_TO_MEDIA_QUERY_BUILDER.dispatch();
   }
 
   function onRemoveAllMediaQueries() {

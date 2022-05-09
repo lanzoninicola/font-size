@@ -7,10 +7,14 @@ export default function StepDetails({
   minFontSize,
   maxFontSize,
   lineHeight,
+  marginBottom,
+  fontFamily,
 }: {
   minFontSize: number;
   maxFontSize: number;
   lineHeight: number;
+  marginBottom: number;
+  fontFamily: string;
 }) {
   const { currentBreakpointId } = useMediaQueriesBuilderService();
   const { getViewportSizeByBreakpointId } = useBreakpointsQueryService();
@@ -58,6 +62,14 @@ export default function StepDetails({
       <HStack {...labelGroupProps}>
         <Text {...labelProps}>Line Height</Text>
         <Text {...valueProps}>{`${lineHeight}%`}</Text>
+      </HStack>
+      <HStack {...labelGroupProps}>
+        <Text {...labelProps}>Margin Bottom</Text>
+        <Text {...valueProps}>{`${marginBottom}rem`}</Text>
+      </HStack>
+      <HStack {...labelGroupProps}>
+        <Text {...labelProps}>Font Family</Text>
+        <Text {...valueProps}>{`${fontFamily}`}</Text>
       </HStack>
     </VStackBox>
   );

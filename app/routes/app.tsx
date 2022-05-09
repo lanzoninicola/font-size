@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { json, Outlet } from "remix";
-import Footer from "~/components/footer/footer";
-import Header from "~/components/header/header";
+import Footer from "~/components/layout/footer";
+import Header from "~/components/layout/header";
 import PreviewContent from "~/components/preview/preview-content";
 import PreviewSideContent from "~/components/preview/preview-side-content";
 import MainGridWrapper from "~/components/shared/main-grid-wrapper";
 import SidePanel from "~/components/shared/side-panel";
-import AppSidebar from "~/components/sidebar/app-sidebar";
+import AppSidebar from "~/components/layout/sidebar/app-sidebar";
 import { BreakpointsFormProvider } from "~/context/breakpoint-builder/breakpoints-form-context";
 import { MediaQueryBuilderProvider } from "~/context/media-query-builder/media-query-builder-context";
 import { PreviewProvider } from "~/context/preview/preview-context";

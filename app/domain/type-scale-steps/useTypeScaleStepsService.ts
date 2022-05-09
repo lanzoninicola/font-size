@@ -1,11 +1,11 @@
-import useHtmlSelectorsSelector from "~/context/app/hooks/useHtmlSelectorsSelector";
+import useHtmlSelectorsSelector from "~/context/app/hooks/useTypeScaleStepsSelector";
 import { SelectorId } from "~/context/app/interfaces";
 
 export default function useSelectorsService() {
-  const { htmlSelectors } = useHtmlSelectorsSelector();
+  const { typeScaleSteps } = useHtmlSelectorsSelector();
 
   function getSelectorNameById(selectorId: SelectorId) {
-    const selector = htmlSelectors?.find(
+    const selector = typeScaleSteps?.find(
       (selector) => selector.key === selectorId
     );
 

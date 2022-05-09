@@ -2,7 +2,7 @@ import { HStack } from "@chakra-ui/react";
 import { Outlet, useOutletContext } from "remix";
 import InnerPageContentArea from "~/components/layout/inner-page-content-area";
 import InnerPageHeaderArea from "~/components/layout/inner-page-header-area";
-import SelectorsToolbar from "~/components/selectors/selectors-toolbar";
+import SelectorsToolbar from "~/components/type-scale/type-scale-steps/type-scale-steps-toolbar";
 import ActionButton from "~/components/shared/action-button";
 import { CollapseIcon } from "~/components/shared/icons";
 import SectionSubHeader from "~/components/shared/section-subheader";

@@ -1,26 +1,21 @@
 import { HStack } from "@chakra-ui/react";
 import { Link } from "remix";
-import useBreakpointsSelector from "~/context/app/hooks/useBreakpointsSelector";
-import useBreakpointsData, {
-  DataProvider,
-} from "~/domain/breakpoints/useBreakpointsData";
-import useBreakpointsRoutes from "~/domain/breakpoints/useBreakpointsRoutes";
 import useBreakpointRoutesLocation from "~/domain/breakpoints/useBreakpointsRoutesLocation";
-import useSelectorsData from "~/domain/selectors/useSelectorsData";
-import useSelectorsRoutes from "~/domain/selectors/useSelectorsRoutes";
+import useTypeScaleStepsData from "~/domain/type-scale-steps/useTypeScaleStepsData";
+import useSelectorsRoutes from "~/domain/type-scale-steps/useTypeScaleStepsRoutes";
 
-import ToolbarWrapper from "../layout/toolbar-wrapper";
-import ActionButton from "../shared/action-button";
-import { EditIcon, InitIcon, NewEntityIcon } from "../shared/icons";
+import ToolbarWrapper from "../../layout/toolbar-wrapper";
+import ActionButton from "../../shared/action-button";
+import { EditIcon, InitIcon } from "../../shared/icons";
 
-export default function SelectorsToolbar() {
+export default function TypeScaleStepsToolbar() {
   const { ROUTE_SELECTORS_UPDATE } = useSelectorsRoutes();
-  const { initSelectors } = useSelectorsData();
+  const { initTypeScaleSteps } = useTypeScaleStepsData();
 
   const { currentRoute } = useBreakpointRoutesLocation();
 
   function onInitSelectors() {
-    initSelectors();
+    initTypeScaleSteps();
   }
 
   return (

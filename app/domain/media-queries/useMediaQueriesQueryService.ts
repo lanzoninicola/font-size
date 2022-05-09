@@ -1,26 +1,18 @@
+import { mediaQueryInitialStatePartial } from "~/context/app/app-context";
+import { MediaQuery } from "~/context/app/interfaces";
+import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
+import { TypeScaleStepConfig } from "~/context/type-scale-steps-builder/interfaces";
+
 /**
  * @description This hook is responsible to run query against the MediaQueries state
  */
-import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
-import useMediaQueriesSelector from "~/context/app/hooks/useMediaQueriesSelector";
-import { SelectorId } from "~/context/app/interfaces";
-
-export default function useMediaQueriesQueryService() {
-  const { mediaQueries } = useMediaQueriesSelector();
+export default function useMediaQueriesQueryService(
+  mediaQueries: MediaQuery[] | null
+) {
   const DEFAULT_LINE_HEIGHT = 120;
 
-  function isMediaQueryEmpty() {
-    return new Promise((resolve, reject) => {
-      if (mediaQueries !== null) {
-        resolve(Object.keys(mediaQueries).length === 0);
-      }
-
-      reject("mediaQueries is null");
-    });
-  }
-
   /**
-   * @description Check if the Media Queries object has the specified breakpoint
+   * @description Check if the Media Queries array has the specified breakpoint
    *
    * @param {BreakpointId} breakpointId
    * @returns {boolean}
@@ -28,31 +20,37 @@ export default function useMediaQueriesQueryService() {
    * */
   function isMediaQueryOfBreakpointExists(bp: BreakpointId) {
     if (!mediaQueries) return false;
-    if (!mediaQueries[bp]) return false;
-    return true;
+    return mediaQueries.some((mq) => mq.breakpointId === bp);
   }
 
   /**
    *
+   * @deprecated - use getMediaQueryByBreakpointIdAndStepId instead
+   *
    * @param {BreakpointId} breakpointId - The breakpoint id
-   * @param {SelectorId} selector - The selector (tag, class, id) to get the media query info
+   * @param {SelectorId} typeScaleStep - The typeScaleStep (tag, class, id) to get the media query info
    * @param {MediaQueries} mq - Optional if the component cannot access to the mediaqueries context
    *
-   * @returns The min and max font size for the given selector and breakpoint in REM
+   * @returns The min and max font size for the given typeScaleStep and breakpoint in REM
    */
-  function getTokenValues(breakpointId: BreakpointId, selector: SelectorId) {
-    let breakpoint = null;
+  function getTokenValues(
+    breakpointId: BreakpointId,
+    typeScaleStep: TypeScaleStepConfig
+  ) {
     let minFontSize = 0;
     let maxFontSize = 0;
     let lineHeight = DEFAULT_LINE_HEIGHT;
 
     if (mediaQueries) {
-      breakpoint = mediaQueries[breakpointId];
+      const breakpointMediaQuery: MediaQuery | undefined = mediaQueries.find(
+        (mq) =>
+          mq.breakpointId === breakpointId && mq.stepId === typeScaleStep.key
+      );
 
-      if (breakpoint) {
-        minFontSize = breakpoint[selector]?.minFontSize ?? 0;
-        maxFontSize = breakpoint[selector]?.maxFontSize ?? 0;
-        lineHeight = breakpoint[selector]?.lineHeight ?? lineHeight;
+      if (breakpointMediaQuery) {
+        minFontSize = breakpointMediaQuery.minFontSize ?? 0;
+        maxFontSize = breakpointMediaQuery.maxFontSize ?? 0;
+        lineHeight = breakpointMediaQuery.lineHeight ?? lineHeight;
       }
     }
 
@@ -63,20 +61,53 @@ export default function useMediaQueriesQueryService() {
     };
   }
 
-  function isMediaQueryOfBreakpointAndSelectorExists(
-    bp: BreakpointId,
-    s: SelectorId
-  ) {
-    if (!mediaQueries) return false;
-    if (!mediaQueries[bp]) return false;
-    if (!mediaQueries[bp][s]) return false;
-    return true;
+  /**
+   *
+   * @param breakpointId - the breakpoint id
+   * @param stepId - Step key
+   * @param mediaQueries - Media queries
+   * @returns Media query step configuration for the given breakpoint and step. If not found, returns the initial state for the media query
+   *
+   * @description - Get the media query step configuration for the breakpoint (minFontSize, maxFontSize, lineHeight, marginBottom, fontFamily)
+   */
+  function getMediaQueryByBreakpointIdAndStepId(
+    breakpointId: BreakpointId,
+    stepId: string
+  ): Omit<MediaQuery, "breakpointId" | "stepId"> {
+    const mq = mediaQueries?.find(
+      (mq) => mq.breakpointId === breakpointId && mq.stepId === stepId
+    );
+
+    return {
+      minFontSize: mq?.minFontSize ?? mediaQueryInitialStatePartial.minFontSize,
+      maxFontSize: mq?.maxFontSize ?? mediaQueryInitialStatePartial.maxFontSize,
+      lineHeight: mq?.lineHeight ?? mediaQueryInitialStatePartial.lineHeight,
+      marginBottom:
+        mq?.marginBottom ?? mediaQueryInitialStatePartial.marginBottom,
+      fontFamily: mq?.fontFamily ?? mediaQueryInitialStatePartial.fontFamily,
+    };
+  }
+
+  /**
+   *
+   * @param breakpointId - the breakpoint id
+   * @param mediaQueries - Media queries
+   * @returns A new list of media queries without the records of media query for the breakpoint
+   */
+  function removeMediaQueriesByBreakpointId(
+    breakpointId: BreakpointId
+  ): MediaQuery[] | [] {
+    return (
+      mediaQueries?.filter(
+        (mediaQuery) => mediaQuery.breakpointId !== breakpointId
+      ) ?? []
+    );
   }
 
   return {
-    isMediaQueryEmpty,
     isMediaQueryOfBreakpointExists,
-    isMediaQueryOfBreakpointAndSelectorExists,
     getTokenValues,
+    getMediaQueryByBreakpointIdAndStepId,
+    removeMediaQueriesByBreakpointId,
   };
 }

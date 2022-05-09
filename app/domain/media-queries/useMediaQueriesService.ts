@@ -1,17 +1,15 @@
 import useMediaQueriesSelector from "~/context/app/hooks/useMediaQueriesSelector";
-import { MediaQueries, SelectorId } from "~/context/app/interfaces";
 import useMediaQueryBuilderContext from "~/context/media-query-builder/hooks/useMediaQueryBuilderContext";
-import { SelectorEntityState } from "~/context/shared/interfaces/entity-state";
 
 export default function useMediaQueriesService() {
   const {
     currentBreakpointId,
-    currentSelectorId,
+    currentTypeScaleStepId,
     minFontSize,
     maxFontSize,
     lineHeight,
     setEntityState,
-    setCurrentSelector,
+    setCurrentTypeScaleStepId,
     setMinFontSize,
     setMaxFontSize,
     setLineHeight,
@@ -29,12 +27,13 @@ export default function useMediaQueriesService() {
     nextMediaQueries[currentBreakpointId] = {
       ...nextMediaQueries[currentBreakpointId],
     };
-    nextMediaQueries[currentBreakpointId][currentSelectorId] = mediaQueryData;
+    nextMediaQueries[currentBreakpointId][currentTypeScaleStepId] =
+      mediaQueryData;
 
     setMediaQueries(nextMediaQueries);
 
     setEntityState(SelectorEntityState.idle);
-    setCurrentSelector("");
+    setCurrentTypeScaleStepId("");
     setMinFontSize("");
     setMaxFontSize("");
     setLineHeight("");
@@ -53,7 +52,7 @@ export default function useMediaQueriesService() {
 
     if (Object.keys(nextMediaQueries[currentBreakpointId]).length === 0) {
       delete nextMediaQueries[currentBreakpointId];
-      setCurrentSelector("");
+      setCurrentTypeScaleStepId("");
     }
 
     if (Object.keys(nextMediaQueries).length === 0) {

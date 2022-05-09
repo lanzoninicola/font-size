@@ -1,6 +1,6 @@
 import { Heading } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import MediaQueryEdit from "~/components/media-queries/media-query-edit";
+import MediaQueryBuilder from "~/components/media-queries/media-query-builder/media-query-builder";
 import FormControlSelectBreakpoint from "~/components/shared/form-control-select-breakpoint";
 import VStackBox from "~/components/shared/vstack-wrapper";
 import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
@@ -8,7 +8,7 @@ import useMediaQueryBuilderContext from "~/context/media-query-builder/hooks/use
 import useBreakpointsQueryService from "~/domain/breakpoints/useBreakpointsQueryService";
 import useMediaQueriesRoutes from "~/domain/media-queries/useMediaQueriesRoutes";
 
-export default function MediaQueriesIndexPage() {
+export default function MediaQueriesBuilderPage() {
   const { isBreakpointsEmpty } = useBreakpointsQueryService();
   const { actions } = useMediaQueriesRoutes();
   const { currentBreakpointId, setCurrentBreakpointId } =
@@ -23,7 +23,7 @@ export default function MediaQueriesIndexPage() {
     if (isBreakpointsEmpty()) {
       actions.NAVIGATE_TO_MISSING_BREAKPOINTS.dispatch();
     } else {
-      actions.NAVIGATE_TO_EDIT_MEDIA_QUERY.dispatch();
+      actions.NAVIGATE_TO_MEDIA_QUERY_BUILDER.dispatch();
     }
   }, [isBreakpointsEmpty()]);
 
@@ -47,7 +47,7 @@ export default function MediaQueriesIndexPage() {
 
       {currentBreakpointId !== "" && (
         <>
-          <MediaQueryEdit />
+          <MediaQueryBuilder />
         </>
       )}
     </VStackBox>

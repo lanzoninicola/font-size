@@ -50,7 +50,7 @@ export default function useMaxConfigSelector() {
   useEffect(() => {
     if (max === undefined) {
       throw new Error(
-        "useTypeScaleMaxConfigSelector hook is used outside of the TypeScaleCalculatorFormContext"
+        "useMaxConfigSelector hook is used outside of the TypeScaleCalculatorFormContext"
       );
     }
   }, []);

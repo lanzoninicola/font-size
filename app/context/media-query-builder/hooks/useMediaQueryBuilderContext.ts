@@ -22,14 +22,14 @@ export default function useMediaQueryBuilderContext() {
     (ctx) => ctx?.setCurrentBreakpointId
   );
 
-  const currentSelectorId = useContextSelector(
+  const currentTypeScaleStepId = useContextSelector(
     MediaQueryBuilderContextData,
-    (ctx) => ctx?.currentSelectorId
+    (ctx) => ctx?.currentTypeScaleStepId
   );
 
-  const setCurrentSelector = useContextSelector(
+  const setCurrentTypeScaleStepId = useContextSelector(
     MediaQueryBuilderContextData,
-    (ctx) => ctx?.setCurrentSelector
+    (ctx) => ctx?.setCurrentTypeScaleStepId
   );
 
   const minFontSize = useContextSelector(
@@ -67,8 +67,8 @@ export default function useMediaQueryBuilderContext() {
     setEntityState,
     currentBreakpointId,
     setCurrentBreakpointId,
-    currentSelectorId,
-    setCurrentSelector,
+    currentTypeScaleStepId,
+    setCurrentTypeScaleStepId,
     minFontSize,
     setMinFontSize,
     maxFontSize,

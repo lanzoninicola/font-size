@@ -2,7 +2,7 @@ import { Box, VStack } from "@chakra-ui/react";
 import { useState } from "react";
 import useBreakpointsRoutes from "~/domain/breakpoints/useBreakpointsRoutes";
 import useMediaQueriesRoutes from "~/domain/media-queries/useMediaQueriesRoutes";
-import useSelectorsRoutes from "~/domain/selectors/useSelectorsRoutes";
+import useSelectorsRoutes from "~/domain/type-scale-steps/useTypeScaleStepsRoutes";
 import useTypeScaleCalculatorRoutes from "~/domain/type-scale-calculator/useTypeScaleCalculatorRoutes";
 
 import {
@@ -10,8 +10,8 @@ import {
   MediaQueryIcon,
   SelectorsIcon,
   SettingsIcon,
-} from "../shared/icons";
-import SidebarContainer from "../shared/sidebar-container";
+} from "../../shared/icons";
+import SidebarContainer from "../../shared/sidebar-container";
 import SidebarItem from "./sidebar-item";
 
 interface SidebarItemConfig {
