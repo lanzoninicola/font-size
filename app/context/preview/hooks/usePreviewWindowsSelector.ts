@@ -52,6 +52,11 @@ export default function usePreviewWindowsSelector() {
   };
 
   function loadPreviewWindows(breakpointId: BreakpointId) {
+    if (breakpointId === "") {
+      actions.PREVIEW_WINDOWS__REMOVE_ALL_WINDOWS.dispatch();
+      return;
+    }
+
     const { minWidth, maxWidth } = getViewportSizeByBreakpointId(breakpointId);
 
     const smallestDevice = getSmallestDevice(minWidth);
