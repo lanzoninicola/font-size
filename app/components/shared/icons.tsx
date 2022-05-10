@@ -546,3 +546,17 @@ export function ArrowDownIcon({
     />
   );
 }
+
+export function ExitIcon({
+  size = 20,
+  color = "gray",
+  ariaLabel = "Move Down",
+}: IconProps) {
+  return (
+    <Image
+      src={`${BASE_URL}/exit-icon-${size}-${color}.svg`}
+      alt={ariaLabel}
+      altaria-label={ariaLabel}
+    />
+  );
+}
