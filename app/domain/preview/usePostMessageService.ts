@@ -1,16 +1,26 @@
 import { useEffect } from "react";
+import { FontConfigFormControl } from "~/context/type-scale-calculator-form/interfaces";
+
+import useGoogleFontsUtils from "../google-fonts/useGoogleFontsUtils";
+
+export interface Message {
+  stylesheetCode: string;
+  fontHeading: Omit<FontConfigFormControl, "breakpointId">;
+  fontBody: Omit<FontConfigFormControl, "breakpointId">;
+}
 
 export default function usePostMessageService() {
   //TODO: adjust target origin
   const TARGET_ORIGIN = "*";
 
-  // TODO: infer type for message
+  const { getGoogleFontURL } = useGoogleFontsUtils();
+
   function postMessage({
     iframeRef,
     message,
   }: {
     iframeRef: React.RefObject<HTMLIFrameElement>;
-    message: any;
+    message: Message;
   }) {
     if (iframeRef.current?.contentWindow) {
       iframeRef.current.contentWindow.postMessage(message, TARGET_ORIGIN);
@@ -25,17 +35,42 @@ export default function usePostMessageService() {
           //TODO: adjust target origin
           // if (event.origin !== "https://font-size-eight.vercel.app") return;
 
-          const iframeBody = document.getElementsByTagName("body");
+          const messageReceived = event.data as Message;
+          const { stylesheetCode, fontHeading, fontBody } = messageReceived;
 
-          if (iframeBody[0]) {
-            const style = document.createElement("style");
-            style.textContent = event.data;
-
-            iframeBody[0].appendChild(style);
-          }
+          addStyleTag(stylesheetCode);
+          addGoogleFontLinkTag({ fontHeading, fontBody });
         },
         false
       );
+    }
+  }
+
+  function addGoogleFontLinkTag({
+    fontHeading,
+    fontBody,
+  }: Omit<Message, "stylesheetCode">) {
+    const iframeBody = document.getElementsByTagName("body");
+    const url = getGoogleFontURL({ fontHeading, fontBody });
+
+    if (iframeBody[0]) {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.type = "text/css";
+      link.href = url;
+
+      iframeBody[0].appendChild(link);
+    }
+  }
+
+  function addStyleTag(content: string) {
+    const iframeBody = document.getElementsByTagName("body");
+
+    if (iframeBody[0]) {
+      const style = document.createElement("style");
+      style.textContent = content;
+
+      iframeBody[0].appendChild(style);
     }
   }
 

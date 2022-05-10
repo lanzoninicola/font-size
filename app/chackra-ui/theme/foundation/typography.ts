@@ -9,8 +9,8 @@ const typography = {
   },
   fonts: {
     ...chakraTheme.fonts,
-    heading: `Open Sans, ${chakraTheme.fonts.heading}`,
-    body: `Open Sans, ${chakraTheme.fonts.body}`,
+    heading: `Inter, ${chakraTheme.fonts.heading}`,
+    body: `Inter, ${chakraTheme.fonts.body}`,
   },
   fontSizes: {
     ...chakraTheme.fontSizes,

@@ -18,6 +18,7 @@ export default function GroupBreakpoints() {
         1. Select a breakpoint
       </Heading>
       <BreakpointsPicker
+        size="sm"
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           actions.TYPE_SCALE_CALCULATOR__CHANGE_BREAKPOINT.dispatch(
             e.target.value

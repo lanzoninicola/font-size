@@ -5,8 +5,10 @@ import VStackBox from "~/components/shared/vstack-wrapper";
 import useMediaQueriesSelector from "~/context/app/hooks/useMediaQueriesSelector";
 import useTypeScaleConfigSelector from "~/context/app/hooks/useTypeScaleConfigSelector";
 import useTypeScaleCalculatorFormContext from "~/context/type-scale-calculator-form/hooks/useTypeScaleCalculatorFormContext";
+import { TypeScaleConfig } from "~/context/type-scale-calculator-form/interfaces";
 
 import GroupBaselineStep from "./group-baseline-step";
+import GroupBodyFonts from "./group-body-fonts";
 import GroupHeadingsFonts from "./group-headings-fonts";
 import GroupMaximum from "./group-maximum";
 import GroupMinimum from "./group-minimum";
@@ -14,11 +16,11 @@ import GroupMinimum from "./group-minimum";
 export default function TypeScaleCalculatorForm() {
   const { actions } = useTypeScaleConfigSelector();
   const { actions: mediaQueriesAction } = useMediaQueriesSelector();
-  const { currentBreakpointId, baseStep, min, max } =
+  const { currentBreakpointId, baseStep, min, max, fontHeading, fontBody } =
     useTypeScaleCalculatorFormContext();
 
   function onSaveTypeScaleCalculation() {
-    const payload = {
+    const payload: TypeScaleConfig = {
       breakpointId: currentBreakpointId,
       baseStep: baseStep.step,
       min: {
@@ -28,6 +30,14 @@ export default function TypeScaleCalculatorForm() {
       max: {
         fontSizeREM: max.fontSizeREM,
         scaleRatio: String(max.scaleRatio),
+      },
+      fontHeading: {
+        fontFamily: fontHeading.fontFamily,
+        fontWeight: parseInt(fontHeading.fontWeight, 10),
+      },
+      fontBody: {
+        fontFamily: fontBody.fontFamily,
+        fontWeight: parseInt(fontBody.fontWeight, 10),
       },
     };
 
@@ -40,6 +50,7 @@ export default function TypeScaleCalculatorForm() {
 
   return (
     <VStackBox spacing={5}>
+      <Divider />
       <Heading
         as="h4"
         fontSize={"xs"}
@@ -49,11 +60,11 @@ export default function TypeScaleCalculatorForm() {
       >
         2. Type scale
       </Heading>
-      <GroupBaselineStep />
-      <Divider />
-
+      {/* <GroupBaselineStep /> */}
       <GroupMinimum />
       <GroupMaximum />
+
+      <Divider />
 
       <Heading
         as="h4"
@@ -65,8 +76,17 @@ export default function TypeScaleCalculatorForm() {
         3. Choose the font
       </Heading>
 
-      <VStackBox>
+      <VStackBox spacing={2}>
+        <Heading as="h3" fontSize={"xs"} color="secondary.300">
+          Headings font
+        </Heading>
         <GroupHeadingsFonts />
+      </VStackBox>
+      <VStackBox spacing={2}>
+        <Heading as="h3" fontSize={"xs"} color="secondary.300">
+          Body font
+        </Heading>
+        <GroupBodyFonts />
       </VStackBox>
       <Button w="100%" bg="secondary.500" onClick={onSaveTypeScaleCalculation}>
         Save

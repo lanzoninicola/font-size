@@ -87,19 +87,19 @@ export default function useCSSCodeBlock() {
       codeBlock += `  ${stepId} {`;
       codeBlock += `\n`;
       codeBlock += `   font-size: ${clampFormula}${
-        forceImportant ? " !important" : ""
+        forceImportant ? "!important" : ""
       };`;
       codeBlock += `\n`;
       codeBlock += `   line-height: ${lineHeight}% ${
-        forceImportant ? " !important" : ""
+        forceImportant ? "!important" : ""
       };`;
       codeBlock += `\n`;
       codeBlock += `   margin-bottom: ${marginBottom}% ${
-        forceImportant ? " !important" : ""
+        forceImportant ? "!important" : ""
       };`;
       codeBlock += `\n`;
       codeBlock += `   font-family: "${fontFamily}" ${
-        forceImportant ? " !important" : ""
+        forceImportant ? "!important" : ""
       };`;
       codeBlock += `\n`;
       codeBlock += `  }`;

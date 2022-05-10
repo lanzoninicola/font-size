@@ -51,7 +51,7 @@ export default function GroupMinimum() {
 
   return (
     <VStackBox spacing={2}>
-      <Heading as="h3" fontSize={"sm"} color="secondary.300">
+      <Heading as="h3" fontSize={"xs"} color="secondary.300">
         {`At ${viewportMinSize()}px viewport width`}
       </Heading>
       <VStackBox gap=".5rem">

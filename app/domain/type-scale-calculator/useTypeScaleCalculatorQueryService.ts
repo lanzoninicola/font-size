@@ -23,7 +23,7 @@ export default function useTypeScaleCalculatorQueryService() {
   }
 
   /**
-   * @description Returns the configuration at minimum stored in the local storage for a given breakpoint.
+   * @description Returns the configuration of minimum values (font size and scale ratio) stored in the local storage for a given breakpoint.
    */
   function getMinimumConfig(breakpointId: BreakpointId) {
     const typeScaleConfig = getBreakpointConfig(breakpointId);
@@ -33,6 +33,9 @@ export default function useTypeScaleCalculatorQueryService() {
     return typeScaleConfig.min;
   }
 
+  /**
+   * @description Returns the configuration of maximum values (font size and scale ratio) stored in the local storage for a given breakpoint.
+   */
   function getMaximumConfig(breakpointId: BreakpointId) {
     const typeScaleConfig = getBreakpointConfig(breakpointId);
     if (!typeScaleConfig) {
@@ -41,10 +44,34 @@ export default function useTypeScaleCalculatorQueryService() {
     return typeScaleConfig.max;
   }
 
+  /**
+   * @description Returns the configuration of font heading stored in the local storage for a given breakpoint.
+   */
+  function getFontHeadingConfig(breakpointId: BreakpointId) {
+    const typeScaleConfig = getBreakpointConfig(breakpointId);
+    if (!typeScaleConfig) {
+      return null;
+    }
+    return typeScaleConfig.fontHeading;
+  }
+
+  /**
+   * @description Returns the configuration of font body stored in the local storage for a given breakpoint.
+   */
+  function getFontBodyConfig(breakpointId: BreakpointId) {
+    const typeScaleConfig = getBreakpointConfig(breakpointId);
+    if (!typeScaleConfig) {
+      return null;
+    }
+    return typeScaleConfig.fontBody;
+  }
+
   return {
     getBreakpointConfig,
     getMinimumConfig,
     getMaximumConfig,
+    getFontHeadingConfig,
+    getFontBodyConfig,
     isBreakpointConfigExists,
   };
 }

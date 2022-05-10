@@ -26,7 +26,7 @@ export interface TypeScaleRatio {
   ratio: number;
 }
 
-// START: Interfaces for the type scale calculator form context.
+// START: Types for the type scale calculator form context.
 export type DefaultBreakpointId = "default";
 
 export type BreakpointIdFormControl = BreakpointId | DefaultBreakpointId;
@@ -45,7 +45,7 @@ export interface FontConfigFormControl {
   fontFamily: string;
   fontWeight: string;
 }
-// END: Interfaces for the type scale calculator form context.
+// END: Types for the type scale calculator form context.
 
 export interface BreakpointTypeScale {
   breakpointId: BreakpointId;

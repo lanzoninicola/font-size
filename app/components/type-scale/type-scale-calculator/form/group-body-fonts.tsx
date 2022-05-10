@@ -4,27 +4,27 @@ import { useLoaderData } from "remix";
 import GoogleFontFamiliesPicker from "~/components/shared/google-font-families-picker";
 import GoogleFontVariantsPicker from "~/components/shared/google-font-variants.picker";
 import useCurrentBreakpointIdSelector from "~/context/type-scale-calculator-form/hooks/useCurrentBreakpointIdSelector";
-import useFontHeadingSelector from "~/context/type-scale-calculator-form/hooks/useFontHeadingSelector";
+import useFontBodySelector from "~/context/type-scale-calculator-form/hooks/useFontBodySelector";
 import { DEFAULT_FONT_FAMILY } from "~/domain/google-fonts/constants";
 import { FontFamily } from "~/domain/google-fonts/interfaces";
 
-export default function GroupHeadingsFonts() {
+export default function GroupBodyFonts() {
   const googleWebFonts: FontFamily[] = useLoaderData();
 
   const [familyWeights, setFamilyWeights] = useState<string[]>(
     DEFAULT_FONT_FAMILY.variants
   );
   const { currentBreakpointId } = useCurrentBreakpointIdSelector();
-  const { fontHeading, actions } = useFontHeadingSelector();
+  const { fontBody, actions } = useFontBodySelector();
 
   function initValues() {
-    actions.TYPE_SCALE_CALCULATOR_FORM__INIT_HEADING_FONT.dispatch({
-      ...fontHeading,
+    actions.TYPE_SCALE_CALCULATOR_FORM__INIT_BODY_FONT.dispatch({
+      ...fontBody,
       breakpointId: currentBreakpointId,
     });
   }
 
-  function onChangedFontFamily(fontInfo: HTMLSelectElement) {
+  function onChangeFontFamily(fontInfo: HTMLSelectElement) {
     // load the weights for the selected font family into the state
     const optionChecked = fontInfo.querySelector("option:checked");
     if (optionChecked) {
@@ -32,8 +32,8 @@ export default function GroupHeadingsFonts() {
     }
 
     // update the state
-    actions.TYPE_SCALE_CALCULATOR_FORM__HEADING_FONT_CHANGED.dispatch({
-      ...fontHeading,
+    actions.TYPE_SCALE_CALCULATOR_FORM__BODY_FONT_CHANGED.dispatch({
+      ...fontBody,
       breakpointId: currentBreakpointId,
       fontFamily: fontInfo.value,
     });
@@ -47,10 +47,10 @@ export default function GroupHeadingsFonts() {
     setFamilyWeights(weights);
   }
 
-  function onChangedFontWeight(fontWeight: string) {
+  function onChangeFontWeight(fontWeight: string) {
     // update the state
-    actions.TYPE_SCALE_CALCULATOR_FORM__HEADING_FONT_CHANGED.dispatch({
-      ...fontHeading,
+    actions.TYPE_SCALE_CALCULATOR_FORM__BODY_FONT_CHANGED.dispatch({
+      ...fontBody,
       breakpointId: currentBreakpointId,
       fontWeight,
     });
@@ -61,16 +61,16 @@ export default function GroupHeadingsFonts() {
   }, [currentBreakpointId]);
 
   return (
-    <HStack w="100%">
+    <HStack>
       <GoogleFontFamiliesPicker
         fonts={googleWebFonts}
-        onChange={onChangedFontFamily}
-        value={fontHeading.fontFamily}
+        onChange={onChangeFontFamily}
+        value={fontBody.fontFamily}
       />
       <GoogleFontVariantsPicker
         weights={familyWeights}
-        value={fontHeading.fontWeight}
-        onChange={onChangedFontWeight}
+        value={fontBody.fontWeight}
+        onChange={onChangeFontWeight}
       />
     </HStack>
   );

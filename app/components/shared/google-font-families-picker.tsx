@@ -1,6 +1,5 @@
 import { forwardRef, HStack, Text } from "@chakra-ui/react";
 import React from "react";
-import { useLoaderData } from "remix";
 import { FontFamily } from "~/domain/google-fonts/interfaces";
 import InputSelect from "./input-select";
 
@@ -16,23 +15,25 @@ const GoogleFontFamiliesPicker = ({
 }: GoogleFontsProps) => {
   return (
     <HStack>
-      <Text color="primary.500" fontSize="smaller">
+      {/* <Text color="primary.500" fontSize="smaller">
         Family
-      </Text>
+      </Text> */}
       <InputSelect
-        w="100%"
+        maxW="250px"
         fontSize={"smaller"}
         textAlign="left"
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          onChange(e.target.value);
+          onChange(e.target);
         }}
-        maxW="150px"
+        value={props.value}
         {...props}
       >
         {fonts.map((font, index) => (
           <option
             key={index}
-            value={`${font.family}|${font.variants.join(",")}`}
+            // value={`${font.family}|${font.variants.join(",")}`}
+            value={font.family}
+            data-weights={font.variants.join(",")}
           >
             {font.family}
           </option>
