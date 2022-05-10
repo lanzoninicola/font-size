@@ -19,52 +19,12 @@ export default function PreviewContent() {
   const devicesData: LoaderData = useLoaderData();
   const { setDevices } = usePreviewDevicesSelector();
 
-  const { currentBreakpointId } = useMediaQueriesBuilderService();
-  const { getViewportSizeByBreakpointId } = useBreakpointsQueryService();
-
   const { previewWindows } = usePreviewWindowsSelector();
-  const { getSmallestDevice, getLargestDevice } = usePreviewDevicesService();
-  const { addBulkWindow, removeAllWindows, getNewPreviewDevice } =
-    usePreviewWindowsService();
   const { zoom } = usePreviewZoomSelector();
-
-  function onChangeBreakpointLoadWindows() {
-    if (currentBreakpointId === "") {
-      return;
-    }
-
-    const { minWidth, maxWidth } =
-      getViewportSizeByBreakpointId(currentBreakpointId);
-
-    const smallestDevice = getSmallestDevice(minWidth);
-    const largestDevice = getLargestDevice(maxWidth);
-
-    if (smallestDevice && largestDevice) {
-      removeAllWindows();
-
-      const previewSmallestDevice = getNewPreviewDevice(
-        smallestDevice.viewportSize.width,
-        smallestDevice.viewportSize.height,
-        smallestDevice.name
-      );
-
-      const previewLargestDevice = getNewPreviewDevice(
-        largestDevice.viewportSize.width,
-        largestDevice.viewportSize.height,
-        largestDevice.name
-      );
-
-      addBulkWindow([previewSmallestDevice, previewLargestDevice]);
-    }
-  }
 
   useEffect(() => {
     setDevices(devicesData);
   }, []);
-
-  useEffect(() => {
-    onChangeBreakpointLoadWindows();
-  }, [currentBreakpointId]);
 
   return (
     <FlippedContainer>

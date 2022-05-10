@@ -35,23 +35,23 @@ export default function App() {
       <Header />
 
       <AppSidebar />
-      <BreakpointsFormProvider>
-        <MediaQueryBuilderProvider>
-          <SidePanel
-            minW="50px"
-            maxW="400px"
-            isCollapsed={isPanelCollapsed}
-            gridArea="panel"
-          >
-            <Outlet context={context} />
-          </SidePanel>
+      <PreviewProvider>
+        <BreakpointsFormProvider>
+          <MediaQueryBuilderProvider>
+            <SidePanel
+              minW="50px"
+              maxW="400px"
+              isCollapsed={isPanelCollapsed}
+              gridArea="panel"
+            >
+              <Outlet context={context} />
+            </SidePanel>
 
-          <PreviewProvider>
             <PreviewContent />
             <PreviewSideContent />
-          </PreviewProvider>
-        </MediaQueryBuilderProvider>
-      </BreakpointsFormProvider>
+          </MediaQueryBuilderProvider>
+        </BreakpointsFormProvider>
+      </PreviewProvider>
       <Footer />
     </MainGridWrapper>
   );

@@ -29,7 +29,8 @@ export const mediaQueryInitialStatePartial: Omit<
   maxFontSize: 1,
   lineHeight: 120,
   marginBottom: 0,
-  fontFamily: "Times New Roman",
+  fontFamily: "Open Sans",
+  fontWeight: 400,
 };
 
 export function AppProvider({ children }: { children: React.ReactNode }) {

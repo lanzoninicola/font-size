@@ -1,11 +1,15 @@
 import { useContextSelector } from "use-context-selector";
 import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
-import { MinMaxTypeScaleConfig } from "~/context/type-scale-calculator-form/interfaces";
+import {
+  FontConfigFormControl,
+  FontTypeScaleConfig,
+  MinMaxTypeScaleConfig,
+} from "~/context/type-scale-calculator-form/interfaces";
 import useMediaQueriesQueryService from "~/domain/media-queries/useMediaQueriesQueryService";
 import useTypeScaleCalculatorUtils from "~/domain/type-scale-calculator/useTypeScaleCalculatorUtils";
 
 import { AppContextData } from "../app-context";
-import { MediaQuery, TypeScaleConfig } from "../interfaces";
+import { TypeScaleConfig } from "../interfaces";
 import useTypeScaleStepsSelector from "./useTypeScaleStepsSelector";
 
 export default function useMediaQueriesSelector() {
@@ -26,12 +30,14 @@ export default function useMediaQueriesSelector() {
   } = useMediaQueriesQueryService(mediaQueries);
 
   const actions = {
-    SET_BREAKPOINT_MEDIA_QUERY_BASED_ON_TYPE_SCALE_CONFIGURATION: {
+    MEDIA_QUERY__UPDATE_MEDIAQUERIES_BASED_ON_TYPE_SCALE_CONFIG: {
       dispatch: (payload: TypeScaleConfig) =>
         updateBreakpointMediaQueries(
           payload.breakpointId,
           payload.min,
-          payload.max
+          payload.max,
+          payload.fontHeading,
+          payload.fontBody
         ),
     },
   };
@@ -39,7 +45,9 @@ export default function useMediaQueriesSelector() {
   function updateBreakpointMediaQueries(
     breakpointId: BreakpointId,
     min: MinMaxTypeScaleConfig,
-    max: MinMaxTypeScaleConfig
+    max: MinMaxTypeScaleConfig,
+    fontHeading: FontTypeScaleConfig,
+    fontBody: FontTypeScaleConfig
   ) {
     if (!typeScaleSteps) {
       return;
@@ -61,9 +69,9 @@ export default function useMediaQueriesSelector() {
       );
 
       // get the min and max font size calculated for the step
-      const stepTypeScaleCalculated = breakpointTypeScale.find((typeScale) => {
-        typeScale.stepKey === step.key;
-      });
+      const stepTypeScaleCalculated = breakpointTypeScale.find(
+        (typeScale) => typeScale.stepKey == step.key
+      );
 
       return {
         breakpointId,
@@ -76,7 +84,12 @@ export default function useMediaQueriesSelector() {
           mediaQueryStepConfig.maxFontSize,
         lineHeight: mediaQueryStepConfig.lineHeight,
         marginBottom: mediaQueryStepConfig.marginBottom,
-        fontFamily: mediaQueryStepConfig.fontFamily,
+        fontFamily:
+          (step.isHeading ? fontHeading.fontFamily : fontBody.fontFamily) ||
+          mediaQueryStepConfig.fontFamily,
+        fontWeight:
+          (step.isHeading ? fontHeading.fontWeight : fontBody.fontWeight) ||
+          mediaQueryStepConfig.fontWeight,
       };
     });
 

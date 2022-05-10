@@ -2,12 +2,12 @@ import { useEffect } from "react";
 import useTypeScaleConfigSelector from "~/context/app/hooks/useTypeScaleConfigSelector";
 import { BaseStepFormControl } from "../interfaces";
 import { initialState } from "../type-scale-calculator-form-context";
-import useTypeScaleCalculatorFormSelector from "./useTypeScaleCalculatorFormSelector";
+import useTypeScaleCalculatorFormContext from "./useTypeScaleCalculatorFormContext";
 
 export default function useBaseStepSelector() {
   const { typeScaleConfig, actions: typeScaleActions } =
     useTypeScaleConfigSelector();
-  const { baseStep, setBaseStep } = useTypeScaleCalculatorFormSelector();
+  const { baseStep, setBaseStep } = useTypeScaleCalculatorFormContext();
 
   const actions = {
     INIT_BASE_STEP: {

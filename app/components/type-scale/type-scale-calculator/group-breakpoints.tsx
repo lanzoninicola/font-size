@@ -1,9 +1,9 @@
 import { Heading } from "@chakra-ui/react";
-import FormControlSelectBreakpoint from "~/components/shared/form-control-select-breakpoint";
+import BreakpointsPicker from "~/components/shared/breakpoints-picker";
 import VStackBox from "~/components/shared/vstack-wrapper";
 import useCurrentBreakpointIdSelector from "~/context/type-scale-calculator-form/hooks/useCurrentBreakpointIdSelector";
 
-export default function BreakpointsPicker() {
+export default function GroupBreakpoints() {
   const { currentBreakpointId, actions } = useCurrentBreakpointIdSelector();
 
   return (
@@ -17,9 +17,11 @@ export default function BreakpointsPicker() {
       >
         1. Select a breakpoint
       </Heading>
-      <FormControlSelectBreakpoint
+      <BreakpointsPicker
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          actions.CHANGE_CURRENT_BREAKPOINT.dispatch(e.target.value)
+          actions.TYPE_SCALE_CALCULATOR__CHANGE_BREAKPOINT.dispatch(
+            e.target.value
+          )
         }
         value={currentBreakpointId}
       />

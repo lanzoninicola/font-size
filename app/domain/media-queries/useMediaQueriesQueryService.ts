@@ -1,7 +1,6 @@
 import { mediaQueryInitialStatePartial } from "~/context/app/app-context";
 import { MediaQuery } from "~/context/app/interfaces";
 import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
-import { TypeScaleStepConfig } from "~/context/type-scale-steps-builder/interfaces";
 
 /**
  * @description This hook is responsible to run query against the MediaQueries state
@@ -23,42 +22,9 @@ export default function useMediaQueriesQueryService(
     return mediaQueries.some((mq) => mq.breakpointId === bp);
   }
 
-  /**
-   *
-   * @deprecated - use getMediaQueryByBreakpointIdAndStepId instead
-   *
-   * @param {BreakpointId} breakpointId - The breakpoint id
-   * @param {SelectorId} typeScaleStep - The typeScaleStep (tag, class, id) to get the media query info
-   * @param {MediaQueries} mq - Optional if the component cannot access to the mediaqueries context
-   *
-   * @returns The min and max font size for the given typeScaleStep and breakpoint in REM
-   */
-  function getTokenValues(
-    breakpointId: BreakpointId,
-    typeScaleStep: TypeScaleStepConfig
-  ) {
-    let minFontSize = 0;
-    let maxFontSize = 0;
-    let lineHeight = DEFAULT_LINE_HEIGHT;
-
-    if (mediaQueries) {
-      const breakpointMediaQuery: MediaQuery | undefined = mediaQueries.find(
-        (mq) =>
-          mq.breakpointId === breakpointId && mq.stepId === typeScaleStep.key
-      );
-
-      if (breakpointMediaQuery) {
-        minFontSize = breakpointMediaQuery.minFontSize ?? 0;
-        maxFontSize = breakpointMediaQuery.maxFontSize ?? 0;
-        lineHeight = breakpointMediaQuery.lineHeight ?? lineHeight;
-      }
-    }
-
-    return {
-      minFontSize,
-      maxFontSize,
-      lineHeight,
-    };
+  function getMediaQueriesByBreakpointId(bp: BreakpointId) {
+    if (!mediaQueries) return null;
+    return mediaQueries.filter((mq) => mq.breakpointId === bp);
   }
 
   /**
@@ -85,6 +51,7 @@ export default function useMediaQueriesQueryService(
       marginBottom:
         mq?.marginBottom ?? mediaQueryInitialStatePartial.marginBottom,
       fontFamily: mq?.fontFamily ?? mediaQueryInitialStatePartial.fontFamily,
+      fontWeight: mq?.fontWeight ?? mediaQueryInitialStatePartial.fontWeight,
     };
   }
 
@@ -106,7 +73,7 @@ export default function useMediaQueriesQueryService(
 
   return {
     isMediaQueryOfBreakpointExists,
-    getTokenValues,
+    getMediaQueriesByBreakpointId,
     getMediaQueryByBreakpointIdAndStepId,
     removeMediaQueriesByBreakpointId,
   };

@@ -1,14 +1,10 @@
 import { Center, Grid, Heading, HStack, Text } from "@chakra-ui/react";
 import { useState } from "react";
-import { Outlet } from "remix";
 import ActionButton from "~/components/shared/action-button";
 import { NewEntityIcon } from "~/components/shared/icons";
 import VStackBox from "~/components/shared/vstack-wrapper";
-import { Selector } from "~/context/app/interfaces";
 
 export default function EditTypeScalePage() {
-  const [selectors, setSelectors] = useState<Selector[]>([]);
-
   return (
     <Center minH="calc(100vh - 150px)" w="100%">
       <VStackBox gap="1.5rem" align="center">

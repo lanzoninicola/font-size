@@ -1,11 +1,10 @@
 import useTypeScaleConfigSelector from "~/context/app/hooks/useTypeScaleConfigSelector";
 
 import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
-import useTypeScaleCalculatorFormSelector from "~/context/type-scale-calculator-form/hooks/useTypeScaleCalculatorFormSelector";
+import useTypeScaleCalculatorFormContext from "~/context/type-scale-calculator-form/hooks/useTypeScaleCalculatorFormContext";
 
 export default function useTypeScaleCalculatorQueryService() {
   const { typeScaleConfig } = useTypeScaleConfigSelector();
-  const { min, setMinimum } = useTypeScaleCalculatorFormSelector();
 
   function getBreakpointConfig(breakpointId: BreakpointId) {
     if (!typeScaleConfig) {

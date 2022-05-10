@@ -1,10 +1,13 @@
-import { Button, Divider, Heading } from "@chakra-ui/react";
+import { Button, Divider, Heading, HStack } from "@chakra-ui/react";
+import GoogleFontFamiliesPicker from "~/components/shared/google-font-families-picker";
+import GoogleFontVariantsPicker from "~/components/shared/google-font-variants.picker";
 import VStackBox from "~/components/shared/vstack-wrapper";
 import useMediaQueriesSelector from "~/context/app/hooks/useMediaQueriesSelector";
 import useTypeScaleConfigSelector from "~/context/app/hooks/useTypeScaleConfigSelector";
-import useTypeScaleCalculatorFormSelector from "~/context/type-scale-calculator-form/hooks/useTypeScaleCalculatorFormSelector";
+import useTypeScaleCalculatorFormContext from "~/context/type-scale-calculator-form/hooks/useTypeScaleCalculatorFormContext";
 
 import GroupBaselineStep from "./group-baseline-step";
+import GroupHeadingsFonts from "./group-headings-fonts";
 import GroupMaximum from "./group-maximum";
 import GroupMinimum from "./group-minimum";
 
@@ -12,7 +15,7 @@ export default function TypeScaleCalculatorForm() {
   const { actions } = useTypeScaleConfigSelector();
   const { actions: mediaQueriesAction } = useMediaQueriesSelector();
   const { currentBreakpointId, baseStep, min, max } =
-    useTypeScaleCalculatorFormSelector();
+    useTypeScaleCalculatorFormContext();
 
   function onSaveTypeScaleCalculation() {
     const payload = {
@@ -28,9 +31,9 @@ export default function TypeScaleCalculatorForm() {
       },
     };
 
-    actions.UPDATE_GLOBAL_STATE.dispatch(payload);
+    actions.TYPESCALE_CALCULATOR__SAVE_CONFIG.dispatch(payload);
 
-    mediaQueriesAction.SET_BREAKPOINT_MEDIA_QUERY_BASED_ON_TYPE_SCALE_CONFIGURATION.dispatch(
+    mediaQueriesAction.MEDIA_QUERY__UPDATE_MEDIAQUERIES_BASED_ON_TYPE_SCALE_CONFIG.dispatch(
       payload
     );
   }
@@ -51,6 +54,20 @@ export default function TypeScaleCalculatorForm() {
 
       <GroupMinimum />
       <GroupMaximum />
+
+      <Heading
+        as="h4"
+        fontSize={"xs"}
+        color="secondary.300"
+        textTransform={"uppercase"}
+        letterSpacing={1}
+      >
+        3. Choose the font
+      </Heading>
+
+      <VStackBox>
+        <GroupHeadingsFonts />
+      </VStackBox>
       <Button w="100%" bg="secondary.500" onClick={onSaveTypeScaleCalculation}>
         Save
       </Button>

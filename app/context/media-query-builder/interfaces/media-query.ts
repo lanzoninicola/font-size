@@ -28,4 +28,6 @@ export interface MediaQuery {
   marginBottom: number;
   // fontFamily for the step. This value might be changed in Media Query application section
   fontFamily: string;
+  // fontWeight for the step. This value might be changed in Media Query application section
+  fontWeight: number;
 }

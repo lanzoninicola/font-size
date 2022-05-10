@@ -1,6 +1,7 @@
 import { HStack, Text, Tooltip } from "@chakra-ui/react";
 import React, { SetStateAction, useCallback, useEffect, useState } from "react";
 import usePreviewDevicesSelector from "~/context/preview/hooks/usePreviewDevicesSelector";
+import usePreviewWindowsSelector from "~/context/preview/hooks/usePreviewWindowsSelector";
 import { DeviceTypes, YesVizDeviceInfo } from "~/context/preview/interfaces";
 import usePreviewDevicesService from "~/domain/preview/usePreviewDevicesService";
 import usePreviewWindowsService from "~/domain/preview/usePreviewWindowsService";
@@ -28,7 +29,8 @@ export default function PreviewDevicesPanel({
   onShowDevicesPanel: () => void;
 }) {
   const { devices: providerDevices } = usePreviewDevicesSelector();
-  const { addWindow, getNewPreviewDevice } = usePreviewWindowsService();
+  const { actions } = usePreviewWindowsSelector();
+  const { getNewPreviewDevice } = usePreviewWindowsService();
   const { getDevicesByName, getDevicesByType } = usePreviewDevicesService();
   const appScrollbarStyle = useCustomScrollbar();
 
@@ -64,7 +66,7 @@ export default function PreviewDevicesPanel({
       name
     );
 
-    addWindow(previewDevice);
+    actions.PREVIEW_WINDOWS__ADD_WINDOW.dispatch(previewDevice);
   }
 
   function onSetDevices(devices: YesVizDeviceInfo[]) {

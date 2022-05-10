@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import useBreakpointsSelector from "~/context/app/hooks/useBreakpointsSelector";
 import useMediaQueriesSelector from "~/context/app/hooks/useMediaQueriesSelector";
 import usePixelsPerRemSelector from "~/context/app/hooks/usePixelsPerRemSelector";
-import { SelectorId } from "~/context/app/interfaces";
+import { MediaQuery } from "~/context/app/interfaces";
 import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
 
 import useBreakpointsQueryService from "../breakpoints/useBreakpointsQueryService";
@@ -11,17 +11,23 @@ import calculateClampSlope from "./calculateClampSlope";
 import calculateClampYAxisIntersection from "./calculateClampYAxisIntersection";
 import generateClampFormula from "./generateClampFormula";
 
-export default function useCSSCodeBlock(forceImportant = false) {
+export default function useCSSCodeBlock() {
   const { pixelsPerRem } = usePixelsPerRemSelector();
   const { mediaQueries } = useMediaQueriesSelector();
   const { breakpoints } = useBreakpointsSelector();
 
   const { getViewportSizeByBreakpointId } = useBreakpointsQueryService();
-  const { getTokenValues } = useMediaQueriesQueryService();
 
-  const [codeBlock, setCodeBlock] = useState<string>("");
-
-  function buildCodeBlock() {
+  /**
+   *
+   * @param breakpointId - the breakpoint id
+   * @param forceImportant - if true add !important to the CSS
+   * @returns  - the CSS code
+   */
+  function getCSSStylesheet(
+    forceImportant = false,
+    breakpointId?: BreakpointId
+  ) {
     const htmlPercentage = (100 / 16) * pixelsPerRem;
 
     let codeBlock = `html {font-size: ${htmlPercentage}%;} /*${pixelsPerRem}px*/`;
@@ -35,71 +41,78 @@ export default function useCSSCodeBlock(forceImportant = false) {
       return codeBlock;
     }
 
-    for (const breakpointId in mediaQueries) {
-      const breakpointMediaQuery = mediaQueries[breakpointId as BreakpointId];
+    let nextMediaQueries: MediaQuery[] = breakpointId
+      ? mediaQueries.filter(
+          (mediaQuery) => mediaQuery.breakpointId === breakpointId
+        )
+      : mediaQueries;
 
-      if (!breakpointMediaQuery) {
-        continue;
-      }
+    nextMediaQueries.forEach((mediaQuery: MediaQuery) => {
+      const {
+        breakpointId,
+        stepId,
+        minFontSize,
+        maxFontSize,
+        lineHeight,
+        marginBottom,
+        fontFamily,
+      } = mediaQuery;
 
-      const { minWidth, maxWidth, minWidthREM, maxWidthREM } =
+      const { minWidth, minWidthREM, maxWidthREM } =
         getViewportSizeByBreakpointId(breakpointId, breakpoints);
 
-      codeBlock += `@media only screen and (min-width: ${minWidth}px) and (max-width: ${maxWidth}px) {`;
+      codeBlock += `@media only screen and (min-width: ${minWidth}px) {`;
       codeBlock += `\n`;
 
-      for (const selector in breakpointMediaQuery) {
-        const { minFontSize, maxFontSize, lineHeight } = getTokenValues(
-          breakpointId,
-          selector as SelectorId
-        );
+      const slope = calculateClampSlope(
+        minFontSize,
+        maxFontSize,
+        minWidthREM,
+        maxWidthREM
+      );
 
-        const slope = calculateClampSlope(
-          minFontSize,
-          maxFontSize,
-          minWidthREM,
-          maxWidthREM
-        );
+      const yAxisIntersection = calculateClampYAxisIntersection(
+        minFontSize,
+        slope,
+        minWidthREM
+      );
 
-        const yAxisIntersection = calculateClampYAxisIntersection(
-          minFontSize,
-          slope,
-          minWidthREM
-        );
+      const clampFormula = generateClampFormula(
+        minFontSize,
+        maxFontSize,
+        slope,
+        yAxisIntersection
+      );
 
-        const clampFormula = generateClampFormula(
-          minFontSize,
-          maxFontSize,
-          slope,
-          yAxisIntersection
-        );
-
-        codeBlock += `  ${selector} {`;
-        codeBlock += `\n`;
-        codeBlock += `   font-size: ${clampFormula}${
-          forceImportant ? " !important" : ""
-        };`;
-        codeBlock += `\n`;
-        codeBlock += `   line-height: ${lineHeight}% ${
-          forceImportant ? " !important" : ""
-        };`;
-        codeBlock += `\n`;
-        codeBlock += `  }`;
-        codeBlock += `\n`;
-      }
+      codeBlock += `  ${stepId} {`;
+      codeBlock += `\n`;
+      codeBlock += `   font-size: ${clampFormula}${
+        forceImportant ? " !important" : ""
+      };`;
+      codeBlock += `\n`;
+      codeBlock += `   line-height: ${lineHeight}% ${
+        forceImportant ? " !important" : ""
+      };`;
+      codeBlock += `\n`;
+      codeBlock += `   margin-bottom: ${marginBottom}% ${
+        forceImportant ? " !important" : ""
+      };`;
+      codeBlock += `\n`;
+      codeBlock += `   font-family: "${fontFamily}" ${
+        forceImportant ? " !important" : ""
+      };`;
+      codeBlock += `\n`;
+      codeBlock += `  }`;
+      codeBlock += `\n`;
 
       codeBlock += `}`;
       codeBlock += `\n`;
-    }
+    });
 
     return codeBlock;
   }
 
-  useEffect(() => {
-    setCodeBlock(buildCodeBlock());
-  }, [mediaQueries, breakpoints]);
-
   return {
-    codeBlock,
+    getCSSStylesheet,
   };
 }

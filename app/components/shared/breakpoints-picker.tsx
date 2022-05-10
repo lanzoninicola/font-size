@@ -17,7 +17,7 @@ export interface Props {
   [key: string]: any;
 }
 
-export default function FormControlSelectBreakpoint({
+export default function BreakpointsPicker({
   value,
   onChange,
   ...props
@@ -83,29 +83,5 @@ export default function FormControlSelectBreakpoint({
         );
       })}
     </FormControlInputSelect>
-    /**
-    <VStackBox w="100%" spacing={1}>
-      <Text color="primary.500" fontSize={"sm"}>
-        Breakpoints
-      </Text>
-      <InputSelect
-        className="input-select"
-        maxW="100%"
-        fontSize={"sm"}
-        onChange={onChange}
-        value={value || "no-selected"}
-        textAlign="left"
-        {...props}
-      >
-        {selectOptions.map((selectOption, index) => {
-          return (
-            <option key={index + 1} value={selectOption.value}>
-              {selectOption.label}
-            </option>
-          );
-        })}
-      </InputSelect>
-    </VStackBox>
-     */
   );
 }

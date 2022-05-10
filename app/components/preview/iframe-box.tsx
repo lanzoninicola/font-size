@@ -14,7 +14,7 @@ export default function IframeBox({
   height: number;
 }) {
   const { mediaQueries } = useMediaQueriesSelector();
-  const { codeBlock } = useCSSCodeBlock(true);
+  const { getCSSStylesheet } = useCSSCodeBlock();
   const { previewUrl } = usePreviewUrl();
   const { postMessage } = usePostMessageService();
   const { iframeDefaultURL } = usePreviewSettings();
@@ -26,6 +26,7 @@ export default function IframeBox({
   const DEFAULT_URL = iframeDefaultURL;
 
   function sendMessage() {
+    const codeBlock = getCSSStylesheet(true);
     postMessage({ iframeRef, message: codeBlock });
   }
 

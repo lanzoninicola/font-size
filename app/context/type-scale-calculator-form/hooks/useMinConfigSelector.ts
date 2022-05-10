@@ -4,10 +4,10 @@ import parseDecimalNumber from "~/domain/utilities/parseDecimalNumber";
 
 import { MinMaxConfigFormControl } from "../interfaces";
 import { initialState } from "../type-scale-calculator-form-context";
-import useTypeScaleCalculatorFormSelector from "./useTypeScaleCalculatorFormSelector";
+import useTypeScaleCalculatorFormContext from "./useTypeScaleCalculatorFormContext";
 
 export default function useMinConfigSelector() {
-  const { min, setMinimum } = useTypeScaleCalculatorFormSelector();
+  const { min, setMinimum } = useTypeScaleCalculatorFormContext();
 
   const actions = {
     INIT_MINIMUM_CONFIG: {

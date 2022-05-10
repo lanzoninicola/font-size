@@ -47,4 +47,5 @@ export type TypeScaleStepConfig = {
   value: HTMLTags | CSSClassAttribute;
   isBaseline: boolean;
   position: number;
+  isHeading: boolean;
 };

@@ -1,4 +1,6 @@
 import { useContextSelector } from "use-context-selector";
+import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
+import usePreviewWindowsSelector from "~/context/preview/hooks/usePreviewWindowsSelector";
 import { MediaQueryBuilderContextData } from "../media-query-builder-context";
 
 export default function useMediaQueryBuilderContext() {
@@ -62,6 +64,20 @@ export default function useMediaQueryBuilderContext() {
     (ctx) => ctx?.setLineHeight
   );
 
+  const { actions: previewWindowsActions } = usePreviewWindowsSelector();
+
+  const actions = {
+    MEDIA_QUERY_BUILDER__CHANGE_BREAKPOINT: {
+      dispatch: (payload: BreakpointId) => changeBreakpoint(payload),
+    },
+  };
+
+  function changeBreakpoint(currentBreakpointId: BreakpointId) {
+    previewWindowsActions.PREVIEW_WINDOWS__SELECTED_BREAKPOINTS.dispatch(
+      currentBreakpointId
+    );
+  }
+
   return {
     entityState,
     setEntityState,
@@ -75,5 +91,6 @@ export default function useMediaQueryBuilderContext() {
     setMaxFontSize,
     lineHeight,
     setLineHeight,
+    actions,
   };
 }

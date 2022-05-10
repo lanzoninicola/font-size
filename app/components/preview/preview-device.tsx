@@ -11,8 +11,7 @@ import ActionButton from "../shared/action-button";
 // TODO: ADD SENDER_ID TO IFRAME
 
 export default function PreviewDevice({ idx }: { idx: number }) {
-  const { removeWindow } = usePreviewWindowsService();
-  const { previewWindows } = usePreviewWindowsSelector();
+  const { previewWindows, actions } = usePreviewWindowsSelector();
 
   const [showRemoveIcon, setShowRemoveIcon] = useState(false);
 
@@ -31,7 +30,7 @@ export default function PreviewDevice({ idx }: { idx: number }) {
   }
 
   function onRemovePreviewWindow(idx: number) {
-    removeWindow(idx);
+    actions.PREVIEW_WINDOWS__REMOVE_WINDOW.dispatch(idx);
   }
 
   return (

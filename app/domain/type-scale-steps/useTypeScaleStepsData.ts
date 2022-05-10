@@ -32,6 +32,7 @@ export default function useTypeScaleStepsData() {
         value: "Heading 1",
         isBaseline: false,
         position: 6,
+        isHeading: true,
       },
       {
         key: HTMLTags.h2,
@@ -39,6 +40,7 @@ export default function useTypeScaleStepsData() {
         value: "Heading 2",
         isBaseline: false,
         position: 5,
+        isHeading: true,
       },
       {
         key: HTMLTags.h3,
@@ -46,6 +48,7 @@ export default function useTypeScaleStepsData() {
         value: "Heading 3",
         isBaseline: false,
         position: 4,
+        isHeading: true,
       },
       {
         key: HTMLTags.h4,
@@ -53,6 +56,7 @@ export default function useTypeScaleStepsData() {
         value: "Heading 4",
         isBaseline: false,
         position: 3,
+        isHeading: true,
       },
       {
         key: HTMLTags.h5,
@@ -60,6 +64,7 @@ export default function useTypeScaleStepsData() {
         value: "Heading 5",
         isBaseline: false,
         position: 2,
+        isHeading: true,
       },
       {
         key: HTMLTags.h6,
@@ -67,6 +72,7 @@ export default function useTypeScaleStepsData() {
         value: "Heading 6",
         isBaseline: false,
         position: 1,
+        isHeading: true,
       },
       {
         key: HTMLTags.p,
@@ -74,6 +80,7 @@ export default function useTypeScaleStepsData() {
         value: "Paragraph",
         isBaseline: true,
         position: 0,
+        isHeading: false,
       },
       {
         key: HTMLTags.caption,
@@ -81,6 +88,7 @@ export default function useTypeScaleStepsData() {
         value: "Caption",
         isBaseline: false,
         position: -1,
+        isHeading: false,
       },
     ];
   }

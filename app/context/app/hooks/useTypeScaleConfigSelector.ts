@@ -16,12 +16,12 @@ export default function useTypeScaleConfigSelector() {
   );
 
   const actions = {
-    UPDATE_GLOBAL_STATE: {
-      dispatch: (payload: TypeScaleConfig) => updateGlobalState(payload),
+    TYPESCALE_CALCULATOR__SAVE_CONFIG: {
+      dispatch: (payload: TypeScaleConfig) => saveTypeScaleConfig(payload),
     },
   };
 
-  function updateGlobalState(payload: TypeScaleConfig) {
+  function saveTypeScaleConfig(payload: TypeScaleConfig) {
     let nextTypeScale = [] as TypeScaleConfig[];
 
     if (typeScaleConfig) {
