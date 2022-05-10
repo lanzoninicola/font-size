@@ -4,14 +4,14 @@ import VStackBox from "~/components/shared/vstack-wrapper";
 
 export default function MissingBreakpointPage() {
   return (
-    <Center>
+    <Center p="2rem">
       <VStackBox gap="2rem">
         <VStackBox>
-          <Heading fontSize="lg" color="white" lineHeight={1.1}>
+          <Heading fontSize="lg" lineHeight={1.1} color="secondary.500">
             No breakpoints created yet.
           </Heading>
           <Text color="white">
-            Please create some breakpoints and come back here.
+            Please create some breakpoints and come back here later.
           </Text>
         </VStackBox>
         <Link to={`/app/breakpoints`}>

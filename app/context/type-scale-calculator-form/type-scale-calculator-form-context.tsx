@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { createContext } from "use-context-selector";
 import { HTMLTags } from "../app/interfaces";
 

@@ -1,7 +1,7 @@
 import { Heading } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import MediaQueryBuilder from "~/components/media-queries/media-query-builder/media-query-builder";
-import StepActions from "~/components/media-queries/media-query-builder/step-actions";
+import StepActions from "~/components/media-queries/media-query-builder/step-actions-buttons";
 import BreakpointsPicker from "~/components/shared/breakpoints-picker";
 import VStackBox from "~/components/shared/vstack-wrapper";
 import useMediaQueriesSelector from "~/context/app/hooks/useMediaQueriesSelector";
@@ -42,9 +42,10 @@ export default function MediaQueriesBuilderPage() {
           textTransform={"uppercase"}
           letterSpacing={1}
         >
-          1. Select a breakpoint to edit
+          1. Select a breakpoint
         </Heading>
         <BreakpointsPicker
+          size="sm"
           onChange={onChangeCurrentBreakpoint}
           value={currentBreakpointId}
         />

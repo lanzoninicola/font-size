@@ -1,5 +1,6 @@
 import { useContextSelector } from "use-context-selector";
 import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
+import { MediaQueryStepEdit } from "~/context/media-query-builder/interfaces/media-query";
 import {
   FontConfigFormControl,
   FontTypeScaleConfig,
@@ -30,9 +31,13 @@ export default function useMediaQueriesSelector() {
   } = useMediaQueriesQueryService(mediaQueries);
 
   const actions = {
-    MEDIA_QUERY__UPDATE_MEDIAQUERIES_BASED_ON_TYPE_SCALE_CONFIG: {
+    MEDIA_QUERIES__ON_MEDIA_QUERY_CHANGE: {
+      dispatch: (mediaQuery: MediaQueryStepEdit) =>
+        onMediaQueryChange(mediaQuery),
+    },
+    MEDIA_QUERIES__ON_TYPE_SCALE_CONFIG_CHANGE: {
       dispatch: (payload: TypeScaleConfig) =>
-        updateBreakpointMediaQueries(
+        onTypeScaleConfigChange(
           payload.breakpointId,
           payload.min,
           payload.max,
@@ -42,7 +47,9 @@ export default function useMediaQueriesSelector() {
     },
   };
 
-  function updateBreakpointMediaQueries(
+  function onMediaQueryChange(mediaQuery: MediaQueryStepEdit) {}
+
+  function onTypeScaleConfigChange(
     breakpointId: BreakpointId,
     min: MinMaxTypeScaleConfig,
     max: MinMaxTypeScaleConfig,
@@ -102,6 +109,7 @@ export default function useMediaQueriesSelector() {
 
   return {
     mediaQueries,
+    setMediaQueries,
     actions,
   };
 }

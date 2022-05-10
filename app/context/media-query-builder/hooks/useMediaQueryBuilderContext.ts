@@ -64,6 +64,16 @@ export default function useMediaQueryBuilderContext() {
     (ctx) => ctx?.setLineHeight
   );
 
+  const marginBottom = useContextSelector(
+    MediaQueryBuilderContextData,
+    (ctx) => ctx?.marginBottom
+  );
+
+  const setMarginBottom = useContextSelector(
+    MediaQueryBuilderContextData,
+    (ctx) => ctx?.setMarginBottom
+  );
+
   const { actions: previewWindowsActions } = usePreviewWindowsSelector();
 
   const actions = {
@@ -91,6 +101,8 @@ export default function useMediaQueryBuilderContext() {
     setMaxFontSize,
     lineHeight,
     setLineHeight,
+    marginBottom,
+    setMarginBottom,
     actions,
   };
 }

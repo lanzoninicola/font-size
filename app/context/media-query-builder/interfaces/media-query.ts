@@ -31,3 +31,5 @@ export interface MediaQuery {
   // fontWeight for the step. This value might be changed in Media Query application section
   fontWeight: number;
 }
+
+export type MediaQueryStepEdit = Omit<MediaQuery, "fontFamily" | "fontWeight">;

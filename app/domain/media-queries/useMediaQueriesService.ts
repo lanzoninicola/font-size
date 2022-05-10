@@ -1,4 +1,6 @@
+import { mediaQueryInitialStatePartial } from "~/context/app/app-context";
 import useMediaQueriesSelector from "~/context/app/hooks/useMediaQueriesSelector";
+import { MediaQuery, TypeScaleStepEntityState } from "~/context/app/interfaces";
 import useMediaQueryBuilderContext from "~/context/media-query-builder/hooks/useMediaQueryBuilderContext";
 
 export default function useMediaQueriesService() {
@@ -8,11 +10,13 @@ export default function useMediaQueriesService() {
     minFontSize,
     maxFontSize,
     lineHeight,
+    marginBottom,
     setEntityState,
     setCurrentTypeScaleStepId,
     setMinFontSize,
     setMaxFontSize,
     setLineHeight,
+    setMarginBottom,
   } = useMediaQueryBuilderContext();
   const { mediaQueries, setMediaQueries } = useMediaQueriesSelector();
 
@@ -20,23 +24,36 @@ export default function useMediaQueriesService() {
     const mediaQueryData = {
       minFontSize: parseFloat(minFontSize),
       maxFontSize: parseFloat(maxFontSize),
-      lineHeight: parseFloat(lineHeight),
+      lineHeight: parseInt(lineHeight, 10),
+      marginBottom: parseFloat(marginBottom),
     };
 
-    const nextMediaQueries: MediaQueries = { ...mediaQueries };
-    nextMediaQueries[currentBreakpointId] = {
-      ...nextMediaQueries[currentBreakpointId],
-    };
-    nextMediaQueries[currentBreakpointId][currentTypeScaleStepId] =
-      mediaQueryData;
+    let nextMediaQueries: MediaQuery[] = mediaQueries ? [...mediaQueries] : [];
+
+    const stepMediaQuery: MediaQuery | undefined = mediaQueries?.find(
+      (mediaQuery) =>
+        mediaQuery.breakpointId === currentBreakpointId &&
+        mediaQuery.stepId === currentTypeScaleStepId
+    );
+
+    const nextStepMediaQuery: Omit<MediaQuery, "fontFamily" | "fontWeight"> =
+      stepMediaQuery
+        ? { ...stepMediaQuery }
+        : {
+            ...mediaQueryInitialStatePartial,
+            breakpointId: currentBreakpointId,
+            stepId: currentTypeScaleStepId,
+            ...mediaQueryData,
+          };
 
     setMediaQueries(nextMediaQueries);
 
-    setEntityState(SelectorEntityState.idle);
+    setEntityState(TypeScaleStepEntityState.idle);
     setCurrentTypeScaleStepId("");
     setMinFontSize("");
     setMaxFontSize("");
     setLineHeight("");
+    setMarginBottom("");
   }
 
   /**

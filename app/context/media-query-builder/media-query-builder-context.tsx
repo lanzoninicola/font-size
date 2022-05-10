@@ -10,12 +10,14 @@ export interface MediaQueryBuilderContext {
   minFontSize: string;
   maxFontSize: string;
   lineHeight: string;
+  marginBottom: string;
   setEntityState: (entityState: TypeScaleStepEntityState) => void;
   setCurrentBreakpointId: (currentBreakpointId: BreakpointId) => void;
   setCurrentTypeScaleStepId: (currentTypeScaleStepId: string) => void;
   setMinFontSize: (minFontSize: string) => void;
   setMaxFontSize: (maxFontSize: string) => void;
   setLineHeight: (lineHeight: string) => void;
+  setMarginBottom: (marginBottom: string) => void;
 }
 
 export const MediaQueryBuilderContextData =
@@ -36,6 +38,7 @@ export function MediaQueryBuilderProvider({
   const [minFontSize, setMinFontSize] = useState<string>("");
   const [maxFontSize, setMaxFontSize] = useState<string>("");
   const [lineHeight, setLineHeight] = useState<string>("110");
+  const [marginBottom, setMarginBottom] = useState<string>("");
 
   return (
     <MediaQueryBuilderContextData.Provider
@@ -46,12 +49,14 @@ export function MediaQueryBuilderProvider({
         minFontSize,
         maxFontSize,
         lineHeight,
+        marginBottom,
         setEntityState,
         setCurrentBreakpointId,
         setCurrentTypeScaleStepId,
         setMinFontSize,
         setMaxFontSize,
         setLineHeight,
+        setMarginBottom,
       }}
     >
       {children}

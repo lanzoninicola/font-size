@@ -4,14 +4,16 @@ import { SelectorId } from "~/context/type-scale-steps-builder/interfaces";
 import useBreakpointsQueryService from "~/domain/breakpoints/useBreakpointsQueryService";
 import useMediaQueriesBuilderService from "~/domain/media-queries/useMediaQueriesBuilderService";
 
-export function StepDetailForm({ selectorId }: { selectorId: SelectorId }) {
+export function StepDetailForm({ stepId }: { stepId: SelectorId }) {
   const {
     minFontSize,
     maxFontSize,
     lineHeight,
+    marginBottom,
     changeMinFontSize,
     changeMaxFontSize,
     changeLineHeight,
+    changeMarginBottom,
   } = useMediaQueriesBuilderService();
 
   const { currentBreakpointId } = useMediaQueriesBuilderService();
@@ -39,10 +41,14 @@ export function StepDetailForm({ selectorId }: { selectorId: SelectorId }) {
     changeLineHeight(e.target.value);
   }
 
+  function onChangeMarginBottom(e: React.ChangeEvent<HTMLInputElement>) {
+    changeMarginBottom(e.target.value);
+  }
+
   return (
     <VStackBox w="100%" gap=".5rem" justify="space-between" mt="1rem">
       <FormControlInputNumber
-        id={`minFontSize-${selectorId}`}
+        id={`minFontSize-${stepId}`}
         label={`Min font size at ${breakpointViewportMinSize()}px`}
         labelFontSize="smaller"
         leftUnit="REM"
@@ -52,7 +58,7 @@ export function StepDetailForm({ selectorId }: { selectorId: SelectorId }) {
         maxW="70px"
       />
       <FormControlInputNumber
-        id={`maxFontSize-${selectorId}`}
+        id={`maxFontSize-${stepId}`}
         label={`Max font size at ${breakpointViewportMaxSize()}px`}
         labelFontSize="smaller"
         leftUnit="REM"
@@ -62,13 +68,23 @@ export function StepDetailForm({ selectorId }: { selectorId: SelectorId }) {
         maxW="70px"
       />
       <FormControlInputNumber
-        id={`lineHeight-${selectorId}`}
+        id={`lineHeight-${stepId}`}
         label="Line Height"
         labelFontSize="smaller"
         leftUnit="%"
         value={lineHeight}
         unitFontSize="smaller"
         onChange={(e) => onChangeLineHeight(e)}
+        maxW="70px"
+      />
+      <FormControlInputNumber
+        id={`margin-bottom-${stepId}`}
+        label="Margin Bottom"
+        labelFontSize="smaller"
+        leftUnit="REM"
+        value={marginBottom}
+        unitFontSize="smaller"
+        onChange={(e) => onChangeMarginBottom(e)}
         maxW="70px"
       />
     </VStackBox>

@@ -15,12 +15,14 @@ export default function useMediaQueriesBuilderService() {
     minFontSize,
     maxFontSize,
     lineHeight,
+    marginBottom,
     setEntityState,
     setCurrentBreakpointId,
     setCurrentTypeScaleStepId,
     setMinFontSize,
     setMaxFontSize,
     setLineHeight,
+    setMarginBottom,
   } = useMediaQueryBuilderContext();
 
   const { getMediaQueryByBreakpointIdAndStepId } =
@@ -44,7 +46,6 @@ export default function useMediaQueriesBuilderService() {
       maxFontSize: stepMaxFontSize,
       lineHeight: stepLineHeight,
       marginBottom: stepMarginBottom,
-      fontFamily: stepFontFamily,
     } = getMediaQueryByBreakpointIdAndStepId(currentBreakpointId, step.key);
 
     changeMinFontSize(String(stepMinFontSize));
@@ -72,6 +73,11 @@ export default function useMediaQueriesBuilderService() {
     setLineHeight(lh);
   }
 
+  function changeMarginBottom(mb: string) {
+    parseInputString(mb);
+    setMarginBottom(mb);
+  }
+
   return {
     entityState,
     currentBreakpointId,
@@ -79,11 +85,13 @@ export default function useMediaQueriesBuilderService() {
     minFontSize,
     maxFontSize,
     lineHeight,
+    marginBottom,
     changeCurrentBreakpoint,
     editCurrentSelector,
     closeEditCurrentSelector,
     changeMinFontSize,
     changeMaxFontSize,
     changeLineHeight,
+    changeMarginBottom,
   };
 }

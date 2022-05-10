@@ -43,7 +43,7 @@ export default function TypeScaleCalculatorForm() {
 
     actions.TYPESCALE_CALCULATOR__SAVE_CONFIG.dispatch(payload);
 
-    mediaQueriesAction.MEDIA_QUERY__UPDATE_MEDIAQUERIES_BASED_ON_TYPE_SCALE_CONFIG.dispatch(
+    mediaQueriesAction.MEDIA_QUERIES__ON_TYPE_SCALE_CONFIG_CHANGE.dispatch(
       payload
     );
   }
