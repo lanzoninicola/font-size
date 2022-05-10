@@ -18,7 +18,7 @@ export default function BreakpointsList() {
 
   const { listAll } = useBreakpointsDataService();
   const { onDeleteBreakpoint } = useBreakpointsFormService();
-  const { navigateTuUpdateBreakpoint } = useBreakpointsRoutesNavigate();
+  const { navigateToUpdateBreakpoint } = useBreakpointsRoutesNavigate();
 
   const [breakpoints, setBreakpoints] = useState<BreakpointFlat[]>([]);
 
@@ -37,7 +37,7 @@ export default function BreakpointsList() {
   }
 
   function onBreakpointUpdate(breakpointId: BreakpointId) {
-    navigateTuUpdateBreakpoint(breakpointId);
+    navigateToUpdateBreakpoint(breakpointId);
   }
 
   function onBreakpointDelete(id: BreakpointId) {
