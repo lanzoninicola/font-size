@@ -23,14 +23,15 @@ export default function useBreakpointsRoutesNavigate() {
     navigate(ROUTE_BREAKPOINTS_NEW);
   }
 
-  function navigateTuUpdateBreakpoint(id: BreakpointId) {
-    navigate(`${ROUTE_BREAKPOINTS_UPDATE}/${id}`);
+  function navigateToUpdateBreakpoint(id: BreakpointId) {
+    const updateURL = ROUTE_BREAKPOINTS_UPDATE.replace(":breakpointId", id);
+    navigate(updateURL);
   }
 
   return {
     navigateToMissingBreakpoints,
     navigateToList,
     navigateToNewBreakpoint,
-    navigateTuUpdateBreakpoint,
+    navigateToUpdateBreakpoint,
   };
 }
