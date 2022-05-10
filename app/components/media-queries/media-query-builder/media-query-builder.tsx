@@ -10,7 +10,7 @@ import useCustomScrollbar from "~/domain/utilities/useCustomScrollbar";
 import ActionButton from "../../shared/action-button";
 import { CloseIcon } from "../../shared/icons";
 import VStackBox from "../../shared/vstack-wrapper";
-import StepActions from "./step-actions";
+import StepActionsButtons from "./step-actions-buttons";
 import { StepDetailForm } from "./step-detail-form";
 import StepDetails from "./step-details";
 
@@ -62,7 +62,7 @@ export default function MediaQueryBuilder() {
                   >
                     {step.value}
                   </Text>
-                  <StepActions step={step} />
+                  <StepActionsButtons step={step} />
                 </VStackBox>
                 {step.key !== currentTypeScaleStepId && (
                   <StepDetails
@@ -86,7 +86,7 @@ export default function MediaQueryBuilder() {
               </Grid>
               {entityState === TypeScaleStepEntityState.edit &&
                 step.key === currentTypeScaleStepId && (
-                  <StepDetailForm selectorId={step.key} />
+                  <StepDetailForm stepId={step.key} />
                 )}
             </Box>
           );

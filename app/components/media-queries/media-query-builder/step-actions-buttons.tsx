@@ -9,7 +9,11 @@ import {
 import useMediaQueriesBuilderService from "~/domain/media-queries/useMediaQueriesBuilderService";
 import useMediaQueriesService from "~/domain/media-queries/useMediaQueriesService";
 
-export default function StepActions({ step }: { step: TypeScaleStepConfig }) {
+export default function StepActionsButtons({
+  step,
+}: {
+  step: TypeScaleStepConfig;
+}) {
   const {
     entityState,
     currentBreakpointId,
