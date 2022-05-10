@@ -21,7 +21,7 @@ export default function BreakpointsPage() {
           <InnerPageHeaderArea>
             <HStack w="100%" justify={"space-between"}>
               <SectionSubHeader>Breakpoints</SectionSubHeader>
-              <ActionButton label="Collpase" onClick={togglePanelCollapse}>
+              <ActionButton label="Collapse" onClick={togglePanelCollapse}>
                 <CollapseIcon />
               </ActionButton>
             </HStack>

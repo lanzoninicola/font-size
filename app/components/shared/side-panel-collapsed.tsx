@@ -13,7 +13,7 @@ export default function SidePanelCollapsed({
 }) {
   return (
     <VStackBox w="100%" h="100%" pt="1rem" align="center">
-      <ActionButton label="Collpase" onClick={toggleCollapse}>
+      <ActionButton label="Collapse" onClick={toggleCollapse}>
         <ExpandIcon />
       </ActionButton>
       <Box w="100%" transform={"rotate(90deg) translateX(30px)"}>

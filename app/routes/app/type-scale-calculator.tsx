@@ -6,7 +6,7 @@ import ActionButton from "~/components/shared/action-button";
 import { CollapseIcon } from "~/components/shared/icons";
 import SectionSubHeader from "~/components/shared/section-subheader";
 import SidePanelCollapsed from "~/components/shared/side-panel-collapsed";
-import SelectorsToolbar from "~/components/type-scale/type-scale-steps/type-scale-steps-toolbar";
+import TypeScaleToolbar from "~/components/type-scale/type-scale-toolbar/type-scale-toolbar";
 
 import { ContextType } from "../app";
 
@@ -21,11 +21,11 @@ export default function SelectorsPage() {
           <InnerPageHeaderArea>
             <HStack w="100%" justify={"space-between"}>
               <SectionSubHeader>Type Scale</SectionSubHeader>
-              <ActionButton label="Collpase" onClick={togglePanelCollapse}>
+              <ActionButton label="Collapse" onClick={togglePanelCollapse}>
                 <CollapseIcon />
               </ActionButton>
             </HStack>
-            <SelectorsToolbar />
+            <TypeScaleToolbar />
           </InnerPageHeaderArea>
           <InnerPageContentArea>
             <Outlet />
