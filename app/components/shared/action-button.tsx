@@ -36,7 +36,7 @@ export default function ActionButton({
       <Tooltip
         label={label}
         aria-label={label}
-        bg="secondary.700"
+        bg="secondary.500"
         color="background.500"
         gutter={16}
         offset={tooltipOffset || [-20, -60]}

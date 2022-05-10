@@ -252,7 +252,7 @@ function DeviceList({
             key={index}
             label={`${device.name} (${device.viewportSize.width}x${device.viewportSize.height})`}
             aria-label={"fioo"}
-            bg="secondary.700"
+            bg="secondary.500"
             color="background.500"
             gutter={16}
             placement="left-start"
