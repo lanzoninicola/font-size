@@ -94,7 +94,7 @@ export default function useCSSCodeBlock() {
         forceImportant ? "!important" : ""
       };`;
       codeBlock += `\n`;
-      codeBlock += `   margin-bottom: ${marginBottom}% ${
+      codeBlock += `   margin-bottom: ${marginBottom}rem ${
         forceImportant ? "!important" : ""
       };`;
       codeBlock += `\n`;
