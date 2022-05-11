@@ -28,7 +28,7 @@ export const mediaQueryInitialStatePartial: Omit<
   minFontSize: 1,
   maxFontSize: 1,
   lineHeight: 120,
-  marginBottom: 0,
+  marginBottom: 1,
   fontFamily: "Open Sans",
   fontWeight: 400,
 };
