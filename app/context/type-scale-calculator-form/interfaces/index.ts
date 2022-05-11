@@ -25,8 +25,12 @@ export interface TypeScaleRatio {
   name: string;
   ratio: number;
 }
+export interface FontConfig {
+  fontFamily: string;
+  fontWeight: string;
+}
 
-// START: Types for the type scale calculator form context.
+/**  START: Types for the type scale calculator form context. */
 export type DefaultBreakpointId = "default";
 
 export type BreakpointIdFormControl = BreakpointId | DefaultBreakpointId;
@@ -40,12 +44,10 @@ export interface MinMaxConfigFormControl {
   scaleRatio: TypeScaleRatio["ratio"];
 }
 
-export interface FontConfigFormControl {
+export interface FontConfigFormControl extends FontConfig {
   breakpointId: BreakpointIdFormControl;
-  fontFamily: string;
-  fontWeight: string;
 }
-// END: Types for the type scale calculator form context.
+/** END: Types for the type scale calculator form context. */
 
 export interface BreakpointTypeScale {
   breakpointId: BreakpointId;
