@@ -1,27 +1,30 @@
-import { FontConfigFormControl } from "~/context/type-scale-calculator-form/interfaces";
+import { FontConfig } from "~/context/type-scale-calculator-form/interfaces";
 import { GOOGLE_FONTS_BASE_URL } from "./constants";
 
-export interface GoogleFontURLProps {
-  fontHeading: Omit<FontConfigFormControl, "breakpointId">;
-  fontBody: Omit<FontConfigFormControl, "breakpointId">;
-}
-
 export default function useGoogleFontsUtils() {
-  // https://developers.google.com/fonts/docs/css2
-  function getGoogleFontURL({ fontHeading, fontBody }: GoogleFontURLProps) {
-    const headingFamily = fontHeading.fontFamily.replace(" ", "+");
-    const bodyFamily = fontBody.fontFamily.replace(" ", "+");
-
+  /**
+   * @returns Given the font config object, returns the properly formatted href
+   * that can be used to link to that font's @font-face CSS on Google's servers.
+   *
+   * @see https://developers.google.com/fonts/docs/css2
+   */
+  function getGoogleFontLinkTagHref(...fonts: FontConfig[]): string {
     let url = `${GOOGLE_FONTS_BASE_URL}?`;
-    url += `family=${headingFamily}:wght@${fontHeading.fontWeight}`;
-    url += `&`;
-    url += `family=${bodyFamily}:wght@${fontBody.fontWeight}`;
+    fonts.forEach((font, idx = 0) => {
+      idx++ > 0 && (url += `&`);
+      url += appendParams(font);
+    });
     url += `&display=swap`;
 
     return url;
   }
 
+  function appendParams(font: FontConfig) {
+    const { fontFamily, fontWeight } = font;
+    return `family=${fontFamily}:wght@${fontWeight}`;
+  }
+
   return {
-    getGoogleFontURL,
+    getGoogleFontLinkTagHref,
   };
 }
