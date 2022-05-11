@@ -13,7 +13,7 @@ export default function usePostMessageService() {
   //TODO: adjust target origin
   const TARGET_ORIGIN = "*";
 
-  const { getGoogleFontURL } = useGoogleFontsUtils();
+  const { getGoogleFontLinkTagHref } = useGoogleFontsUtils();
 
   function postMessage({
     iframeRef,
@@ -38,8 +38,12 @@ export default function usePostMessageService() {
           const messageReceived = event.data as Message;
           const { stylesheetCode, fontHeading, fontBody } = messageReceived;
 
-          addStyleTag(stylesheetCode);
-          addGoogleFontLinkTag({ fontHeading, fontBody });
+          if (stylesheetCode) {
+            addTypographyStyleTag(stylesheetCode);
+          }
+          if (fontHeading && fontBody) {
+            addGoogleFontLinkTag({ fontHeading, fontBody });
+          }
         },
         false
       );
@@ -51,7 +55,7 @@ export default function usePostMessageService() {
     fontBody,
   }: Omit<Message, "stylesheetCode">) {
     const iframeBody = document.getElementsByTagName("body");
-    const url = getGoogleFontURL({ fontHeading, fontBody });
+    const url = getGoogleFontLinkTagHref(fontHeading, fontBody);
 
     if (iframeBody[0]) {
       const link = document.createElement("link");
@@ -63,7 +67,7 @@ export default function usePostMessageService() {
     }
   }
 
-  function addStyleTag(content: string) {
+  function addTypographyStyleTag(content: string) {
     const iframeBody = document.getElementsByTagName("body");
 
     if (iframeBody[0]) {
