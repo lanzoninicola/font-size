@@ -46,25 +46,22 @@ export default function usePreviewWindowsSelector() {
       dispatch: (payload: { id: number; height: string }) =>
         changeWindowHeight(payload.id, payload.height),
     },
+    PREVIEW_WINDOWS__SELECTED_EMPTY_BREAKPOINTS: {
+      dispatch: () => removeAllWindows(),
+    },
     PREVIEW_WINDOWS__SELECTED_BREAKPOINTS: {
-      dispatch: (payload: BreakpointId) => loadPreviewWindows(payload),
+      dispatch: (payload: BreakpointId) =>
+        loadPreviewWindowsAccordingToBreakpoint(payload),
     },
   };
 
-  function loadPreviewWindows(breakpointId: BreakpointId) {
-    if (breakpointId === "") {
-      actions.PREVIEW_WINDOWS__REMOVE_ALL_WINDOWS.dispatch();
-      return;
-    }
-
+  function loadPreviewWindowsAccordingToBreakpoint(breakpointId: BreakpointId) {
     const { minWidth, maxWidth } = getViewportSizeByBreakpointId(breakpointId);
 
     const smallestDevice = getSmallestDevice(minWidth);
     const largestDevice = getLargestDevice(maxWidth);
 
     if (smallestDevice && largestDevice) {
-      actions.PREVIEW_WINDOWS__REMOVE_ALL_WINDOWS.dispatch();
-
       const previewSmallestDevice = getNewPreviewDevice(
         smallestDevice.viewportSize.width,
         smallestDevice.viewportSize.height,
@@ -100,9 +97,8 @@ export default function usePreviewWindowsSelector() {
    * The size of the new window is set to the default value if a width and height have not given.
    */
   function addBulkWindow(devices: PreviewDevice[]) {
-    const nextState = [...previewWindows];
+    const nextState = [...devices];
 
-    nextState.unshift(...devices);
     setPreviewWindows(nextState);
   }
 
