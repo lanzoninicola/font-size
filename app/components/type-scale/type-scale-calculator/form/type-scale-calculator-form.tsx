@@ -6,6 +6,7 @@ import useMediaQueriesSelector from "~/context/app/hooks/useMediaQueriesSelector
 import useTypeScaleConfigSelector from "~/context/app/hooks/useTypeScaleConfigSelector";
 import useTypeScaleCalculatorFormContext from "~/context/type-scale-calculator-form/hooks/useTypeScaleCalculatorFormContext";
 import { TypeScaleConfig } from "~/context/type-scale-calculator-form/interfaces";
+import { FormHeading, FormSubHeading } from "./form-headings";
 
 import GroupBaselineStep from "./group-baseline-step";
 import GroupBodyFonts from "./group-body-fonts";
@@ -51,43 +52,17 @@ export default function TypeScaleCalculatorForm() {
   return (
     <VStackBox spacing={5}>
       <Divider />
-      <Heading
-        as="h4"
-        fontSize={"xs"}
-        color="secondary.300"
-        textTransform={"uppercase"}
-        letterSpacing={1}
-      >
-        2. Type scale
-      </Heading>
+      <FormHeading>2. Type scale</FormHeading>
       {/* <GroupBaselineStep /> */}
       <GroupMinimum />
       <GroupMaximum />
 
       <Divider />
 
-      <Heading
-        as="h4"
-        fontSize={"xs"}
-        color="secondary.300"
-        textTransform={"uppercase"}
-        letterSpacing={1}
-      >
-        3. Choose the font
-      </Heading>
+      <FormHeading>3. Choose the font</FormHeading>
+      <GroupHeadingsFonts />
+      <GroupBodyFonts />
 
-      <VStackBox spacing={2}>
-        <Heading as="h3" fontSize={"xs"} color="secondary.300">
-          Headings font
-        </Heading>
-        <GroupHeadingsFonts />
-      </VStackBox>
-      <VStackBox spacing={2}>
-        <Heading as="h3" fontSize={"xs"} color="secondary.300">
-          Body font
-        </Heading>
-        <GroupBodyFonts />
-      </VStackBox>
       <Button w="100%" bg="secondary.500" onClick={onSaveTypeScaleCalculation}>
         Save
       </Button>
