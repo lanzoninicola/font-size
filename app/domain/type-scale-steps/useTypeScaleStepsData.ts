@@ -9,7 +9,10 @@ import {
 
 export default function useTypeScaleStepsData() {
   const { setTypeScaleSteps } = useHtmlSelectorsSelector();
-  const [provider, _] = useLocalStorage("FS_INIT_BREAKPOINTS_PROVIDER");
+  const [provider, _] = useLocalStorage(
+    "FS_INIT_BREAKPOINTS_PROVIDER",
+    DataProvider.default
+  );
 
   function initTypeScaleSteps() {
     const s = getByProvider(provider as DataProvider);

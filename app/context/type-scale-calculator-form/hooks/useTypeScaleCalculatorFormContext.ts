@@ -42,26 +42,6 @@ export default function useTypeScaleCalculatorFormContext() {
     (ctx) => ctx?.setMinimum
   );
 
-  const fontHeading = useContextSelector(
-    TypeScaleCalculatorFormContextData,
-    (ctx) => ctx?.fontHeading
-  );
-
-  const setFontHeading = useContextSelector(
-    TypeScaleCalculatorFormContextData,
-    (ctx) => ctx?.setFontHeading
-  );
-
-  const fontBody = useContextSelector(
-    TypeScaleCalculatorFormContextData,
-    (ctx) => ctx?.fontBody
-  );
-
-  const setFontBody = useContextSelector(
-    TypeScaleCalculatorFormContextData,
-    (ctx) => ctx?.setFontBody
-  );
-
   return {
     currentBreakpointId,
     setCurrentBreakpointId,
@@ -71,9 +51,5 @@ export default function useTypeScaleCalculatorFormContext() {
     setMinimum,
     max,
     setMaximum,
-    fontHeading,
-    setFontHeading,
-    fontBody,
-    setFontBody,
   };
 }

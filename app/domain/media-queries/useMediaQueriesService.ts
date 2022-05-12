@@ -1,7 +1,7 @@
-import { mediaQueryInitialStatePartial } from "~/context/app/app-context";
 import useMediaQueriesSelector from "~/context/app/hooks/useMediaQueriesSelector";
 import { MediaQuery, TypeScaleStepEntityState } from "~/context/app/interfaces";
 import useMediaQueryBuilderContext from "~/context/media-query-builder/hooks/useMediaQueryBuilderContext";
+import { mediaQueryInitialStatePartial } from "~/context/media-query-builder/media-query-builder-context";
 
 export default function useMediaQueriesService() {
   const {

@@ -1,13 +1,7 @@
 import { useEffect } from "react";
-import { FontConfigFormControl } from "~/context/type-scale-calculator-form/interfaces";
 
 import useGoogleFontsUtils from "../google-fonts/useGoogleFontsUtils";
-
-export interface Message {
-  stylesheetCode: string;
-  fontHeading: Omit<FontConfigFormControl, "breakpointId">;
-  fontBody: Omit<FontConfigFormControl, "breakpointId">;
-}
+import { Message, PostMessage } from "./types/indext";
 
 export default function usePostMessageService() {
   //TODO: adjust target origin
@@ -15,18 +9,14 @@ export default function usePostMessageService() {
 
   const { getGoogleFontLinkTagHref } = useGoogleFontsUtils();
 
-  function postMessage({
-    iframeRef,
-    message,
-  }: {
-    iframeRef: React.RefObject<HTMLIFrameElement>;
-    message: Message;
-  }) {
+  /** This function is fired inside the useEffect of iframe-box component to send messages to preview iframes*/
+  function postMessage({ iframeRef, message }: PostMessage) {
     if (iframeRef.current?.contentWindow) {
       iframeRef.current.contentWindow.postMessage(message, TARGET_ORIGIN);
     }
   }
 
+  /** This function is used inside the page (/preview/content) that contains the content template */
   function handleMessages() {
     if (window) {
       window.addEventListener(

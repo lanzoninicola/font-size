@@ -1,10 +1,8 @@
 import { Box } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
 import useMediaQueriesSelector from "~/context/app/hooks/useMediaQueriesSelector";
+import useTypographySelector from "~/context/app/hooks/useTypographySelector";
 import usePreviewUrl from "~/context/preview/hooks/usePreviewUrl";
-import useCurrentBreakpointIdSelector from "~/context/type-scale-calculator-form/hooks/useCurrentBreakpointIdSelector";
-import useFontBodySelector from "~/context/type-scale-calculator-form/hooks/useFontBodySelector";
-import useFontHeadingSelector from "~/context/type-scale-calculator-form/hooks/useFontHeadingSelector";
 import useCSSCodeBlock from "~/domain/code-block/useCSSCodeBlock";
 import usePostMessageService from "~/domain/preview/usePostMessageService";
 import usePreviewSettings from "~/domain/preview/usePreviewSettings";
@@ -16,43 +14,33 @@ export default function IframeBox({
   width: number;
   height: number;
 }) {
-  const { fontHeading } = useFontHeadingSelector();
-  const { fontBody } = useFontBodySelector();
-  const { mediaQueries } = useMediaQueriesSelector();
+  const { typography } = useTypographySelector();
   const { getCSSStylesheet } = useCSSCodeBlock();
   const { previewUrl } = usePreviewUrl();
   const { postMessage } = usePostMessageService();
-  const { iframeDefaultURL } = usePreviewSettings();
+  const { iframeDefaultURL: DEFAULT_URL } = usePreviewSettings();
 
   const [iframeReloadKey, setIframeReloadKey] = useState(0);
 
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
-  const DEFAULT_URL = iframeDefaultURL;
-
-  function sendMessage() {
+  function onIframeLoad() {
     const codeBlock = getCSSStylesheet(true);
 
     postMessage({
       iframeRef,
       message: {
         stylesheetCode: codeBlock,
-        fontHeading: {
-          fontFamily: fontHeading.fontFamily,
-          fontWeight: fontHeading.fontWeight,
-        },
-        fontBody: {
-          fontFamily: fontBody.fontFamily,
-          fontWeight: fontBody.fontWeight,
-        },
+        fontHeading: typography.headings,
+        fontBody: typography.body,
       },
     });
   }
 
-  // reload the frame when the media queries change and a new url is set
+  // reload the frame when the typography object change
   useEffect(() => {
     setIframeReloadKey(iframeReloadKey + 1);
-  }, [mediaQueries, previewUrl]);
+  }, [typography]);
 
   return (
     <>
@@ -71,7 +59,7 @@ export default function IframeBox({
           }
           width="100%"
           height="100%"
-          onLoad={sendMessage}
+          onLoad={onIframeLoad}
           style={{
             borderRadius: "5px",
           }}

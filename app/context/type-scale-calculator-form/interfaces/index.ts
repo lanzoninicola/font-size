@@ -6,28 +6,17 @@ export interface MinMaxTypeScaleConfig {
   scaleRatio: string;
 }
 
-export interface FontTypeScaleConfig {
-  fontFamily: string;
-  fontWeight: number;
-}
-
 export interface TypeScaleConfig {
   breakpointId: BreakpointId;
   baseStep: SelectorId;
   min: MinMaxTypeScaleConfig;
   max: MinMaxTypeScaleConfig;
-  fontHeading: FontTypeScaleConfig;
-  fontBody: FontTypeScaleConfig;
 }
 
 export interface TypeScaleRatio {
   key: string;
   name: string;
   ratio: number;
-}
-export interface FontConfig {
-  fontFamily: string;
-  fontWeight: string;
 }
 
 /**  START: Types for the type scale calculator form context. */
@@ -44,9 +33,6 @@ export interface MinMaxConfigFormControl {
   scaleRatio: TypeScaleRatio["ratio"];
 }
 
-export interface FontConfigFormControl extends FontConfig {
-  breakpointId: BreakpointIdFormControl;
-}
 /** END: Types for the type scale calculator form context. */
 
 export interface BreakpointTypeScale {

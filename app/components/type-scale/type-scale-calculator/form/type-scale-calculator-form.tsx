@@ -17,7 +17,7 @@ import GroupMinimum from "./group-minimum";
 export default function TypeScaleCalculatorForm() {
   const { actions } = useTypeScaleConfigSelector();
   const { actions: mediaQueriesAction } = useMediaQueriesSelector();
-  const { currentBreakpointId, baseStep, min, max, fontHeading, fontBody } =
+  const { currentBreakpointId, baseStep, min, max } =
     useTypeScaleCalculatorFormContext();
 
   function onSaveTypeScaleCalculation() {
@@ -31,14 +31,6 @@ export default function TypeScaleCalculatorForm() {
       max: {
         fontSizeREM: max.fontSizeREM,
         scaleRatio: String(max.scaleRatio),
-      },
-      fontHeading: {
-        fontFamily: fontHeading.fontFamily,
-        fontWeight: parseInt(fontHeading.fontWeight, 10),
-      },
-      fontBody: {
-        fontFamily: fontBody.fontFamily,
-        fontWeight: parseInt(fontBody.fontWeight, 10),
       },
     };
 

@@ -6,7 +6,7 @@ export interface FontFamily {
 
 export interface DefaultFontFamily {
   category: "sans-serif";
-  family: "Open Sans";
+  family: "Inter";
   variants: ["400"];
 }
 

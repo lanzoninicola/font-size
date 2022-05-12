@@ -4,8 +4,7 @@ import { useLoaderData } from "remix";
 import GoogleFontFamiliesPicker from "~/components/shared/google-font-families-picker";
 import GoogleFontVariantsPicker from "~/components/shared/google-font-variants.picker";
 import VStackBox from "~/components/shared/vstack-wrapper";
-import useCurrentBreakpointIdSelector from "~/context/type-scale-calculator-form/hooks/useCurrentBreakpointIdSelector";
-import useFontBodySelector from "~/context/type-scale-calculator-form/hooks/useFontBodySelector";
+import useTypographySelector from "~/context/app/hooks/useTypographySelector";
 import { DEFAULT_FONT_FAMILY } from "~/domain/google-fonts/constants";
 import { FontFamily } from "~/domain/google-fonts/interfaces";
 import useGoogleFontsUtils from "~/domain/google-fonts/useGoogleFontsUtils";
@@ -14,20 +13,12 @@ import { FormSubHeading } from "./form-headings";
 
 export default function GroupBodyFonts() {
   const googleWebFonts: FontFamily[] = useLoaderData();
-  const { currentBreakpointId } = useCurrentBreakpointIdSelector();
-  const { fontBody, actions } = useFontBodySelector();
+  const { typography, actions } = useTypographySelector();
   const { getGoogleFontLinkTagHref } = useGoogleFontsUtils();
 
   const [familyWeights, setFamilyWeights] = useState<string[]>(
     DEFAULT_FONT_FAMILY.variants
   );
-
-  function initValues() {
-    actions.TYPE_SCALE_CALCULATOR_FORM__INIT_BODY_FONT.dispatch({
-      ...fontBody,
-      breakpointId: currentBreakpointId,
-    });
-  }
 
   function onChangeFontFamily(fontFamilyHTMLSelectElement: HTMLSelectElement) {
     populateFontWeightsPickerComponent(fontFamilyHTMLSelectElement);
@@ -36,20 +27,12 @@ export default function GroupBodyFonts() {
     const fontFamily = fontFamilyHTMLSelectElement.value;
 
     // update the global state
-    actions.TYPE_SCALE_CALCULATOR_FORM__BODY_FONT_CHANGED.dispatch({
-      ...fontBody,
-      breakpointId: currentBreakpointId,
-      fontFamily,
-    });
+    actions.TYPOGRAPHY__BODY_FONT_FAMILY_CHANGED.dispatch(fontFamily);
   }
 
   function onChangeFontWeight(fontWeight: string) {
     // update the global state
-    actions.TYPE_SCALE_CALCULATOR_FORM__BODY_FONT_CHANGED.dispatch({
-      ...fontBody,
-      breakpointId: currentBreakpointId,
-      fontWeight,
-    });
+    actions.TYPOGRAPHY__BODY_FONT_WEIGHT_CHANGED.dispatch(fontWeight);
   }
 
   function populateFontWeightsPickerComponent(
@@ -71,30 +54,33 @@ export default function GroupBodyFonts() {
   }
 
   useEffect(() => {
-    initValues();
-  }, [currentBreakpointId]);
+    console.log(typography.body.fontFamily);
+  }, []);
 
   return (
     <VStackBox spacing={2}>
-      <FormSubHeading>Headings font</FormSubHeading>
+      <FormSubHeading>Body font</FormSubHeading>
       <VStackBox spacing={2}>
         <HStack w="100%">
           <GoogleFontFamiliesPicker
             fonts={googleWebFonts}
             onChange={onChangeFontFamily}
-            value={fontBody.fontFamily}
+            value={typography?.body.fontFamily}
           />
           <GoogleFontVariantsPicker
             weights={familyWeights}
-            value={fontBody.fontWeight}
+            value={typography?.body.fontWeight}
             onChange={onChangeFontWeight}
           />
         </HStack>
-        <link rel="stylesheet" href={getGoogleFontLinkTagHref(fontBody)}></link>
+        <link
+          rel="stylesheet"
+          href={getGoogleFontLinkTagHref(typography?.body)}
+        ></link>
         <Input
           variant="unstyled"
           placeholder="Type here something..."
-          fontFamily={fontBody.fontFamily}
+          fontFamily={typography?.body.fontFamily}
           color="primary.500"
         />
       </VStackBox>

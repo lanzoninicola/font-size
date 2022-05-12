@@ -26,10 +26,6 @@ export interface MediaQuery {
   lineHeight: number;
   // margin bottom for the step. This value might be changed in Media Query application section
   marginBottom: number;
-  // fontFamily for the step. This value might be changed in Media Query application section
-  fontFamily: string;
-  // fontWeight for the step. This value might be changed in Media Query application section
-  fontWeight: number;
 }
 
 export type MediaQueryStepEdit = Omit<MediaQuery, "fontFamily" | "fontWeight">;

@@ -18,6 +18,8 @@ export default function useCSSCodeBlock() {
 
   const { getViewportSizeByBreakpointId } = useBreakpointsQueryService();
 
+  function getFontFamilyStylesheet() {}
+
   /**
    *
    * @param breakpointId - the breakpoint id
@@ -55,7 +57,6 @@ export default function useCSSCodeBlock() {
         maxFontSize,
         lineHeight,
         marginBottom,
-        fontFamily,
       } = mediaQuery;
 
       const { minWidth, minWidthREM, maxWidthREM } =

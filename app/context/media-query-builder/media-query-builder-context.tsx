@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createContext } from "use-context-selector";
 import { BreakpointId } from "../breakpoint-builder/interfaces";
-import { TypeScaleStepEntityState } from "../app/interfaces";
+import { MediaQuery, TypeScaleStepEntityState } from "../app/interfaces";
 
 export interface MediaQueryBuilderContext {
   entityState: TypeScaleStepEntityState;
@@ -19,6 +19,16 @@ export interface MediaQueryBuilderContext {
   setLineHeight: (lineHeight: string) => void;
   setMarginBottom: (marginBottom: string) => void;
 }
+
+export const mediaQueryInitialStatePartial: Omit<
+  MediaQuery,
+  "breakpointId" | "stepId"
+> = {
+  minFontSize: 1,
+  maxFontSize: 1,
+  lineHeight: 120,
+  marginBottom: 1,
+};
 
 export const MediaQueryBuilderContextData =
   createContext<MediaQueryBuilderContext>({} as MediaQueryBuilderContext);
