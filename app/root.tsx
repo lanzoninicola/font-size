@@ -3,6 +3,7 @@ import { withEmotionCache } from "@emotion/react";
 import React from "react";
 import {
   Links,
+  LinksFunction,
   LiveReload,
   Meta,
   Outlet,
@@ -88,6 +89,19 @@ export function CatchBoundary() {
 interface DocumentProps {
   children: React.ReactNode;
 }
+
+export const links: LinksFunction = () => {
+  return [
+    {
+      rel: "preconnect",
+      href: "https://fonts.googleapis.com",
+    },
+    {
+      rel: "stylesheet",
+      href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap",
+    },
+  ];
+};
 
 const Document = withEmotionCache(
   ({ children }: DocumentProps, emotionCache) => {

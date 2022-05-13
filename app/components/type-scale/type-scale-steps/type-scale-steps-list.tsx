@@ -15,12 +15,12 @@ import VStackBox from "../../shared/vstack-wrapper";
 
 export default function TypeScaleStepsList() {
   const { typeScaleSteps, setTypeScaleSteps } = useHtmlSelectorsSelector();
-  const { getTypeScaleStepsSortedByPosition } = useTypeScaleStepsQueryService();
+  const { getStepsSortedByPosition } = useTypeScaleStepsQueryService();
 
   const [selectors, setSelectors] = useState<TypeScaleStepConfig[]>([]);
 
   useEffect(() => {
-    setSelectors(getTypeScaleStepsSortedByPosition("DESC"));
+    setSelectors(getStepsSortedByPosition("DESC"));
 
     console.log(selectors);
   }, [typeScaleSteps]);

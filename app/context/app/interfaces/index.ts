@@ -11,15 +11,17 @@ import { MediaQuery } from "~/context/media-query-builder/interfaces/media-query
 
 export interface AppContext {
   pixelsPerRem: number;
-  breakpoints: Breakpoints | null;
-  typeScaleSteps: TypeScaleStepConfig[] | null;
-  typeScaleConfig: TypeScaleConfig[] | null;
-  mediaQueries: MediaQuery[] | null;
+  breakpoints: Breakpoints;
+  typography: Typography;
+  typeScaleSteps: TypeScaleStepConfig[];
+  typeScaleConfig: TypeScaleConfig[];
+  mediaQueries: MediaQuery[];
   setPixelsPerRem: (pixelsPerRem: number) => void;
-  setBreakpoints: (breakpoints: Breakpoints | null) => void;
-  setTypeScaleSteps: (typeScaleSteps: TypeScaleStepConfig[] | null) => void;
+  setBreakpoints: (breakpoints: Breakpoints) => void;
+  setTypography: (typography: Typography) => void;
+  setTypeScaleSteps: (typeScaleSteps: TypeScaleStepConfig[]) => void;
   setTypeScale: (typeScaleConfig: TypeScaleConfig[]) => void;
-  setMediaQueries: (mediaQueries: MediaQuery[] | null) => void;
+  setMediaQueries: (mediaQueries: MediaQuery[]) => void;
 }
 
 enum DataProvider {
@@ -39,6 +41,19 @@ export enum EntityState {
 export enum TypeScaleStepEntityState {
   idle = "idle",
   edit = "edit",
+}
+
+export type FontFamily = string;
+export type FontWeight = string;
+
+export interface FontConfig {
+  fontFamily: FontFamily;
+  fontWeight: FontWeight;
+}
+
+export interface Typography {
+  headings: FontConfig;
+  body: FontConfig;
 }
 
 export type {

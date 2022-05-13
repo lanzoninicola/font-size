@@ -7,24 +7,18 @@ export default function useTypeScaleStepsQueryService() {
   const { typeScaleSteps } = useHtmlSelectorsSelector();
 
   /**
-   * @description Check if the global Selectors array is empty
+   * @description Check if the global Steps array is empty
    * @returns {boolean}
    */
-  function isSelectorsEmpty() {
-    console.log(typeScaleSteps);
-
-    if (typeScaleSteps) {
-      return typeScaleSteps.length === 0;
-    }
-
-    return true;
+  function isTypeScaleStepsEmpty() {
+    return typeScaleSteps.length === 0;
   }
 
   /**
-   * @description Get the selectors array sorted by position property ascendant or descendant
+   * @description Get the steps array sorted by position property ascendant or descendant
    * @param {boolean} [descendant=false]
    */
-  function getTypeScaleStepsSortedByPosition(
+  function getStepsSortedByPosition(
     sort: SortOrientation
   ): TypeScaleStepConfig[] {
     if (typeScaleSteps) {
@@ -38,8 +32,26 @@ export default function useTypeScaleStepsQueryService() {
     return [];
   }
 
+  /**
+   * @description Get the headings steps
+   * @returns {TypeScaleStepConfig[]}
+   */
+  function getHeadersSteps() {
+    return typeScaleSteps.filter((step) => step.isHeading === true);
+  }
+
+  /**
+   * @description Get the body steps
+   * @returns {TypeScaleStepConfig[]}
+   */
+  function getBodySteps() {
+    return typeScaleSteps.filter((step) => step.isHeading === false);
+  }
+
   return {
-    isSelectorsEmpty,
-    getTypeScaleStepsSortedByPosition,
+    isTypeScaleStepsEmpty,
+    getStepsSortedByPosition,
+    getHeadersSteps,
+    getBodySteps,
   };
 }

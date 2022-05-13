@@ -1,11 +1,7 @@
 import { useContextSelector } from "use-context-selector";
 import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
 import { MediaQueryStepEdit } from "~/context/media-query-builder/interfaces/media-query";
-import {
-  FontConfigFormControl,
-  FontTypeScaleConfig,
-  MinMaxTypeScaleConfig,
-} from "~/context/type-scale-calculator-form/interfaces";
+import { MinMaxTypeScaleConfig } from "~/context/type-scale-calculator-form/interfaces";
 import useMediaQueriesQueryService from "~/domain/media-queries/useMediaQueriesQueryService";
 import useTypeScaleCalculatorUtils from "~/domain/type-scale-calculator/useTypeScaleCalculatorUtils";
 
@@ -37,13 +33,7 @@ export default function useMediaQueriesSelector() {
     },
     MEDIA_QUERIES__ON_TYPE_SCALE_CONFIG_CHANGE: {
       dispatch: (payload: TypeScaleConfig) =>
-        onTypeScaleConfigChange(
-          payload.breakpointId,
-          payload.min,
-          payload.max,
-          payload.fontHeading,
-          payload.fontBody
-        ),
+        onTypeScaleConfigChange(payload.breakpointId, payload.min, payload.max),
     },
   };
 
@@ -52,9 +42,7 @@ export default function useMediaQueriesSelector() {
   function onTypeScaleConfigChange(
     breakpointId: BreakpointId,
     min: MinMaxTypeScaleConfig,
-    max: MinMaxTypeScaleConfig,
-    fontHeading: FontTypeScaleConfig,
-    fontBody: FontTypeScaleConfig
+    max: MinMaxTypeScaleConfig
   ) {
     if (!typeScaleSteps) {
       return;
@@ -91,12 +79,6 @@ export default function useMediaQueriesSelector() {
           mediaQueryStepConfig.maxFontSize,
         lineHeight: mediaQueryStepConfig.lineHeight,
         marginBottom: mediaQueryStepConfig.marginBottom,
-        fontFamily:
-          (step.isHeading ? fontHeading.fontFamily : fontBody.fontFamily) ||
-          mediaQueryStepConfig.fontFamily,
-        fontWeight:
-          (step.isHeading ? fontHeading.fontWeight : fontBody.fontWeight) ||
-          mediaQueryStepConfig.fontWeight,
       };
     });
 

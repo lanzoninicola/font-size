@@ -1,6 +1,6 @@
-import { mediaQueryInitialStatePartial } from "~/context/app/app-context";
 import { MediaQuery } from "~/context/app/interfaces";
 import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
+import { mediaQueryInitialStatePartial } from "~/context/media-query-builder/media-query-builder-context";
 
 /**
  * @description This hook is responsible to run query against the MediaQueries state

@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 
 // https://remix.run/docs/en/v1/guides/constraints#rendering-with-browser-only-apis
-export default function useLocalStorage<T>(
-  key: string,
-  initialValue: T | null = null
-) {
-  const [state, setState] = useState<T | null>(initialValue);
+export default function useLocalStorage<T>(key: string, initialValue: T) {
+  const [state, setState] = useState<T>(initialValue);
 
   // The code below is moved into useEffect, which only runs in the browser.
   useEffect(() => {
@@ -37,7 +34,7 @@ export default function useLocalStorage<T>(
     }
   }
 
-  function setWithLocalStorage(nextState: T | null) {
+  function setWithLocalStorage(nextState: T) {
     try {
       setState(nextState);
 

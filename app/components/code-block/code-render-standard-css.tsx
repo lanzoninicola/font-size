@@ -1,14 +1,15 @@
 import { useEffect } from "react";
-import useCSSCodeBlock from "~/domain/code-block/useCSSCodeBlock";
+import useStylesheet from "~/domain/stylesheet/useStylesheet";
 
 import CodeBox from "./code-box";
 
 export default function CodeRenderStandardCSS() {
-  const { codeBlock } = useCSSCodeBlock();
+  const { getMediaQueriesStylesheet, getTypographyStyleSheet } =
+    useStylesheet();
 
   return (
     <>
-      <CodeBox disableCopy={true}>{codeBlock}</CodeBox>
+      <CodeBox disableCopy={true}>{}</CodeBox>
     </>
   );
 }

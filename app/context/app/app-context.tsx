@@ -3,12 +3,14 @@ import { createContext } from "use-context-selector";
 import useLocalStorage from "~/components/shared/hooks/useLocalStorage";
 import useBreakpointsData from "~/domain/breakpoints/useBreakpointsData";
 import useTypeScaleStepsData from "~/domain/type-scale-steps/useTypeScaleStepsData";
+import getTypographyInitialState from "~/domain/typography/getTypographyInitialState";
 
 import {
   FS_CONTEXT_BREAKPOINTS,
   FS_CONTEXT_MEDIA_QUERIES,
   FS_CONTEXT_TYPESCALE_CONFIG,
   FS_CONTEXT_TYPESCALE_STEPS,
+  FS_CONTEXT_TYPOGRAPHY,
 } from "./constants";
 import {
   AppContext,
@@ -17,21 +19,10 @@ import {
   MediaQuery,
   TypeScaleConfig,
   TypeScaleStepConfig,
+  Typography,
 } from "./interfaces";
 
 export const AppContextData = createContext<AppContext>({} as AppContext);
-
-export const mediaQueryInitialStatePartial: Omit<
-  MediaQuery,
-  "breakpointId" | "stepId"
-> = {
-  minFontSize: 1,
-  maxFontSize: 1,
-  lineHeight: 120,
-  marginBottom: 1,
-  fontFamily: "Open Sans",
-  fontWeight: 400,
-};
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   const { getByProvider: getBreakpointsByProvider } = useBreakpointsData();
@@ -41,25 +32,32 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [pixelsPerRem, setPixelsPerRem] = useState(16);
 
   // On app load, default breakpoints are loaded
-  const [breakpoints, setBreakpoints] = useLocalStorage<Breakpoints | null>(
+  const [breakpoints, setBreakpoints] = useLocalStorage<Breakpoints>(
     FS_CONTEXT_BREAKPOINTS,
     getBreakpointsByProvider(DataProvider.default)
   );
 
   // On app load, default type scale steps are loaded
   const [typeScaleSteps, setTypeScaleSteps] = useLocalStorage<
-    TypeScaleStepConfig[] | null
+    TypeScaleStepConfig[]
   >(
     FS_CONTEXT_TYPESCALE_STEPS,
     getTypeScaleStepsByProvider(DataProvider.default)
   );
 
   const [typeScaleConfig, setTypeScale] = useLocalStorage<TypeScaleConfig[]>(
-    FS_CONTEXT_TYPESCALE_CONFIG
+    FS_CONTEXT_TYPESCALE_CONFIG,
+    []
   );
 
-  const [mediaQueries, setMediaQueries] = useLocalStorage<MediaQuery[] | null>(
-    FS_CONTEXT_MEDIA_QUERIES
+  const [mediaQueries, setMediaQueries] = useLocalStorage<MediaQuery[]>(
+    FS_CONTEXT_MEDIA_QUERIES,
+    []
+  );
+
+  const [typography, setTypography] = useLocalStorage<Typography>(
+    FS_CONTEXT_TYPOGRAPHY,
+    getTypographyInitialState()
   );
 
   return (
@@ -70,11 +68,13 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         breakpoints,
         typeScaleConfig,
         mediaQueries,
+        typography,
         setPixelsPerRem,
         setTypeScaleSteps,
         setBreakpoints,
         setTypeScale,
         setMediaQueries,
+        setTypography,
       }}
     >
       {children}
