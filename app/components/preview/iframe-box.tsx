@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import useMediaQueriesSelector from "~/context/app/hooks/useMediaQueriesSelector";
 import useTypographySelector from "~/context/app/hooks/useTypographySelector";
 import usePreviewUrl from "~/context/preview/hooks/usePreviewUrl";
-import useCSSCodeBlock from "~/domain/code-block/useCSSCodeBlock";
+import useStylesheet from "~/domain/stylesheet/useStylesheet";
 import usePostMessageService from "~/domain/preview/usePostMessageService";
 import usePreviewSettings from "~/domain/preview/usePreviewSettings";
 
@@ -15,7 +15,8 @@ export default function IframeBox({
   height: number;
 }) {
   const { typography } = useTypographySelector();
-  const { getCSSStylesheet } = useCSSCodeBlock();
+  const { getMediaQueriesStylesheet, getTypographyStyleSheet } =
+    useStylesheet();
   const { previewUrl } = usePreviewUrl();
   const { postMessage } = usePostMessageService();
   const { iframeDefaultURL: DEFAULT_URL } = usePreviewSettings();
@@ -25,12 +26,14 @@ export default function IframeBox({
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   function onIframeLoad() {
-    const codeBlock = getCSSStylesheet(true);
+    const mediaQueriesStylesheet = getMediaQueriesStylesheet(true);
+    const typographyStyleSheet = getTypographyStyleSheet(true);
 
     postMessage({
       iframeRef,
       message: {
-        stylesheetCode: codeBlock,
+        stylesheetTypographyCode: typographyStyleSheet,
+        stylesheetMediaQueriesCode: mediaQueriesStylesheet,
         fontHeading: typography.headings,
         fontBody: typography.body,
       },
