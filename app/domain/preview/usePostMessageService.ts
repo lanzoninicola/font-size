@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { FontConfig } from "~/context/app/interfaces";
 
 import useGoogleFontsUtils from "../google-fonts/useGoogleFontsUtils";
-import { Message, PostMessage } from "./types/indext";
+import { Message, PostMessage } from "./types";
 
 export default function usePostMessageService() {
   //TODO: adjust target origin
@@ -45,11 +45,16 @@ export default function usePostMessageService() {
           if (stylesheetTypographyCode) {
             addStyleTag(stylesheetTypographyCode);
           }
+          if (fontHeading) {
+            addGoogleFontLinkTag(fontHeading);
+          }
+
+          if (fontBody) {
+            addGoogleFontLinkTag(fontBody);
+          }
+
           if (stylesheetMediaQueriesCode) {
             addStyleTag(stylesheetMediaQueriesCode);
-          }
-          if (fontHeading && fontBody) {
-            addGoogleFontLinkTag({ fontHeading, fontBody });
           }
         },
         false
@@ -59,20 +64,13 @@ export default function usePostMessageService() {
 
   /**
    * @description Adds the <link> tag for the Google Fonts
-   * @param fontHeading
-   * @param fontBody
+   * @param {array} - fontHeading or fontBody or both
    *
    * @private
    */
-  function addGoogleFontLinkTag({
-    fontHeading,
-    fontBody,
-  }: {
-    fontHeading: FontConfig;
-    fontBody: FontConfig;
-  }) {
+  function addGoogleFontLinkTag(...fonts: FontConfig[]) {
     const iframeBody = document.getElementsByTagName("body");
-    const url = getGoogleFontLinkTagHref(fontHeading, fontBody);
+    const url = getGoogleFontLinkTagHref(...fonts);
 
     if (iframeBody[0]) {
       const link = document.createElement("link");

@@ -3,8 +3,8 @@ import { json, Outlet } from "remix";
 import Footer from "~/components/layout/footer";
 import Header from "~/components/layout/header";
 import AppSidebar from "~/components/layout/sidebar/app-sidebar";
-import PreviewContent from "~/components/preview/preview-content";
-import PreviewSideContent from "~/components/preview/preview-side-content";
+import PreviewFrames from "~/components/preview/preview-frames";
+import PreviewSideContent from "~/components/preview/preview-side-content/preview-side-content";
 import MainGridWrapper from "~/components/shared/main-grid-wrapper";
 import SidePanel from "~/components/shared/side-panel";
 import { BreakpointsFormProvider } from "~/context/breakpoint-builder/breakpoints-form-context";
@@ -49,7 +49,7 @@ export default function App() {
                 <Outlet context={context} />
               </SidePanel>
 
-              <PreviewContent />
+              <PreviewFrames />
               <PreviewSideContent />
             </MediaQueryBuilderProvider>
           </TypeScaleCalculatorFormProvider>

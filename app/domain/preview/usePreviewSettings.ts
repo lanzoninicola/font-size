@@ -3,7 +3,7 @@ export default function usePreviewSettings() {
     iframeDefaultURL: "/preview/content",
     iframeDefaultWidth: 412,
     iframeDefaultHeight: 718,
-    deviceName: "Custom Device",
+    name: "Custom Device",
   };
 
   return PREVIEW_SETTINGS;

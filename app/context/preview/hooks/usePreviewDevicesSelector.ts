@@ -1,5 +1,5 @@
 import { useContextSelector } from "use-context-selector";
-import { YesVizDeviceInfo } from "../interfaces";
+import { YesVizDeviceInfo } from "../types";
 
 import { PreviewContextData } from "../preview-context";
 

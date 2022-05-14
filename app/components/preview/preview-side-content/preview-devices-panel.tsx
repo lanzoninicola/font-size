@@ -2,12 +2,12 @@ import { HStack, Text, Tooltip } from "@chakra-ui/react";
 import React, { SetStateAction, useCallback, useEffect, useState } from "react";
 import usePreviewDevicesSelector from "~/context/preview/hooks/usePreviewDevicesSelector";
 import usePreviewWindowsSelector from "~/context/preview/hooks/usePreviewWindowsSelector";
-import { DeviceTypes, YesVizDeviceInfo } from "~/context/preview/interfaces";
+import { DeviceTypes, YesVizDeviceInfo } from "~/context/preview/types";
 import usePreviewDevicesService from "~/domain/preview/usePreviewDevicesService";
 import usePreviewWindowsService from "~/domain/preview/usePreviewWindowsService";
 import useCustomScrollbar from "~/domain/utilities/useCustomScrollbar";
 
-import ActionButton from "../shared/action-button";
+import ActionButton from "../../shared/action-button";
 import {
   CloseIcon,
   LaptopIcon,
@@ -16,10 +16,10 @@ import {
   SortSizeIcon,
   TabletIcon,
   WatchIcon,
-} from "../shared/icons";
-import InputSelect from "../shared/input-select";
-import InputText from "../shared/input-text";
-import VStackBox from "../shared/vstack-wrapper";
+} from "../../shared/icons";
+import InputSelect from "../../shared/input-select";
+import InputText from "../../shared/input-text";
+import VStackBox from "../../shared/vstack-wrapper";
 
 export type DeviceTypeOptions = "All" | DeviceTypes;
 

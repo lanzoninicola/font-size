@@ -10,7 +10,7 @@ import { useEffect } from "react";
 import VStackBox from "~/components/shared/vstack-wrapper";
 import usePostMessageService from "~/domain/preview/usePostMessageService";
 
-export default function PreviewContent() {
+export default function PreviewFrames() {
   const { handleMessages } = usePostMessageService();
 
   useEffect(() => {

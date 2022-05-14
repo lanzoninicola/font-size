@@ -1,5 +1,5 @@
 import { HStack, Input } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLoaderData } from "remix";
 import GoogleFontFamiliesPicker from "~/components/shared/google-font-families-picker";
 import GoogleFontVariantsPicker from "~/components/shared/google-font-variants.picker";
@@ -9,9 +9,9 @@ import { DEFAULT_FONT_FAMILY } from "~/domain/google-fonts/constants";
 import { FontFamily } from "~/domain/google-fonts/interfaces";
 import useGoogleFontsUtils from "~/domain/google-fonts/useGoogleFontsUtils";
 
-import { FormSubHeading } from "./form-headings";
+import { FormSubHeading } from "../type-scale/type-scale-calculator/form/form-headings";
 
-export default function GroupHeadingsFonts() {
+export default function BodyFontsPicker() {
   const googleWebFonts: FontFamily[] = useLoaderData();
   const { typography, actions } = useTypographySelector();
   const { getGoogleFontLinkTagHref } = useGoogleFontsUtils();
@@ -27,12 +27,12 @@ export default function GroupHeadingsFonts() {
     const fontFamily = fontFamilyHTMLSelectElement.value;
 
     // update the global state
-    actions.TYPOGRAPHY__HEADINGS_FONT_FAMILY_CHANGED.dispatch(fontFamily);
+    actions.TYPOGRAPHY__BODY_FONT_FAMILY_CHANGED.dispatch(fontFamily);
   }
 
   function onChangeFontWeight(fontWeight: string) {
     // update the global state
-    actions.TYPOGRAPHY__HEADINGS_FONT_WEIGHT_CHANGED.dispatch(fontWeight);
+    actions.TYPOGRAPHY__BODY_FONT_WEIGHT_CHANGED.dispatch(fontWeight);
   }
 
   function populateFontWeightsPickerComponent(
@@ -53,30 +53,34 @@ export default function GroupHeadingsFonts() {
     return weightsAttr?.split(",") || DEFAULT_FONT_FAMILY.variants;
   }
 
+  useEffect(() => {
+    console.log(typography.body.fontFamily);
+  }, []);
+
   return (
     <VStackBox spacing={2}>
-      <FormSubHeading>Headings font</FormSubHeading>
+      <FormSubHeading>Body font</FormSubHeading>
       <VStackBox spacing={2}>
         <HStack w="100%">
           <GoogleFontFamiliesPicker
             fonts={googleWebFonts}
             onChange={onChangeFontFamily}
-            value={typography?.headings?.fontFamily}
+            value={typography?.body.fontFamily}
           />
           <GoogleFontVariantsPicker
             weights={familyWeights}
-            value={typography?.headings?.fontWeight}
+            value={typography?.body.fontWeight}
             onChange={onChangeFontWeight}
           />
         </HStack>
         <link
           rel="stylesheet"
-          href={getGoogleFontLinkTagHref(typography?.headings)}
+          href={getGoogleFontLinkTagHref(typography?.body)}
         ></link>
         <Input
           variant="unstyled"
           placeholder="Type here something..."
-          fontFamily={typography?.headings?.fontFamily}
+          fontFamily={typography?.body.fontFamily}
           color="primary.500"
         />
       </VStackBox>

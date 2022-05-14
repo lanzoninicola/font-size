@@ -1,18 +1,7 @@
 import { useState } from "react";
 import { createContext } from "use-context-selector";
 
-import { PreviewDevice, YesVizDeviceInfo } from "./interfaces";
-
-export interface PreviewContext {
-  devices: YesVizDeviceInfo[];
-  previewWindows: PreviewDevice[];
-  previewUrl: string;
-  zoom: number;
-  setDevices: (devices: YesVizDeviceInfo[]) => void;
-  setPreviewWindows: (previewWindows: PreviewDevice[]) => void;
-  setPreviewUrl: (url: string) => void;
-  setZoom: (zoom: number) => void;
-}
+import { PreviewContext, PreviewDevice, YesVizDeviceInfo } from "./types";
 
 export const PreviewContextData = createContext<PreviewContext>(
   {} as PreviewContext
