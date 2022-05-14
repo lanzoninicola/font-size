@@ -2,7 +2,7 @@ import { HStack, Text, Tooltip } from "@chakra-ui/react";
 import React, { SetStateAction, useCallback, useEffect, useState } from "react";
 import usePreviewDevicesSelector from "~/context/preview/hooks/usePreviewDevicesSelector";
 import usePreviewWindowsSelector from "~/context/preview/hooks/usePreviewWindowsSelector";
-import { DeviceTypes, YesVizDeviceInfo } from "~/context/preview/interfaces";
+import { DeviceTypes, YesVizDeviceInfo } from "~/context/preview/types";
 import usePreviewDevicesService from "~/domain/preview/usePreviewDevicesService";
 import usePreviewWindowsService from "~/domain/preview/usePreviewWindowsService";
 import useCustomScrollbar from "~/domain/utilities/useCustomScrollbar";

@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import usePreviewDevicesSelector from "~/context/preview/hooks/usePreviewDevicesSelector";
-import { DeviceTypes, YesVizDeviceInfo } from "~/context/preview/interfaces";
+import { DeviceTypes, YesVizDeviceInfo } from "~/context/preview/types";
 
 type SortOrientation = "ASC" | "DESC";
 

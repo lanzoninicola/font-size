@@ -3,9 +3,10 @@ import { useEffect, useRef, useState } from "react";
 import useMediaQueriesSelector from "~/context/app/hooks/useMediaQueriesSelector";
 import useTypographySelector from "~/context/app/hooks/useTypographySelector";
 import usePreviewUrl from "~/context/preview/hooks/usePreviewUrl";
-import useStylesheet from "~/domain/stylesheet/useStylesheet";
+import useMediaQueriesStylesheet from "~/domain/stylesheet/useMediaQueriesStylesheet";
 import usePostMessageService from "~/domain/preview/usePostMessageService";
 import usePreviewSettings from "~/domain/preview/usePreviewSettings";
+import usePreviewIframeRefsSelector from "~/context/preview/hooks/usePreviewIframeRefsSelector";
 
 export default function IframeBox({
   width,
@@ -14,36 +15,47 @@ export default function IframeBox({
   width: number;
   height: number;
 }) {
-  const { typography } = useTypographySelector();
-  const { getMediaQueriesStylesheet, getTypographyStyleSheet } =
-    useStylesheet();
+  // const { typography } = useTypographySelector();
+  // const { getMediaQueriesStylesheet, getStyleSheet } =
+  //   useMediaQueriesStylesheet();
   const { previewUrl } = usePreviewUrl();
-  const { postMessage } = usePostMessageService();
+  // const { postMessage } = usePostMessageService();
   const { iframeDefaultURL: DEFAULT_URL } = usePreviewSettings();
+  const { actions } = usePreviewIframeRefsSelector();
 
-  const [iframeReloadKey, setIframeReloadKey] = useState(0);
+  // const [iframeReloadKey, setIframeReloadKey] = useState(0);
 
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
-  function onIframeLoad() {
-    const mediaQueriesStylesheet = getMediaQueriesStylesheet(true);
-    const typographyStyleSheet = getTypographyStyleSheet(true);
+  // function onIframeLoad() {
+  //   const mediaQueriesStylesheet = getMediaQueriesStylesheet(true);
+  //   const typographyStyleSheet = getStyleSheet(true);
 
-    postMessage({
-      iframeRef,
-      message: {
-        stylesheetTypographyCode: typographyStyleSheet,
-        stylesheetMediaQueriesCode: mediaQueriesStylesheet,
-        fontHeading: typography.headings,
-        fontBody: typography.body,
-      },
-    });
-  }
+  //   postMessage({
+  //     iframeRef,
+  //     message: {
+  //       stylesheetTypographyCode: typographyStyleSheet,
+  //       stylesheetMediaQueriesCode: mediaQueriesStylesheet,
+  //       fontHeading: typography.headings,
+  //       fontBody: typography.body,
+  //     },
+  //   });
+  // }
 
   // reload the frame when the typography object change
+  // useEffect(() => {
+  //   setIframeReloadKey(iframeReloadKey + 1);
+  // }, [typography]);
+
   useEffect(() => {
-    setIframeReloadKey(iframeReloadKey + 1);
-  }, [typography]);
+    if (iframeRef.current) {
+      actions.PREVIEW__ADD_IFRAME_REF.dispatch(iframeRef);
+    }
+
+    return () => {
+      actions.PREVIEW__REMOVE_IFRAME_REF.dispatch(iframeRef);
+    };
+  }, []);
 
   return (
     <>
@@ -54,15 +66,15 @@ export default function IframeBox({
         transition="all 500ms ease"
       >
         <iframe
-          key={iframeReloadKey}
-          name="iframe-preview"
+          // key={iframeReloadKey}
+          name={`preview-iframe-${width}-${height}`}
           ref={iframeRef}
           src={
             previewUrl || previewUrl === "https://" ? previewUrl : DEFAULT_URL
           }
           width="100%"
           height="100%"
-          onLoad={onIframeLoad}
+          // onLoad={onIframeLoad}
           style={{
             borderRadius: "5px",
           }}

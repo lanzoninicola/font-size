@@ -1,4 +1,7 @@
 import { useContextSelector } from "use-context-selector";
+import usePreviewIframeRefsSelector from "~/context/preview/hooks/usePreviewIframeRefsSelector";
+import useMediaQueriesStylesheet from "~/domain/stylesheet/useMediaQueriesStylesheet";
+import useTypographyStylesheet from "~/domain/stylesheet/useTypographyStylesheet";
 import { AppContextData } from "../app-context";
 import { FontFamily, FontWeight } from "../interfaces";
 
@@ -28,6 +31,9 @@ export default function useTypographySelector() {
     },
   };
 
+  const { actions: previewActions } = usePreviewIframeRefsSelector();
+  const { getTypographyBodyStylesheet } = useTypographyStylesheet(typography);
+
   function changeHeadingsFontFamily(payload: FontFamily) {
     const nextTypography = { ...typography };
     nextTypography.headings.fontFamily = payload;
@@ -44,6 +50,13 @@ export default function useTypographySelector() {
     const nextTypography = { ...typography };
     nextTypography.body.fontFamily = payload;
     setTypography(nextTypography);
+
+    const stylesheet = getTypographyBodyStylesheet(true);
+
+    previewActions.PREVIEW__POST_MESSAGE_CHANGED_BODY_FONT.dispatch({
+      fontBody: typography.body,
+      stylesheetTypographyCode: stylesheet,
+    });
   }
 
   function changeBodyFontWeight(payload: FontWeight) {

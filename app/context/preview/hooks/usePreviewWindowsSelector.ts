@@ -7,7 +7,7 @@ import usePreviewSettings from "~/domain/preview/usePreviewSettings";
 import usePreviewWindowsService from "~/domain/preview/usePreviewWindowsService";
 import parseDecimalNumber from "~/domain/utilities/parseDecimalNumber";
 
-import { PreviewDevice } from "../interfaces";
+import { PreviewDevice } from "../types";
 import { PreviewContextData } from "../preview-context";
 
 export default function usePreviewWindowsSelector() {

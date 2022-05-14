@@ -1,3 +1,16 @@
+export interface PreviewContext {
+  devices: YesVizDeviceInfo[];
+  previewWindows: PreviewDevice[];
+  previewUrl: string;
+  zoom: number;
+  iframeRefs: React.RefObject<HTMLIFrameElement>[];
+  setDevices: (devices: YesVizDeviceInfo[]) => void;
+  setPreviewWindows: (previewWindows: PreviewDevice[]) => void;
+  setPreviewUrl: (url: string) => void;
+  setZoom: (zoom: number) => void;
+  setIframeRefs: (iframeRefs: React.RefObject<HTMLIFrameElement>[]) => void;
+}
+
 export interface PreviewDevice {
   width: number;
   height: number;

@@ -4,7 +4,7 @@ import { useLoaderData } from "remix";
 import usePreviewDevicesSelector from "~/context/preview/hooks/usePreviewDevicesSelector";
 import usePreviewWindowsSelector from "~/context/preview/hooks/usePreviewWindowsSelector";
 import usePreviewZoomSelector from "~/context/preview/hooks/usePreviewZoomSelector";
-import { YesVizDeviceInfo } from "~/context/preview/interfaces";
+import { YesVizDeviceInfo } from "~/context/preview/types";
 import useBreakpointsQueryService from "~/domain/breakpoints/useBreakpointsQueryService";
 import useMediaQueriesBuilderService from "~/domain/media-queries/useMediaQueriesBuilderService";
 import usePreviewDevicesService from "~/domain/preview/usePreviewDevicesService";

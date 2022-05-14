@@ -1,4 +1,4 @@
-import { PreviewDevice } from "~/context/preview/interfaces";
+import { PreviewDevice } from "~/context/preview/types";
 
 import usePreviewSettings from "./usePreviewSettings";
 

@@ -9,8 +9,8 @@ import { TypeScaleConfig } from "~/context/type-scale-calculator-form/interfaces
 import { FormHeading, FormSubHeading } from "./form-headings";
 
 import GroupBaselineStep from "./group-baseline-step";
-import GroupBodyFonts from "./group-body-fonts";
-import GroupHeadingsFonts from "./group-headings-fonts";
+import BodyFontsPicker from "../../../typography/body-fonts-picker";
+import HeadingFontsPicker from "../../../typography/headings-fonts-picker";
 import GroupMaximum from "./group-maximum";
 import GroupMinimum from "./group-minimum";
 
@@ -52,8 +52,8 @@ export default function TypeScaleCalculatorForm() {
       <Divider />
 
       <FormHeading>3. Choose the font</FormHeading>
-      <GroupHeadingsFonts />
-      <GroupBodyFonts />
+      {/* <HeadingFontsPicker /> */}
+      <BodyFontsPicker />
 
       <Button w="100%" bg="secondary.500" onClick={onSaveTypeScaleCalculation}>
         Save
