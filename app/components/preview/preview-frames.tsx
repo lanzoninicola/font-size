@@ -5,17 +5,13 @@ import usePreviewDevicesSelector from "~/context/preview/hooks/usePreviewDevices
 import usePreviewWindowsSelector from "~/context/preview/hooks/usePreviewWindowsSelector";
 import usePreviewZoomSelector from "~/context/preview/hooks/usePreviewZoomSelector";
 import { YesVizDeviceInfo } from "~/context/preview/types";
-import useBreakpointsQueryService from "~/domain/breakpoints/useBreakpointsQueryService";
-import useMediaQueriesBuilderService from "~/domain/media-queries/useMediaQueriesBuilderService";
-import usePreviewDevicesService from "~/domain/preview/usePreviewDevicesService";
-import usePreviewWindowsService from "~/domain/preview/usePreviewWindowsService";
-import FlippedContainer from "../layout/flipped-container";
 
-import PreviewDevice from "./preview-device";
+import FlippedContainer from "../layout/flipped-container";
+import PreviewFrame from "./preview-frame/preview-frame";
 
 type LoaderData = YesVizDeviceInfo[];
 
-export default function PreviewContent() {
+export default function PreviewFrames() {
   const devicesData: LoaderData = useLoaderData();
   const { setDevices } = usePreviewDevicesSelector();
 
@@ -43,9 +39,9 @@ export default function PreviewContent() {
             paddingTop="1rem"
           >
             <>
-              {previewWindows.map((_, idx) => (
-                <PreviewDevice key={idx} idx={idx} />
-              ))}
+              {previewWindows.map((device, idx) => {
+                return <PreviewFrame key={idx} device={device} />;
+              })}
             </>
           </HStack>
         </Box>

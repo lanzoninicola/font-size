@@ -52,7 +52,7 @@ export default function TypeScaleCalculatorForm() {
       <Divider />
 
       <FormHeading>3. Choose the font</FormHeading>
-      {/* <HeadingFontsPicker /> */}
+      <HeadingFontsPicker />
       <BodyFontsPicker />
 
       <Button w="100%" bg="secondary.500" onClick={onSaveTypeScaleCalculation}>

@@ -2,13 +2,14 @@ import { useEffect } from "react";
 import { useContextSelector } from "use-context-selector";
 import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
 import useBreakpointsQueryService from "~/domain/breakpoints/useBreakpointsQueryService";
+import { TypographyMessage } from "~/domain/preview/types";
+import { usePostMessage } from "~/domain/preview/usePostMessage";
 import usePreviewDevicesService from "~/domain/preview/usePreviewDevicesService";
-import usePreviewSettings from "~/domain/preview/usePreviewSettings";
 import usePreviewWindowsService from "~/domain/preview/usePreviewWindowsService";
 import parseDecimalNumber from "~/domain/utilities/parseDecimalNumber";
 
-import { PreviewDevice } from "../types";
 import { PreviewContextData } from "../preview-context";
+import { PreviewDevice } from "../types";
 
 export default function usePreviewWindowsSelector() {
   const previewWindows = useContextSelector(
@@ -33,7 +34,7 @@ export default function usePreviewWindowsSelector() {
       dispatch: (payload: PreviewDevice[]) => addBulkWindow(payload),
     },
     PREVIEW_WINDOWS__REMOVE_WINDOW: {
-      dispatch: (payload: number) => removeWindow(payload),
+      dispatch: (payload: PreviewDevice) => removeWindow(payload),
     },
     PREVIEW_WINDOWS__REMOVE_ALL_WINDOWS: {
       dispatch: () => removeAllWindows(),
@@ -53,7 +54,15 @@ export default function usePreviewWindowsSelector() {
       dispatch: (payload: BreakpointId) =>
         loadPreviewWindowsAccordingToBreakpoint(payload),
     },
+    PREVIEW_WINDOWS__IFRAME_LOADED: {
+      dispatch: (device: PreviewDevice) => deviceWithIframeRef(device),
+    },
+    PREVIEW_WINDOWS__POST_MESSAGE_CHANGED_FONT: {
+      dispatch: (payload: TypographyMessage) => publishSelectedFont(payload),
+    },
   };
+
+  const { postMessage } = usePostMessage();
 
   function loadPreviewWindowsAccordingToBreakpoint(breakpointId: BreakpointId) {
     const { minWidth, maxWidth } = getViewportSizeByBreakpointId(breakpointId);
@@ -106,9 +115,9 @@ export default function usePreviewWindowsSelector() {
    * @description Remove the selected window from the previewWindows array
    * @param id of the window to remove
    */
-  function removeWindow(id: number) {
+  function removeWindow(device: PreviewDevice) {
     let nextState = [...previewWindows];
-    nextState.splice(id, 1);
+    nextState = nextState.filter((d) => d.name !== device.name);
     setPreviewWindows(nextState);
   }
 
@@ -141,6 +150,34 @@ export default function usePreviewWindowsSelector() {
     const nextHeight = parseDecimalNumber(height);
     nextState[id].height = nextHeight;
     setPreviewWindows(nextState);
+  }
+
+  /**
+   * @description Attach the iframe reference to the device loaded
+   * @param device - PreviewDevice with the iframe ref
+   */
+  function deviceWithIframeRef(device: PreviewDevice) {
+    const nextState = [...previewWindows];
+
+    const deviceLoaded = nextState.find((d) => d.name === device.name);
+
+    if (deviceLoaded) {
+      deviceLoaded.iframeRef = device.iframeRef;
+    }
+
+    setPreviewWindows(nextState);
+  }
+
+  /**
+   * @description Publish the selected font to the preview frames
+   * @param payload - TypographyMessage
+   * */
+  function publishSelectedFont(payload: TypographyMessage) {
+    previewWindows.forEach((device) => {
+      if (device.iframeRef) {
+        postMessage(device.iframeRef, payload);
+      }
+    });
   }
 
   useEffect(() => {

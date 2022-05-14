@@ -2,9 +2,9 @@ import { VStack } from "@chakra-ui/react";
 import { useState } from "react";
 import usePreviewWindowsService from "~/domain/preview/usePreviewWindowsService";
 
-import ActionButton from "../shared/action-button";
-import { AddIcon, ClearAllIcon } from "../shared/icons";
-import SidebarContainer from "../shared/sidebar-container";
+import ActionButton from "../../shared/action-button";
+import { AddIcon, ClearAllIcon } from "../../shared/icons";
+import SidebarContainer from "../../shared/sidebar-container";
 
 export default function PreviewSidebar({
   onShowDevicesPanel,

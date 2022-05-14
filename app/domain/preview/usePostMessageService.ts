@@ -42,8 +42,6 @@ export default function usePostMessageService() {
             fontBody,
           } = messageReceived;
 
-          console.log(messageReceived);
-
           if (stylesheetTypographyCode) {
             addStyleTag(stylesheetTypographyCode);
           }
@@ -81,8 +79,6 @@ export default function usePostMessageService() {
       link.href = url;
 
       iframeBody[0].appendChild(link);
-
-      console.log(link);
     }
   }
 

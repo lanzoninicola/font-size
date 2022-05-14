@@ -13,10 +13,6 @@ export function PreviewProvider({ children }: { children: React.ReactNode }) {
   const [previewUrl, setPreviewUrl] = useState("");
   const [zoom, setZoom] = useState(100);
 
-  const [iframeRefs, setIframeRefs] = useState<
-    React.RefObject<HTMLIFrameElement>[]
-  >([]);
-
   return (
     <PreviewContextData.Provider
       value={{
@@ -24,12 +20,10 @@ export function PreviewProvider({ children }: { children: React.ReactNode }) {
         previewWindows,
         previewUrl,
         zoom,
-        iframeRefs,
         setDevices,
         setPreviewWindows,
         setPreviewUrl,
         setZoom,
-        setIframeRefs,
       }}
     >
       {children}
