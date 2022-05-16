@@ -13,8 +13,10 @@ export default function usePostMessageService() {
   /**
    * @description This function is fired inside the useEffect of iframe-box component
    * to send messages to preview iframes
+   * @deprecated Use postMessage function of usePostMessage hook instead
    *
    * */
+
   function postMessage({ iframeRef, message }: PostMessage) {
     if (iframeRef.current?.contentWindow) {
       iframeRef.current.contentWindow.postMessage(message, TARGET_ORIGIN);

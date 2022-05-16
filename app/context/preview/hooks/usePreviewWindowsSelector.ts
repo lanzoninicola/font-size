@@ -57,7 +57,7 @@ export default function usePreviewWindowsSelector() {
     PREVIEW_WINDOWS__IFRAME_LOADED: {
       dispatch: (device: PreviewDevice) => deviceWithIframeRef(device),
     },
-    PREVIEW_WINDOWS__POST_MESSAGE_CHANGED_FONT: {
+    PREVIEW_WINDOWS__POST_MESSAGE_CURRENT_TYPOGRAPHY: {
       dispatch: (payload: TypographyMessage) => publishSelectedFont(payload),
     },
   };
@@ -158,7 +158,6 @@ export default function usePreviewWindowsSelector() {
    */
   function deviceWithIframeRef(device: PreviewDevice) {
     const nextState = [...previewWindows];
-
     const deviceLoaded = nextState.find((d) => d.name === device.name);
 
     if (deviceLoaded) {

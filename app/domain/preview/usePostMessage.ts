@@ -13,7 +13,6 @@ export interface UsePostMessage {
 export const usePostMessage = (): UsePostMessage => {
   const TARGET_ORIGIN = "*";
 
-  //   const iframeRef = useRef<HTMLIFrameElement>(null);
   const postMessage = useCallback((iframeRef, payload) => {
     const element = iframeRef.current;
     if (element?.contentWindow == null) return;

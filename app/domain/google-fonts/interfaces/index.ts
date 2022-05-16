@@ -4,11 +4,10 @@ export interface FontFamily {
   variants: string[];
 }
 
-export interface DefaultFontFamily {
-  category: "sans-serif";
-  family: "Inter";
-  variants: ["400"];
-}
+export type DefaultGoogleFont = Omit<
+  GoogleFont,
+  "subsets" | "lastModified" | "version" | "kind"
+>;
 
 export interface GoogleFont {
   family: string;
@@ -28,5 +27,5 @@ export interface GoogleWebFontResponse {
 
 export interface DefaultGoogleWebFontResponse {
   kind: "";
-  items: DefaultFontFamily[];
+  items: DefaultGoogleFont[];
 }

@@ -1,4 +1,4 @@
-import { DEFAULT_FONT_FAMILY } from "./constants";
+import { DEFAULT_GOOGLE_FONT, GOOGLE_WEBFONTS_API_URL } from "./constants";
 import {
   DefaultGoogleWebFontResponse,
   GoogleWebFontResponse,
@@ -13,7 +13,7 @@ export default class GoogleFontsService {
     try {
       const response: GoogleWebFontResponse = await (
         await fetch(
-          `https://www.googleapis.com/webfonts/v1/webfonts?sort=alpha&key=${process.env.GOOGLE_FONTS_API_KEY}`
+          `${GOOGLE_WEBFONTS_API_URL}&key=${process.env.GOOGLE_FONTS_API_KEY}`
         )
       ).json();
 
@@ -21,7 +21,7 @@ export default class GoogleFontsService {
     } catch (e) {
       return {
         kind: "",
-        items: [DEFAULT_FONT_FAMILY],
+        items: [DEFAULT_GOOGLE_FONT],
       };
     }
   }

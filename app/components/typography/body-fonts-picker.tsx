@@ -5,7 +5,7 @@ import GoogleFontFamiliesPicker from "~/components/shared/google-font-families-p
 import GoogleFontVariantsPicker from "~/components/shared/google-font-variants.picker";
 import VStackBox from "~/components/shared/vstack-wrapper";
 import useTypographySelector from "~/context/app/hooks/useTypographySelector";
-import { DEFAULT_FONT_FAMILY } from "~/domain/google-fonts/constants";
+import { DEFAULT_GOOGLE_FONT } from "~/domain/google-fonts/constants";
 import { FontFamily } from "~/domain/google-fonts/interfaces";
 import useGoogleFontsUtils from "~/domain/google-fonts/useGoogleFontsUtils";
 
@@ -17,7 +17,7 @@ export default function BodyFontsPicker() {
   const { getGoogleFontLinkTagHref } = useGoogleFontsUtils();
 
   const [familyWeights, setFamilyWeights] = useState<string[]>(
-    DEFAULT_FONT_FAMILY.variants
+    DEFAULT_GOOGLE_FONT.variants
   );
 
   function onChangeFontFamily(fontFamilyHTMLSelectElement: HTMLSelectElement) {
@@ -50,12 +50,8 @@ export default function BodyFontsPicker() {
   /** Get the array of font weights for the selected font family from the "data-weights" attribute */
   function getWeights(HTMLOptionElementChecked: Element): string[] {
     const weightsAttr = HTMLOptionElementChecked.getAttribute("data-weights");
-    return weightsAttr?.split(",") || DEFAULT_FONT_FAMILY.variants;
+    return weightsAttr?.split(",") || DEFAULT_GOOGLE_FONT.variants;
   }
-
-  useEffect(() => {
-    console.log(typography.body.fontFamily);
-  }, []);
 
   return (
     <VStackBox spacing={2}>

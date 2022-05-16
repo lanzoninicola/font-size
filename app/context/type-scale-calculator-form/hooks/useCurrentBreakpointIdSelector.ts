@@ -46,7 +46,7 @@ export default function useCurrentBreakpointIdSelector() {
 
     if (prevState !== nextBreakpointId && nextBreakpointId !== "") {
       const message =
-        "The smallest and largest device in the preview area was loaded according to the selected breakpoint.";
+        "The smallest and largest device was loaded in the preview area according to the selected breakpoint.";
       infoNotification(message);
     }
   }
