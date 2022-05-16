@@ -2,7 +2,7 @@ import { useContextSelector } from "use-context-selector";
 import useBreakpointsData from "~/domain/breakpoints/useBreakpointsData";
 
 import { AppContextData } from "../app-context";
-import { DataProvider } from "../interfaces";
+import { BreakpointsProvider } from "../types";
 
 export default function useBreakpointsSelector() {
   const breakpoints = useContextSelector(
@@ -17,14 +17,14 @@ export default function useBreakpointsSelector() {
 
   const actions = {
     BREAKPOINTS__INIT_WITH_PRE_CONFIGURED_BREAKPOINTS: {
-      dispatch: (payload?: DataProvider) =>
+      dispatch: (payload?: BreakpointsProvider) =>
         loadPreConfiguredBreakpoints(payload),
     },
   };
 
   const { getByProvider } = useBreakpointsData();
 
-  function loadPreConfiguredBreakpoints(provider?: DataProvider) {
+  function loadPreConfiguredBreakpoints(provider?: BreakpointsProvider) {
     const preConfiguredBreakpoints = getByProvider(provider);
     setBreakpoints(preConfiguredBreakpoints);
   }

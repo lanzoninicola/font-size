@@ -1,4 +1,4 @@
-import { FontConfig } from "~/context/app/interfaces";
+import { FontConfig } from "~/context/app/types";
 
 /** Shape of the message content sent to the iframe in preview */
 export interface MediaQueriesMessage {

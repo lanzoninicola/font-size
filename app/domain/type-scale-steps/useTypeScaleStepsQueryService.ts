@@ -1,5 +1,5 @@
 import useHtmlSelectorsSelector from "~/context/app/hooks/useTypeScaleStepsSelector";
-import { TypeScaleStepConfig } from "~/context/type-scale-steps-builder/interfaces";
+import { TypeScaleStepConfig } from "~/context/type-scale-steps-builder/types";
 
 type SortOrientation = "ASC" | "DESC";
 

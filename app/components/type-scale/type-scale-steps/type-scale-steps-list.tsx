@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import useHtmlSelectorsSelector from "~/context/app/hooks/useTypeScaleStepsSelector";
-import { TypeScaleStepConfig } from "~/context/type-scale-steps-builder/interfaces";
+import { TypeScaleStepConfig } from "~/context/type-scale-steps-builder/types";
 import useTypeScaleStepsQueryService from "~/domain/type-scale-steps/useTypeScaleStepsQueryService";
 
 import VStackBox from "../../shared/vstack-wrapper";

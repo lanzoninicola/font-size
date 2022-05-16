@@ -1,11 +1,18 @@
-import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
-import {
-  BreakpointTypeScale,
-  MinMaxTypeScaleConfig,
-} from "~/context/type-scale-calculator-form/interfaces";
-import { TypeScaleStepConfig } from "~/context/type-scale-steps-builder/interfaces";
+import { BreakpointId } from "~/context/app/types/breakpoints";
+import { MinMaxTypeScaleConfig } from "~/context/app/types/type-scale-config";
+import { TypeScaleStepConfig } from "~/context/app/types/type-scale-steps";
 import parseDecimalNumber from "../utilities/parseDecimalNumber";
 import round from "../utilities/round";
+
+interface BreakpointTypeScale {
+  breakpointId: BreakpointId;
+  // step key of the type scale
+  stepKey: string;
+  // min font size calculated for the breakpoint
+  minFontSize: number;
+  // max font size calculated for the breakpoint
+  maxFontSize: number;
+}
 
 export default function useTypeScaleCalculatorUtils() {
   /**

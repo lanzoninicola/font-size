@@ -1,7 +1,7 @@
 import { HStack } from "@chakra-ui/react";
 import { Link } from "remix";
 import useBreakpointsSelector from "~/context/app/hooks/useBreakpointsSelector";
-import { DataProvider } from "~/context/app/interfaces";
+import { BreakpointsProvider } from "~/context/app/types";
 import useRouteLocation from "~/domain/app/useRouteLocation";
 import useBreakpointsRoutes from "~/domain/breakpoints/useBreakpointsRoutes";
 
@@ -19,7 +19,7 @@ export default function BreakpointsToolbar() {
 
   function onInitBreakpoints() {
     actions.BREAKPOINTS__INIT_WITH_PRE_CONFIGURED_BREAKPOINTS.dispatch(
-      DataProvider.default
+      BreakpointsProvider.default
     );
   }
 

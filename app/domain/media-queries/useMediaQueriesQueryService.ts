@@ -1,4 +1,4 @@
-import { MediaQuery } from "~/context/app/interfaces";
+import { MediaQuery } from "~/context/app/types";
 import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
 import { mediaQueryInitialStatePartial } from "~/context/media-query-builder/media-query-builder-context";
 

@@ -1,15 +1,18 @@
-import { DataProvider } from "~/context/app/interfaces";
-import { Breakpoints } from "~/context/breakpoint-builder/interfaces";
+import { BreakpointsProvider, Breakpoints } from "../types/breakpoints";
 
-export default function useBreakpointsData() {
+type UseBreakpointsInitialState = {
+  get: (provider?: BreakpointsProvider) => Breakpoints;
+};
+
+export default function useBreakpointsInitialState(): UseBreakpointsInitialState {
   /**
    * @description Returns the breakpoints data based on the provider of data (default, chakraui, tailwindcss, bootstrap).
    * Also, set the provider name to local storage
    */
-  function getByProvider(provider?: DataProvider) {
-    const currentProvider = provider || DataProvider.default;
+  function get(provider?: BreakpointsProvider) {
+    const currentProvider = provider || BreakpointsProvider.default;
 
-    if (currentProvider === DataProvider.default) {
+    if (currentProvider === BreakpointsProvider.default) {
       return _getDefaults();
     }
 
@@ -29,6 +32,6 @@ export default function useBreakpointsData() {
   }
 
   return {
-    getByProvider,
+    get,
   };
 }

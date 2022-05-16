@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createContext } from "use-context-selector";
 import { BreakpointId } from "../breakpoint-builder/interfaces";
-import { MediaQuery, TypeScaleStepEntityState } from "../app/interfaces";
+import { MediaQuery, TypeScaleStepEntityState } from "../app/types";
 
 export interface MediaQueryBuilderContext {
   entityState: TypeScaleStepEntityState;

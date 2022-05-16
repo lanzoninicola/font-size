@@ -1,3 +1,10 @@
+export enum BreakpointsProvider {
+  default = "default",
+  chakraui = "chackraui",
+  tailwindcss = "tailwindcss",
+  bootstrap = "bootstrap",
+}
+
 export enum BreakpointConfigKeys {
   label = "label",
   minWidth = "minWidth",

@@ -1,12 +1,13 @@
 import { useContextSelector } from "use-context-selector";
 import usePreviewWindowsSelector from "~/context/preview/hooks/usePreviewWindowsSelector";
 import useTypographyStylesheet from "~/domain/stylesheet/useTypographyStylesheet";
-import getTypographyInitialState from "~/domain/typography/getTypographyInitialState";
 
 import { AppContextData } from "../app-context";
-import { FontFamily, FontWeight } from "../interfaces";
+import { FontFamily, FontWeight } from "../types/typography";
+import useTypographyInitialState from "./useTypographyInitialState";
 
 export default function useTypographySelector() {
+  const { get: getInitialState } = useTypographyInitialState();
   const typography = useContextSelector(
     AppContextData,
     (ctx) => ctx?.typography
@@ -51,7 +52,7 @@ export default function useTypographySelector() {
   }
 
   function changeHeadingsFontFamily(payload: FontFamily) {
-    const initialState = getTypographyInitialState();
+    const initialState = getInitialState();
 
     const nextTypography = { ...typography };
     nextTypography.headings.fontFamily = payload;
@@ -76,7 +77,7 @@ export default function useTypographySelector() {
   }
 
   function changeBodyFontFamily(payload: FontFamily) {
-    const initialState = getTypographyInitialState();
+    const initialState = getInitialState();
 
     const nextTypography = { ...typography };
     nextTypography.body.fontFamily = payload;

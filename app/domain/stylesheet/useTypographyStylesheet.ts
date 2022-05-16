@@ -1,5 +1,5 @@
 import useTypographySelector from "~/context/app/hooks/useTypographySelector";
-import { Typography } from "~/context/app/interfaces";
+import { Typography } from "~/context/app/types";
 
 import useTypeScaleStepsQueryService from "../type-scale-steps/useTypeScaleStepsQueryService";
 import css from "./css";

@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 import { useContextSelector } from "use-context-selector";
-import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
+import { BreakpointId } from "~/context/app/types/breakpoints";
 import usePreviewWindowsSelector from "~/context/preview/hooks/usePreviewWindowsSelector";
 import useNotifications from "~/domain/app/useNotifications";
 import { TypeScaleCalculatorFormContextData } from "../type-scale-calculator-form-context";
 
 export default function useCurrentBreakpointIdSelector() {
-  const [foo, setFoo] = useState("");
-
   const currentBreakpointId = useContextSelector(
     TypeScaleCalculatorFormContextData,
     (ctx) => ctx?.currentBreakpointId

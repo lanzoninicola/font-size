@@ -1,12 +1,15 @@
 import { useContextSelector } from "use-context-selector";
-import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
+
 import { MediaQueryStepEdit } from "~/context/media-query-builder/interfaces/media-query";
-import { MinMaxTypeScaleConfig } from "~/context/type-scale-calculator-form/interfaces";
 import useMediaQueriesQueryService from "~/domain/media-queries/useMediaQueriesQueryService";
 import useTypeScaleCalculatorUtils from "~/domain/type-scale-calculator/useTypeScaleCalculatorUtils";
 
 import { AppContextData } from "../app-context";
-import { TypeScaleConfig } from "../interfaces";
+import { BreakpointId } from "../types/breakpoints";
+import {
+  TypeScaleConfig,
+  MinMaxTypeScaleConfig,
+} from "../types/type-scale-config";
 import useTypeScaleStepsSelector from "./useTypeScaleStepsSelector";
 
 export default function useMediaQueriesSelector() {
@@ -31,10 +34,10 @@ export default function useMediaQueriesSelector() {
       dispatch: (mediaQuery: MediaQueryStepEdit) =>
         onMediaQueryChange(mediaQuery),
     },
-    MEDIA_QUERIES__ON_TYPE_SCALE_CONFIG_CHANGE: {
-      dispatch: (payload: TypeScaleConfig) =>
-        onTypeScaleConfigChange(payload.breakpointId, payload.min, payload.max),
-    },
+    // MEDIA_QUERIES__ON_TYPE_SCALE_CONFIG_CHANGE: {
+    //   dispatch: (payload: TypeScaleConfig) =>
+    //     onTypeScaleConfigChange(payload.breakpointId, payload.min, payload.max),
+    // },
   };
 
   function onMediaQueryChange(mediaQuery: MediaQueryStepEdit) {}

@@ -4,16 +4,17 @@ import FormControlInputNumber from "~/components/shared/form-control-input-numbe
 import FormControlInputSelect from "~/components/shared/form-control-input-select";
 import VStackBox from "~/components/shared/vstack-wrapper";
 import useCurrentBreakpointIdSelector from "~/context/type-scale-calculator-form/hooks/useCurrentBreakpointIdSelector";
-import useMinConfigSelector from "~/context/type-scale-calculator-form/hooks/useMinConfigSelector";
+
 import useBreakpointsQueryService from "~/domain/breakpoints/useBreakpointsQueryService";
-import useTypeScaleCalculatorData from "~/domain/type-scale-calculator/useTypeScaleCalculatorData";
+import useTypeScaleRatio from "~/domain/type-scale-calculator/useTypeScaleRatio";
+
 import parseDecimalNumber from "~/domain/utilities/parseDecimalNumber";
 
 export default function GroupMinimum() {
   const { currentBreakpointId } = useCurrentBreakpointIdSelector();
-  const { min, actions } = useMinConfigSelector();
+
   const { getViewportSizeByBreakpointId } = useBreakpointsQueryService();
-  const { getTypeScaleRatio } = useTypeScaleCalculatorData();
+  const ratio = useTypeScaleRatio();
 
   function initValues() {
     actions.INIT_MINIMUM_CONFIG.dispatch({
@@ -73,7 +74,7 @@ export default function GroupMinimum() {
           minW="200px"
           onChange={onChangeScaleRatio}
         >
-          {Object.values(getTypeScaleRatio()).map((typeScale, idx) => (
+          {ratio.map((typeScale, idx) => (
             <option key={idx} value={typeScale.ratio}>
               {`${typeScale.ratio} (${typeScale.name})`}
             </option>

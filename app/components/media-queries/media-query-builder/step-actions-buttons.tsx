@@ -4,7 +4,7 @@ import { EditIcon, ResetIcon, SaveIcon } from "~/components/shared/icons";
 import {
   TypeScaleStepConfig,
   TypeScaleStepEntityState,
-} from "~/context/app/interfaces";
+} from "~/context/app/types";
 
 import useMediaQueriesBuilderService from "~/domain/media-queries/useMediaQueriesBuilderService";
 import useMediaQueriesService from "~/domain/media-queries/useMediaQueriesService";

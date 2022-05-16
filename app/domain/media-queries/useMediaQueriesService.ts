@@ -1,5 +1,5 @@
 import useMediaQueriesSelector from "~/context/app/hooks/useMediaQueriesSelector";
-import { MediaQuery, TypeScaleStepEntityState } from "~/context/app/interfaces";
+import { MediaQuery, TypeScaleStepEntityState } from "~/context/app/types";
 import useMediaQueryBuilderContext from "~/context/media-query-builder/hooks/useMediaQueryBuilderContext";
 import { mediaQueryInitialStatePartial } from "~/context/media-query-builder/media-query-builder-context";
 
@@ -62,7 +62,7 @@ export default function useMediaQueriesService() {
    * @param bp - the breakpoint id
    * @param s - the selector
    */
-  function deleteMediaQuery(s: SelectorId) {
+  function deleteMediaQuery(s: StepId) {
     let nextMediaQueries: MediaQueries | null = { ...mediaQueries };
 
     delete nextMediaQueries[currentBreakpointId][s];

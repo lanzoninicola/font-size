@@ -1,26 +1,17 @@
-import useLocalStorage from "~/components/shared/hooks/useLocalStorage";
-import useHtmlSelectorsSelector from "~/context/app/hooks/useTypeScaleStepsSelector";
-import { DataProvider } from "~/context/app/interfaces";
 import {
   HTMLTags,
+  StepType,
   TypeScaleStepConfig,
-  SelectorType,
-} from "~/context/type-scale-steps-builder/interfaces";
+  TypeScaleStepProvider,
+} from "~/context/app/types/type-scale-steps";
 
-export default function useTypeScaleStepsData() {
-  const { setTypeScaleSteps } = useHtmlSelectorsSelector();
-  const [provider, _] = useLocalStorage(
-    "FS_INIT_BREAKPOINTS_PROVIDER",
-    DataProvider.default
-  );
+type UseTypeScaleStepsInitialState = {
+  get: (provider?: TypeScaleStepProvider) => TypeScaleStepConfig[];
+};
 
-  function initTypeScaleSteps() {
-    const s = getByProvider(provider as DataProvider);
-    setTypeScaleSteps(s);
-  }
-
-  function getByProvider(provider: DataProvider) {
-    if (provider === DataProvider.default) {
+export default function useTypeScaleStepsInitialState(): UseTypeScaleStepsInitialState {
+  function get(provider?: TypeScaleStepProvider) {
+    if (provider === TypeScaleStepProvider.default) {
       return _getDefault();
     }
 
@@ -31,7 +22,7 @@ export default function useTypeScaleStepsData() {
     return [
       {
         key: HTMLTags.h1,
-        type: SelectorType.tag,
+        type: StepType.tag,
         value: "Heading 1",
         isBaseline: false,
         position: 6,
@@ -39,7 +30,7 @@ export default function useTypeScaleStepsData() {
       },
       {
         key: HTMLTags.h2,
-        type: SelectorType.tag,
+        type: StepType.tag,
         value: "Heading 2",
         isBaseline: false,
         position: 5,
@@ -47,7 +38,7 @@ export default function useTypeScaleStepsData() {
       },
       {
         key: HTMLTags.h3,
-        type: SelectorType.tag,
+        type: StepType.tag,
         value: "Heading 3",
         isBaseline: false,
         position: 4,
@@ -55,7 +46,7 @@ export default function useTypeScaleStepsData() {
       },
       {
         key: HTMLTags.h4,
-        type: SelectorType.tag,
+        type: StepType.tag,
         value: "Heading 4",
         isBaseline: false,
         position: 3,
@@ -63,7 +54,7 @@ export default function useTypeScaleStepsData() {
       },
       {
         key: HTMLTags.h5,
-        type: SelectorType.tag,
+        type: StepType.tag,
         value: "Heading 5",
         isBaseline: false,
         position: 2,
@@ -71,7 +62,7 @@ export default function useTypeScaleStepsData() {
       },
       {
         key: HTMLTags.h6,
-        type: SelectorType.tag,
+        type: StepType.tag,
         value: "Heading 6",
         isBaseline: false,
         position: 1,
@@ -79,7 +70,7 @@ export default function useTypeScaleStepsData() {
       },
       {
         key: HTMLTags.p,
-        type: SelectorType.tag,
+        type: StepType.tag,
         value: "Paragraph",
         isBaseline: true,
         position: 0,
@@ -87,7 +78,7 @@ export default function useTypeScaleStepsData() {
       },
       {
         key: HTMLTags.caption,
-        type: SelectorType.tag,
+        type: StepType.tag,
         value: "Caption",
         isBaseline: false,
         position: -1,
@@ -97,7 +88,6 @@ export default function useTypeScaleStepsData() {
   }
 
   return {
-    getByProvider,
-    initTypeScaleSteps,
+    get,
   };
 }

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import useBreakpointsSelector from "~/context/app/hooks/useBreakpointsSelector";
 import useMediaQueriesSelector from "~/context/app/hooks/useMediaQueriesSelector";
 import usePixelsPerRemSelector from "~/context/app/hooks/usePixelsPerRemSelector";
-import { MediaQuery } from "~/context/app/interfaces";
+import { MediaQuery } from "~/context/app/types";
 import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
 
 import useBreakpointsQueryService from "../breakpoints/useBreakpointsQueryService";

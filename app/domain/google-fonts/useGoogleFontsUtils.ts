@@ -1,4 +1,4 @@
-import { FontConfig } from "~/context/app/interfaces";
+import { FontConfig } from "~/context/app/types";
 import { GOOGLE_FONTS_BASE_URL } from "./constants";
 
 export default function useGoogleFontsUtils() {

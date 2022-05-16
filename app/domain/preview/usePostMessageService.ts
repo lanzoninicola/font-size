@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { FontConfig } from "~/context/app/interfaces";
+import { FontConfig } from "~/context/app/types";
 
 import useGoogleFontsUtils from "../google-fonts/useGoogleFontsUtils";
 import { Message, PostMessage } from "./types";

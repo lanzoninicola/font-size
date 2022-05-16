@@ -2,7 +2,7 @@ import { Button } from "@chakra-ui/react";
 import { useState } from "react";
 import useBreakpointsSelector from "~/context/app/hooks/useBreakpointsSelector";
 import useMediaQueriesSelector from "~/context/app/hooks/useMediaQueriesSelector";
-import { MediaQueries } from "~/context/app/interfaces";
+import { MediaQueries } from "~/context/app/types";
 
 import VStackBox from "../shared/vstack-wrapper";
 import CodeRenderOptions from "./code-render-options";

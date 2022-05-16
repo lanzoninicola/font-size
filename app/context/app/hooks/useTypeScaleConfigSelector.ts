@@ -1,7 +1,8 @@
 import { useContextSelector } from "use-context-selector";
 
 import { AppContextData } from "../app-context";
-import { TypeScaleConfig } from "../interfaces";
+import { BreakpointId } from "../types/breakpoints";
+import { TypeScaleConfig } from "../types/type-scale-config";
 
 export default function useTypeScaleConfigSelector() {
   // This is the state of the type scale configuration made by the user for each breakpoint
@@ -16,30 +17,47 @@ export default function useTypeScaleConfigSelector() {
   );
 
   const actions = {
-    TYPESCALE_CALCULATOR__SAVE_CONFIG: {
-      dispatch: (payload: TypeScaleConfig) => saveTypeScaleConfig(payload),
+    TYPESCALE_CALCULATOR__CHANGE_MIN_FONT_SIZE: {
+      dispatch: (payload: BreakpointId) => changeMinFontSize(payload),
+    },
+    TYPESCALE_CALCULATOR__CHANGE_MIN_SCALE_RATIO: {
+      dispatch: (payload: BreakpointId) => changeMinScaleRatio(payload),
+    },
+    TYPESCALE_CALCULATOR__CHANGE_MAX_FONT_SIZE: {
+      dispatch: (payload: BreakpointId) => changeMaxFontSize(payload),
+    },
+    TYPESCALE_CALCULATOR__CHANGE_MAX_SCALE_RATIO: {
+      dispatch: (payload: BreakpointId) => changeMaxScaleRatio(payload),
     },
   };
 
-  function saveTypeScaleConfig(payload: TypeScaleConfig) {
-    let nextTypeScale = [] as TypeScaleConfig[];
+  function changeMinFontSize(payload: BreakpointId) {}
 
-    if (typeScaleConfig) {
-      nextTypeScale = [...typeScaleConfig];
-    }
+  function changeMinScaleRatio(payload: BreakpointId) {}
 
-    const index = nextTypeScale.findIndex(
-      (typeScaleConfig) => typeScaleConfig.breakpointId === payload.breakpointId
-    );
+  function changeMaxFontSize(payload: BreakpointId) {}
 
-    if (index > -1) {
-      nextTypeScale[index] = payload;
-    } else {
-      nextTypeScale.push(payload);
-    }
+  function changeMaxScaleRatio(payload: BreakpointId) {}
 
-    setTypeScale(nextTypeScale);
-  }
+  // function saveTypeScaleConfig(payload: TypeScaleConfig) {
+  //   let nextTypeScale = [] as TypeScaleConfig[];
+
+  //   if (typeScaleConfig) {
+  //     nextTypeScale = [...typeScaleConfig];
+  //   }
+
+  //   const index = nextTypeScale.findIndex(
+  //     (typeScaleConfig) => typeScaleConfig.breakpointId === payload.breakpointId
+  //   );
+
+  //   if (index > -1) {
+  //     nextTypeScale[index] = payload;
+  //   } else {
+  //     nextTypeScale.push(payload);
+  //   }
+
+  //   setTypeScale(nextTypeScale);
+  // }
 
   return {
     typeScaleConfig,

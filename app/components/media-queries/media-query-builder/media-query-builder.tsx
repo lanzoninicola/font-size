@@ -2,7 +2,7 @@ import { Box, Grid, HStack, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import useMediaQueriesSelector from "~/context/app/hooks/useMediaQueriesSelector";
 import useTypeScaleStepsSelector from "~/context/app/hooks/useTypeScaleStepsSelector";
-import { TypeScaleStepEntityState } from "~/context/app/interfaces";
+import { TypeScaleStepEntityState } from "~/context/app/types";
 import useMediaQueriesBuilderService from "~/domain/media-queries/useMediaQueriesBuilderService";
 import useMediaQueriesQueryService from "~/domain/media-queries/useMediaQueriesQueryService";
 import useCustomScrollbar from "~/domain/utilities/useCustomScrollbar";

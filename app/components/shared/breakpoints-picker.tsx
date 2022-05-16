@@ -1,15 +1,11 @@
 import { useEffect, useState } from "react";
 import useBreakpointsSelector from "~/context/app/hooks/useBreakpointsSelector";
-import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
+import { BreakpointId } from "~/context/app/types/breakpoints";
 import { BreakpointFlat } from "~/domain/breakpoints/interfaces";
 import useBreakpointsDataService from "~/domain/breakpoints/useBreakpointsDataService";
 
 import FormControlInputSelect from "./form-control-input-select";
-
-export interface SelectOption {
-  value: string;
-  label: string;
-}
+import { PickerOption } from "./types";
 
 export interface Props {
   value?: BreakpointId;
@@ -25,7 +21,7 @@ export default function BreakpointsPicker({
   const { breakpoints } = useBreakpointsSelector();
 
   const { listAll } = useBreakpointsDataService();
-  const [selectOptions, setSelectOptions] = useState<SelectOption[]>([]);
+  const [selectOptions, setSelectOptions] = useState<PickerOption[]>([]);
 
   function initOptions() {
     const breakpointsResponse = listAll();
@@ -42,7 +38,7 @@ export default function BreakpointsPicker({
 
   function buildOptions(breakpoints: BreakpointFlat[]) {
     if (breakpoints) {
-      let options: SelectOption[] = [
+      let options: PickerOption[] = [
         {
           value: "",
           label: " --- Choose a breakpoint --- ",
@@ -75,10 +71,10 @@ export default function BreakpointsPicker({
       onChange={onChange}
       {...props}
     >
-      {selectOptions.map((selectOption, index) => {
+      {selectOptions.map((PickerOption, index) => {
         return (
-          <option key={index + 1} value={selectOption.value}>
-            {selectOption.label}
+          <option key={index + 1} value={PickerOption.value}>
+            {PickerOption.label}
           </option>
         );
       })}

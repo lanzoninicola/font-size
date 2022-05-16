@@ -1,10 +1,10 @@
 import FormControlInputNumber from "~/components/shared/form-control-input-number";
 import VStackBox from "~/components/shared/vstack-wrapper";
-import { SelectorId } from "~/context/type-scale-steps-builder/interfaces";
+import { StepId } from "~/context/type-scale-steps-builder/types";
 import useBreakpointsQueryService from "~/domain/breakpoints/useBreakpointsQueryService";
 import useMediaQueriesBuilderService from "~/domain/media-queries/useMediaQueriesBuilderService";
 
-export function StepDetailForm({ stepId }: { stepId: SelectorId }) {
+export function StepDetailForm({ stepId }: { stepId: StepId }) {
   const {
     minFontSize,
     maxFontSize,

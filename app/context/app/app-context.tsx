@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { createContext } from "use-context-selector";
 import useLocalStorage from "~/components/shared/hooks/useLocalStorage";
-import useBreakpointsData from "~/domain/breakpoints/useBreakpointsData";
-import useTypeScaleStepsData from "~/domain/type-scale-steps/useTypeScaleStepsData";
-import getTypographyInitialState from "~/domain/typography/getTypographyInitialState";
 
 import {
   FS_CONTEXT_BREAKPOINTS,
@@ -12,29 +9,32 @@ import {
   FS_CONTEXT_TYPESCALE_STEPS,
   FS_CONTEXT_TYPOGRAPHY,
 } from "./constants";
+import useBreakpointsInitialState from "./hooks/useBreakpointsInitialState";
+import useTypeScaleStepsInitialState from "./hooks/useTypeScaleStepsInitialState";
+import useTypographyInitialState from "./hooks/useTypographyInitialState";
+import { MediaQuery } from "./types";
+import { AppContext } from "./types/app-context";
+import { Breakpoints, BreakpointsProvider } from "./types/breakpoints";
+import { TypeScaleConfig } from "./types/type-scale-config";
 import {
-  AppContext,
-  Breakpoints,
-  DataProvider,
-  MediaQuery,
-  TypeScaleConfig,
   TypeScaleStepConfig,
-  Typography,
-} from "./interfaces";
+  TypeScaleStepProvider,
+} from "./types/type-scale-steps";
+import { Typography } from "./types/typography";
 
 export const AppContextData = createContext<AppContext>({} as AppContext);
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
-  const { getByProvider: getBreakpointsByProvider } = useBreakpointsData();
-  const { getByProvider: getTypeScaleStepsByProvider } =
-    useTypeScaleStepsData();
+  const { get: getBreakpointsInitialState } = useBreakpointsInitialState();
+  const { get: getTypeScaleStepsByProvider } = useTypeScaleStepsInitialState();
+  const { get: getTypographyInitialState } = useTypographyInitialState();
 
   const [pixelsPerRem, setPixelsPerRem] = useState(16);
 
   // On app load, default breakpoints are loaded
   const [breakpoints, setBreakpoints] = useLocalStorage<Breakpoints>(
     FS_CONTEXT_BREAKPOINTS,
-    getBreakpointsByProvider(DataProvider.default)
+    getBreakpointsInitialState(BreakpointsProvider.default)
   );
 
   // On app load, default type scale steps are loaded
@@ -42,7 +42,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     TypeScaleStepConfig[]
   >(
     FS_CONTEXT_TYPESCALE_STEPS,
-    getTypeScaleStepsByProvider(DataProvider.default)
+    getTypeScaleStepsByProvider(TypeScaleStepProvider.default)
   );
 
   const [typeScaleConfig, setTypeScale] = useLocalStorage<TypeScaleConfig[]>(
