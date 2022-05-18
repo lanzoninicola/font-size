@@ -1,9 +1,8 @@
-import { Box, VStack } from "@chakra-ui/react";
+import { VStack } from "@chakra-ui/react";
 import { useState } from "react";
 import useBreakpointsRoutes from "~/domain/breakpoints/useBreakpointsRoutes";
 import useMediaQueriesRoutes from "~/domain/media-queries/useMediaQueriesRoutes";
-import useSelectorsRoutes from "~/domain/type-scale-steps/useTypeScaleStepsRoutes";
-import useTypeScaleCalculatorRoutes from "~/domain/type-scale-calculator/useTypeScaleCalculatorRoutes";
+import useTypeScaleRoutes from "~/domain/type-scale/useTypeScaleRoutes";
 
 import {
   BreakpointsIcon,
@@ -27,7 +26,7 @@ interface SidebarItemConfig {
 export default function AppSidebar() {
   const { ROUTE_MEDIA_QUERY_BASE_ROUTE } = useMediaQueriesRoutes();
   const { ROUTE_BREAKPOINTS_BASE_ROUTE } = useBreakpointsRoutes();
-  const { ROUTE_TYPE_SCALE_CALCULATOR } = useTypeScaleCalculatorRoutes();
+  const { ROUTE_TYPE_SCALE_CALCULATOR } = useTypeScaleRoutes();
 
   const items: SidebarItemConfig[] = [
     {

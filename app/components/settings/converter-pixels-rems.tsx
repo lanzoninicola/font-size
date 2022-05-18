@@ -14,13 +14,13 @@ export default function ConverterPixelsRems() {
       <HStack w="100%" aria-label={`Convert PX to REM`} justify="space-between">
         <HStack>
           <InputNumber />
-          <Text color="primary.500" fontWeight={700} fontSize={"sm"}>
+          <Text color="primary.500" fontWeight="bold" fontSize={"sm"}>
             PX
           </Text>
         </HStack>
         <HStack>
           <InputNumber />
-          <Text color="primary.500" fontWeight={700} fontSize={"sm"}>
+          <Text color="primary.500" fontWeight="bold" fontSize={"sm"}>
             REM
           </Text>
         </HStack>

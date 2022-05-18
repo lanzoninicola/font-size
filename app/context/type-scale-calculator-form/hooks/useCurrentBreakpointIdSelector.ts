@@ -26,10 +26,19 @@ export default function useCurrentBreakpointIdSelector() {
   };
 
   function changeCurrentBreakpoint(nextBreakpointId: BreakpointId) {
-    const prevState = currentBreakpointId;
-
     setCurrentBreakpointId(nextBreakpointId);
 
+    handlePreviewActions(nextBreakpointId);
+
+    const prevState = currentBreakpointId;
+    if (prevState !== nextBreakpointId && nextBreakpointId !== "") {
+      const message =
+        "The smallest and largest device was loaded in the preview area according to the selected breakpoint.";
+      infoNotification(message);
+    }
+  }
+
+  function handlePreviewActions(nextBreakpointId: BreakpointId) {
     if (nextBreakpointId === "") {
       previewWindowsActions.PREVIEW_WINDOWS__SELECTED_EMPTY_BREAKPOINTS.dispatch();
     }
@@ -40,12 +49,6 @@ export default function useCurrentBreakpointIdSelector() {
       previewWindowsActions.PREVIEW_WINDOWS__SELECTED_BREAKPOINTS.dispatch(
         nextBreakpointId
       );
-    }
-
-    if (prevState !== nextBreakpointId && nextBreakpointId !== "") {
-      const message =
-        "The smallest and largest device was loaded in the preview area according to the selected breakpoint.";
-      infoNotification(message);
     }
   }
 

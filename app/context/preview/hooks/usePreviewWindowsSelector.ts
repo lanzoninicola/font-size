@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useContextSelector } from "use-context-selector";
-import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
+import { BreakpointId } from "~/context/app/types/breakpoints";
 import useBreakpointsQueryService from "~/domain/breakpoints/useBreakpointsQueryService";
-import { TypographyMessage } from "~/domain/preview/types";
+import { MediaQueriesMessage, TypographyMessage } from "~/domain/preview/types";
 import { usePostMessage } from "~/domain/preview/usePostMessage";
 import usePreviewDevicesService from "~/domain/preview/usePreviewDevicesService";
 import usePreviewWindowsService from "~/domain/preview/usePreviewWindowsService";
@@ -59,6 +59,10 @@ export default function usePreviewWindowsSelector() {
     },
     PREVIEW_WINDOWS__POST_MESSAGE_CURRENT_TYPOGRAPHY: {
       dispatch: (payload: TypographyMessage) => publishSelectedFont(payload),
+    },
+    PREVIEW_WINDOWS__POST_MESSAGE_CURRENT_MEDIA_QUERIES: {
+      dispatch: (payload: MediaQueriesMessage) =>
+        publishCurrentMediaQueries(payload),
     },
   };
 
@@ -172,6 +176,18 @@ export default function usePreviewWindowsSelector() {
    * @param payload - TypographyMessage
    * */
   function publishSelectedFont(payload: TypographyMessage) {
+    previewWindows.forEach((device) => {
+      if (device.iframeRef) {
+        postMessage(device.iframeRef, payload);
+      }
+    });
+  }
+
+  /**
+   * @description Publish the current Media Queries to the preview frames
+   * @param payload - MediaQueriesMessage
+   * */
+  function publishCurrentMediaQueries(payload: MediaQueriesMessage) {
     previewWindows.forEach((device) => {
       if (device.iframeRef) {
         postMessage(device.iframeRef, payload);

@@ -1,5 +1,5 @@
-import { MediaQuery } from "~/context/app/types";
-import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
+import { BreakpointId } from "~/context/app/types/breakpoints";
+import { MediaQuery } from "~/context/app/types/media-queries";
 import { mediaQueryInitialStatePartial } from "~/context/media-query-builder/media-query-builder-context";
 
 /**
@@ -50,8 +50,6 @@ export default function useMediaQueriesQueryService(
       lineHeight: mq?.lineHeight ?? mediaQueryInitialStatePartial.lineHeight,
       marginBottom:
         mq?.marginBottom ?? mediaQueryInitialStatePartial.marginBottom,
-      fontFamily: mq?.fontFamily ?? mediaQueryInitialStatePartial.fontFamily,
-      fontWeight: mq?.fontWeight ?? mediaQueryInitialStatePartial.fontWeight,
     };
   }
 

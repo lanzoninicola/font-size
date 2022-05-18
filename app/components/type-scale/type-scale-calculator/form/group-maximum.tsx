@@ -3,24 +3,23 @@ import { useEffect } from "react";
 import FormControlInputNumber from "~/components/shared/form-control-input-number";
 import FormControlInputSelect from "~/components/shared/form-control-input-select";
 import VStackBox from "~/components/shared/vstack-wrapper";
+import useTypeScaleConfigSelector from "~/context/app/hooks/useTypeScaleConfigSelector";
 import useCurrentBreakpointIdSelector from "~/context/type-scale-calculator-form/hooks/useCurrentBreakpointIdSelector";
-import useMaxConfigSelector from "~/context/type-scale-calculator-form/hooks/useMaxConfigSelector";
+
 import useBreakpointsQueryService from "~/domain/breakpoints/useBreakpointsQueryService";
-import useTypeScaleCalculatorData from "~/domain/type-scale-calculator/useTypeScaleCalculatorData";
+import useTypeScaleRatio from "~/domain/type-scale/type-scale-calculator/useTypeScaleRatio";
+import useTypeScaleCalculatorData from "~/domain/type-scale/type-scale-calculator/useTypeScaleRatio";
+import useTypeScaleQueryService from "~/domain/type-scale/useTypeScaleQueryService";
 import parseDecimalNumber from "~/domain/utilities/parseDecimalNumber";
 
 export default function GroupMinimum() {
   const { currentBreakpointId } = useCurrentBreakpointIdSelector();
-  const { max, actions } = useMaxConfigSelector();
+  const { actions } = useTypeScaleConfigSelector();
   const { getViewportSizeByBreakpointId } = useBreakpointsQueryService();
-  const { getTypeScaleRatio } = useTypeScaleCalculatorData();
-
-  function initValues() {
-    actions.INIT_MAXIMUM_CONFIG.dispatch({
-      ...max,
-      breakpointId: currentBreakpointId,
-    });
-  }
+  const { typeScaleConfig } = useTypeScaleConfigSelector();
+  const { getMaxFontSize, getMaxScaleRatio } =
+    useTypeScaleQueryService(typeScaleConfig);
+  const ratio = useTypeScaleRatio();
 
   function viewportMaxSize() {
     const { maxWidth } = getViewportSizeByBreakpointId(currentBreakpointId);
@@ -28,26 +27,20 @@ export default function GroupMinimum() {
   }
 
   function onChangeFontSize(event: React.ChangeEvent<HTMLInputElement>) {
-    const value = event.target.value;
-    actions.CHANGE_FONT_SIZE.dispatch({
-      ...max,
+    const maxFontSizeREM = parseDecimalNumber(event.target.value);
+    actions.TYPESCALE_CONFIG__UPDATE_MAX_FONT_SIZE.dispatch({
       breakpointId: currentBreakpointId,
-      fontSizeREM: value,
+      maxFontSizeREM,
     });
   }
 
   function onChangeScaleRatio(event: React.ChangeEvent<HTMLInputElement>) {
-    const value = parseDecimalNumber(event.target.value);
-    actions.CHANGE_SCALE_RATIO.dispatch({
-      ...max,
+    const maxScaleRatio = parseDecimalNumber(event.target.value);
+    actions.TYPESCALE_CONFIG__UPDATE_MAX_SCALE_RATIO.dispatch({
       breakpointId: currentBreakpointId,
-      scaleRatio: value,
+      maxScaleRatio,
     });
   }
-
-  useEffect(() => {
-    initValues();
-  }, [currentBreakpointId]);
 
   return (
     <VStackBox spacing={2}>
@@ -58,7 +51,7 @@ export default function GroupMinimum() {
         <FormControlInputNumber
           size="sm"
           label="Font Size"
-          value={max.fontSizeREM}
+          value={String(getMaxFontSize(currentBreakpointId))}
           leftUnit="REM"
           onChange={onChangeFontSize}
           w="70px"
@@ -68,12 +61,12 @@ export default function GroupMinimum() {
           size={"sm"}
           orientation="horizontal"
           label="Scale Ratio"
-          value={max.scaleRatio}
+          value={getMaxScaleRatio(currentBreakpointId)}
           textAlign="right"
           minW="200px"
           onChange={onChangeScaleRatio}
         >
-          {getTypeScaleRatio().map((typeScale) => (
+          {ratio.map((typeScale) => (
             <option key={typeScale.key} value={typeScale.ratio}>
               {`${typeScale.ratio} (${typeScale.name})`}
             </option>

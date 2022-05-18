@@ -14,12 +14,12 @@ export default function Credits() {
       <HStack gap="1rem">
         <VStackBox>
           <HStack wrap={"wrap"} gap=".15rem" spacing={0}>
-            <Text fontSize={["sm"]} fontWeight={700}>
+            <Text fontSize={["sm"]} fontWeight="bold">
               Credits:
             </Text>
             <Text fontSize={["sm"]}>Pedro Rodriguez</Text>
           </HStack>
-          <Text fontSize={["sm"]} fontWeight={700}>
+          <Text fontSize={["sm"]} fontWeight="bold">
             Read the article
           </Text>
         </VStackBox>

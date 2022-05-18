@@ -10,5 +10,11 @@ import parseInputString from "./parseInputString";
  * @returns {number} - Float decimal number
  */
 export default function parseDecimalNumber(value: string) {
-  return parseFloat(parseInputString(value));
+  let parsedValue = parseInputString(value);
+
+  if (parsedValue === null || parsedValue === "") {
+    parsedValue = "0";
+  }
+
+  return parseFloat(parseInputString(parsedValue));
 }

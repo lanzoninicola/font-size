@@ -2,7 +2,8 @@ import { Box, Grid, HStack, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import useMediaQueriesSelector from "~/context/app/hooks/useMediaQueriesSelector";
 import useTypeScaleStepsSelector from "~/context/app/hooks/useTypeScaleStepsSelector";
-import { TypeScaleStepEntityState } from "~/context/app/types";
+import { TypeScaleStepEntityState } from "~/context/app/types/type-scale-steps";
+
 import useMediaQueriesBuilderService from "~/domain/media-queries/useMediaQueriesBuilderService";
 import useMediaQueriesQueryService from "~/domain/media-queries/useMediaQueriesQueryService";
 import useCustomScrollbar from "~/domain/utilities/useCustomScrollbar";
@@ -57,7 +58,7 @@ export default function MediaQueryBuilder() {
                   <Text
                     color="primary.500"
                     fontSize={"sm"}
-                    fontWeight={700}
+                    fontWeight="bold"
                     flexGrow={2}
                   >
                     {step.value}

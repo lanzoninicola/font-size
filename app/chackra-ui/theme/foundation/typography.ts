@@ -3,9 +3,8 @@ import { theme as chakraTheme } from "@chakra-ui/react";
 const typography = {
   fontWeights: {
     ...chakraTheme.fontWeights,
-    normal: 400,
-    medium: 600,
-    bold: 700,
+    normal: 500,
+    bold: 600,
   },
   fonts: {
     ...chakraTheme.fonts,

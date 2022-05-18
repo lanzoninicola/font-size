@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import FormControlInputSelect from "~/components/shared/form-control-input-select";
 import useHtmlSelectorsSelector from "~/context/app/hooks/useTypeScaleStepsSelector";
-import useBaseStepSelector from "~/context/type-scale-calculator-form/hooks/useBaseStepSelector";
 import useCurrentBreakpointIdSelector from "~/context/type-scale-calculator-form/hooks/useCurrentBreakpointIdSelector";
 
 export default function GroupBaselineStep() {

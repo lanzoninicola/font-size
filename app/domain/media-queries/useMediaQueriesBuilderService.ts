@@ -1,8 +1,10 @@
 import useMediaQueriesSelector from "~/context/app/hooks/useMediaQueriesSelector";
-import { TypeScaleStepEntityState } from "~/context/app/types";
-import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
+import { BreakpointId } from "~/context/app/types/breakpoints";
+import {
+  TypeScaleStepConfig,
+  TypeScaleStepEntityState,
+} from "~/context/app/types/type-scale-steps";
 import useMediaQueryBuilderContext from "~/context/media-query-builder/hooks/useMediaQueryBuilderContext";
-import { TypeScaleStepConfig } from "~/context/type-scale-steps-builder/types";
 import parseInputString from "../utilities/parseInputString";
 import useMediaQueriesQueryService from "./useMediaQueriesQueryService";
 

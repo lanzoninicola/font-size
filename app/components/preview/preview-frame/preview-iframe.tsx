@@ -1,5 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import { useRef } from "react";
+import useMediaQueriesSelector from "~/context/app/hooks/useMediaQueriesSelector";
 import useTypographySelector from "~/context/app/hooks/useTypographySelector";
 import usePreviewUrl from "~/context/preview/hooks/usePreviewUrl";
 import usePreviewWindowsSelector from "~/context/preview/hooks/usePreviewWindowsSelector";
@@ -15,6 +16,8 @@ export default function PreviewIframe({ device }: PreviewIframeProps) {
   const { iframeDefaultURL: DEFAULT_URL } = usePreviewSettings();
   const { actions: previewActions } = usePreviewWindowsSelector();
   const { actions: typographyActions } = useTypographySelector();
+  const { mediaQueries, actions: mediaQueriesActions } =
+    useMediaQueriesSelector();
 
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
@@ -26,6 +29,9 @@ export default function PreviewIframe({ device }: PreviewIframeProps) {
       });
 
       typographyActions.TYPOGRAPHY__POST_MESSAGE_CURRENT_TYPOGRAPHY.dispatch();
+      mediaQueriesActions.MEDIA_QUERIES__POST_MESSAGE_CURRENT_MEDIA_QUERIES.dispatch(
+        mediaQueries
+      );
     }
   }
 

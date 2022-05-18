@@ -114,7 +114,7 @@ export default function BreakpointsList() {
 function MinMaxLabel({ children }: { children: React.ReactNode }) {
   return (
     <Box transform={"rotate(-90deg)"}>
-      <Text fontSize="10px" color="primary.500" fontWeight={700}>
+      <Text fontSize="10px" color="primary.500" fontWeight="bold">
         {children}
       </Text>
     </Box>

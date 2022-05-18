@@ -32,7 +32,7 @@ export default function App() {
   const context: ContextType = { isPanelCollapsed, togglePanelCollapse };
 
   return (
-    <MainGridWrapper as="main" bg="background.700" minH="100vh">
+    <MainGridWrapper as="main" bg="background.500" minH="100vh">
       <Header />
 
       <AppSidebar />

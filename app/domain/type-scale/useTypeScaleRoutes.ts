@@ -1,13 +1,17 @@
 import { useNavigate } from "remix";
 import useAppRoutes from "../app/useAppRoutes";
 
-export default function useTypeScaleCalculatorRoutes() {
+export default function useTypeScaleRoutes() {
   const navigate = useNavigate();
-
   const { ROUTE_APP_ERROR_MISSING_BREAKPOINTS } = useAppRoutes();
 
   const ROUTE_TYPE_SCALE_CALCULATOR_BASE_ROUTE = "/app/type-scale-calculator";
   const ROUTE_TYPE_SCALE_CALCULATOR = `${ROUTE_TYPE_SCALE_CALCULATOR_BASE_ROUTE}`;
+  const ROUTE_TYPE_SCALE_STEPS_BASE_ROUTE = "/app/type-scale";
+  const ROUTE_TYPE_SCALE_STEPS_LIST = `${ROUTE_TYPE_SCALE_STEPS_BASE_ROUTE}/list`;
+  const ROUTE_TYPE_SCALE_STEPS_ERROR_MISSING_TYPE_SCALE_STEPS = `${ROUTE_TYPE_SCALE_STEPS_BASE_ROUTE}/missing-selectors`;
+  const ROUTE_TYPE_SCALE_STEPS_NEW = `${ROUTE_TYPE_SCALE_STEPS_BASE_ROUTE}/new`;
+  const ROUTE_TYPE_SCALE_STEPS_UPDATE = `${ROUTE_TYPE_SCALE_STEPS_BASE_ROUTE}/edit`;
 
   const actions = {
     NAVIGATE_TO_MISSING_BREAKPOINTS: {
@@ -21,6 +25,11 @@ export default function useTypeScaleCalculatorRoutes() {
   return {
     ROUTE_TYPE_SCALE_CALCULATOR_BASE_ROUTE,
     ROUTE_TYPE_SCALE_CALCULATOR,
+    ROUTE_TYPE_SCALE_STEPS_BASE_ROUTE,
+    ROUTE_TYPE_SCALE_STEPS_LIST,
+    ROUTE_TYPE_SCALE_STEPS_ERROR_MISSING_TYPE_SCALE_STEPS,
+    ROUTE_TYPE_SCALE_STEPS_NEW,
+    ROUTE_TYPE_SCALE_STEPS_UPDATE,
     actions,
   };
 }

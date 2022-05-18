@@ -21,7 +21,7 @@ export default function SidePanel({
       borderRightColor={"primaryAlpha.20"}
       minH="100vh"
       transition="max-width 0.2s ease-in-out"
-      bg="background.500"
+      bg="background.300"
       {...props}
     >
       {children}

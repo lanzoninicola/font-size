@@ -1,5 +1,6 @@
 import { BreakpointId } from "~/context/app/types/breakpoints";
 
+/** Global typeScaleCalculatorForm context */
 export interface TypeScaleCalculatorFormContext {
   currentBreakpointId: BreakpointId;
   setCurrentBreakpointId: (breakpointId: BreakpointId) => void;

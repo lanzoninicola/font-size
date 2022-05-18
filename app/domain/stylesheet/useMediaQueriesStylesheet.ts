@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
 import useBreakpointsSelector from "~/context/app/hooks/useBreakpointsSelector";
-import useMediaQueriesSelector from "~/context/app/hooks/useMediaQueriesSelector";
 import usePixelsPerRemSelector from "~/context/app/hooks/usePixelsPerRemSelector";
-import { MediaQuery } from "~/context/app/types";
-import { BreakpointId } from "~/context/breakpoint-builder/interfaces";
+
+import { BreakpointId } from "~/context/app/types/breakpoints";
+import { MediaQuery } from "~/context/app/types/media-queries";
 
 import useBreakpointsQueryService from "../breakpoints/useBreakpointsQueryService";
 import calculateClampSlope from "./calculateClampSlope";
@@ -14,7 +13,6 @@ import withUnit from "./withUnit";
 
 export default function useMediaQueriesStylesheet() {
   const { pixelsPerRem } = usePixelsPerRemSelector();
-  const { mediaQueries } = useMediaQueriesSelector();
   const { breakpoints } = useBreakpointsSelector();
 
   const { getViewportSizeByBreakpointId } = useBreakpointsQueryService();
@@ -22,11 +20,12 @@ export default function useMediaQueriesStylesheet() {
   /**
    * @description Returns the CSS code block based on the MediaQueries state
    *
-   * @param forceImportant - if true add !important to the CSS*
+   * @param forceImportant - if true add !important to the CSS rules
    * @param breakpointId - the breakpoint id
    * @returns {string} The CSS code
    */
   function getMediaQueriesStylesheet(
+    mediaQueries: MediaQuery[] | null,
     forceImportant = false,
     breakpointId?: BreakpointId
   ) {

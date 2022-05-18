@@ -13,7 +13,9 @@ export default function css(
   value: string,
   forceImportant: boolean
 ): string {
-  let codeBlock = `  ${property}: ${value}${forceImportant && " !important"};`;
+  let codeBlock = `  ${property}: ${value}`;
+  codeBlock += forceImportant ? " !important" : "";
+  codeBlock += `;`;
   codeBlock += `\n`;
 
   return codeBlock;

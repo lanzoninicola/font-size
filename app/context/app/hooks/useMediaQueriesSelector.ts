@@ -1,11 +1,14 @@
+import { useEffect } from "react";
 import { useContextSelector } from "use-context-selector";
 
-import { MediaQueryStepEdit } from "~/context/media-query-builder/interfaces/media-query";
+import usePreviewWindowsSelector from "~/context/preview/hooks/usePreviewWindowsSelector";
 import useMediaQueriesQueryService from "~/domain/media-queries/useMediaQueriesQueryService";
-import useTypeScaleCalculatorUtils from "~/domain/type-scale-calculator/useTypeScaleCalculatorUtils";
+import useMediaQueriesStylesheet from "~/domain/stylesheet/useMediaQueriesStylesheet";
+import useTypeScaleCalculator from "~/domain/type-scale/type-scale-calculator/useTypeScaleCalculator";
 
 import { AppContextData } from "../app-context";
 import { BreakpointId } from "../types/breakpoints";
+import { MediaQuery, MediaQueryStepEdit } from "../types/media-queries";
 import {
   TypeScaleConfig,
   MinMaxTypeScaleConfig,
@@ -22,27 +25,32 @@ export default function useMediaQueriesSelector() {
     (ctx) => ctx?.setMediaQueries
   );
 
-  const { typeScaleSteps } = useTypeScaleStepsSelector();
-  const { calculateBreakpointTypeScale } = useTypeScaleCalculatorUtils();
-  const {
-    getMediaQueryByBreakpointIdAndStepId,
-    removeMediaQueriesByBreakpointId,
-  } = useMediaQueriesQueryService(mediaQueries);
-
   const actions = {
     MEDIA_QUERIES__ON_MEDIA_QUERY_CHANGE: {
       dispatch: (mediaQuery: MediaQueryStepEdit) =>
         onMediaQueryChange(mediaQuery),
     },
-    // MEDIA_QUERIES__ON_TYPE_SCALE_CONFIG_CHANGE: {
-    //   dispatch: (payload: TypeScaleConfig) =>
-    //     onTypeScaleConfigChange(payload.breakpointId, payload.min, payload.max),
-    // },
+    MEDIA_QUERIES__ON_TYPE_SCALE_CONFIG_CHANGE: {
+      dispatch: (payload: TypeScaleConfig) =>
+        generateTypeScale(payload.breakpointId, payload.min, payload.max),
+    },
+    MEDIA_QUERIES__POST_MESSAGE_CURRENT_MEDIA_QUERIES: {
+      dispatch: (payload: MediaQuery[]) => publishCurrentMediaQueries(payload),
+    },
   };
+
+  const { typeScaleSteps } = useTypeScaleStepsSelector();
+  const { calculateBreakpointTypeScale } = useTypeScaleCalculator();
+  const {
+    getMediaQueryByBreakpointIdAndStepId,
+    removeMediaQueriesByBreakpointId,
+  } = useMediaQueriesQueryService(mediaQueries);
+  const { getMediaQueriesStylesheet } = useMediaQueriesStylesheet();
+  const { actions: previewActions } = usePreviewWindowsSelector();
 
   function onMediaQueryChange(mediaQuery: MediaQueryStepEdit) {}
 
-  function onTypeScaleConfigChange(
+  function generateTypeScale(
     breakpointId: BreakpointId,
     min: MinMaxTypeScaleConfig,
     max: MinMaxTypeScaleConfig
@@ -90,6 +98,23 @@ export default function useMediaQueriesSelector() {
 
     // add the new media query for the breakpoint
     setMediaQueries([...mediaQueriesRest, ...newBreakpointMediaQueries]);
+
+    // publish the new media queries to the preview windows
+    publishCurrentMediaQueries([
+      ...mediaQueriesRest,
+      ...newBreakpointMediaQueries,
+    ]);
+  }
+
+  function publishCurrentMediaQueries(mediaQueries: MediaQuery[]) {
+    previewActions.PREVIEW_WINDOWS__POST_MESSAGE_CURRENT_MEDIA_QUERIES.dispatch(
+      {
+        stylesheetMediaQueriesCode: getMediaQueriesStylesheet(
+          mediaQueries,
+          true
+        ),
+      }
+    );
   }
 
   return {

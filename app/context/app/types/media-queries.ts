@@ -1,4 +1,4 @@
-import { BreakpointId } from "../../breakpoint-builder/interfaces";
+import { BreakpointId } from "./breakpoints";
 
 /**
  * @example Shape of the media query object

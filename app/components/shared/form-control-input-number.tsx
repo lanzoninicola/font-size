@@ -58,7 +58,7 @@ export default function FormControlInputNumber({
         {leftUnit && (
           <Text
             color="primary.500"
-            fontWeight={700}
+            fontWeight="bold"
             fontSize={unitFontSize || "sm"}
           >
             {leftUnit && leftUnit.toUpperCase()}
@@ -73,7 +73,7 @@ export default function FormControlInputNumber({
         {(unit || rightUnit) && (
           <Text
             color="primary.500"
-            fontWeight={700}
+            fontWeight="bold"
             fontSize={unitFontSize || "sm"}
           >
             {(unit && unit.toUpperCase()) ||

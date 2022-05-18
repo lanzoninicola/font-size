@@ -1,5 +1,5 @@
-import { MediaQuery } from ".";
 import { Breakpoints } from "./breakpoints";
+import { MediaQuery } from "./media-queries";
 import { TypeScaleConfig } from "./type-scale-config";
 import { TypeScaleStepConfig } from "./type-scale-steps";
 import { Typography } from "./typography";

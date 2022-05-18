@@ -15,7 +15,7 @@ export default function SectionHeader({
         as="h2"
         fontSize="22px"
         lineHeight="50px"
-        fontWeight={700}
+        fontWeight="bold"
         {...props}
       >
         {children}

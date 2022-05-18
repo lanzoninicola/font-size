@@ -1,7 +1,7 @@
 import useTypographySelector from "~/context/app/hooks/useTypographySelector";
-import { Typography } from "~/context/app/types";
+import { Typography } from "~/context/app/types/typography";
 
-import useTypeScaleStepsQueryService from "../type-scale-steps/useTypeScaleStepsQueryService";
+import useTypeScaleStepsQueryService from "../type-scale/type-scale-steps/useTypeScaleStepsQueryService";
 import css from "./css";
 
 export default function useTypographyStylesheet(typography: Typography) {

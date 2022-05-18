@@ -13,7 +13,7 @@ export default function FormControlLabel({
     <FormLabel
       htmlFor={htmlFor}
       color="primary.500"
-      fontWeight={400}
+      fontWeight="normal"
       fontSize={props.fontSize || "sm"}
       {...props}
     >

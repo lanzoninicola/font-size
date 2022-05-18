@@ -3,25 +3,24 @@ import { useContext, useEffect, useState } from "react";
 import FormControlInputNumber from "~/components/shared/form-control-input-number";
 import FormControlInputSelect from "~/components/shared/form-control-input-select";
 import VStackBox from "~/components/shared/vstack-wrapper";
+import useMediaQueriesSelector from "~/context/app/hooks/useMediaQueriesSelector";
+import useTypeScaleConfigSelector from "~/context/app/hooks/useTypeScaleConfigSelector";
 import useCurrentBreakpointIdSelector from "~/context/type-scale-calculator-form/hooks/useCurrentBreakpointIdSelector";
 
 import useBreakpointsQueryService from "~/domain/breakpoints/useBreakpointsQueryService";
-import useTypeScaleRatio from "~/domain/type-scale-calculator/useTypeScaleRatio";
+import useTypeScaleRatio from "~/domain/type-scale/type-scale-calculator/useTypeScaleRatio";
+import useTypeScaleQueryService from "~/domain/type-scale/useTypeScaleQueryService";
 
 import parseDecimalNumber from "~/domain/utilities/parseDecimalNumber";
 
 export default function GroupMinimum() {
   const { currentBreakpointId } = useCurrentBreakpointIdSelector();
-
+  const { typeScaleConfig, actions } = useTypeScaleConfigSelector();
+  const { actions: mediaQueryActions } = useMediaQueriesSelector();
   const { getViewportSizeByBreakpointId } = useBreakpointsQueryService();
+  const { getMinFontSize, getMinScaleRatio } =
+    useTypeScaleQueryService(typeScaleConfig);
   const ratio = useTypeScaleRatio();
-
-  function initValues() {
-    actions.INIT_MINIMUM_CONFIG.dispatch({
-      ...min,
-      breakpointId: currentBreakpointId,
-    });
-  }
 
   function viewportMinSize() {
     const { minWidth } = getViewportSizeByBreakpointId(currentBreakpointId);
@@ -29,26 +28,21 @@ export default function GroupMinimum() {
   }
 
   function onChangeFontSize(event: React.ChangeEvent<HTMLInputElement>) {
-    const value = event.target.value;
-    actions.CHANGE_FONT_SIZE.dispatch({
-      ...min,
+    const minFontSizeREM = parseDecimalNumber(event.target.value);
+
+    actions.TYPESCALE_CONFIG__UPDATE_MIN_FONT_SIZE.dispatch({
       breakpointId: currentBreakpointId,
-      fontSizeREM: value,
+      minFontSizeREM,
     });
   }
 
   function onChangeScaleRatio(event: React.ChangeEvent<HTMLInputElement>) {
-    const value = parseDecimalNumber(event.target.value);
-    actions.CHANGE_SCALE_RATIO.dispatch({
-      ...min,
+    const minScaleRatio = parseDecimalNumber(event.target.value);
+    actions.TYPESCALE_CONFIG__UPDATE_MIN_SCALE_RATIO.dispatch({
       breakpointId: currentBreakpointId,
-      scaleRatio: value,
+      minScaleRatio,
     });
   }
-
-  useEffect(() => {
-    initValues();
-  }, [currentBreakpointId]);
 
   return (
     <VStackBox spacing={2}>
@@ -59,7 +53,7 @@ export default function GroupMinimum() {
         <FormControlInputNumber
           size="sm"
           label="Font Size"
-          value={min.fontSizeREM}
+          value={String(getMinFontSize(currentBreakpointId))}
           leftUnit="REM"
           onChange={onChangeFontSize}
           w="70px"
@@ -69,7 +63,7 @@ export default function GroupMinimum() {
           size={"sm"}
           orientation="horizontal"
           label="Scale Ratio"
-          value={min.scaleRatio}
+          value={String(getMinScaleRatio(currentBreakpointId))}
           textAlign="right"
           minW="200px"
           onChange={onChangeScaleRatio}

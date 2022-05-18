@@ -17,7 +17,7 @@ export default function EntityStateIdleMessage({
       </Text>
       <Text color="primary.500">
         <Box as="span" display="flex" flexDir={"row"} gap=".75rem">
-          or load the pre-configured {context} with <InitIcon />
+          or load pre-built {context} configuration with <InitIcon />
         </Box>
       </Text>
     </VStackBox>

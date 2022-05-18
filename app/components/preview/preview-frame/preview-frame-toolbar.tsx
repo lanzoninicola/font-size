@@ -75,7 +75,7 @@ export default function PreviewFrameToolbar({
         )}
       </HStack>
       <Text color="primary.500" fontSize="smaller">
-        <Text as="span" fontSize="smaller" fontWeight={700}>
+        <Text as="span" fontSize="smaller" fontWeight="bold">
           Device:{" "}
         </Text>
         {device.name}

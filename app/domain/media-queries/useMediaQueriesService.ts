@@ -1,5 +1,9 @@
 import useMediaQueriesSelector from "~/context/app/hooks/useMediaQueriesSelector";
-import { MediaQuery, TypeScaleStepEntityState } from "~/context/app/types";
+import { MediaQuery } from "~/context/app/types";
+import {
+  TypeScaleStepEntityState,
+  StepId,
+} from "~/context/app/types/type-scale-steps";
 import useMediaQueryBuilderContext from "~/context/media-query-builder/hooks/useMediaQueryBuilderContext";
 import { mediaQueryInitialStatePartial } from "~/context/media-query-builder/media-query-builder-context";
 

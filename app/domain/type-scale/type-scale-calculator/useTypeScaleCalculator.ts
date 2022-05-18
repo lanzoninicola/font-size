@@ -1,9 +1,14 @@
 import { BreakpointId } from "~/context/app/types/breakpoints";
 import { MinMaxTypeScaleConfig } from "~/context/app/types/type-scale-config";
 import { TypeScaleStepConfig } from "~/context/app/types/type-scale-steps";
-import parseDecimalNumber from "../utilities/parseDecimalNumber";
-import round from "../utilities/round";
 
+import round from "../../utilities/round";
+
+/**
+ * Shape of the object that contains the calculation of min and max font-size for the step
+ * based on the TypeScaleConfig configuration object.
+ * This object is a partial of global MediaQuery object for the step.
+ */
 interface BreakpointTypeScale {
   breakpointId: BreakpointId;
   // step key of the type scale
@@ -14,7 +19,7 @@ interface BreakpointTypeScale {
   maxFontSize: number;
 }
 
-export default function useTypeScaleCalculatorUtils() {
+export default function useTypeScaleCalculator() {
   /**
    *
    * @param breakpointId - Breakpoint id
@@ -67,15 +72,13 @@ export default function useTypeScaleCalculatorUtils() {
   ) {
     const minFontSize = round(
       Math.min(
-        parseDecimalNumber(minConfig.fontSizeREM) *
-          Math.pow(parseDecimalNumber(minConfig.scaleRatio), stepPosition)
+        minConfig.fontSizeREM * Math.pow(minConfig.scaleRatio, stepPosition)
       )
     );
 
     const maxFontSize = round(
       Math.min(
-        parseDecimalNumber(maxConfig.fontSizeREM) *
-          Math.pow(parseDecimalNumber(maxConfig.scaleRatio), stepPosition)
+        maxConfig.fontSizeREM * Math.pow(maxConfig.scaleRatio, stepPosition)
       )
     );
 

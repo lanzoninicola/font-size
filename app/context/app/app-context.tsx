@@ -12,9 +12,10 @@ import {
 import useBreakpointsInitialState from "./hooks/useBreakpointsInitialState";
 import useTypeScaleStepsInitialState from "./hooks/useTypeScaleStepsInitialState";
 import useTypographyInitialState from "./hooks/useTypographyInitialState";
-import { MediaQuery } from "./types";
+
 import { AppContext } from "./types/app-context";
 import { Breakpoints, BreakpointsProvider } from "./types/breakpoints";
+import { MediaQuery } from "./types/media-queries";
 import { TypeScaleConfig } from "./types/type-scale-config";
 import {
   TypeScaleStepConfig,
